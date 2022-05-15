@@ -1,15 +1,15 @@
 {
     "name": "evanm.io-web",
     "author": "Evan Madill <emadill@outlook.com>",
+    "description": "The backend component of a portfolio website running Strapi",
     "version": "0.1.0",
     "private": true,
-    "description": "The backend component of a portfolio website running Strapi",
     "license": "MIT",
     "homepage": "https://github.com/evanwrm/evanm.io",
     "engines": {
-        "node": ">=16.0.0",
+        "node": ">=12.x.x <=16.x.x",
         "yarn": ">=1.22.0",
-        "npm": "please-use-yarn"
+        "npm": ">=6.0.0"
     },
     "scripts": {
         "develop": "strapi develop",

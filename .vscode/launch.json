@@ -8,7 +8,7 @@
             "name": "Next.js: debug server-side",
             "type": "node-terminal",
             "request": "launch",
-            "command": "yarn dev",
+            "command": "cross-env NODE_OPTIONS='--inspect' yarn dev",
             "cwd": "${workspaceFolder}/packages/web"
         },
         {
@@ -22,7 +22,7 @@
             "name": "Next.js: debug full stack",
             "type": "node-terminal",
             "request": "launch",
-            "command": "yarn dev",
+            "command": "cross-env NODE_OPTIONS='--inspect' yarn dev",
             "serverReadyAction": {
                 "pattern": "started server on .+, url: (https?://.+)",
                 "uriFormat": "%s",
