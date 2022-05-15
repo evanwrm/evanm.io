@@ -1,6 +1,6 @@
 {
     "name": "evanm.io-web",
-    "author": "Evan Madill",
+    "author": "Evan Madill <emadill@outlook.com>",
     "description": "The frontend component of a portfolio website running Next.js",
     "version": "0.1.0",
     "private": true,

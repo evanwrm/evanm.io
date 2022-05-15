@@ -1,3 +1,11 @@
 {
-    "eslint.workingDirectories": ["packages/api", "packages/web"]
+    // let eslint know working directories
+    "eslint.workingDirectories": ["packages/api", "packages/web"],
+    // format on save
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+    }
 }

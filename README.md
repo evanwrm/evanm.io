@@ -13,3 +13,8 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+TODO:
+
+-   readme for `web`, and `api`
+-   getting started main
