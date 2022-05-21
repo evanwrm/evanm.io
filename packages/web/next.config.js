@@ -5,8 +5,8 @@ const baseConfig = {
     poweredByHeader: false,
     reactStrictMode: true,
     i18n: {
-        locales: ["en-US"],
-        defaultLocale: "en-US"
+        locales: ["en-CA", "en-US"],
+        defaultLocale: "en-CA"
     },
     // Using env as config since runtime config isn't supported by serverless deployments
     env: {
@@ -14,7 +14,7 @@ const baseConfig = {
         siteName: "evanm.io",
         siteDisplayName: "Evan Madill's Portfolio Website",
         description: "The frontend component of a portfolio website running Next.js",
-        locale: "en_US"
+        locale: "en_CA"
     }
 };
 
