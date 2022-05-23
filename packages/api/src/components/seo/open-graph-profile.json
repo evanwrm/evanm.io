@@ -1,0 +1,22 @@
+{
+    "collectionName": "components_seo_open_graph_profiles",
+    "info": {
+        "displayName": "OpenGraphProfile",
+        "icon": "address-book"
+    },
+    "options": {},
+    "attributes": {
+        "firstName": {
+            "type": "string"
+        },
+        "lastName": {
+            "type": "string"
+        },
+        "username": {
+            "type": "string"
+        },
+        "gender": {
+            "type": "string"
+        }
+    }
+}
