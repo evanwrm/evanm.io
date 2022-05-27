@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { AppContext, AppInitialProps, AppProps } from "next/app";
 import React, { useEffect, useState } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import ProgressBar from "../components/ProgressBar";
 import "../styles/globals.css";
 
 const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
@@ -54,6 +55,7 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
             <ThemeProvider defaultTheme="system">
                 <QueryClientProvider client={queryClient}>
                     <Hydrate state={pageProps.dehydratedState}>
+                        <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
                         <Component {...pageProps} />
                     </Hydrate>
                 </QueryClientProvider>
