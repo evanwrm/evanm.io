@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+const withPreact = require("next-plugin-preact");
 
 const baseConfig = {
     poweredByHeader: false,
@@ -25,15 +26,15 @@ const baseConfig = {
 
 module.exports = (phase, { defaultConfig }) => {
     if (phase === PHASE_DEVELOPMENT_SERVER) {
-        return {
+        return withPreact({
             /* development only config options here */
             ...defaultConfig,
             ...baseConfig
-        };
+        });
     }
 
-    return {
+    return withPreact({
         ...defaultConfig,
         ...baseConfig
-    };
+    });
 };
