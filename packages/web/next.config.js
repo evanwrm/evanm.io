@@ -8,12 +8,17 @@ const baseConfig = {
         locales: ["en-CA", "en-US"],
         defaultLocale: "en-CA"
     },
+    images: {
+        loader: "default",
+        domains: ["localhost"]
+    },
+
     // Using env as config since runtime config isn't supported by serverless deployments
     env: {
         url: "https://evanm.io",
         siteName: "evanm.io",
-        siteDisplayName: "Evan Madill's Portfolio Website",
-        description: "The frontend component of a portfolio website running Next.js",
+        siteDisplayName: "Evan Madill",
+        description: "Portfolio website by Evan Madill",
         locale: "en_CA"
     }
 };
