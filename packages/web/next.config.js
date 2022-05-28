@@ -6,21 +6,12 @@ const baseConfig = {
     poweredByHeader: false,
     reactStrictMode: true,
     i18n: {
-        locales: ["en-CA", "en-US"],
-        defaultLocale: "en-CA"
+        locales: ["en-us", "en"],
+        defaultLocale: "en-us"
     },
     images: {
         loader: "default",
         domains: ["localhost"]
-    },
-
-    // Using env as config since runtime config isn't supported by serverless deployments
-    env: {
-        url: "https://evanm.io",
-        siteName: "evanm.io",
-        siteDisplayName: "Evan Madill",
-        description: "Portfolio website by Evan Madill",
-        locale: "en_CA"
     }
 };
 

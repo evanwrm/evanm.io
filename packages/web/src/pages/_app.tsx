@@ -5,6 +5,7 @@ import { AppContext, AppInitialProps, AppProps } from "next/app";
 import React, { useEffect, useState } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import ProgressBar from "../components/ProgressBar";
+import { SITE_URL } from "../lib/constants";
 import "../styles/globals.css";
 
 const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
@@ -42,14 +43,9 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
     return (
         <React.Fragment>
             <DefaultSeo
-                titleTemplate={`%s - ${process.env.siteDisplayName}`}
-                title={process.env.siteDisplayName}
-                description={process.env.description}
                 openGraph={{
-                    title: process.env.siteDisplayName,
-                    type: "website",
-                    locale: process.env.locale,
-                    site_name: process.env.siteName
+                    url: SITE_URL,
+                    type: "website"
                 }}
             />
             <ThemeProvider defaultTheme="system">

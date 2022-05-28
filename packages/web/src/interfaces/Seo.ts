@@ -16,8 +16,8 @@ export interface OpenGraph {
     description?: string;
     site_name?: string;
     locale?: string;
-    images: OpenGraphMedia[];
-    profile: OpenGraphProfile;
+    images?: OpenGraphMedia[];
+    profile?: OpenGraphProfile;
 }
 export interface OpenGraphMedia {
     url: string;

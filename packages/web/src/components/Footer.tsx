@@ -1,6 +1,5 @@
 import { getYear } from "date-fns";
 import React from "react";
-import { MdCopyright } from "react-icons/md";
 import { Global } from "../interfaces/Global";
 import { SocialLink } from "../interfaces/Social";
 import Icon from "./Icon";
@@ -35,8 +34,7 @@ const Footer: React.FC<Props> = ({ global, socials = [] }: Props) => {
         <footer className="footer p-4 border-t border-base-content/10">
             <div>
                 <p>
-                    <MdCopyright className="inline-block fill-current w-4 h-4" />{" "}
-                    {getYear(Date.now())} {global?.firstName} {global?.lastName}. All Rights
+                    © {getYear(Date.now())} {global?.firstName} {global?.lastName}. All Rights
                     Reserved.
                 </p>
             </div>
@@ -56,6 +54,7 @@ const Footer: React.FC<Props> = ({ global, socials = [] }: Props) => {
                     {socials.map(social => (
                         <a
                             href={social.url}
+                            aria-label={social.name}
                             target="_blank"
                             rel="noopener noreferrer"
                             key={social.socialId}

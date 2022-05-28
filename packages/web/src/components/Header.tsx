@@ -30,9 +30,15 @@ const routes = [
 ];
 
 const Header: React.FC<Props> = ({ title, seo }: Props) => {
+    const pageSeo: Seo = {
+        ...seo,
+        ...(title && { title }),
+        openGraph: { ...seo?.openGraph, ...(title && { title }) }
+    };
+
     return (
         <React.Fragment>
-            <NextSeo {...seo} />
+            <NextSeo {...pageSeo} />
             <div className="navbar flex justify-center shadow-lg bg-base-200 backdrop-blur-xl bg-opacity-80 bg-clip-padding">
                 <div className="w-full md:max-w-3xl sm:max-w-full">
                     <div className="w-1/2 flex justify-start items-center">

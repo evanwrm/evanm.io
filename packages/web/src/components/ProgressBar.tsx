@@ -1,4 +1,4 @@
-import { Router } from "next/router";
+import { useRouter } from "next/router";
 import NProgress, { NProgressOptions } from "nprogress";
 import { useEffect } from "react";
 
@@ -8,6 +8,8 @@ interface Props {
 }
 
 const ProgressBar: React.FC<Props> = ({ options, color }: Props) => {
+    const router = useRouter();
+
     const routeChangeStart = () => {
         NProgress.start();
     };
@@ -19,18 +21,18 @@ const ProgressBar: React.FC<Props> = ({ options, color }: Props) => {
     useEffect(() => {
         options && NProgress.configure(options);
 
-        Router.events.on("routeChangeStart", routeChangeStart);
-        Router.events.on("routeChangeComplete", routeChangeEnd);
-        Router.events.on("routeChangeError", routeChangeEnd);
+        router.events.on("routeChangeStart", routeChangeStart);
+        router.events.on("routeChangeComplete", routeChangeEnd);
+        router.events.on("routeChangeError", routeChangeEnd);
 
         return () => {
-            Router.events.off("routeChangeStart", routeChangeStart);
-            Router.events.off("routeChangeComplete", routeChangeEnd);
-            Router.events.off("routeChangeError", routeChangeEnd);
+            router.events.off("routeChangeStart", routeChangeStart);
+            router.events.off("routeChangeComplete", routeChangeEnd);
+            router.events.off("routeChangeError", routeChangeEnd);
 
             NProgress.remove();
         };
-    }, [options]);
+    }, [options, router.events]);
 
     return (
         <style jsx global>{`
