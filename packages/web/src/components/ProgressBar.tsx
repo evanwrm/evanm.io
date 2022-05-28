@@ -30,7 +30,7 @@ const ProgressBar: React.FC<Props> = ({ options, color }: Props) => {
 
             NProgress.remove();
         };
-    }, []);
+    }, [options]);
 
     return (
         <style jsx global>{`

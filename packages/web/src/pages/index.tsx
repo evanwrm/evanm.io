@@ -1,33 +1,21 @@
 import type { GetStaticProps, GetStaticPropsResult, NextPage } from "next";
+import { dehydrate, DehydratedState, QueryClient, useQuery } from "react-query";
 import Layout from "../components/layouts/Layout";
-import { Global } from "../interfaces/Global";
-import { Project } from "../interfaces/Project";
-import { Seo } from "../interfaces/Seo";
-import { SocialLink } from "../interfaces/Social";
-import { NotFoundError } from "../lib/errors";
 import { getGlobal, getProjects, getSeo, getSocials } from "../lib/services";
 
 interface Props {
-    global: Global | null;
-    seo: Seo | null;
-    socials: SocialLink[] | null;
-    projects: Project[] | null;
     errors?: string;
-    // dehydratedState: DehydratedState;
+    dehydratedState: DehydratedState;
 }
 
-// global: initialGlobal,
-// seo: initialSeo,
-// socials: initialSocial,
-// projects: initialProjects
-const Home: NextPage<Props> = ({ global, socials }: Props) => {
-    // const { data: global } = useQuery("global", getGlobal, { initialData: initialGlobal });
-    // const { data: seo } = useQuery("seo", getSeo, { initialData: initialSeo });
-    // const { data: socials } = useQuery("socials", getSocials, { initialData: initialSocial });
-    // const { data: projects } = useQuery("projects", getProjects, { initialData: initialProjects });
+const Home: NextPage<Props> = ({}: Props) => {
+    const { data: global } = useQuery("global", getGlobal);
+    const { data: seo } = useQuery("seo", getSeo);
+    const { data: socials } = useQuery("socials", getSocials);
+    // const { data: projects } = useQuery("projects", getProjects);
 
     return (
-        <Layout global={global ?? undefined} socials={socials ?? undefined}>
+        <Layout global={global} seo={seo} socials={socials}>
             <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
                 <h1 className="text-6xl font-bold">
                     Welcome to{" "}
@@ -84,40 +72,16 @@ const Home: NextPage<Props> = ({ global, socials }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
-    let global = null,
-        seo = null,
-        socials = null,
-        projects = null,
-        errors = null;
+    const queryClient = new QueryClient();
 
-    try {
-        [global, seo, socials, projects] = await Promise.all([
-            getGlobal(),
-            getSeo(),
-            getSocials({ sort: "id" }),
-            getProjects()
-        ]);
-        if (!global) throw new NotFoundError("Failed to fetch Global data");
-        if (!seo) throw new NotFoundError("Failed to fetch Seo data");
-        if (!socials) throw new NotFoundError("Failed to fetch Social data");
-        if (!projects) throw new NotFoundError("Failed to fetch Project data");
-    } catch (err: any) {
-        errors = err.message;
-    }
+    await Promise.all([
+        queryClient.prefetchQuery("global", getGlobal),
+        queryClient.prefetchQuery("seo", getSeo),
+        queryClient.prefetchQuery("socials", () => getSocials({ sort: "id" })),
+        queryClient.prefetchQuery("projects", getProjects)
+    ]);
 
-    return { props: { global, seo, socials, projects, errors } }; // revalidate: 60
+    return { props: { dehydratedState: dehydrate(queryClient) }, revalidate: 60 };
 };
-// export const getStaticProps: GetStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
-//     const queryClient = new QueryClient();
-
-//     await Promise.all([
-//         queryClient.prefetchQuery("global", getGlobal),
-//         queryClient.prefetchQuery("seo", getSeo),
-//         queryClient.prefetchQuery("socials", () => getSocials({ sort: "id" })),
-//         queryClient.prefetchQuery("projects", getProjects)
-//     ]);
-
-//     return { props: { dehydratedState: dehydrate(queryClient) }, revalidate: 60 };
-// };
 
 export default Home;

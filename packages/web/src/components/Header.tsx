@@ -1,10 +1,12 @@
 import { NextSeo } from "next-seo";
 import React from "react";
 import { HiMenuAlt2 } from "react-icons/hi";
+import { Seo } from "../interfaces/Seo";
 import ThemeSwap from "./ThemeSwap";
 
 interface Props {
     title?: string;
+    seo?: Seo;
 }
 
 const routes = [
@@ -27,10 +29,10 @@ const routes = [
     }
 ];
 
-const Header: React.FC<Props> = ({ title }: Props) => {
+const Header: React.FC<Props> = ({ title, seo }: Props) => {
     return (
         <React.Fragment>
-            <NextSeo title={title} />
+            <NextSeo {...seo} />
             <div className="navbar flex justify-center shadow-lg bg-base-200 backdrop-blur-xl bg-opacity-80 bg-clip-padding">
                 <div className="w-full md:max-w-3xl sm:max-w-full">
                     <div className="w-1/2 flex justify-start items-center">
