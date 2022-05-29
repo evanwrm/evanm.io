@@ -20,10 +20,12 @@
         "prettier": "prettier --write ."
     },
     "dependencies": {
+        "@next/bundle-analyzer": "^12.1.7-canary.19",
         "clsx": "^1.1.1",
         "daisyui": "^2.15.0",
         "date-fns": "^2.28.0",
         "next": "^12.1.7-canary.19",
+        "next-compose-plugins": "^2.2.1",
         "next-connect": "^0.12.2",
         "next-plugin-preact": "^3.0.6",
         "next-seo": "^5.4.0",
@@ -36,7 +38,8 @@
         "react-dom": "npm:@preact/compat",
         "react-icons": "^4.3.1",
         "react-query": "^3.39.0",
-        "react-ssr-prepass": "npm:preact-ssr-prepass"
+        "react-ssr-prepass": "npm:preact-ssr-prepass",
+        "sharp": "^0.30.5"
     },
     "devDependencies": {
         "@types/node": "^17.0.33",

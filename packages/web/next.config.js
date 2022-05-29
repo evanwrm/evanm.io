@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+const withPlugins = require("next-compose-plugins");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true"
+});
 const withPreact = require("next-plugin-preact");
 
 const baseConfig = {
@@ -14,18 +18,9 @@ const baseConfig = {
         domains: ["localhost"]
     }
 };
+const plugins = [[withBundleAnalyzer], withPreact];
 
-module.exports = (phase, { defaultConfig }) => {
-    if (phase === PHASE_DEVELOPMENT_SERVER) {
-        return withPreact({
-            /* development only config options here */
-            ...defaultConfig,
-            ...baseConfig
-        });
-    }
-
-    return withPreact({
-        ...defaultConfig,
-        ...baseConfig
-    });
-};
+module.exports = withPlugins(plugins, {
+    ...baseConfig,
+    [PHASE_DEVELOPMENT_SERVER]: {}
+});

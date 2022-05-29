@@ -14,6 +14,12 @@ yarn dev
 
 Now, we can open [http://localhost:3000](http://localhost:3000) and begin developement.
 
+Alternatively, we can analyze bundle sizes by setting the `ANALYZE` environment variable, and building the app:
+
+```sh
+ANALYZE=true yarn build
+```
+
 # Deployment
 
 For deployment, we will deploy to [Vercel](https://vercel.com/). Development hooks can be setup to listen for changes on the Git repo, and automatically deploy changes.
