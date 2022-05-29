@@ -1,3 +1,4 @@
+import { LazyMotion } from "framer-motion";
 import { NextComponentType } from "next";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
@@ -40,6 +41,8 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
             })
     );
 
+    // const loadFeatures = () => import("../lib/framerFeatures").then(mod => mod.default);
+
     return (
         <React.Fragment>
             <DefaultSeo
@@ -48,14 +51,19 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
                     type: "website"
                 }}
             />
-            <ThemeProvider defaultTheme="system">
-                <QueryClientProvider client={queryClient}>
-                    <Hydrate state={pageProps.dehydratedState}>
-                        <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
-                        <Component {...pageProps} />
-                    </Hydrate>
-                </QueryClientProvider>
-            </ThemeProvider>
+            <QueryClientProvider client={queryClient}>
+                <Hydrate state={pageProps.dehydratedState}>
+                    <LazyMotion
+                        features={async () => (await import("../lib/framerFeatures")).default}
+                        strict
+                    >
+                        <ThemeProvider defaultTheme="system">
+                            <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
+                            <Component {...pageProps} />
+                        </ThemeProvider>
+                    </LazyMotion>
+                </Hydrate>
+            </QueryClientProvider>
         </React.Fragment>
     );
 };
