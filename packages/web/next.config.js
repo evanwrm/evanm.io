@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
+const analyzerMode = process.env.ANALYZE === "true";
+
 const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 const withPlugins = require("next-compose-plugins");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
-    enabled: process.env.ANALYZE === "true"
+    enabled: analyzerMode
 });
+const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
+const withPWA = require("next-pwa");
 const withPreact = require("next-plugin-preact");
 
 const baseConfig = {
@@ -17,9 +21,27 @@ const baseConfig = {
     images: {
         loader: "default",
         domains: ["localhost"]
+    },
+    webpack(config, _options) {
+        if (analyzerMode) config.plugins.push(new DuplicatePackageCheckerPlugin());
+
+        return config;
     }
 };
-const plugins = [[withBundleAnalyzer], withPreact];
+const plugins = [
+    [withBundleAnalyzer],
+    [
+        withPWA,
+        {
+            pwa: {
+                dest: "public",
+                register: true
+                // sw: "service-worker.js"
+            }
+        }
+    ],
+    withPreact
+];
 
 module.exports = withPlugins(plugins, {
     ...baseConfig,

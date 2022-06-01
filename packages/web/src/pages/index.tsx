@@ -15,7 +15,7 @@ const Home: NextPage<Props> = ({}: Props) => {
     // const { data: projects } = useQuery("projects", getProjects);
 
     return (
-        <Layout global={global} seo={seo} socials={socials}>
+        <Layout title="Home" global={global} seo={seo} socials={socials}>
             <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
                 <h1 className="text-6xl font-bold">
                     Welcome to{" "}
@@ -37,7 +37,7 @@ const Home: NextPage<Props> = ({}: Props) => {
                             href="https://nextjs.org/docs"
                             className="w-1/2 rounded-xl border border-base-content/10 flex-initial p-6 text-left transition-colors hover:text-primary focus:text-primary"
                         >
-                            <h3 className="mb-6 text-2xl font-bold">Documentation &rarr;</h3>
+                            <h2 className="mb-6 text-2xl font-bold">Documentation &rarr;</h2>
                             <p>Find in-depth information about Next.js features and API.</p>
                         </a>
 
@@ -45,7 +45,7 @@ const Home: NextPage<Props> = ({}: Props) => {
                             href="https://nextjs.org/learn"
                             className="w-1/2 rounded-xl border border-base-content/10 flex-initial p-6 text-left transition-colors hover:text-primary focus:text-primary"
                         >
-                            <h3 className="mb-6 text-2xl font-bold">Learn &rarr;</h3>
+                            <h2 className="mb-6 text-2xl font-bold">Learn &rarr;</h2>
                             <p>Learn about Next.js in an interactive course with quizzes!</p>
                         </a>
                     </div>
@@ -54,14 +54,14 @@ const Home: NextPage<Props> = ({}: Props) => {
                             href="https://github.com/vercel/next.js/tree/master/examples"
                             className="w-1/2 rounded-xl border border-base-content/10 flex-initial p-6 text-left transition-colors hover:text-primary focus:text-primary"
                         >
-                            <h3 className="mb-6 text-2xl font-bold">Examples &rarr;</h3>
+                            <h2 className="mb-6 text-2xl font-bold">Examples &rarr;</h2>
                             <p>Discover and deploy boilerplate example Next.js projects.</p>
                         </a>
                         <a
                             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
                             className="w-1/2 rounded-xl border border-base-content/10 flex-initial p-6 text-left transition-colors hover:text-primary focus:text-primary"
                         >
-                            <h3 className="mb-6 text-2xl font-bold">Deploy &rarr;</h3>
+                            <h2 className="mb-6 text-2xl font-bold">Deploy &rarr;</h2>
                             <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
                         </a>
                     </div>

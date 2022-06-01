@@ -1,7 +1,6 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 // import { themeColor } from "../components/ThemeProvider";
-// import createEmotionCache from '../src/createEmotionCache';
 
 class DocumentWrapper extends Document {
     // `getInitialProps` belongs to `_document` (instead of `_app`),
@@ -47,9 +46,28 @@ class DocumentWrapper extends Document {
     render(): JSX.Element {
         return (
             <Html>
+                {/* prettier-ignore */}
                 <Head>
-                    {/* PWA primary color */}
-                    {/* <meta name="theme-color" content={themeColor} /> */}
+                    <meta name="application-name" content="evanm.io PWA" />
+                    <meta name="theme-color" content="#ffffff" />
+                    <meta name="format-detection" content="telephone=no" />
+                    <meta name="mobile-web-app-capable" content="yes" />
+
+                    <meta name="apple-mobile-web-app-capable" content="yes" />
+                    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+                    <meta name="apple-mobile-web-app-title" content="evanm.io PWA" />
+
+                    <meta name="msapplication-config" content="/static/favicons/browserconfig.xml" />
+                    <meta name="msapplication-TileColor" content="#2b5797" />
+                    <meta name="msapplication-TileImage" content="/static/favicons/mstile-144x144.png" />
+                    <meta name="msapplication-tap-highlight" content="no" />
+
+                    <link rel="manifest" href="/manifest.webmanifest" />       
+                    <link rel="shortcut icon" href="/static/favicons/favicon.ico" />
+                    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
+                    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
+                    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png" />
+                    <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
                 </Head>
                 <body>
                     <Main />

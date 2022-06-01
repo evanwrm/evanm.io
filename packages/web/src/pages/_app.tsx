@@ -1,8 +1,8 @@
-import { LazyMotion } from "framer-motion";
 import { NextComponentType } from "next";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import { AppContext, AppInitialProps, AppProps } from "next/app";
+import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import ProgressBar from "../components/ProgressBar";
@@ -48,20 +48,35 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
             <DefaultSeo
                 openGraph={{
                     url: SITE_URL,
-                    type: "website"
+                    type: "website",
+                    images: [
+                        {
+                            url: `${SITE_URL}/favicons/apple-touch-icon.png`,
+                            width: 180,
+                            height: 180,
+                            alt: "evanm.io logo",
+                            type: "image/png"
+                        }
+                    ]
                 }}
             />
+            <Head>
+                <meta
+                    name="viewport"
+                    content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
+                />
+            </Head>
             <QueryClientProvider client={queryClient}>
                 <Hydrate state={pageProps.dehydratedState}>
-                    <LazyMotion
+                    {/* <LazyMotion
                         features={async () => (await import("../lib/framerFeatures")).default}
                         strict
-                    >
-                        <ThemeProvider defaultTheme="system">
-                            <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
-                            <Component {...pageProps} />
-                        </ThemeProvider>
-                    </LazyMotion>
+                    > */}
+                    <ThemeProvider defaultTheme="system">
+                        <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
+                        <Component {...pageProps} />
+                    </ThemeProvider>
+                    {/* </LazyMotion> */}
                 </Hydrate>
             </QueryClientProvider>
         </React.Fragment>
