@@ -34,6 +34,7 @@ const plugins = [
         withPWA,
         {
             pwa: {
+                disable: PHASE_DEVELOPMENT_SERVER,
                 dest: "public",
                 register: true
                 // sw: "service-worker.js"
@@ -45,5 +46,6 @@ const plugins = [
 
 module.exports = withPlugins(plugins, {
     ...baseConfig,
+    ["!" + PHASE_DEVELOPMENT_SERVER]: {},
     [PHASE_DEVELOPMENT_SERVER]: {}
 });
