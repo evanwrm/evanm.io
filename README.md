@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://evanm.io" rel="noopener" target="_blank">
-        <img width="350" src="packages/web/public/portfolio-logo.svg" alt="evanm.io logo" />
+        <img width="150" src="packages/web/public/portfolio-logo.svg" alt="evanm.io logo" />
     </a>
 </p>
 
