@@ -36,12 +36,12 @@ const plugins = [
         withPWA,
         {
             pwa: {
-                disable: PHASE_DEVELOPMENT_SERVER,
                 dest: "public",
                 register: true
                 // sw: "service-worker.js"
             }
-        }
+        },
+        ["!" + PHASE_DEVELOPMENT_SERVER]
     ],
     withPreact
 ];
