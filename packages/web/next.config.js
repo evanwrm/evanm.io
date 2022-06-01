@@ -13,7 +13,6 @@ const withPreact = require("next-plugin-preact");
 const baseConfig = {
     poweredByHeader: false,
     reactStrictMode: true,
-    esmExternals: true,
     i18n: {
         locales: ["en-us", "en"],
         defaultLocale: "en-us"
@@ -26,6 +25,9 @@ const baseConfig = {
         if (analyzerMode) config.plugins.push(new DuplicatePackageCheckerPlugin());
 
         return config;
+    },
+    experimental: {
+        esmExternals: false
     }
 };
 const plugins = [
