@@ -4,7 +4,8 @@
     "info": {
         "singularName": "global",
         "pluralName": "globals",
-        "displayName": "Global"
+        "displayName": "Global",
+        "description": ""
     },
     "options": {
         "draftAndPublish": true
@@ -19,6 +20,16 @@
         },
         "lastName": {
             "type": "string"
+        },
+        "cv": {
+            "allowedTypes": ["files"],
+            "type": "media",
+            "multiple": false
+        },
+        "resume": {
+            "allowedTypes": ["files"],
+            "type": "media",
+            "multiple": false
         }
     }
 }

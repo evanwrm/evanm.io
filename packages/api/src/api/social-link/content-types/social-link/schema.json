@@ -30,6 +30,10 @@
         },
         "iconId": {
             "type": "string"
+        },
+        "hidden": {
+            "type": "boolean",
+            "default": false
         }
     }
 }

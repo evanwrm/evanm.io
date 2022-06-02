@@ -1,0 +1,38 @@
+{
+    "kind": "collectionType",
+    "collectionName": "publications",
+    "info": {
+        "singularName": "publication",
+        "pluralName": "publications",
+        "displayName": "Publication"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "author": {
+            "type": "string",
+            "required": true
+        },
+        "booktitle": {
+            "type": "string"
+        },
+        "journal": {
+            "type": "string"
+        },
+        "pages": {
+            "type": "string"
+        },
+        "year": {
+            "type": "date"
+        },
+        "organization": {
+            "type": "string"
+        }
+    }
+}
