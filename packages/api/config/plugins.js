@@ -17,5 +17,26 @@ module.exports = ({ env }) => ({
                 delete: {}
             }
         }
+    },
+    graphql: {
+        config: {
+            endpoint: "/graphql",
+            shadowCRUD: true,
+            playgroundAlways: false,
+            depthLimit: 7,
+            amountLimit: 100,
+            apolloServer: {
+                tracing: true
+            }
+        }
+    },
+    "strapi-prometheus": {
+        enabled: true,
+        config: {
+            prefix: "",
+            fullURL: false,
+            includeQuery: false,
+            defaultMetrics: true
+        }
     }
 });

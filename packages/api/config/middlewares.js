@@ -33,5 +33,6 @@ module.exports = [
                 }
             }
         }
-    }
+    },
+    "plugin::strapi-prometheus.metrics"
 ];
