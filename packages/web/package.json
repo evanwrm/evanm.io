@@ -20,7 +20,7 @@
         "prettier": "prettier --write ."
     },
     "dependencies": {
-        "@next/bundle-analyzer": "12.1.5",
+        "@next/bundle-analyzer": "12.1.6",
         "clsx": "^1.1.1",
         "daisyui": "^2.15.0",
         "date-fns": "^2.28.0",
