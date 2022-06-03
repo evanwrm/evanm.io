@@ -28,12 +28,23 @@ Portfolio website running on [Next.js](https://nextjs.org/) + [Strapi](https://s
 
 ## Getting Started
 
-First, run the development server:
+### Website (frontend)
 
-```sh
-npm run dev
-# or
-yarn dev
-```
+-   [Next.js 12](https://nextjs.org)
+-   [Typescript](https://www.typescriptlang.org)
+-   [Preact](https://preactjs.com)
+-   [Tailwind 3.0](https://tailwindcss.com)
+-   [Framer Motion](https://www.framer.com/motion)
+-   Installation/usage instructions can be found in [packages/web](packages/web)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Google Chrome Lighthouse](https://user-images.githubusercontent.com/66049888/171769240-8f67d6e0-74f2-49be-84a4-b7f8717c6fa4.png)
+
+### API (backend)
+
+-   [Strapi 4](https://strapi.io)
+-   [PosgresSQL](https://www.postgresql.org/)
+-   Installation/usage instructions can be found in [packages/api](packages/api)
+
+## License
+
+[MIT](LICENSE)

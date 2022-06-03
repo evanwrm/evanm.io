@@ -20,7 +20,7 @@ Alternatively, we can analyze bundle sizes by setting the `ANALYZE` environment 
 ANALYZE=true yarn build
 ```
 
-# Deployment
+## Deployment
 
 For deployment, we will deploy to [Vercel](https://vercel.com/). Development hooks can be setup to listen for changes on the Git repo, and automatically deploy changes.
 
