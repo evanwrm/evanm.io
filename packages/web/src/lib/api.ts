@@ -6,7 +6,14 @@ export interface APIResponse<T = unknown> {
     meta: Record<string, unknown>;
 }
 export interface DataAPIResponse<T = unknown> {
+    id: number;
     attributes: T;
+}
+
+export interface StrapiTimestamp {
+    createdAt: string;
+    updatedAt: string;
+    publishedAt?: string;
 }
 
 export interface APIFetcher<P = any> {
@@ -55,6 +62,6 @@ export const getAPIURL = (path = "") => {
 export const mapAPIData = <T>(response: APIResponse<T>): T | T[] => {
     const data = response.data;
 
-    if (Array.isArray(data)) return data.map(item => item.attributes);
-    return data.attributes;
+    if (Array.isArray(data)) return data.map(item => ({ ...item.attributes }));
+    return { ...data.attributes };
 };

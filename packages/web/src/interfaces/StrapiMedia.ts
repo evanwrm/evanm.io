@@ -1,12 +1,6 @@
-export interface StrapiMedia {
-    data: StrapiData;
-    meta: Record<string, unknown>;
-}
+import { APIResponse } from "../lib/api";
 
-export interface StrapiData {
-    id: number;
-    attributes: StrapiAttributes;
-}
+export interface StrapiMedia extends APIResponse<StrapiAttributes> {}
 
 export interface StrapiAttributes {
     name?: string;
@@ -21,10 +15,4 @@ export interface StrapiAttributes {
     url: string;
     previewUrl?: string;
     provider?: string;
-}
-
-export interface StrapiTimestamp {
-    createdAt: string;
-    updatedAt: string;
-    publishedAt?: string;
 }

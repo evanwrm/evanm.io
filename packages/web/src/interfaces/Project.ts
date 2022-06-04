@@ -1,4 +1,5 @@
-import { StrapiMedia, StrapiTimestamp } from "./StrapiMedia";
+import { StrapiTimestamp } from "../lib/api";
+import { StrapiMedia } from "./StrapiMedia";
 
 export interface Project extends StrapiTimestamp {
     name: string;

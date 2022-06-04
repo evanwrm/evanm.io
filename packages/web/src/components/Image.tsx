@@ -8,7 +8,9 @@ interface Props {
 }
 
 export const Image: React.FC<Props> = ({ image }: Props) => {
-    const { width, height, alternativeText } = image.data.attributes;
+    const { width, height, alternativeText } = Array.isArray(image.data)
+        ? image.data[0]?.attributes
+        : image.data.attributes;
 
     return (
         <NextImage

@@ -1,4 +1,4 @@
-import { StrapiTimestamp } from "./StrapiMedia";
+import { StrapiTimestamp } from "../lib/api";
 
 export interface Publication extends StrapiTimestamp {
     title: string;
