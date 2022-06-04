@@ -37,7 +37,7 @@ Portfolio website running on [Next.js](https://nextjs.org/) + [Strapi](https://s
 -   [Framer Motion](https://www.framer.com/motion)
 -   Installation/usage instructions can be found in [packages/web](packages/web)
 
-![Google Chrome Lighthouse](https://user-images.githubusercontent.com/66049888/171769240-8f67d6e0-74f2-49be-84a4-b7f8717c6fa4.png)
+![Google Chrome Lighthouse](https://user-images.githubusercontent.com/66049888/171770773-cbccf8e9-d29d-41aa-b4d4-b49ecf7baf54.gif)
 
 ### API (backend)
 
