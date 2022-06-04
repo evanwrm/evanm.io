@@ -18,8 +18,11 @@ const ProjectCard: React.FC<Props> = ({ project }: Props) => {
                 </h2>
                 <p>{project.logline}</p>
                 <div className="card-actions justify-end">
-                    <div className="badge badge-outline">Fashion</div>
-                    <div className="badge badge-outline">Products</div>
+                    {["React", "Docker"].map(skill => (
+                        <div className="badge badge-outline" key={skill}>
+                            {skill}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

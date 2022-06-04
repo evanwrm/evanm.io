@@ -1,5 +1,6 @@
 import { Global } from "../interfaces/Global";
 import { Project } from "../interfaces/Project";
+import { Publication } from "../interfaces/Publication";
 import { Seo } from "../interfaces/Seo";
 import { SocialLink } from "../interfaces/Social";
 import { fetchAPI, ServiceFetcher } from "./api";
@@ -34,4 +35,12 @@ export const getProjects: ServiceFetcher<Project[]> = async (
     mapData: boolean = true
 ) => {
     return fetchAPI("/projects", urlParamsObject, options, mapData);
+};
+
+export const getPublications: ServiceFetcher<Publication[]> = async (
+    urlParamsObject: any = { populate: "*" },
+    options: RequestInit = {},
+    mapData: boolean = true
+) => {
+    return fetchAPI("/publications", urlParamsObject, options, mapData);
 };

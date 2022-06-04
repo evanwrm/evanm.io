@@ -1,12 +1,12 @@
 import React from "react";
-import { Project } from "../interfaces/Project";
+import { Publication } from "../interfaces/Publication";
 
 interface Props {
-    project: Project;
+    publication: Publication;
 }
 
-const PublicationCard: React.FC<Props> = ({ project }: Props) => {
-    return <span>{project.name}</span>;
+const PublicationCard: React.FC<Props> = ({ publication }: Props) => {
+    return <span>{publication.title}</span>;
 };
 
 export default PublicationCard;

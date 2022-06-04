@@ -1,7 +1,9 @@
 import type { GetStaticProps, GetStaticPropsResult, NextPage } from "next";
 import { dehydrate, DehydratedState, QueryClient, useQuery } from "react-query";
 import Layout from "../components/layouts/Layout";
-import { getGlobal, getProjects, getSeo, getSocials } from "../lib/services";
+import ProjectCard from "../components/ProjectCard";
+import PublicationCard from "../components/PublicationCard";
+import { getGlobal, getProjects, getPublications, getSeo, getSocials } from "../lib/services";
 
 interface Props {
     errors?: string;
@@ -12,7 +14,8 @@ const Home: NextPage<Props> = ({}: Props) => {
     const { data: global } = useQuery("global", getGlobal);
     const { data: seo } = useQuery("seo", getSeo);
     const { data: socials } = useQuery("socials", getSocials);
-    // const { data: projects } = useQuery("projects", getProjects);
+    const { data: projects } = useQuery("projects", getProjects);
+    const { data: publications } = useQuery("publications", getPublications);
 
     return (
         <Layout title="Home" global={global} seo={seo} socials={socials}>
@@ -66,6 +69,25 @@ const Home: NextPage<Props> = ({}: Props) => {
                         </a>
                     </div>
                 </div>
+
+                <div className="mt-12 flex space-y-8 max-w-3xl flex-wrap sm:w-full">
+                    {projects?.map(project => (
+                        <div className="flex space-x-8" key={project.name}>
+                            <ProjectCard project={project} key={project.name + project.startDate} />
+                        </div>
+                    ))}
+                </div>
+
+                <div className="mt-12 flex space-y-8 max-w-3xl flex-wrap sm:w-full">
+                    {publications?.map(publication => (
+                        <div className="flex space-x-8" key={publication.title}>
+                            <PublicationCard
+                                publication={publication}
+                                key={publication.title + publication.year}
+                            />
+                        </div>
+                    ))}
+                </div>
             </main>
         </Layout>
     );
@@ -78,7 +100,8 @@ export const getStaticProps: GetStaticProps = async (): Promise<GetStaticPropsRe
         queryClient.prefetchQuery("global", getGlobal),
         queryClient.prefetchQuery("seo", getSeo),
         queryClient.prefetchQuery("socials", () => getSocials({ sort: "id" })),
-        queryClient.prefetchQuery("projects", getProjects)
+        queryClient.prefetchQuery("projects", getProjects),
+        queryClient.prefetchQuery("publications", getPublications)
     ]);
 
     return { props: { dehydratedState: dehydrate(queryClient) }, revalidate: 60 };
