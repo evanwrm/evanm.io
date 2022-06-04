@@ -1,6 +1,6 @@
 import NextImage from "next/image";
 import React from "react";
-import { Image as ImageProps } from "../interfaces/Image";
+import { StrapiMedia as ImageProps } from "../interfaces/StrapiMedia";
 import { getMedia } from "../lib/media";
 
 interface Props {

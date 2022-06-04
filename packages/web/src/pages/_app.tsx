@@ -1,4 +1,4 @@
-import { LazyMotion } from "framer-motion";
+import { AnimatePresence, LazyMotion } from "framer-motion";
 import { NextComponentType } from "next";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
@@ -71,10 +71,12 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
                         features={async () => (await import("../lib/framerFeatures")).default}
                         strict
                     >
-                        <ThemeProvider defaultTheme="system">
-                            <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
-                            <Component {...pageProps} />
-                        </ThemeProvider>
+                        <AnimatePresence exitBeforeEnter>
+                            <ThemeProvider defaultTheme="system">
+                                <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
+                                <Component {...pageProps} />
+                            </ThemeProvider>
+                        </AnimatePresence>
                     </LazyMotion>
                 </Hydrate>
             </QueryClientProvider>

@@ -69,7 +69,7 @@ class DocumentWrapper extends Document {
                     <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png" />
                     <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
                 </Head>
-                <body>
+                <body className="scrollbar">
                     <Main />
                     <NextScript />
                 </body>

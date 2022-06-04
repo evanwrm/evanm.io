@@ -1,4 +1,6 @@
-export interface Project {
+import { StrapiMedia, StrapiTimestamp } from "./StrapiMedia";
+
+export interface Project extends StrapiTimestamp {
     name: string;
     logline?: string;
     description?: string;
@@ -7,4 +9,6 @@ export interface Project {
     publication?: string;
     startDate?: string;
     endDate?: string;
+    thumbnail?: StrapiMedia;
+    media?: StrapiMedia[];
 }

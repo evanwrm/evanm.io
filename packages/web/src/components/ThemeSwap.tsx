@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useTheme } from "next-themes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 interface Props {
@@ -15,6 +15,11 @@ const ThemeSwap: React.FC<Props> = ({ className }: Props) => {
         setTheme(checked ? "light" : "dark");
         setChecked(!checked);
     };
+
+    // Sync
+    useEffect(() => {
+        setChecked(resolvedTheme === "dark");
+    }, [resolvedTheme]);
 
     return (
         <div

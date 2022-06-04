@@ -48,11 +48,6 @@
             "multiple": true,
             "required": false,
             "allowedTypes": ["images", "videos", "audios", "files"]
-        },
-        "hidden": {
-            "type": "boolean",
-            "default": false,
-            "required": false
         }
     }
 }

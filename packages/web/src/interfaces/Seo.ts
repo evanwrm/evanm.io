@@ -1,6 +1,7 @@
 import { NextSeoProps } from "next-seo";
+import { StrapiTimestamp } from "./StrapiMedia";
 
-export interface Seo extends NextSeoProps {
+export interface Seo extends NextSeoProps, StrapiTimestamp {
     title?: string;
     titleTemplate?: string;
     description?: string;
