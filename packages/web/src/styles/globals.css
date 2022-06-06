@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url(/fonts/Inter-roman.var.woff2) format("woff2");
+    unicode-range: U+0000-007f;
+}
+@font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url(/fonts/Inter-italic.var.woff2) format("woff2");
+    unicode-range: U+0000-007f;
+}
+@font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url(/fonts/FiraCode-VF.woff2) format("woff2");
+}
+
 [data-theme="light"] {
     --scrollbar: #a3a3a3;
     --scrollbar-hover: #737373;
@@ -9,6 +33,16 @@
 [data-theme="dark"] {
     --scrollbar: #404040;
     --scrollbar-hover: #525252;
+}
+
+@layer base {
+    * {
+        @apply selection:bg-primary selection:text-primary-content;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 @layer utilities {
@@ -38,5 +72,15 @@
     .scrollbar::-webkit-scrollbar-thumb:hover {
         background: var(--scrollbar-hover);
         box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    .link-underline {
+        background-size: 0 3px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+    }
+    .link-underline:hover {
+        background-size: 100% 3px;
+        background-position: 0 100%;
     }
 }

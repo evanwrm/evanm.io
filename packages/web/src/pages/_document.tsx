@@ -48,6 +48,9 @@ class DocumentWrapper extends Document {
             <Html>
                 {/* prettier-ignore */}
                 <Head>
+                    <link rel="preload" href="/fonts/Inter-roman.var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+                    <link rel="preload" href="/fonts/FiraCode-VF.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+                    
                     <meta name="application-name" content="evanm.io PWA" />
                     <meta name="theme-color" content="#ffffff" />
                     <meta name="format-detection" content="telephone=no" />
@@ -69,7 +72,7 @@ class DocumentWrapper extends Document {
                     <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png" />
                     <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
                 </Head>
-                <body className="scrollbar">
+                <body className="scrollbar transition duration-150">
                     <Main />
                     <NextScript />
                 </body>

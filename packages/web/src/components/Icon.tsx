@@ -1,6 +1,5 @@
 import React from "react";
-import { MdAlternateEmail } from "react-icons/md";
-import { RiGithubLine, RiLinkedinFill } from "react-icons/ri";
+import { getDynamicIcon } from "../lib/icons";
 
 export interface IconProps {
     icon: string;
@@ -42,20 +41,6 @@ export interface IconProps {
 //         default: return dynamic<IconBaseProps>(() => import("react-icons/md").then(mod => mod[icon]) as any);
 //     }
 // };
-
-/**
- * Instead import only the icons needed
- * We lose the ability to use new icons on the fly (having to redeploy)
- * However this approach doesn't cause module loading for SSG
- */
-const iconMap: Record<string, any> = {
-    MdAlternateEmail,
-    RiGithubLine,
-    RiLinkedinFill
-};
-const getDynamicIcon = (icon: string) => {
-    return iconMap[icon];
-};
 
 const Icon: React.FC<IconProps> = ({ className = "fill-current w-10 h-10", icon }: IconProps) => {
     // const packageId =
