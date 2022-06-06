@@ -1,6 +1,6 @@
 import { AnimatePresence, m } from "framer-motion";
 import { NextSeo } from "next-seo";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHideOnScroll } from "../hooks/useHideOnScroll";
 import { Global } from "../interfaces/Global";
 import { Seo } from "../interfaces/Seo";
@@ -30,6 +30,13 @@ const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
     const handleToggleOpen = () => {
         setMobileOpen(!mobileOpen);
     };
+
+    // Prevent scrolling when menu is open
+    useEffect(() => {
+        const body = document.body;
+        if (mobileOpen) body?.style?.setProperty("overflow", "hidden");
+        else body?.style?.removeProperty("overflow");
+    }, [mobileOpen]);
 
     const routes = [
         {

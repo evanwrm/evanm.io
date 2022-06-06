@@ -32,7 +32,7 @@ const Footer: React.FC<Props> = ({ global, socials = [] }: Props) => {
     ];
 
     return (
-        <footer className="footer p-4 border-t border-base-content/10">
+        <footer className="footer p-4 border-t border-base-content/10 overflow-clip">
             <div>
                 <p>
                     © 2022 - {getYear(Date.now())} {global?.firstName} {global?.lastName}. All

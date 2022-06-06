@@ -17,7 +17,7 @@ const RouteNavList: React.FC<Props> = ({ routes, className, onElementClick, ...p
                         href={route.path}
                         aria-label={route.label}
                         onClick={onElementClick}
-                        className="opacity-80 hover:opacity-100 font-bold transition-[background-size] link-underline bg-gradient-to-r from-secondary/20 to-secondary/80"
+                        className="opacity-80 hover:opacity-100 font-bold transition-[background-size] link-underline rounded bg-gradient-to-r from-secondary/20 to-secondary/80"
                     >
                         {route.label}
                     </NavLink>
