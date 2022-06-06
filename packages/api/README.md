@@ -16,6 +16,8 @@ Now, we can open [http://localhost:5000](http://localhost:5000) and head to the 
 
 To test the graphql playground, head over to the `/graphql` endpoint, or find the documentation at `/documentation`. A [Prometheus](https://prometheus.io/) metrics endpoint is available at `/api/metrics`.
 
+Remember to give roles/permissions for your collections, found under `Settings > Roles > Collections Name` in the admin panel.
+
 ## Deployment
 
 For deployment, we can either setup automated deployment triggers within the Railway UI. Since we run in an isolated monorepo, we have to set the root directory to `packages/api`.

@@ -19,7 +19,7 @@ const baseConfig = {
     },
     images: {
         loader: "default",
-        domains: ["localhost"]
+        domains: ["localhost", "res.cloudinary.com"]
     },
     webpack(config, _options) {
         if (analyzerMode) config.plugins.push(new DuplicatePackageCheckerPlugin());

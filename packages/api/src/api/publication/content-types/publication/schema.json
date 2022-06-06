@@ -4,7 +4,8 @@
     "info": {
         "singularName": "publication",
         "pluralName": "publications",
-        "displayName": "Publication"
+        "displayName": "Publication",
+        "description": ""
     },
     "options": {
         "draftAndPublish": true
@@ -33,6 +34,21 @@
         },
         "organization": {
             "type": "string"
+        },
+        "pdf": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string"
+        },
+        "award": {
+            "type": "string"
+        },
+        "project": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::project.project",
+            "inversedBy": "publications"
         }
     }
 }

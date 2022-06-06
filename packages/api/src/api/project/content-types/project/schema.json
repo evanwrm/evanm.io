@@ -28,9 +28,6 @@
         "repository": {
             "type": "string"
         },
-        "publication": {
-            "type": "string"
-        },
         "startDate": {
             "type": "datetime"
         },
@@ -49,10 +46,17 @@
             "required": false,
             "allowedTypes": ["images", "videos", "audios", "files"]
         },
-        "hidden": {
-            "type": "boolean",
-            "default": false,
-            "required": false
+        "publications": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::publication.publication",
+            "mappedBy": "project"
+        },
+        "skills": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::skill.skill",
+            "inversedBy": "projects"
         }
     }
 }

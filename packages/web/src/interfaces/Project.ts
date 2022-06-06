@@ -1,10 +1,18 @@
-export interface Project {
+import { StrapiTimestamp } from "../lib/api";
+import { Publication } from "./Publication";
+import { Skill } from "./Skill";
+import { StrapiMedia } from "./StrapiMedia";
+
+export interface Project extends StrapiTimestamp {
     name: string;
     logline?: string;
     description?: string;
     liveSite?: string;
     repository?: string;
-    publication?: string;
     startDate?: string;
     endDate?: string;
+    thumbnail?: StrapiMedia;
+    media?: StrapiMedia[];
+    publications: Publication[];
+    skills: Skill[];
 }

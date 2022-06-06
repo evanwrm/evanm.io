@@ -1,4 +1,6 @@
-export interface SocialLink {
+import { StrapiTimestamp } from "../lib/api";
+
+export interface SocialLink extends StrapiTimestamp {
     socialId: string;
     name: string;
     iconId: string;
