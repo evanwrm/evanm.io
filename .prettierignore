@@ -1,6 +1,7 @@
 .yarn/
 .cache/
 .next/
+.husky/
 build/
 dist/
 node_modules/
