@@ -4,21 +4,30 @@ import { useEffect, useState } from "react";
 export const useHideOnScroll = (threshold: number) => {
     const { scrollY } = useViewportScroll();
     const [hidden, setHidden] = useState(false);
+    const [travel, setTravel] = useState(0);
 
-    const updateHidden = () => {
+    const updateTravel = () => {
         const delta = scrollY.get() - scrollY.getPrevious();
-
-        if (delta > threshold) setHidden(true);
-        else if (delta < -threshold) setHidden(false);
+        setTravel(prevTravel => prevTravel + delta);
     };
 
     useEffect(() => {
-        const unsubscribeY = scrollY.onChange(updateHidden);
+        const unsubscribeY = scrollY.onChange(updateTravel);
 
         return () => {
             unsubscribeY();
         };
     }, []);
 
-    return { hidden };
+    useEffect(() => {
+        if (travel > threshold) {
+            setHidden(true);
+            setTravel(travel % threshold);
+        } else if (travel < -threshold) {
+            setHidden(false);
+            setTravel(travel % threshold);
+        }
+    }, [travel]);
+
+    return { hidden, travel };
 };

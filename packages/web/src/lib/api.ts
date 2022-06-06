@@ -21,18 +21,18 @@ export interface APIFetcher<P = any> {
         path: string,
         urlParamsObject?: any,
         options?: RequestInit,
-        mapData?: boolean
+        flattenData?: boolean
     ): Promise<T>;
 }
 export interface ServiceFetcher<P = any> {
-    <T = P>(urlParamsObject?: any, options?: RequestInit, mapData?: boolean): Promise<T>;
+    <T = P>(urlParamsObject?: any, options?: RequestInit, flattenData?: boolean): Promise<T>;
 }
 
 export const fetchAPI: APIFetcher = async <T>(
     path: string = "",
     urlParamsObject: any = {},
     options: RequestInit = {},
-    mapData: boolean = true
+    flattenData: boolean = true
 ): Promise<T> => {
     const mergedOptions = {
         headers: {
@@ -52,16 +52,34 @@ export const fetchAPI: APIFetcher = async <T>(
     }
     const data: APIResponse<any> = await response.json();
 
-    return mapData ? mapAPIData(data) : data;
+    return flattenData ? flattenResponse(data) : (data as any);
 };
 
 export const getAPIURL = (path = "") => {
     return `${API_URL}${path}`;
 };
 
-export const mapAPIData = <T>(response: APIResponse<T>): T | T[] => {
-    const data = response.data;
+// Flatten response
+const flattenArray = <T>(array: DataAPIResponse<T>[]) => {
+    return array.map(data => flattenResponse(data));
+};
+const flattenAttributes = <T>(data: DataAPIResponse<T>) => {
+    const attrs: Record<string, unknown> = {};
+    for (const key in data.attributes) {
+        attrs[key] =
+            typeof data.attributes[key] === "object"
+                ? flattenResponse(data.attributes[key])
+                : data.attributes[key];
+    }
+    return {
+        id: data.id,
+        ...attrs
+    };
+};
+export const flattenResponse = <T>(data: any): T => {
+    if (Array.isArray(data)) return flattenArray(data) as any;
+    if (data?.attributes) return flattenAttributes(data) as any;
+    if (data?.data !== undefined) return flattenResponse(data.data) as any;
 
-    if (Array.isArray(data)) return data.map(item => ({ ...item.attributes }));
-    return { ...data.attributes };
+    return data as any;
 };

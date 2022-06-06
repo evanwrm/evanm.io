@@ -1,4 +1,5 @@
 import { StrapiTimestamp } from "../lib/api";
+import { Project } from "./Project";
 
 export interface Publication extends StrapiTimestamp {
     title: string;
@@ -8,4 +9,8 @@ export interface Publication extends StrapiTimestamp {
     pages?: string;
     year: string;
     organization?: string;
+    pdf?: string;
+    url?: string;
+    award?: string;
+    project?: Project;
 }

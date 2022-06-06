@@ -1,8 +1,4 @@
-import { APIResponse } from "../lib/api";
-
-export interface StrapiMedia extends APIResponse<StrapiAttributes> {}
-
-export interface StrapiAttributes {
+export interface StrapiMedia {
     name?: string;
     alternativeText?: string;
     caption?: string;

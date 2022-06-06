@@ -15,8 +15,8 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ title, global, seo, socials, children }: Props) => {
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center transition-all">
-            <Header title={title} seo={seo} />
+        <div className="min-h-screen flex flex-col items-center justify-center">
+            <Header title={title} global={global} seo={seo} socials={socials} />
             {children}
             <Footer global={global} socials={socials} />
         </div>

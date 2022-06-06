@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
-import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import Icon from "./Icon";
 
 interface Props {
     className?: string;
@@ -30,15 +30,15 @@ const ThemeSwap: React.FC<Props> = ({ className }: Props) => {
             )}
             data-tip={checked ? "Light Mode" : "Dark Mode"}
         >
-            <label className="swap swap-rotate opacity-80 transition hover:-translate-y-1 hover:scale-105 hover:opacity-100 hover:text-primary focus:text-primary">
+            <label className="swap swap-rotate">
                 <input
                     type="checkbox"
                     aria-label="Theme swap"
                     checked={checked}
                     onChange={handleTheme}
                 />
-                <MdOutlineLightMode className="swap-on w-6 h-6" />
-                <MdOutlineDarkMode className="swap-off w-6 h-6" />
+                <Icon icon="MdOutlineLightMode" className="swap-on w-6 h-6" />
+                <Icon icon="MdOutlineDarkMode" className="swap-off w-6 h-6" />
             </label>
         </div>
     );
