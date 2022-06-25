@@ -6,12 +6,12 @@ updates:
           interval: "monthly"
       open-pull-requests-limit: 10
     - package-ecosystem: "npm"
-      directory: "/packages/api"
+      directory: "/apps/api"
       schedule:
           interval: "monthly"
       open-pull-requests-limit: 10
     - package-ecosystem: "npm"
-      directory: "/packages/web"
+      directory: "/apps/web"
       schedule:
           interval: "monthly"
       open-pull-requests-limit: 10

@@ -8,27 +8,27 @@
             "name": "Next.js: debug server-side",
             "type": "node-terminal",
             "request": "launch",
-            "command": "cross-env NODE_OPTIONS='--inspect' yarn dev",
-            "cwd": "${workspaceFolder}/packages/web"
+            "command": "yarn debug",
+            "cwd": "${workspaceFolder}/apps/web"
         },
         {
             "name": "Next.js: debug client-side",
             "type": "pwa-chrome",
             "request": "launch",
             "url": "http://localhost:3000",
-            "cwd": "${workspaceFolder}/packages/web"
+            "cwd": "${workspaceFolder}/apps/web"
         },
         {
             "name": "Next.js: debug full stack",
             "type": "node-terminal",
             "request": "launch",
-            "command": "cross-env NODE_OPTIONS='--inspect' yarn dev",
+            "command": "yarn debug",
             "serverReadyAction": {
                 "pattern": "started server on .+, url: (https?://.+)",
                 "uriFormat": "%s",
                 "action": "debugWithChrome"
             },
-            "cwd": "${workspaceFolder}/packages/web"
+            "cwd": "${workspaceFolder}/apps/web"
         }
     ]
 }

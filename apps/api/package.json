@@ -1,0 +1,46 @@
+{
+    "name": "evanm.io-api",
+    "author": "Evan Madill <emadill@outlook.com>",
+    "description": "The backend component of a portfolio website running Strapi",
+    "version": "0.1.0",
+    "private": true,
+    "license": "MIT",
+    "homepage": "https://api.evanm.io",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/evanwrm/evanm.io",
+        "directory": "apps/api"
+    },
+    "engines": {
+        "node": ">=12.x.x <=16.x.x",
+        "yarn": ">=1.22.0",
+        "npm": ">=6.0.0"
+    },
+    "scripts": {
+        "dev": "strapi develop",
+        "build": "strapi build",
+        "start": "strapi start",
+        "strapi": "strapi",
+        "lint": "eslint .",
+        "prettier": "prettier --write ."
+    },
+    "dependencies": {
+        "@strapi/plugin-documentation": "4.1.9",
+        "@strapi/plugin-graphql": "4.1.9",
+        "@strapi/plugin-i18n": "4.1.9",
+        "@strapi/plugin-users-permissions": "4.1.9",
+        "@strapi/provider-upload-cloudinary": "4.1.9",
+        "@strapi/strapi": "4.1.9",
+        "pg": "8.7.3",
+        "strapi-prometheus": "^0.6.2"
+    },
+    "devDependencies": {
+        "@babel/eslint-parser": "^7.17.0",
+        "eslint": "^8.15.0",
+        "eslint-config-prettier": "^8.5.0",
+        "prettier": "^2.6.2"
+    },
+    "strapi": {
+        "uuid": "35d7a084-3088-4d0b-869e-f503693ee8e5"
+    }
+}

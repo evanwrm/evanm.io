@@ -1,6 +1,6 @@
 {
     // let eslint know working directories
-    "eslint.workingDirectories": ["packages/api", "packages/web"],
+    "eslint.workingDirectories": [{ "pattern": "apps/*" }, { "pattern": "packages/*" }],
     // format on save
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,

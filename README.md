@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://evanm.io" rel="noopener" target="_blank">
-        <img width="150" src="packages/web/public/portfolio-logo.svg" alt="evanm.io logo" />
+        <img width="150" src="apps/web/public/portfolio-logo.svg" alt="evanm.io logo" />
     </a>
 </p>
 
@@ -31,11 +31,12 @@ Portfolio website running on [Next.js](https://nextjs.org/) + [Strapi](https://s
 ### Website (frontend)
 
 -   [Next.js 12](https://nextjs.org)
--   [Typescript](https://www.typescriptlang.org)
 -   [Preact](https://preactjs.com)
+-   [Typescript](https://www.typescriptlang.org)
 -   [Tailwind 3.0](https://tailwindcss.com)
 -   [Framer Motion](https://www.framer.com/motion)
--   Installation/usage instructions can be found in [packages/web](packages/web)
+-   [tRPC](https://trpc.io/)
+-   Installation/usage instructions can be found in [apps/web](apps/web)
 
 ![Google Chrome Lighthouse](https://user-images.githubusercontent.com/66049888/171770773-cbccf8e9-d29d-41aa-b4d4-b49ecf7baf54.gif)
 
@@ -43,7 +44,7 @@ Portfolio website running on [Next.js](https://nextjs.org/) + [Strapi](https://s
 
 -   [Strapi 4](https://strapi.io)
 -   [PosgresSQL](https://www.postgresql.org/)
--   Installation/usage instructions can be found in [packages/api](packages/api)
+-   Installation/usage instructions can be found in [apps/api](apps/api)
 
 ## License
 

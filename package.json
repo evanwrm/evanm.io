@@ -5,14 +5,17 @@
     "version": "0.1.0",
     "private": true,
     "license": "MIT",
-    "homepage": "https://github.com/evanwrm/evanm.io",
-    "scripts": {
-        "prettier": "prettier --write .",
-        "prepare": "husky install"
-    },
+    "homepage": "https://evanm.io",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/evanwrm/evanm.io.git"
+        "url": "https://github.com/evanwrm/evanm.io"
+    },
+    "scripts": {
+        "g:lint": "run-p g:format-check g:lint-check",
+        "g:lint-check": "yarn workspaces foreach -ptv run lint",
+        "g:format-check": "prettier --check .",
+        "g:format-fix": "prettier --write .",
+        "prepare": "husky install"
     },
     "keywords": [
         "portfolio",
@@ -26,6 +29,7 @@
         "@commitlint/cli": "^16.3.0",
         "@commitlint/config-conventional": "^16.2.4",
         "husky": "^8.0.1",
+        "npm-run-all": "^4.1.5",
         "prettier": "^2.6.2"
     },
     "workspaces": {
