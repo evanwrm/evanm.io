@@ -10,12 +10,20 @@
         "type": "git",
         "url": "https://github.com/evanwrm/evanm.io"
     },
+    "engines": {
+        "node": ">=16.0.0",
+        "pnpm": ">=7.2.1"
+    },
+    "packageManager": "pnpm@7.3.0",
     "scripts": {
         "g:lint": "run-p g:format-check g:lint-check",
-        "g:lint-check": "yarn workspaces foreach -ptv run lint",
+        "g:lint-check": "pnpm -r --parallel run lint",
         "g:format-check": "prettier --check .",
         "g:format-fix": "prettier --write .",
-        "prepare": "husky install"
+        "g:changeset": "changeset",
+        "deps:update": "pnpm up -irL",
+        "lint-staged": "lint-staged",
+        "prepare": "is-ci || husky install"
     },
     "keywords": [
         "portfolio",
@@ -26,13 +34,25 @@
         "url": "https://github.com/evanwrm/evanm.io/issues"
     },
     "devDependencies": {
-        "@commitlint/cli": "^16.3.0",
-        "@commitlint/config-conventional": "^16.2.4",
+        "@babel/eslint-parser": "^7.18.2",
+        "@changesets/cli": "^2.23.0",
+        "@commitlint/cli": "^17.0.3",
+        "@commitlint/config-conventional": "^17.0.3",
+        "cross-env": "^7.0.3",
+        "eslint": "^8.18.0",
+        "eslint-config-prettier": "^8.5.0",
         "husky": "^8.0.1",
+        "is-ci": "^3.0.1",
+        "lint-staged": "^13.0.3",
         "npm-run-all": "^4.1.5",
-        "prettier": "^2.6.2"
+        "prettier": "^2.7.1",
+        "shell-quote": "^1.7.3",
+        "typescript": "4.7.4"
     },
     "workspaces": {
-        "packages": []
+        "packages": [
+            "apps/*",
+            "packages/*"
+        ]
     }
 }

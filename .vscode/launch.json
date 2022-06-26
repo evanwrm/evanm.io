@@ -8,7 +8,7 @@
             "name": "Next.js: debug server-side",
             "type": "node-terminal",
             "request": "launch",
-            "command": "yarn debug",
+            "command": "pnpm run debug",
             "cwd": "${workspaceFolder}/apps/web"
         },
         {
@@ -22,7 +22,7 @@
             "name": "Next.js: debug full stack",
             "type": "node-terminal",
             "request": "launch",
-            "command": "yarn debug",
+            "command": "pnpm run debug",
             "serverReadyAction": {
                 "pattern": "started server on .+, url: (https?://.+)",
                 "uriFormat": "%s",

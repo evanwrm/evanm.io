@@ -1,5 +1,4 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
-import React from "react";
 // import { themeColor } from "../components/ThemeProvider";
 
 class DocumentWrapper extends Document {
@@ -72,7 +71,7 @@ class DocumentWrapper extends Document {
                     <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png" />
                     <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
                 </Head>
-                <body className="scrollbar transition duration-150">
+                <body className="transition duration-150 scrollbar">
                     <Main />
                     <NextScript />
                 </body>

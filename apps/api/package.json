@@ -13,16 +13,15 @@
     },
     "engines": {
         "node": ">=12.x.x <=16.x.x",
-        "yarn": ">=1.22.0",
-        "npm": ">=6.0.0"
+        "pnpm": ">=7.2.1"
     },
+    "packageManager": "pnpm@7.3.0",
     "scripts": {
         "dev": "strapi develop",
         "build": "strapi build",
         "start": "strapi start",
         "strapi": "strapi",
-        "lint": "eslint .",
-        "prettier": "prettier --write ."
+        "lint": "eslint --max-warnings=0 --ignore-path=../../.eslintignore ."
     },
     "dependencies": {
         "@strapi/plugin-documentation": "4.1.9",
@@ -35,10 +34,10 @@
         "strapi-prometheus": "^0.6.2"
     },
     "devDependencies": {
-        "@babel/eslint-parser": "^7.17.0",
-        "eslint": "^8.15.0",
+        "@babel/eslint-parser": "^7.18.2",
+        "eslint": "^8.18.0",
         "eslint-config-prettier": "^8.5.0",
-        "prettier": "^2.6.2"
+        "prettier": "^2.7.1"
     },
     "strapi": {
         "uuid": "35d7a084-3088-4d0b-869e-f503693ee8e5"

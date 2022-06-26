@@ -15,8 +15,5 @@
             "experimentalObjectRestSpread": true,
             "jsx": false
         }
-    },
-    "globals": {
-        "strapi": true
     }
 }

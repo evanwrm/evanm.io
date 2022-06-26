@@ -36,7 +36,10 @@ Portfolio website running on [Next.js](https://nextjs.org/) + [Strapi](https://s
 -   [Tailwind 3.0](https://tailwindcss.com)
 -   [Framer Motion](https://www.framer.com/motion)
 -   [tRPC](https://trpc.io/)
--   Installation/usage instructions can be found in [apps/web](apps/web)
+-   [Vitest](https://vitest.dev/)
+-   [Playwright](https://playwright.dev/)
+
+Installation/usage instructions can be found in [apps/web](apps/web)
 
 ![Google Chrome Lighthouse](https://user-images.githubusercontent.com/66049888/171770773-cbccf8e9-d29d-41aa-b4d4-b49ecf7baf54.gif)
 
@@ -44,7 +47,8 @@ Portfolio website running on [Next.js](https://nextjs.org/) + [Strapi](https://s
 
 -   [Strapi 4](https://strapi.io)
 -   [PosgresSQL](https://www.postgresql.org/)
--   Installation/usage instructions can be found in [apps/api](apps/api)
+
+Installation/usage instructions can be found in [apps/api](apps/api)
 
 ## License
 

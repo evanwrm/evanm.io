@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import NProgress, { NProgressOptions } from "nprogress";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 interface Props {
     color?: string;

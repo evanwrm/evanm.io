@@ -7,9 +7,7 @@ This is the frontend component of the portfolio website
 First, run the development server:
 
 ```sh
-npm run dev
-# or
-yarn dev
+pnpm dev
 ```
 
 Now, we can open [http://localhost:3000](http://localhost:3000) and begin developement.
@@ -17,7 +15,7 @@ Now, we can open [http://localhost:3000](http://localhost:3000) and begin develo
 Alternatively, we can analyze bundle sizes by setting the `ANALYZE` environment variable, and building the app:
 
 ```sh
-ANALYZE=true yarn build
+ANALYZE=true pnpm build
 ```
 
 ## Deployment

@@ -7,9 +7,7 @@ Here we use [Strapi](https://strapi.io/), and deploy using [Railway](https://rai
 First, run the development server:
 
 ```sh
-npm run strapi
-# or
-yarn strapi
+pnpm strapi
 ```
 
 Now, we can open [http://localhost:5000](http://localhost:5000) and head to the `/admin` endpoint.
