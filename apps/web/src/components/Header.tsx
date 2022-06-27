@@ -1,5 +1,6 @@
 import { AnimatePresence, m } from "framer-motion";
 import { NextSeo, NextSeoProps } from "next-seo";
+import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { useHideOnScroll } from "../hooks/useHideOnScroll";
 import { getMedia } from "../lib/media";
@@ -18,6 +19,8 @@ interface Props {
     seo?: Seo;
     socials?: SocialLink[];
 }
+
+const DynamicMobileDrawer = dynamic(() => import("./MobileDrawer"), { ssr: true });
 
 const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
     // Ensure our Seo is compatiable with a nullable NextSeoProps
@@ -68,47 +71,14 @@ const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
             <NextSeo {...pageSeo} />
             <AnimatePresence>
                 {mobileOpen && (
-                    <m.div
-                        className="fixed z-10 left-[-50%] top-0 w-[200%] h-screen shadow bg-base-100 backdrop-blur-xl bg-opacity-60 bg-clip-padding"
-                        drag="x"
-                        dragElastic={0.1}
-                        dragMomentum={false}
-                        dragConstraints={{
-                            left: 0.1,
-                            right: 0.1
-                        }}
-                        onDragEnd={(_event, info) => {
-                            const isDraggingRight = info.offset.x > 0;
-                            const threshold = 300 * (isDraggingRight ? 2 / 3 : 1 / 2);
-
-                            if (mobileOpen && Math.abs(info.offset.x) > threshold)
-                                setMobileOpen(false);
-                            else if (!mobileOpen && Math.abs(info.offset.x) < threshold)
-                                setMobileOpen(true);
-                        }}
-                        initial={{ opacity: 0, x: 399 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 399 }}
-                        transition={{ type: "spring", duration: 0.5, bounce: 0.25 }}
-                    >
-                        <div className="relative flex flex-col items-center justify-center w-full h-screen">
-                            <div className="flex items-center justify-start w-1/2 gap-6 p-2">
-                                <div
-                                    className="btn btn-ghost btn-circle md:hidden"
-                                    onClick={e => handleToggleOpen(e)}
-                                    tabIndex={0}
-                                >
-                                    <Icon icon="HiX" className="w-6 h-6" />
-                                </div>
-                            </div>
-                            <RouteNavList
-                                routes={routes}
-                                tabIndex={0}
-                                onElementClick={e => handleToggleOpen(e)}
-                                className="flex flex-col items-center justify-center w-1/2 h-screen tracking-widest"
-                            />
-                        </div>
-                    </m.div>
+                    <DynamicMobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)}>
+                        <RouteNavList
+                            routes={routes}
+                            tabIndex={0}
+                            onElementClick={handleToggleOpen}
+                            className="flex flex-col items-center justify-center w-1/2 h-full tracking-widest"
+                        />
+                    </DynamicMobileDrawer>
                 )}
             </AnimatePresence>
             <AnimatePresence>
@@ -124,7 +94,7 @@ const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
                             <div className="flex items-center justify-start w-1/2">
                                 <div
                                     className="btn btn-ghost btn-circle md:hidden"
-                                    onClick={e => handleToggleOpen(e)}
+                                    onClick={handleToggleOpen}
                                     tabIndex={0}
                                 >
                                     <Icon icon="HiMenuAlt2" className="w-6 h-6" />

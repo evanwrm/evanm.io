@@ -1,4 +1,4 @@
-import qs from "qs";
+import { stringify } from "qs";
 import { StrapiQueryParameters } from "../validators/StapiQueryParameters";
 import { NEXT_PUBLIC_API_URL } from "./utils/constants";
 
@@ -24,7 +24,7 @@ export const fetchAPI = async <T>(
         ...options
     };
 
-    const queryString = qs.stringify(urlParamsObject);
+    const queryString = stringify(urlParamsObject);
     const requestUrl = getAPIURL(`/api${path}${queryString ? `?${queryString}` : ""}`);
 
     const response = await fetch(requestUrl, mergedOptions);

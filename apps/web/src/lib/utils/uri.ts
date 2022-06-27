@@ -1,17 +1,12 @@
-const URIParse = (url: string) => {
-    // URI RFC: https://datatracker.ietf.org/doc/html/rfc3986#appendix-B
-    const match = url.match(/^(([^:\/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/);
-    return (
-        match && {
-            protocol: match[1],
-            host: match[4]
-        }
-    );
-};
+import { parseUrl } from "next/dist/shared/lib/router/utils/parse-url";
 
 export const isExternal = (url: string, baseLocation: string = "/") => {
-    const match = URIParse(url);
-    const location = URIParse(baseLocation);
+    const match = parseUrl(url);
+    const location = parseUrl(baseLocation);
 
-    return location && (match?.protocol !== location?.protocol || match?.host !== location?.host);
+    return (
+        match.protocol !== location.protocol ||
+        match.hostname !== location.hostname ||
+        match.port !== location.port
+    );
 };

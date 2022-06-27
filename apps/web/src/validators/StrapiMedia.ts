@@ -1,18 +1,26 @@
 import { z } from "zod";
 
-export const strapiMediaValidator = z.object({
+export const mediaFormatValidator = z.object({
     name: z.string().nullish(),
-    alternativeText: z.string().nullish(),
-    caption: z.string().nullish(),
+    url: z.string().url(),
     width: z.number().nullish(),
     height: z.number().nullish(),
-    hash: z.string(),
+    size: z.number(),
     ext: z.string(),
     mime: z.string(),
-    size: z.number(),
-    url: z.string().url(),
-    previewUrl: z.string().url().nullish(),
-    provider: z.string().nullish()
+    hash: z.string()
 });
+
+export const strapiMediaValidator = z
+    .object({
+        alternativeText: z.string().nullish(),
+        caption: z.string().nullish(),
+        formats: z
+            .union([z.string(), z.object({ thumbnail: mediaFormatValidator.nullish() })])
+            .nullish(),
+        previewUrl: z.string().url().nullish(),
+        provider: z.string().nullish()
+    })
+    .merge(mediaFormatValidator);
 
 export type StrapiMedia = z.infer<typeof strapiMediaValidator>;

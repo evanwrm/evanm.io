@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes";
 import { AppContext, AppInitialProps, AppProps } from "next/app";
 import Head from "next/head";
 import React, { useEffect } from "react";
+import { ReactQueryDevtools } from "react-query/devtools";
 import superjson from "superjson";
 import ProgressBar from "../components/ProgressBar";
 import { AppRouter } from "../lib/server/routers/app";
@@ -64,6 +65,7 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
                     <ThemeProvider defaultTheme="system">
                         <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
                         <Component {...pageProps} />
+                        <ReactQueryDevtools initialIsOpen={false} />
                     </ThemeProvider>
                 </AnimatePresence>
             </LazyMotion>

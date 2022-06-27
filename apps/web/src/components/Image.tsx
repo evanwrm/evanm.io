@@ -1,6 +1,6 @@
 import NextImage from "next/image";
 import React from "react";
-import { getMedia } from "../lib/media";
+import { getMedia, getMediaThumbnail } from "../lib/media";
 import { StrapiMedia } from "../validators/StrapiMedia";
 
 interface Props {
@@ -21,6 +21,8 @@ export const Image: React.FC<Props> = ({ image, alt = "", className }: Props) =>
             layout="intrinsic"
             objectFit="contain"
             className={className}
+            placeholder="blur"
+            blurDataURL={getMediaThumbnail(image)}
         />
     );
 };

@@ -13,7 +13,7 @@ interface Props {
 const ProjectCard: React.FC<Props> = ({ project }: Props) => {
     return (
         <Tilt className="w-96" tiltStrength={5}>
-            <div className="w-full h-full transition shadow-xl card group bg-base-200/50 hover:ring hover:ring-secondary ring-offset-base-100 ring-offset-0 hover:ring-offset-4">
+            <div className="w-full h-full antialiased transition shadow-xl card group bg-base-200/50 hover:ring hover:ring-secondary ring-offset-base-100 ring-offset-0 hover:ring-offset-4">
                 {project.thumbnail && (
                     <figure className="h-screen max-h-48 bg-base-100 overflow-clip">
                         <Image

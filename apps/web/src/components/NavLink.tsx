@@ -3,7 +3,7 @@ import Link, { LinkProps } from "next/link";
 import React from "react";
 import { isExternal } from "../lib/utils/uri";
 
-interface Props extends LinkProps, React.HTMLAttributes<HTMLAnchorElement> {
+interface Props extends Pick<LinkProps, "as" | "href">, React.HTMLAttributes<HTMLAnchorElement> {
     children?: React.ReactNode;
     className?: string;
 }
