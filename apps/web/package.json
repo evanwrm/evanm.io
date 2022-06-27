@@ -76,7 +76,7 @@
     },
     "pnpm": {
         "overrides": {
-            "**/react-ssr-prepass": "npm:preact-ssr-prepass@^1.2.0"
+            "react-ssr-prepass": "npm:preact-ssr-prepass@^1.2.0"
         }
     },
     "nextBundleAnalysis": {
