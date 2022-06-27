@@ -1,4 +1,5 @@
 import { getYear } from "date-fns";
+import { m } from "framer-motion";
 import React from "react";
 import { getMedia } from "../lib/media";
 import { Global } from "../validators/Global";
@@ -47,10 +48,14 @@ const Footer: React.FC<Props> = ({ global, socials = [] }: Props) => {
                 <div className="flex my-4 space-x-4">
                     {socials.map(social => (
                         <NavLink href={social.url} aria-label={social.name} key={social.socialId}>
-                            <Icon
-                                icon={social.iconId}
-                                className="w-8 h-8 transition opacity-80 hover:-translate-y-1 hover:scale-110 hover:opacity-100 focus:opacity-100"
-                            />
+                            <m.div
+                                className="flex opacity-80"
+                                whileHover={{ scale: 1.1, opacity: 1, y: -4 }}
+                                whileFocus={{ scale: 1.1, opacity: 1, y: -4 }}
+                                whileTap={{ scale: 0.9, opacity: 1 }}
+                            >
+                                <Icon icon={social.iconId} className="w-8 h-8" />
+                            </m.div>
                         </NavLink>
                     ))}
                 </div>

@@ -21,6 +21,7 @@
         "g:format-check": "prettier --check .",
         "g:format-fix": "prettier --write .",
         "g:changeset": "changeset",
+        "g:clean": "rm -rf pnpm-lock.yaml node_modules && pnpm -r --parallel exec rm -rf pnpm-lock.yaml node_modules",
         "deps:update": "pnpm up -irL",
         "lint-staged": "lint-staged",
         "prepare": "is-ci || husky install"
@@ -53,6 +54,7 @@
         "packages": [
             "apps/*",
             "packages/*"
-        ]
+        ],
+        "nohoist": []
     }
 }

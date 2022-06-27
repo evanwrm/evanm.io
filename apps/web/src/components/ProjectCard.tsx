@@ -1,3 +1,4 @@
+import { m } from "framer-motion";
 import React from "react";
 import { getRepositoryIcon } from "../lib/icons";
 import { Project } from "../validators/Project";
@@ -34,10 +35,17 @@ const ProjectCard: React.FC<Props> = ({ project }: Props) => {
                                     aria-label="Repository"
                                     key={project.repository}
                                 >
-                                    <Icon
-                                        icon={getRepositoryIcon(project.repository)}
-                                        className="w-6 h-6 transition opacity-80 hover:-translate-y-1 hover:scale-110 hover:opacity-100 focus:opacity-100"
-                                    />
+                                    <m.div
+                                        className="flex opacity-80"
+                                        whileHover={{ scale: 1.1, opacity: 1, y: -4 }}
+                                        whileFocus={{ scale: 1.1, opacity: 1, y: -4 }}
+                                        whileTap={{ scale: 0.9, opacity: 1 }}
+                                    >
+                                        <Icon
+                                            icon={getRepositoryIcon(project.repository)}
+                                            className="w-6 h-6"
+                                        />
+                                    </m.div>
                                 </NavLink>
                             )}
                             {project.liveSite && (
@@ -46,10 +54,14 @@ const ProjectCard: React.FC<Props> = ({ project }: Props) => {
                                     aria-label="Live website"
                                     key={project.liveSite}
                                 >
-                                    <Icon
-                                        icon={"RiExternalLinkLine"}
-                                        className="w-6 h-6 transition opacity-80 hover:-translate-y-1 hover:scale-110 hover:opacity-100 focus:opacity-100"
-                                    />
+                                    <m.div
+                                        className="flex opacity-80"
+                                        whileHover={{ scale: 1.1, opacity: 1, y: -4 }}
+                                        whileFocus={{ scale: 1.1, opacity: 1, y: -4 }}
+                                        whileTap={{ scale: 0.9, opacity: 1 }}
+                                    >
+                                        <Icon icon={"RiExternalLinkLine"} className="w-6 h-6" />
+                                    </m.div>
                                 </NavLink>
                             )}
                         </div>
