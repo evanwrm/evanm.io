@@ -1,6 +1,11 @@
 import { FaFilePdf } from "react-icons/fa";
 import { HiMenuAlt2, HiOutlineLightBulb, HiX } from "react-icons/hi";
-import { MdAlternateEmail, MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import {
+    MdAlternateEmail,
+    MdKeyboardArrowUp,
+    MdOutlineDarkMode,
+    MdOutlineLightMode
+} from "react-icons/md";
 import {
     RiExternalLinkLine,
     RiFacebookFill,
@@ -63,6 +68,7 @@ const iconMap: Record<string, any> = {
     // Extras
     HiMenuAlt2,
     HiX,
+    MdKeyboardArrowUp,
     MdOutlineDarkMode,
     MdOutlineLightMode,
     RiExternalLinkLine,

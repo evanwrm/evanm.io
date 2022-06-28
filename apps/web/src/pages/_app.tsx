@@ -1,3 +1,4 @@
+import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { withTRPC } from "@trpc/next";
 import { AnimatePresence, LazyMotion } from "framer-motion";
 import { NextComponentType } from "next";
@@ -81,9 +82,12 @@ export default withTRPC<AppRouter>({
             return NEXT_PUBLIC_SITE_URL;
         };
 
+        // https://trpc.io/docs/links
         const url = `${getBaseUrl()}/api/trpc`;
+        const links = [httpBatchLink({ url, maxBatchSize: 10 })];
+
         return {
-            url,
+            links,
             transformer: superjson,
             queryClientConfig: { defaultOptions: { queries: { staleTime: Infinity } } }
         };

@@ -1,7 +1,7 @@
 import { createSSGHelpers } from "@trpc/react/ssg";
-import type { GetStaticProps, GetStaticPropsResult, NextPage } from "next";
+import { GetStaticProps, GetStaticPropsResult, NextPage } from "next";
 import superjson from "superjson";
-import FadeIn from "../components/FadeIn.";
+import FadeIn from "../components/animations/FadeIn.";
 import Grid from "../components/Grid";
 import Icon from "../components/Icon";
 import Layout from "../components/layouts/Layout";
@@ -21,7 +21,7 @@ const Home: NextPage = () => {
     return (
         <Layout title="Home" global={global} seo={seo} socials={socials}>
             <main className="flex flex-col items-center justify-center flex-1 w-full max-w-3xl p-4 text-center duration-150 overflow-clip">
-                <div className="my-6">
+                <div className="my-6 mt-24">
                     <h1 className="text-6xl font-bold">
                         <span>Welcome to </span>
                         <a className="duration-150 text-primary" href="https://nextjs.org">

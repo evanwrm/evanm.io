@@ -1,7 +1,7 @@
-import { m } from "framer-motion";
 import React from "react";
 import { getRepositoryIcon } from "../lib/icons";
 import { Project } from "../validators/Project";
+import IconButton from "./animations/IconButton";
 import Icon from "./Icon";
 import { Image } from "./Image";
 import NavLink from "./NavLink";
@@ -35,17 +35,12 @@ const ProjectCard: React.FC<Props> = ({ project }: Props) => {
                                     aria-label="Repository"
                                     key={project.repository}
                                 >
-                                    <m.div
-                                        className="flex opacity-80"
-                                        whileHover={{ scale: 1.1, opacity: 1, y: -4 }}
-                                        whileFocus={{ scale: 1.1, opacity: 1, y: -4 }}
-                                        whileTap={{ scale: 0.9, opacity: 1 }}
-                                    >
+                                    <IconButton className="flex opacity-80">
                                         <Icon
                                             icon={getRepositoryIcon(project.repository)}
                                             className="w-6 h-6"
                                         />
-                                    </m.div>
+                                    </IconButton>
                                 </NavLink>
                             )}
                             {project.liveSite && (
@@ -54,14 +49,9 @@ const ProjectCard: React.FC<Props> = ({ project }: Props) => {
                                     aria-label="Live website"
                                     key={project.liveSite}
                                 >
-                                    <m.div
-                                        className="flex opacity-80"
-                                        whileHover={{ scale: 1.1, opacity: 1, y: -4 }}
-                                        whileFocus={{ scale: 1.1, opacity: 1, y: -4 }}
-                                        whileTap={{ scale: 0.9, opacity: 1 }}
-                                    >
+                                    <IconButton className="flex opacity-80">
                                         <Icon icon={"RiExternalLinkLine"} className="w-6 h-6" />
-                                    </m.div>
+                                    </IconButton>
                                 </NavLink>
                             )}
                         </div>

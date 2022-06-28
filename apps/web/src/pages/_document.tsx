@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
+import { DOM_PORTAL_ID } from "../lib/utils/constants";
 // import { themeColor } from "../components/ThemeProvider";
 
 class DocumentWrapper extends Document {
@@ -73,6 +74,7 @@ class DocumentWrapper extends Document {
                 </Head>
                 <body className="transition duration-150 scrollbar">
                     <Main />
+                    <div id={DOM_PORTAL_ID} />
                     <NextScript />
                 </body>
             </Html>
