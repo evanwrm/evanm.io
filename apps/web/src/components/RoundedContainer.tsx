@@ -11,7 +11,7 @@ const RoundedContainer: React.FC<Props> = ({ className, children }: Props) => {
         <span
             className={clsx(
                 className,
-                "p-3 mx-2 inline-flex justify-center items-center text-center rounded-full", // border-2
+                "mx-2 inline-flex items-center justify-center rounded-full p-3 text-center", // border-2
                 "bg-base-content/10" // border-accent/10
             )}
         >

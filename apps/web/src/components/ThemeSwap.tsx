@@ -37,8 +37,8 @@ const ThemeSwap: React.FC<Props> = ({ className }: Props) => {
                     checked={checked}
                     onChange={handleTheme}
                 />
-                <Icon icon="MdOutlineLightMode" className="w-6 h-6 swap-on" />
-                <Icon icon="MdOutlineDarkMode" className="w-6 h-6 swap-off" />
+                <Icon icon="MdOutlineLightMode" className="swap-on h-6 w-6" />
+                <Icon icon="MdOutlineDarkMode" className="swap-off h-6 w-6" />
             </label>
         </div>
     );

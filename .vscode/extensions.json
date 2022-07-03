@@ -4,7 +4,6 @@
         "dbaeumer.vscode-eslint",
         "csstools.postcss",
         "bradlc.vscode-tailwindcss",
-        "heybourn.headwind",
         "mikestead.dotenv",
         "Orta.vscode-jest",
         "eamodio.gitlens"

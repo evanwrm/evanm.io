@@ -4,6 +4,3 @@ export const VERCEL_URL = process.env.VERCEL_URL && `https://${process.env.VERCE
 // Public
 export const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 export const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-
-// Application
-export const DOM_PORTAL_ID = "react-portal";

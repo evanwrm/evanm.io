@@ -1,10 +1,10 @@
 import React from "react";
 import { getRepositoryIcon } from "../lib/icons";
 import { Project } from "../validators/Project";
-import IconButton from "./animations/IconButton";
+import ResponsiveButton from "./animations/ResponsiveButton";
 import Icon from "./Icon";
 import { Image } from "./Image";
-import NavLink from "./NavLink";
+import NavLink from "./navigation/NavLink";
 import Tilt from "./Tilt";
 
 interface Props {
@@ -13,10 +13,10 @@ interface Props {
 
 const ProjectCard: React.FC<Props> = ({ project }: Props) => {
     return (
-        <Tilt className="w-96" tiltStrength={5}>
-            <div className="w-full h-full antialiased transition shadow-xl card group bg-base-200/50 hover:ring hover:ring-secondary ring-offset-base-100 ring-offset-0 hover:ring-offset-4">
+        <Tilt className="max-h-screen" tiltStrength={5}>
+            <div className="border-base-content/10 card bg-base-200/50 hover:ring-secondary ring-offset-base-100 group h-full w-full rounded-xl border antialiased shadow-xl ring-offset-0 transition hover:ring hover:ring-offset-4">
                 {project.thumbnail && (
-                    <figure className="h-screen max-h-48 bg-base-100 overflow-clip">
+                    <figure className="bg-base-100 h-screen max-h-48 overflow-clip">
                         <Image
                             image={project.thumbnail}
                             alt={project.name}
@@ -24,23 +24,23 @@ const ProjectCard: React.FC<Props> = ({ project }: Props) => {
                         />
                     </figure>
                 )}
-                <div className="w-full shadow-inner card-body">
-                    <div className="flex items-center w-full gap-4">
+                <div className="card-body w-full gap-y-8 shadow-inner">
+                    <div className="flex w-full items-center gap-4">
                         <h2 className="card-title">{project.name}</h2>
                         <div className="badge badge-secondary">NEW</div>
-                        <div className="flex justify-end flex-1 gap-4">
+                        <div className="flex flex-1 justify-end gap-4">
                             {project.repository && (
                                 <NavLink
                                     href={project.repository}
                                     aria-label="Repository"
                                     key={project.repository}
                                 >
-                                    <IconButton className="flex opacity-80">
+                                    <ResponsiveButton className="flex opacity-80">
                                         <Icon
                                             icon={getRepositoryIcon(project.repository)}
-                                            className="w-6 h-6"
+                                            className="h-6 w-6"
                                         />
-                                    </IconButton>
+                                    </ResponsiveButton>
                                 </NavLink>
                             )}
                             {project.liveSite && (
@@ -49,21 +49,21 @@ const ProjectCard: React.FC<Props> = ({ project }: Props) => {
                                     aria-label="Live website"
                                     key={project.liveSite}
                                 >
-                                    <IconButton className="flex opacity-80">
-                                        <Icon icon={"RiExternalLinkLine"} className="w-6 h-6" />
-                                    </IconButton>
+                                    <ResponsiveButton className="flex opacity-80">
+                                        <Icon icon={"RiExternalLinkLine"} className="h-6 w-6" />
+                                    </ResponsiveButton>
                                 </NavLink>
                             )}
                         </div>
                     </div>
-                    <p>{project.logline}</p>
-                    <div className="justify-end card-actions">
+                    <p className="prose text-left">{project.logline}</p>
+                    <div className="card-actions justify-end">
                         {project.skills?.map(skill => (
                             <div
-                                className="gap-2 py-3 transition badge badge-outline hover:text-primary focus:text-primary"
+                                className="badge badge-outline hover:text-primary focus:text-primary gap-2 py-3 transition"
                                 key={skill.skillId}
                             >
-                                <Icon className="inline-block w-4 h-4" icon={skill.iconId} />
+                                <Icon className="inline-block h-4 w-4" icon={skill.iconId} />
                                 {skill.name}
                             </div>
                         ))}

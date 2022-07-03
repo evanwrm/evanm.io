@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Link, { LinkProps } from "next/link";
 import React from "react";
-import { isExternal } from "../lib/utils/uri";
+import { isExternal } from "../../lib/utils/uri";
 
 interface Props extends Pick<LinkProps, "as" | "href">, React.HTMLAttributes<HTMLAnchorElement> {
     children?: React.ReactNode;

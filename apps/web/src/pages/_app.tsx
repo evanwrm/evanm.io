@@ -1,23 +1,31 @@
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { withTRPC } from "@trpc/next";
 import { AnimatePresence, LazyMotion } from "framer-motion";
+import { KBarProvider } from "kbar";
 import { NextComponentType } from "next";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import { AppContext, AppInitialProps, AppProps } from "next/app";
+import dynamic from "next/dynamic";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import superjson from "superjson";
 import ProgressBar from "../components/ProgressBar";
 import { AppRouter } from "../lib/server/routers/app";
+import { generateStaticSpotlightActions } from "../lib/spotlightActions";
 import { NEXT_PUBLIC_SITE_URL, NODE_ENV, VERCEL_URL } from "../lib/utils/constants";
 import "../styles/globals.css";
+
+const DynamicSpotlight = dynamic(() => import("../components/navigation/Spotlight"), { ssr: true });
 
 const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
     Component,
     pageProps
 }: AppProps) => {
+    const router = useRouter();
+
     useEffect(() => {
         if (NODE_ENV === "production") {
             // eslint-disable-next-line no-console
@@ -64,9 +72,15 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
             >
                 <AnimatePresence exitBeforeEnter>
                     <ThemeProvider defaultTheme="system">
-                        <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
-                        <Component {...pageProps} />
-                        <ReactQueryDevtools initialIsOpen={false} />
+                        <KBarProvider
+                            actions={generateStaticSpotlightActions(router)}
+                            options={{ enableHistory: true, toggleShortcut: "$mod+k" }}
+                        >
+                            <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
+                            <DynamicSpotlight />
+                            <Component {...pageProps} />
+                            <ReactQueryDevtools initialIsOpen={false} />
+                        </KBarProvider>
                     </ThemeProvider>
                 </AnimatePresence>
             </LazyMotion>

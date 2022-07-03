@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import { m } from "framer-motion";
 import React from "react";
-import { lightBounceTransition, slideFadeRightOffscreenVariants } from "../lib/framerVariants";
-import IconButton from "./animations/IconButton";
-import Icon from "./Icon";
+import { lightBounceTransition, slideFadeLeftOffscreenVariants } from "../../lib/framerVariants";
+import ResponsiveButton from "../animations/ResponsiveButton";
+import Icon from "../Icon";
 
 interface Props {
     open: boolean;
@@ -22,7 +22,7 @@ const MobileDrawer: React.FC<Props> = ({ open, onClose, className, children }: P
         <m.div
             className={clsx(
                 className,
-                "fixed z-50 left-[-50%] top-0 w-[200%] h-screen shadow bg-base-100 backdrop-blur-lg bg-opacity-60 bg-clip-padding"
+                "bg-base-100 fixed left-[-50%] top-0 z-50 h-screen w-[200%] select-none bg-opacity-60 bg-clip-padding shadow backdrop-blur backdrop-saturate-200"
             )}
             drag="x"
             dragElastic={0.1}
@@ -33,8 +33,8 @@ const MobileDrawer: React.FC<Props> = ({ open, onClose, className, children }: P
             }}
             onDragEnd={(_event, info) => {
                 const offset = info.delta.x - info.offset.x;
-                const isDraggingRight = offset > 0;
-                const threshold = 300 * (isDraggingRight ? 1 / 2 : 2 / 3);
+                const isDraggingLeft = offset > 0;
+                const threshold = 300 * (isDraggingLeft ? 1 / 2 : Infinity);
 
                 if (open && offset > threshold) onClose();
                 else if (open && offset < -threshold) onClose();
@@ -42,20 +42,20 @@ const MobileDrawer: React.FC<Props> = ({ open, onClose, className, children }: P
             initial="hidden"
             animate="visible"
             exit="hidden"
-            variants={slideFadeRightOffscreenVariants}
+            variants={slideFadeLeftOffscreenVariants}
             transition={lightBounceTransition}
         >
-            <div className="relative flex flex-col items-center justify-start w-full h-screen">
-                <div className="z-10 flex items-center justify-start w-1/2 gap-6 p-2">
-                    <IconButton
-                        className="flex items-center justify-center select-none btn-ghost btn-circle md:hidden"
+            <div className="relative flex h-screen w-full flex-col items-center justify-start">
+                <div className="z-10 flex w-1/2 items-center justify-start gap-6 p-2">
+                    <ResponsiveButton
+                        className="btn-ghost btn-circle flex select-none items-center justify-center md:hidden"
                         onClick={handleClose}
                         tabIndex={0}
                     >
-                        <Icon icon="HiX" className="w-6 h-6" />
-                    </IconButton>
+                        <Icon icon="HiX" className="h-6 w-6" />
+                    </ResponsiveButton>
                 </div>
-                <div className="flex items-center justify-center w-1/2 h-full -mt-16">
+                <div className="-mt-16 flex h-full w-1/2 items-center justify-center">
                     {children}
                 </div>
             </div>

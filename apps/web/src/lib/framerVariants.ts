@@ -9,8 +9,8 @@ export const slideFadeRightVariants: Variants = {
     hidden: { x: 25, opacity: 0 },
     visible: { x: 0, opacity: 1 }
 };
-export const slideFadeRightOffscreenVariants: Variants = {
-    hidden: { x: 399, opacity: 0 },
+export const slideFadeLeftOffscreenVariants: Variants = {
+    hidden: { x: -400, opacity: 0 },
     visible: { x: 0, opacity: 1 }
 };
 export const slideInTopVariants: Variants = {

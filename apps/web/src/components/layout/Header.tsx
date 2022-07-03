@@ -1,20 +1,22 @@
+import Portal from "@reach/portal";
 import { AnimatePresence, m } from "framer-motion";
+import { useKBar } from "kbar";
 import { NextSeo, NextSeoProps } from "next-seo";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import { useHideOnScroll } from "../hooks/useHideOnScroll";
-import { anticipateTransition, slideInTopVariants } from "../lib/framerVariants";
-import { getMedia } from "../lib/media";
-import { DeepNullable } from "../lib/utils/types";
-import { Global } from "../validators/Global";
-import { Seo } from "../validators/Seo";
-import { SocialLink } from "../validators/Social";
-import IconButton from "./animations/IconButton";
-import Icon from "./Icon";
-import NavLink from "./NavLink";
-import Portal from "./Portal";
-import RouteNavList from "./RouteNavList";
-import ThemeSwap from "./ThemeSwap";
+import { useFramerVariants } from "../../hooks/useFramerVariants";
+import { useHideOnScroll } from "../../hooks/useHideOnScroll";
+import { anticipateTransition, slideInTopVariants } from "../../lib/framerVariants";
+import { getMedia } from "../../lib/media";
+import { DeepNullable } from "../../lib/utils/types";
+import { Global } from "../../validators/Global";
+import { Seo } from "../../validators/Seo";
+import { SocialLink } from "../../validators/Social";
+import ResponsiveButton from "../animations/ResponsiveButton";
+import Icon from "../Icon";
+import NavLink from "../navigation/NavLink";
+import RouteNavList from "../navigation/RouteNavList";
+import ThemeSwap from "../ThemeSwap";
 
 interface Props {
     title?: string;
@@ -36,6 +38,9 @@ const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
 
     const { hidden } = useHideOnScroll(80, 60);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const headerVariants = useFramerVariants(slideInTopVariants, { disableMountAnimation: true });
+
+    const { query } = useKBar();
 
     const handleToggleOpen = (_e: React.MouseEvent) => {
         setMobileOpen(!mobileOpen);
@@ -79,7 +84,7 @@ const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
                                 routes={routes}
                                 tabIndex={0}
                                 onElementClick={handleToggleOpen}
-                                className="flex flex-col items-center justify-center w-1/2 h-full tracking-widest"
+                                className="flex h-full w-1/2 flex-col items-center justify-center tracking-widest"
                             />
                         </DynamicMobileDrawer>
                     )}
@@ -88,28 +93,28 @@ const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
             <AnimatePresence>
                 {!hidden && (
                     <m.div
-                        className="fixed top-0 z-40 flex items-center justify-center w-full shadow shadow-base-content/10 navbar bg-base-100 bg-opacity-60 backdrop-blur-lg bg-clip-padding"
+                        className="shadow-base-content/10 navbar bg-base-100 fixed top-0 z-40 flex w-full items-center justify-center bg-opacity-60 bg-clip-padding shadow backdrop-blur backdrop-saturate-200"
                         initial="hidden"
                         animate="visible"
                         exit="hidden"
-                        variants={slideInTopVariants}
+                        variants={headerVariants}
                         transition={anticipateTransition}
                     >
                         <div className={"w-full max-w-full"}>
-                            <div className="flex items-center justify-start w-1/2">
-                                <IconButton
-                                    className="flex items-center justify-center select-none btn-ghost btn-circle md:hidden"
+                            <div className="flex w-1/2 items-center justify-start">
+                                <ResponsiveButton
+                                    className="btn-ghost btn-circle flex select-none items-center justify-center md:hidden"
                                     onClick={handleToggleOpen}
                                     tabIndex={0}
                                 >
-                                    <Icon icon="HiMenuAlt2" className="w-6 h-6" />
-                                </IconButton>
+                                    <Icon icon="HiMenuAlt2" className="h-6 w-6" />
+                                </ResponsiveButton>
                                 <NavLink
                                     href="/"
                                     aria-label="Home"
                                     className="ml-2 opacity-80 hover:opacity-100"
                                 >
-                                    <div className="inline font-bold text-base-content">
+                                    <div className="text-base-content inline font-bold">
                                         <span className="hover:text-base-content">evanm</span>
                                         <span className="text-secondary">.io</span>
                                     </div>
@@ -122,10 +127,7 @@ const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
                                     className="flex flex-row"
                                 />
                             </div>
-                            <div className="flex items-center justify-end w-1/2 gap-6 mr-4">
-                                <IconButton className="flex opacity-80">
-                                    <ThemeSwap className="w-6 h-6" />
-                                </IconButton>
+                            <div className="mr-4 flex w-1/2 items-center justify-end gap-6">
                                 {github && (
                                     <a
                                         href={`${github.url}/${seo?.openGraph?.site_name ?? ""}`}
@@ -134,11 +136,20 @@ const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
                                         rel="noopener noreferrer"
                                         key={github.socialId}
                                     >
-                                        <IconButton className="flex opacity-80">
-                                            <Icon icon="SiGithub" className="w-6 h-6" />
-                                        </IconButton>
+                                        <ResponsiveButton className="flex opacity-80">
+                                            <Icon icon="SiGithub" className="h-6 w-6" />
+                                        </ResponsiveButton>
                                     </a>
                                 )}
+                                <ResponsiveButton
+                                    className="flex opacity-80"
+                                    onClick={() => query.toggle()}
+                                >
+                                    <Icon className="h-6 w-6" icon="RiCommandLine" />
+                                </ResponsiveButton>
+                                <ResponsiveButton className="flex opacity-80">
+                                    <ThemeSwap className="h-6 w-6" />
+                                </ResponsiveButton>
                             </div>
                         </div>
                     </m.div>

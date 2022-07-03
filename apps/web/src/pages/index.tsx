@@ -1,14 +1,17 @@
 import { createSSGHelpers } from "@trpc/react/ssg";
+import { useRegisterActions } from "kbar";
 import { GetStaticProps, GetStaticPropsResult, NextPage } from "next";
+import { useRouter } from "next/router";
 import superjson from "superjson";
 import FadeIn from "../components/animations/FadeIn.";
-import Grid from "../components/Grid";
 import Icon from "../components/Icon";
+import Grid from "../components/layout/Grid";
 import Layout from "../components/layouts/Layout";
 import ProjectCard from "../components/ProjectCard";
 import PublicationCard from "../components/PublicationCard";
 import RoundedContainer from "../components/RoundedContainer";
 import { appRouter } from "../lib/server/routers/app";
+import { generateHydratedSpotlightActions } from "../lib/spotlightActions";
 import { trpc } from "../lib/utils/trpc";
 
 const Home: NextPage = () => {
@@ -18,51 +21,58 @@ const Home: NextPage = () => {
     const { data: projects } = trpc.useQuery(["projects.find", { sort: "endDate:desc" }]);
     const { data: publications } = trpc.useQuery(["publications.find", { sort: "year:desc" }]);
 
+    const router = useRouter();
+    useRegisterActions(generateHydratedSpotlightActions(router, { global, seo, socials }), [
+        global,
+        seo,
+        socials
+    ]);
+
     return (
         <Layout title="Home" global={global} seo={seo} socials={socials}>
-            <main className="flex flex-col items-center justify-center flex-1 w-full max-w-3xl p-4 text-center duration-150 overflow-clip">
+            <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-center overflow-clip p-4 text-center duration-150">
                 <div className="my-6 mt-24">
                     <h1 className="text-6xl font-bold">
                         <span>Welcome to </span>
-                        <a className="duration-150 text-primary" href="https://nextjs.org">
+                        <a className="text-primary duration-150" href="https://nextjs.org">
                             Next.js!
                         </a>
                     </h1>
 
                     <p className="mt-6 text-2xl">
                         <span>Get started by editing </span>
-                        <code className="p-3 font-mono text-lg rounded-md bg-base-200">
+                        <code className="bg-base-200 rounded-md p-3 font-mono text-lg">
                             pages/index.js
                         </code>
                     </p>
                 </div>
 
-                <FadeIn id="intro" className="flex flex-col w-full gap-8 my-6 scroll-mt-16">
+                <FadeIn id="intro" className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
                     <Grid className="gap-8">
                         <a
                             href="https://nextjs.org/docs"
-                            className="flex-initial p-6 text-left duration-150 border rounded-xl border-base-content/10 hover:text-primary focus:text-primary"
+                            className="border-base-content/10 hover:text-primary focus:text-primary flex-initial rounded-xl border p-6 text-left duration-150"
                         >
                             <h2 className="mb-6 text-2xl font-bold">Documentation &rarr;</h2>
                             <p>Find in-depth information about Next.js features and API.</p>
                         </a>
                         <a
                             href="https://nextjs.org/learn"
-                            className="flex-initial p-6 text-left duration-150 border rounded-xl border-base-content/10 hover:text-primary focus:text-primary"
+                            className="border-base-content/10 hover:text-primary focus:text-primary flex-initial rounded-xl border p-6 text-left duration-150"
                         >
                             <h2 className="mb-6 text-2xl font-bold">Learn &rarr;</h2>
                             <p>Learn about Next.js in an interactive course with quizzes!</p>
                         </a>
                         <a
                             href="https://github.com/vercel/next.js/tree/master/examples"
-                            className="flex-initial p-6 text-left duration-150 border rounded-xl border-base-content/10 hover:text-primary focus:text-primary"
+                            className="border-base-content/10 hover:text-primary focus:text-primary flex-initial rounded-xl border p-6 text-left duration-150"
                         >
                             <h2 className="mb-6 text-2xl font-bold">Examples &rarr;</h2>
                             <p>Discover and deploy boilerplate example Next.js projects.</p>
                         </a>
                         <a
                             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                            className="flex-initial p-6 text-left duration-150 border rounded-xl border-base-content/10 hover:text-primary focus:text-primary"
+                            className="border-base-content/10 hover:text-primary focus:text-primary flex-initial rounded-xl border p-6 text-left duration-150"
                         >
                             <h2 className="mb-6 text-2xl font-bold">Deploy &rarr;</h2>
                             <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
@@ -70,46 +80,39 @@ const Home: NextPage = () => {
                     </Grid>
                 </FadeIn>
 
-                <FadeIn id="projects" className="flex flex-col w-full gap-8 my-6 scroll-mt-16">
+                <FadeIn id="projects" className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
                     <h2 className="flex items-center justify-start text-2xl font-bold">
                         <RoundedContainer>
-                            <Icon icon="HiOutlineLightBulb" className="w-6 h-6" />
+                            <Icon icon="HiOutlineLightBulb" className="h-6 w-6" />
                         </RoundedContainer>
                         Projects
                     </h2>
                     <FadeIn>
                         <Grid className="gap-8">
                             {projects?.map(project => (
-                                <div className="flex justify-center space-x-8" key={project.name}>
-                                    <ProjectCard
-                                        project={project}
-                                        key={project.name + project.startDate}
-                                    />
-                                </div>
+                                <ProjectCard
+                                    project={project}
+                                    key={project.name + project.startDate}
+                                />
                             ))}
                         </Grid>
                     </FadeIn>
                 </FadeIn>
 
-                <FadeIn id="publications" className="flex flex-col w-full gap-8 my-6 scroll-mt-16">
+                <FadeIn id="publications" className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
                     <h2 className="flex items-center justify-start text-2xl font-bold">
                         <RoundedContainer>
-                            <Icon icon="SiBookstack" className="w-6 h-6" />
+                            <Icon icon="SiBookstack" className="h-6 w-6" />
                         </RoundedContainer>
                         Recent Publications
                     </h2>
                     <FadeIn>
                         <Grid className="gap-8">
                             {publications?.map(publication => (
-                                <div
-                                    className="flex justify-center space-x-8"
-                                    key={publication.title}
-                                >
-                                    <PublicationCard
-                                        publication={publication}
-                                        key={publication.title + publication.year}
-                                    />
-                                </div>
+                                <PublicationCard
+                                    publication={publication}
+                                    key={publication.title + publication.year}
+                                />
                             ))}
                         </Grid>
                     </FadeIn>

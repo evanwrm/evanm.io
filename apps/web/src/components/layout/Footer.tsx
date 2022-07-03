@@ -1,12 +1,12 @@
 import { getYear } from "date-fns";
 import React from "react";
-import { getMedia } from "../lib/media";
-import { Global } from "../validators/Global";
-import { SocialLink } from "../validators/Social";
-import IconButton from "./animations/IconButton";
-import Icon from "./Icon";
-import NavLink from "./NavLink";
-import RouteNavList from "./RouteNavList";
+import { getMedia } from "../../lib/media";
+import { Global } from "../../validators/Global";
+import { SocialLink } from "../../validators/Social";
+import ResponsiveButton from "../animations/ResponsiveButton";
+import Icon from "../Icon";
+import NavLink from "../navigation/NavLink";
+import RouteNavList from "../navigation/RouteNavList";
 
 interface Props {
     global?: Global;
@@ -34,7 +34,7 @@ const Footer: React.FC<Props> = ({ global, socials = [] }: Props) => {
     ];
 
     return (
-        <footer className="p-4 border-t footer border-base-content/10 overflow-clip">
+        <footer className="footer border-base-content/10 overflow-clip border-t p-4">
             <div>
                 <p>
                     © 2022 - {getYear(Date.now())} {global?.firstName} {global?.lastName}. All
@@ -42,15 +42,15 @@ const Footer: React.FC<Props> = ({ global, socials = [] }: Props) => {
                 </p>
             </div>
             <div>
-                <div className="flex my-4 space-x-4">
+                <div className="my-4 flex space-x-4">
                     <RouteNavList routes={routes} tabIndex={0} className="flex flex-row" />
                 </div>
-                <div className="flex my-4 space-x-4">
+                <div className="my-4 flex space-x-4">
                     {socials.map(social => (
                         <NavLink href={social.url} aria-label={social.name} key={social.socialId}>
-                            <IconButton className="flex opacity-80">
-                                <Icon icon={social.iconId} className="w-8 h-8" />
-                            </IconButton>
+                            <ResponsiveButton className="flex opacity-80">
+                                <Icon icon={social.iconId} className="h-8 w-8" />
+                            </ResponsiveButton>
                         </NavLink>
                     ))}
                 </div>

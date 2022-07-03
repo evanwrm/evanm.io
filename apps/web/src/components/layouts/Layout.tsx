@@ -2,10 +2,9 @@ import React from "react";
 import { Global } from "../../validators/Global";
 import { Seo } from "../../validators/Seo";
 import { SocialLink } from "../../validators/Social";
-import BackToTop from "../BackToTop";
-import Footer from "../Footer";
-import Header from "../Header";
-import Portal from "../Portal";
+import Footer from "../layout/Footer";
+import Header from "../layout/Header";
+import BackToTop from "../navigation/BackToTop";
 
 interface Props {
     title?: string;
@@ -17,13 +16,11 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ title, global, seo, socials, children }: Props) => {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
+        <div className="flex min-h-screen flex-col items-center justify-center">
             <Header title={title} global={global} seo={seo} socials={socials} />
             {children}
+            <BackToTop />
             <Footer global={global} socials={socials} />
-            <Portal>
-                <BackToTop />
-            </Portal>
         </div>
     );
 };

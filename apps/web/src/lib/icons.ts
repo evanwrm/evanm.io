@@ -1,12 +1,18 @@
+import { IconType } from "react-icons";
 import { FaFilePdf } from "react-icons/fa";
-import { HiMenuAlt2, HiOutlineLightBulb, HiX } from "react-icons/hi";
+import { HiColorSwatch, HiMenuAlt2, HiOutlineLightBulb, HiX } from "react-icons/hi";
+import { IoDocumentTextOutline } from "react-icons/io5";
 import {
     MdAlternateEmail,
     MdKeyboardArrowUp,
+    MdOutlineContentCopy,
     MdOutlineDarkMode,
-    MdOutlineLightMode
+    MdOutlineKeyboardReturn,
+    MdOutlineLightMode,
+    MdOutlineMonitor
 } from "react-icons/md";
 import {
+    RiCommandLine,
     RiExternalLinkLine,
     RiFacebookFill,
     RiGithubLine,
@@ -34,13 +40,14 @@ import {
     SiTypescript,
     SiYoutube
 } from "react-icons/si";
+import { VscHome } from "react-icons/vsc";
 
 /**
  * Instead import only the icons needed
  * We lose the ability to use new icons on the fly (having to redeploy)
  * However this approach doesn't cause module loading for SSG
  */
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, IconType> = {
     // Socials
     MdAlternateEmail,
     RiGithubLine,
@@ -65,19 +72,28 @@ const iconMap: Record<string, any> = {
     SiPytorch,
     SiGit,
 
+    // Theme
+    MdOutlineDarkMode,
+    MdOutlineLightMode,
+    MdOutlineMonitor,
+
     // Extras
     HiMenuAlt2,
     HiX,
+    RiCommandLine,
     MdKeyboardArrowUp,
-    MdOutlineDarkMode,
-    MdOutlineLightMode,
+    MdOutlineKeyboardReturn,
     RiExternalLinkLine,
+    IoDocumentTextOutline,
     FaFilePdf,
+    MdOutlineContentCopy,
     SiGithub,
     SiGitlab,
     SiBitbucket,
     HiOutlineLightBulb,
-    SiBookstack
+    SiBookstack,
+    VscHome,
+    HiColorSwatch
 };
 
 export const getDynamicIcon = (icon: string) => {

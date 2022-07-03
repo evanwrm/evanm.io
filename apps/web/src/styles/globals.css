@@ -74,6 +74,11 @@
         box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
     }
 
+    /* Allow scrollbar styles from parent */
+    .scrollbar-children > * {
+        @apply scrollbar;
+    }
+
     .link-underline {
         background-size: 0 3px;
         background-position: 0 100%;

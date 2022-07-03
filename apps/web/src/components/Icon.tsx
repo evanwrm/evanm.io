@@ -42,7 +42,7 @@ export interface IconProps {
 //     }
 // };
 
-const Icon: React.FC<IconProps> = ({ className = "fill-current w-10 h-10", icon }: IconProps) => {
+const Icon: React.FC<IconProps> = ({ className = "w-10 h-10 fill-current", icon }: IconProps) => {
     // const packageId =
     //     icon
     //         .replace(/([^A-Z])([A-Z])/g, "$1 $2")
@@ -51,7 +51,7 @@ const Icon: React.FC<IconProps> = ({ className = "fill-current w-10 h-10", icon 
     //         ?.toLowerCase() || "";
     const SVGIcon = getDynamicIcon(icon);
 
-    return <SVGIcon className={className} />;
+    return <React.Fragment>{SVGIcon ? <SVGIcon className={className} /> : icon}</React.Fragment>;
 };
 
 export default Icon;
