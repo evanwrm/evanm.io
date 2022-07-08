@@ -15,10 +15,14 @@ import superjson from "superjson";
 import ProgressBar from "../components/ProgressBar";
 import { AppRouter } from "../lib/server/routers/app";
 import { generateStaticSpotlightActions } from "../lib/spotlightActions";
-import { NEXT_PUBLIC_SITE_URL, NODE_ENV, VERCEL_URL } from "../lib/utils/constants";
+import { NEXT_PUBLIC_SITE_URL, NODE_ENV } from "../lib/utils/constants";
+import { getBaseUrl } from "../lib/utils/uri";
 import "../styles/globals.css";
+import "../styles/prism.css";
 
-const DynamicSpotlight = dynamic(() => import("../components/navigation/Spotlight"), { ssr: true });
+const DynamicSpotlight = dynamic(() => import("../components/navigation/Spotlight"), {
+    ssr: false
+});
 
 const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
     Component,
@@ -90,12 +94,6 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
 
 export default withTRPC<AppRouter>({
     config() {
-        const getBaseUrl = () => {
-            if (typeof window !== "undefined") return "";
-            if (VERCEL_URL) return VERCEL_URL;
-            return NEXT_PUBLIC_SITE_URL;
-        };
-
         // https://trpc.io/docs/links
         const url = `${getBaseUrl()}/api/trpc`;
         const links = [httpBatchLink({ url, maxBatchSize: 10 })];

@@ -4,7 +4,9 @@ import { HiColorSwatch, HiMenuAlt2, HiOutlineLightBulb, HiX } from "react-icons/
 import { IoDocumentTextOutline } from "react-icons/io5";
 import {
     MdAlternateEmail,
+    MdCheckCircleOutline,
     MdKeyboardArrowUp,
+    MdOutlineArticle,
     MdOutlineContentCopy,
     MdOutlineDarkMode,
     MdOutlineKeyboardReturn,
@@ -87,10 +89,12 @@ const iconMap: Record<string, IconType> = {
     IoDocumentTextOutline,
     FaFilePdf,
     MdOutlineContentCopy,
+    MdCheckCircleOutline,
     SiGithub,
     SiGitlab,
     SiBitbucket,
     HiOutlineLightBulb,
+    MdOutlineArticle,
     SiBookstack,
     VscHome,
     HiColorSwatch

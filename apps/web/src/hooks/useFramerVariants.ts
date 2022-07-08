@@ -16,7 +16,5 @@ export const useFramerVariants = (
             setVariants(oldVariants => ({ ...oldVariants, hidden: initialVariants?.hidden }));
     }, [initialVariants, disableMountAnimation]);
 
-    console.log(variants);
-
     return variants;
 };

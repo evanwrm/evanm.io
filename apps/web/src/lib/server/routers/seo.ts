@@ -1,5 +1,5 @@
 import { seoValidator } from "../../../validators/Seo";
-import { strapiQueryParameterValidator } from "../../../validators/StapiQueryParameters";
+import { strapiQueryParameterValidator } from "../../../validators/StrapiQueryParameters";
 import { fetchAPI } from "../../api";
 import { createRouter } from "../createRouter";
 

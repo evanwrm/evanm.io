@@ -1,0 +1,142 @@
+:root {
+    --prism-background: #1a1e29ff;
+    --prism-foreground: #abb2bfff;
+
+    --prism-line-inserted: #00809b33; /* Set inserted line (+) color */
+    --prism-line-deleted: #ff000033; /* Set deleted line (-) color */
+    --prism-highlight-background: #00bcf233; /* Set highlight bg color */
+    --prism-highlight-border: #00bcf299; /* Set highlight accent border color */
+    --prism-line-number: #495162ff; /* Line number color */
+
+    --prism-token-namespace: #e5c07bff;
+    --prism-token-variable: #d55fdeff;
+    --prism-token-function: #61afefff;
+    --prism-token-attr: #d19a66ff;
+    --prism-token-punctuation: #d19a66ff;
+    --prism-token-operator: #ef596fff;
+    --prism-token-string: #89ca78ff;
+    --prism-token-comment: #7f848eff;
+}
+[data-theme="light"] {
+}
+[data-theme="dark"] {
+}
+
+.code-line {
+    @apply -mx-4 block border-l-4 border-transparent px-4;
+}
+.code-highlight {
+    @apply float-left min-w-full;
+}
+
+.code-line.inserted {
+    background-color: var(--prism-line-inserted);
+}
+.code-line.deleted {
+    background-color: var(--prism-line-deleted);
+}
+.highlight-line {
+    @apply -mx-4 border-l-4;
+    background-color: var(--prism-highlight-background);
+    border-left-color: var(--prism-highlight-border);
+}
+
+.line-number::before {
+    @apply mr-4 -ml-2 inline-block w-4 text-right content-[attr(line)];
+    color: var(--prism-line-number);
+}
+
+/**
+ * Prism.js Theme
+ * https://prism.dotenv.dev/
+ * https://github.com/PrismJS/prism-themes
+ * https://atelierbram.github.io/Base2Tone-prism/
+ * https://k88hudson.github.io/syntax-highlighting-theme-generator/www/
+*/
+
+/* Code block */
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    @apply m-0 overflow-auto whitespace-pre break-normal rounded-none p-4 text-left text-sm leading-relaxed;
+    @apply selection:bg-[#67769660] selection:text-inherit selection:shadow-none;
+    background: var(--prism-background);
+    color: var(--prism-foreground);
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    @apply rounded-md p-1;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: var(--prism-token-comment);
+    font-style: italic;
+}
+
+.token.punctuation,
+.token.constant,
+.token.deleted,
+.token.tag {
+    color: var(--prism-token-punctuation);
+}
+
+.token.attr-value,
+.token.keyword,
+.token.control,
+.token.directive,
+.token.unit,
+.token.placeholder,
+.token.variable,
+.token.important,
+.token.selector,
+.token.statement,
+.token.atrule,
+.token.url,
+.token.regex {
+    color: var(--prism-token-variable);
+}
+
+.token.builtin,
+.token.changed,
+.token.namespace,
+.token.class-name {
+    color: var(--prism-token-namespace);
+}
+
+.token.operator,
+.token.property,
+.token.entity {
+    color: var(--prism-token-operator);
+}
+.token.entity {
+    @apply cursor-help;
+}
+
+.token.string,
+.token.inserted {
+    color: var(--prism-token-string);
+}
+
+.token.attr-name,
+.token.char,
+.token.number,
+.token.hexcode,
+.token.boolean {
+    color: var(--prism-token-attr);
+}
+
+.token.function,
+.token.content {
+    color: var(--prism-token-function);
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}

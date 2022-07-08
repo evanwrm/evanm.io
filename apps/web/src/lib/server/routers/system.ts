@@ -23,9 +23,7 @@ export const systemRouter = createRouter()
                 });
 
             try {
-                // TODO: update when stable
-                // https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#using-on-demand-revalidation
-                await res?.unstable_revalidate(path);
+                await res?.revalidate(path);
                 return res?.json({ status: "success" });
             } catch (err) {
                 // If there was an error, Next.js will continue

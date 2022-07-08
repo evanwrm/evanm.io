@@ -20,7 +20,7 @@ const ProjectCard: React.FC<Props> = ({ project }: Props) => {
                         <Image
                             image={project.thumbnail}
                             alt={project.name}
-                            className="transition group-hover:scale-105"
+                            className="h-full w-full transition group-hover:scale-105"
                         />
                     </figure>
                 )}

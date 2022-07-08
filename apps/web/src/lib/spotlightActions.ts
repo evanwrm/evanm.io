@@ -33,7 +33,7 @@ export const generateStaticSpotlightActions = (router: NextRouter): Action[] => 
             shortcut: ["g", "h"],
             keywords: "home, index, main",
             icon: "VscHome",
-            // perform: () => router.push("/"),
+            perform: () => router.push("/"),
             ...spotlightSections.navigation
         },
         {
@@ -48,20 +48,21 @@ export const generateStaticSpotlightActions = (router: NextRouter): Action[] => 
         {
             id: "publications",
             name: "Publications",
-            shortcut: ["g", "b"],
+            shortcut: ["g", "c"],
             keywords: "paper, academia, research, school",
             icon: "SiBookstack",
             perform: () => router.push("/#publications"),
             ...spotlightSections.navigation
+        },
+        {
+            id: "blog",
+            name: "Blog",
+            shortcut: ["g", "b"],
+            keywords: "article, writing, words",
+            icon: "MdOutlineArticle",
+            perform: () => router.push("/blog"),
+            ...spotlightSections.navigation
         }
-        // {
-        //     id: "blog",
-        //     name: "Blog",
-        //     shortcut: ["b"],
-        //     keywords: "writing, words",
-        //     perform: () => router.push("/blog"),
-        //     ...spotlightSections.navigation
-        // }
     ];
 
     return [...actions];

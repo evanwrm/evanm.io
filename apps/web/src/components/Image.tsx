@@ -1,4 +1,5 @@
-import NextImage from "next/image";
+import clsx from "clsx";
+import NextImage from "next/future/image";
 import React from "react";
 import { getMedia, getMediaThumbnail } from "../lib/media";
 import { StrapiMedia } from "../validators/StrapiMedia";
@@ -9,6 +10,8 @@ interface Props {
     className?: string;
 }
 
+// https://plaiceholder.co/
+// https://png-pixel.com/
 export const Image: React.FC<Props> = ({ image, alt = "", className }: Props) => {
     const { width, height, alternativeText } = image;
 
@@ -18,9 +21,7 @@ export const Image: React.FC<Props> = ({ image, alt = "", className }: Props) =>
             alt={alternativeText || alt}
             width={width ?? undefined}
             height={height ?? undefined}
-            layout="intrinsic"
-            objectFit="contain"
-            className={className}
+            className={clsx(className, "object-cover")}
             placeholder="blur"
             blurDataURL={getMediaThumbnail(image)}
         />

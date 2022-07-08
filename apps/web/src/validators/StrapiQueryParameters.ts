@@ -8,8 +8,8 @@ export const strapiQueryParameterValidator = z.object({
     fields: z.array(z.string()).nullish(),
     pagination: z
         .union([
-            z.object({ page: z.number(), pageSize: z.number(), withCount: z.boolean() }),
-            z.object({ start: z.number(), limit: z.number(), withCount: z.boolean() })
+            z.object({ page: z.number(), pageSize: z.number(), withCount: z.boolean().nullish() }),
+            z.object({ start: z.number(), limit: z.number(), withCount: z.boolean().nullish() })
         ])
         .nullish(),
     publicationState: z.enum(["live", "preview"]).nullish(),

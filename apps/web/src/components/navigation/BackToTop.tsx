@@ -20,7 +20,7 @@ const BackToTop: React.FC = () => {
             <AnimatePresence>
                 {!hidden && (
                     <ResponsiveButton
-                        className="bg- shadow-base-content/10 btn-ghost btn-circle fixed bottom-6 right-8 z-40 flex select-none items-center justify-center bg-clip-padding shadow"
+                        className="shadow-base-content/10 btn-ghost btn-circle fixed bottom-6 right-8 z-40 flex select-none items-center justify-center bg-clip-padding shadow"
                         initial="hidden"
                         animate="visible"
                         exit="hidden"

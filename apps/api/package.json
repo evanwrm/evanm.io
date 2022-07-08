@@ -31,6 +31,9 @@
         "@strapi/provider-upload-cloudinary": "4.2.2",
         "@strapi/strapi": "4.2.2",
         "pg": "8.7.3",
+        "reading-time": "^1.5.0",
+        "slugify": "^1.6.5",
+        "strapi-plugin-wysiwsg-react-md-editor": "^4.2.0",
         "strapi-prometheus": "^0.6.2"
     },
     "devDependencies": {

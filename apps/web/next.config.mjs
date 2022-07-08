@@ -12,6 +12,7 @@ const withBundleAnalyzer = bundleAnalyzer({ enabled: analyzerMode });
 
 /** @type {import('next').NextConfig} */
 const baseConfig = {
+    swcMinify: false, // TODO: enable when minify is fixed
     poweredByHeader: false,
     reactStrictMode: true,
     i18n: {
@@ -29,7 +30,12 @@ const baseConfig = {
         return config;
     },
     experimental: {
-        esmExternals: false
+        esmExternals: false, // TODO: enable when minify is fixed
+        browsersListForSwc: true,
+        legacyBrowsers: false,
+        images: {
+            allowFutureImage: true
+        }
     }
 };
 const plugins = [

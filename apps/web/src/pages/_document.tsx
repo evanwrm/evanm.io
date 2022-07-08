@@ -44,11 +44,11 @@ class DocumentWrapper extends Document {
 
     render(): JSX.Element {
         return (
-            <Html>
+            <Html dir="ltr">
                 {/* prettier-ignore */}
                 <Head>
-                    <link rel="preload" href="/fonts/Inter-roman.var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-                    <link rel="preload" href="/fonts/FiraCode-VF.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+                    <link rel="preload" href="/fonts/inter-latin-variable-wghtOnly-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+                    <link rel="preload" href="/fonts/fira-code-latin-variable-wghtOnly-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
                     
                     <meta name="application-name" content="evanm.io PWA" />
                     <meta name="theme-color" content="#ffffff" />

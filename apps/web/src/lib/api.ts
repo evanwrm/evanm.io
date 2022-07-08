@@ -1,5 +1,5 @@
 import { stringify } from "qs";
-import { StrapiQueryParameters } from "../validators/StapiQueryParameters";
+import { StrapiQueryParameters } from "../validators/StrapiQueryParameters";
 import { NEXT_PUBLIC_API_URL } from "./utils/constants";
 
 export interface APIResponse<T = unknown> {

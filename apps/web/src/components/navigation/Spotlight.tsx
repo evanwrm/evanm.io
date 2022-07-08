@@ -20,8 +20,6 @@ import Icon from "../Icon";
 const RenderResults: React.FC = () => {
     const { results, rootActionId } = useMatches();
 
-    console.log(results.length);
-
     return (
         <div className="scrollbar-children px-2 pb-2">
             <KBarResults

@@ -19,7 +19,7 @@ const IconButton: React.FC<Props> = ({
         <m.div
             className={clsx(className, "cursor-pointer")}
             whileHover="hover"
-            whileFocus="hover"
+            // whileFocus="hover"
             whileTap="tap"
             variants={variants}
             {...props}

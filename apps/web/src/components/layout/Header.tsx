@@ -8,7 +8,7 @@ import { useFramerVariants } from "../../hooks/useFramerVariants";
 import { useHideOnScroll } from "../../hooks/useHideOnScroll";
 import { anticipateTransition, slideInTopVariants } from "../../lib/framerVariants";
 import { getMedia } from "../../lib/media";
-import { DeepNullable } from "../../lib/utils/types";
+import { DeepNullable } from "../../types/utils";
 import { Global } from "../../validators/Global";
 import { Seo } from "../../validators/Seo";
 import { SocialLink } from "../../validators/Social";
@@ -25,7 +25,7 @@ interface Props {
     socials?: SocialLink[];
 }
 
-const DynamicMobileDrawer = dynamic(() => import("./MobileDrawer"), { ssr: true });
+const DynamicMobileDrawer = dynamic(() => import("./MobileDrawer"), { ssr: false });
 
 const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
     // Ensure our Seo is compatiable with a nullable NextSeoProps
