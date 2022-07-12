@@ -1,12 +1,13 @@
 import { publicationValidator } from "../../../validators/Publication";
 import { strapiQueryParameterValidator } from "../../../validators/StrapiQueryParameters";
 import { fetchAPI } from "../../api";
-import { createRouter } from "../createRouter";
+import { t } from "../trpc";
 
-export const publicationRouter = createRouter().query("find", {
-    input: strapiQueryParameterValidator.optional(),
-    async resolve({ input }) {
-        return await fetchAPI("/publications", { populate: "*", ...input });
-    },
-    output: publicationValidator.array()
+export const publicationRouter = t.router({
+    find: t.procedure
+        .input(strapiQueryParameterValidator.optional())
+        .output(publicationValidator.array())
+        .query(async ({ input }) => {
+            return await fetchAPI("/publications", { populate: "*", ...input });
+        })
 });

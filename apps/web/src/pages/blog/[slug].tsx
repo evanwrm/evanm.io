@@ -15,10 +15,10 @@ import { trpc } from "../../lib/utils/trpc";
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const BlogPost: NextPage<Props> = ({ slug }: Props) => {
-    const { data: global } = trpc.useQuery(["global.find"]);
-    const { data: seo } = trpc.useQuery(["seo.find"]);
-    const { data: socials } = trpc.useQuery(["socials.find", { sort: "id" }]);
-    const { data: article } = trpc.useQuery(["articles.findOne", { slug }]);
+    const { data: global } = trpc.proxy.global.find.useQuery({});
+    const { data: seo } = trpc.proxy.seo.find.useQuery({});
+    const { data: socials } = trpc.proxy.socials.find.useQuery({ sort: "id" });
+    const { data: article } = trpc.proxy.articles.findOne.useQuery({ slug });
 
     const router = useRouter();
     useRegisterActions(generateHydratedSpotlightActions(router, { global, seo, socials }), [
@@ -83,15 +83,15 @@ export const getStaticProps: GetStaticProps = async ({
         return { notFound: true };
     }
 
-    const ssg = await createSSGHelpers({
+    const ssg = createSSGHelpers({
         router: appRouter,
         ctx: {},
         transformer: superjson
     });
 
     await Promise.all([
-        ssg.fetchQuery("global.find"),
-        ssg.fetchQuery("seo.find"),
+        ssg.fetchQuery("global.find", {}),
+        ssg.fetchQuery("seo.find", {}),
         ssg.fetchQuery("socials.find", { sort: "id" }),
         ssg.fetchQuery("articles.findOne", { slug })
     ]);

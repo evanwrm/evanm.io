@@ -40,6 +40,8 @@
         U+2C60-2C7F, U+A720-A7FF;
 } */
 
+/* Martel Sans */
+
 [data-theme="light"] {
     --scrollbar: #a3a3a3;
     --scrollbar-hover: #737373;

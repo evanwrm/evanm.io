@@ -1,12 +1,13 @@
 import { seoValidator } from "../../../validators/Seo";
 import { strapiQueryParameterValidator } from "../../../validators/StrapiQueryParameters";
 import { fetchAPI } from "../../api";
-import { createRouter } from "../createRouter";
+import { t } from "../trpc";
 
-export const seoRouter = createRouter().query("find", {
-    input: strapiQueryParameterValidator.optional(),
-    async resolve({ input }) {
-        return await fetchAPI("/seo", { populate: "*", ...input });
-    },
-    output: seoValidator
+export const seoRouter = t.router({
+    find: t.procedure
+        .input(strapiQueryParameterValidator.optional())
+        .output(seoValidator)
+        .query(async ({ input }) => {
+            return await fetchAPI("/seo", { populate: "*", ...input });
+        })
 });

@@ -6,6 +6,4 @@ export const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://lo
 export const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 // Runtime
-export const NEXT_PUBLIC_REVALIDATE_TIME = parseInt(
-    process.env.NEXT_PUBLIC_REVALIDATE_TIME ?? "60"
-);
+export const NEXT_PUBLIC_REVALIDATE_TIME = parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME ?? "1");

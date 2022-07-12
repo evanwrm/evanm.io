@@ -12,10 +12,10 @@ import { NEXT_PUBLIC_REVALIDATE_TIME } from "../../lib/utils/constants";
 import { trpc } from "../../lib/utils/trpc";
 
 const Blog: NextPage = () => {
-    const { data: global } = trpc.useQuery(["global.find"]);
-    const { data: seo } = trpc.useQuery(["seo.find"]);
-    const { data: socials } = trpc.useQuery(["socials.find", { sort: "id" }]);
-    // const { data: articles } = trpc.useQuery(["articles.find", { sort: "publishedAt:desc" }]);
+    const { data: global } = trpc.proxy.global.find.useQuery({});
+    const { data: seo } = trpc.proxy.seo.find.useQuery({});
+    const { data: socials } = trpc.proxy.socials.find.useQuery({ sort: "id" });
+    // const { data: articles } = trpc.proxy.articles.find.useQuery({ sort: "publishedAt:desc" });
 
     const router = useRouter();
     useRegisterActions(generateHydratedSpotlightActions(router, { global, seo, socials }), [
@@ -65,15 +65,15 @@ const Blog: NextPage = () => {
 };
 
 export const getStaticProps: GetStaticProps = async (): Promise<GetStaticPropsResult<{}>> => {
-    const ssg = await createSSGHelpers({
+    const ssg = createSSGHelpers({
         router: appRouter,
         ctx: {},
         transformer: superjson
     });
 
     await Promise.all([
-        ssg.fetchQuery("global.find"),
-        ssg.fetchQuery("seo.find"),
+        ssg.fetchQuery("global.find", {}),
+        ssg.fetchQuery("seo.find", {}),
         ssg.fetchQuery("socials.find", { sort: "id" }),
         ssg.fetchQuery("articles.find", { sort: "publishedAt:desc" })
     ]);

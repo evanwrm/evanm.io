@@ -50,7 +50,7 @@ const Pre = ({ className, children, ...props }: Props) => {
             <AnimatePresence>
                 {hovered && (
                     <m.div
-                        className="absolute right-2 top-2"
+                        className="absolute right-4 top-4"
                         initial="hidden"
                         animate="visible"
                         exit="hidden"
@@ -58,19 +58,29 @@ const Pre = ({ className, children, ...props }: Props) => {
                         transition={anticipateTransition}
                     >
                         <ResponsiveButton
-                            className={clsx("flex select-none rounded-lg border p-1.5", {
-                                "border-success/40": copied,
-                                "border-base-content/40": !copied
-                            })}
+                            className={clsx(
+                                "relative flex h-6 w-6 select-none rounded outline outline-1 outline-offset-4",
+                                {
+                                    "outline-success/80": copied,
+                                    "outline-base-content/40": !copied
+                                }
+                            )}
                             aria-label="Copy code"
                             onClick={onCopy}
                             tabIndex={0}
                         >
                             <Icon
-                                icon={copied ? "MdCheckCircleOutline" : "MdOutlineContentCopy"}
-                                className={clsx("h-6 w-6 transition-colors", {
-                                    "text-success/80": copied,
-                                    "text-base-content/80": !copied
+                                icon="MdCheckCircleOutline"
+                                className={clsx("absolute h-full w-full transition", {
+                                    "text-success/80 opacity-100": copied,
+                                    "text-base-content/80 scale-0 opacity-0": !copied
+                                })}
+                            />
+                            <Icon
+                                icon="MdOutlineContentCopy"
+                                className={clsx("absolute h-full w-full transition", {
+                                    "text-success/80 scale-0 opacity-0": copied,
+                                    "text-base-content/80 opacity-100": !copied
                                 })}
                             />
                         </ResponsiveButton>

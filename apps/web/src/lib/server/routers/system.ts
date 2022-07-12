@@ -1,17 +1,15 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { createRouter } from "../createRouter";
 import { env } from "../env";
+import { t } from "../trpc";
 
-export const systemRouter = createRouter()
-    .query("healthz", {
-        async resolve() {
-            return { status: "success" };
-        }
-    })
-    .mutation("revalidatez", {
-        input: z.object({ path: z.string() }),
-        async resolve({ ctx, input }) {
+export const systemRouter = t.router({
+    healthz: t.procedure.query(async () => {
+        return { status: "success" };
+    }),
+    revalidatez: t.procedure
+        .input(z.object({ path: z.string() }))
+        .mutation(async ({ ctx, input }) => {
             const { token, res } = ctx;
             const { path } = input;
 
@@ -30,9 +28,9 @@ export const systemRouter = createRouter()
                 // to show the last successfully generated page
                 throw new TRPCError({
                     code: "INTERNAL_SERVER_ERROR",
-                    cause: err,
+                    cause: err as Error,
                     message: "Error revalidating"
                 });
             }
-        }
-    });
+        })
+});

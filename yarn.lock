@@ -2958,32 +2958,34 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
-"@trpc/client@^9.25.3":
-  version "9.25.3"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.25.3.tgz#7a0d1a28b98c976479004c34019db7ac17f274e7"
-  integrity sha512-4R+IK3cCDjoOTwHDyu+uN0bF3mYQI34i6aDNU3D/dJJxcA8PX5f8yb++nnR4RT6oTnu3yiR3PFC4KslvBtyi9w==
+"@trpc/client@^10.0.0-alpha.36":
+  version "10.0.0-alpha.36"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.0.0-alpha.36.tgz#781440583ebc1f7a4d77b0799898459c0cb5e379"
+  integrity sha512-mE2Ye5B+7ylk8/XJApEjpeWZivkiR5Hq6+/KJClFYPsxoZY2QgKwYYO2H2AIjnU5ZOCxqawoljWw1SiwtuCBdw==
   dependencies:
     "@babel/runtime" "^7.9.0"
 
-"@trpc/next@^9.25.3":
-  version "9.25.3"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-9.25.3.tgz#a8703f328074f560574b683483456f3156634e3b"
-  integrity sha512-eAhPIinDTUiEgiPjChNIcqaPgwn+rJ8HX374fwff/tZXg5OVr3dA7rur2nYyQUWO8LvdiLfUAbTxgtoEB8SPKw==
+"@trpc/next@^10.0.0-alpha.36":
+  version "10.0.0-alpha.36"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.0.0-alpha.36.tgz#dada5dceebb2266b927fb9f2c8d9dd2103014224"
+  integrity sha512-MqNpxwfnxHg9YNKLA7nm4Kr7j80CDXwbKg5aMjKRMwxn11tT1z3O9qdMFO1nT+A3dFAK/Xexs8K7MwG8KOh5rA==
   dependencies:
     "@babel/runtime" "^7.9.0"
     react-ssr-prepass "^1.5.0"
 
-"@trpc/react@^9.25.3":
-  version "9.25.3"
-  resolved "https://registry.yarnpkg.com/@trpc/react/-/react-9.25.3.tgz#4da4ba8e3363199d9b310481aac279bcdf187adc"
-  integrity sha512-/StrJS7hKPPn88YaXX+qRU50MeLZxBmPC5BLVyhRtwmbzK25Q0MTzBgQLrjoCpJ/HgXYZEbB5ddiw8f+/WnqIA==
+"@trpc/react@^10.0.0-alpha.36":
+  version "10.0.0-alpha.36"
+  resolved "https://registry.yarnpkg.com/@trpc/react/-/react-10.0.0-alpha.36.tgz#1d1748aeb932ad9ddef32eca5cf50283171ecdf8"
+  integrity sha512-NyGlHhEVtWuQ4rVzpO7DjPlN06pN+sb1Yxeyx68QPrYHmDq+1J/VfWfhold/xi2solt/aT/EF5ldHY+w7KMn7Q==
   dependencies:
     "@babel/runtime" "^7.9.0"
 
-"@trpc/server@^9.25.3":
-  version "9.25.3"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-9.25.3.tgz#a11ef35f872216a84e2c9c76c56d7e95e703c477"
-  integrity sha512-1LEURCmSGpxx8/0ZtzMpd0hiSB4xGNKJ9DKq6sbPk+bzdACjH9Ujdwca4P6ylxa8HdMel/effwjlCG0Tfx06Lg==
+"@trpc/server@^10.0.0-alpha.36":
+  version "10.0.0-alpha.36"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.0.0-alpha.36.tgz#84db6556400fd464dc98e4ec7398781f89445cfe"
+  integrity sha512-TsgU/NMqY1I4Eg8MuzvfO0gKSpmsjB3DHKTrTlStUEheUFNhFP150ocRaRJykW77aSaNOH81sXZ7dImKyn0fZg==
+  dependencies:
+    tslib "^2.1.0"
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.9"
@@ -4975,9 +4977,9 @@ camelize@^1.0.0:
   integrity sha512-W2lPwkBkMZwFlPCXhIlYgxu+7gC/NUlCtdK652DAJ1JdgV0sTrvuPFshNPrFa1TY2JOkLhgdeEBplB4ezEa+xg==
 
 caniuse-lite@^1.0.30001332, caniuse-lite@^1.0.30001335, caniuse-lite@^1.0.30001359:
-  version "1.0.30001364"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001364.tgz#1e118f0e933ed2b79f8d461796b8ce45398014a0"
-  integrity sha512-9O0xzV3wVyX0SlegIQ6knz+okhBB5pE0PC40MNdwcipjwpxoUEHL24uJ+gG42cgklPjfO5ZjZPme9FTSN3QT2Q==
+  version "1.0.30001365"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001365.tgz#72c2c3863b1a545cfd3d9953535bd2ee17568158"
+  integrity sha512-VDQZ8OtpuIPMBA4YYvZXECtXbddMCUFJk1qu8Mqxfm/SZJNSr1cy4IuLCOL7RJ/YASrvJcYg1Zh+UEUQ5m6z8Q==
 
 caseless@~0.12.0:
   version "0.12.0"

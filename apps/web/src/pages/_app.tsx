@@ -1,5 +1,3 @@
-import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
-import { withTRPC } from "@trpc/next";
 import { AnimatePresence, LazyMotion } from "framer-motion";
 import "katex/dist/katex.css";
 import { KBarProvider } from "kbar";
@@ -12,12 +10,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
-import superjson from "superjson";
 import ProgressBar from "../components/ProgressBar";
-import { AppRouter } from "../lib/server/routers/app";
 import { generateStaticSpotlightActions } from "../lib/spotlightActions";
 import { NEXT_PUBLIC_SITE_URL, NODE_ENV } from "../lib/utils/constants";
-import { getBaseUrl } from "../lib/utils/uri";
+import { trpc } from "../lib/utils/trpc";
 import "../styles/globals.css";
 import "../styles/prism.css";
 
@@ -84,7 +80,11 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
                             <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
                             <DynamicSpotlight />
                             <Component {...pageProps} />
-                            <ReactQueryDevtools initialIsOpen={false} />
+                            {NODE_ENV !== "production" && (
+                                <div className="hidden md:block">
+                                    <ReactQueryDevtools initialIsOpen={false} />
+                                </div>
+                            )}
                         </KBarProvider>
                     </ThemeProvider>
                 </AnimatePresence>
@@ -93,17 +93,4 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
     );
 };
 
-export default withTRPC<AppRouter>({
-    config() {
-        // https://trpc.io/docs/links
-        const url = `${getBaseUrl()}/api/trpc`;
-        const links = [httpBatchLink({ url, maxBatchSize: 10 })];
-
-        return {
-            links,
-            transformer: superjson,
-            queryClientConfig: { defaultOptions: { queries: { staleTime: Infinity } } }
-        };
-    },
-    ssr: false // https://github.com/trpc/trpc/discussions/958
-})(AppWrapper);
+export default trpc.withTRPC(AppWrapper);

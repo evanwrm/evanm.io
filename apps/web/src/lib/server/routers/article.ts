@@ -4,19 +4,19 @@ import { Article, articleValidator } from "../../../validators/Article";
 import { strapiQueryParameterValidator } from "../../../validators/StrapiQueryParameters";
 import { fetchAPI } from "../../api";
 import { mdxSerialize } from "../../mdx";
-import { createRouter } from "../createRouter";
+import { t } from "../trpc";
 
-export const articleRouter = createRouter()
-    .query("find", {
-        input: strapiQueryParameterValidator.optional(),
-        async resolve({ input }) {
+export const articleRouter = t.router({
+    find: t.procedure
+        .input(strapiQueryParameterValidator.optional())
+        .output(articleValidator.array())
+        .query(async ({ input }) => {
             return await fetchAPI("/articles", { populate: "*", ...input });
-        },
-        output: articleValidator.array()
-    })
-    .query("findOne", {
-        input: z.object({ slug: z.string() }).merge(strapiQueryParameterValidator),
-        async resolve({ input }) {
+        }),
+    findOne: t.procedure
+        .input(z.object({ slug: z.string() }).merge(strapiQueryParameterValidator))
+        .output(articleValidator.merge(z.object({ mdxData: z.object({ mdxSource: z.any() }) })))
+        .query(async ({ input }) => {
             const { slug, filters, ...rest } = input;
             const articles = await fetchAPI<Article[]>("/articles", {
                 populate: "*",
@@ -30,6 +30,5 @@ export const articleRouter = createRouter()
 
             const article = articles[0];
             return { ...article, mdxData: await mdxSerialize(article.content) };
-        },
-        output: articleValidator.merge(z.object({ mdxData: z.object({ mdxSource: z.any() }) }))
-    });
+        })
+});
