@@ -10,17 +10,17 @@ import remarkMath from "remark-math";
 export const mdxSerialize = async (source: string) => {
     const mdxSource = await serialize(source, {
         mdxOptions: {
-            // format: "mdx",
+            format: "mdx",
             remarkPlugins: [remarkGfm, remarkMath],
             rehypePlugins: [
-                rehypePrism,
-                rehypeCodeTitles,
                 rehypeSlug,
                 rehypeAutolinkHeadings,
-                rehypeKatex
+                rehypeKatex,
+                rehypeCodeTitles,
+                rehypePrism
             ]
-        }
-        // parseFrontmatter: true
+        },
+        parseFrontmatter: true
     });
 
     return {

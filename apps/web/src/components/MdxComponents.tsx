@@ -1,16 +1,9 @@
-import { MDXRemote } from "next-mdx-remote";
+import { MDXRemote, MDXRemoteProps } from "next-mdx-remote";
 import React from "react";
 import NavLink from "./navigation/NavLink";
 import Pre from "./Pre";
 
-// TODO: mdx v2 break with preact
-// upgrade next-mdx-bundler once this is fixed
-interface Props {
-    compiledSource: string;
-    components?: any;
-    scope?: any;
-    lazy?: boolean;
-}
+interface Props extends MDXRemoteProps {}
 
 export const defaultComponents = {
     a: ({ href = "", ...props }) => (

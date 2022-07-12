@@ -37,3 +37,4 @@ railway up # upload cwd and deploy
 ### Gotchas
 
 -   If you want to manage your resume/cv through cloudinary, remember to [enable pdf sharing](https://support.cloudinary.com/hc/en-us/articles/360016480179-PDF-or-ZIP-files-appearing-in-Media-Library-but-download-URLs-return-an-error-)
+-   If you have a docker container which uses newer features that require BuildKit, enable it in Railway with `DOCKER_BUILDKIT=1`

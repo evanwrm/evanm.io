@@ -31,7 +31,7 @@ export const fetchAPI = async <T>(
 
     if (!response.ok) {
         console.error(response.statusText);
-        throw new Error(`An error occured please try again`);
+        throw new Error(`An error occured fetching API data, please try again`);
     }
     const data: APIResponse<any> = await response.json();
 

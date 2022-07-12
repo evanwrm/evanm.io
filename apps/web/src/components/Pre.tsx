@@ -60,7 +60,7 @@ const Pre: React.FC<Props> = ({ className, children, ...props }: Props) => {
                         <ResponsiveButton
                             className={clsx("flex select-none rounded-lg border p-1.5", {
                                 "border-success/40": copied,
-                                "border-zinc-400/40": !copied
+                                "border-base-content/40": !copied
                             })}
                             aria-label="Copy code"
                             onClick={onCopy}
@@ -70,7 +70,7 @@ const Pre: React.FC<Props> = ({ className, children, ...props }: Props) => {
                                 icon={copied ? "MdCheckCircleOutline" : "MdOutlineContentCopy"}
                                 className={clsx("h-6 w-6 transition-colors", {
                                     "text-success/80": copied,
-                                    "text-neutral-content/80": !copied
+                                    "text-base-content/80": !copied
                                 })}
                             />
                         </ResponsiveButton>

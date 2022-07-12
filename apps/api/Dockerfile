@@ -60,7 +60,6 @@ COPY --from=deps /app ./
 
 # Build project
 WORKDIR /app/$ROOT_DIR
-RUN pwd && ls
 RUN $PACKAGE_MANAGER run build
 
 #

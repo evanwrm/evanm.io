@@ -1,6 +1,7 @@
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { withTRPC } from "@trpc/next";
 import { AnimatePresence, LazyMotion } from "framer-motion";
+import "katex/dist/katex.css";
 import { KBarProvider } from "kbar";
 import { NextComponentType } from "next";
 import { DefaultSeo } from "next-seo";

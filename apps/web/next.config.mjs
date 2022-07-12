@@ -1,7 +1,6 @@
 import bundleAnalyzer from "@next/bundle-analyzer";
 import DuplicatePackageCheckerPlugin from "duplicate-package-checker-webpack-plugin";
 import withPlugins from "next-compose-plugins";
-import withPreact from "next-plugin-preact";
 import withPWA from "next-pwa";
 import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 import { env } from "./src/lib/server/env.js";
@@ -50,8 +49,8 @@ const plugins = [
             }
         },
         ["!" + PHASE_DEVELOPMENT_SERVER]
-    ],
-    withPreact
+    ]
+    // withPreact TODO: readd when preact is fixed
 ];
 
 export default withPlugins(plugins, {
