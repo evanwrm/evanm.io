@@ -8,7 +8,7 @@ interface Props extends Pick<LinkProps, "as" | "href">, React.HTMLAttributes<HTM
     className?: string;
 }
 
-const NavLink: React.FC<Props> = ({ href, as, className, children, ...props }: Props) => {
+const NavLink = ({ href, as, className, children, ...props }: Props) => {
     const url = typeof href === "string" ? href : href.href ?? "";
 
     if (isExternal(url))

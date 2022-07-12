@@ -27,7 +27,7 @@ interface Props {
 
 const DynamicMobileDrawer = dynamic(() => import("./MobileDrawer"), { ssr: false });
 
-const Header: React.FC<Props> = ({ title, global, seo, socials }: Props) => {
+const Header = ({ title, global, seo, socials }: Props) => {
     // Ensure our Seo is compatiable with a nullable NextSeoProps
     const extendedSeo: Partial<DeepNullable<NextSeoProps>> = {
         ...seo,

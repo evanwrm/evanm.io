@@ -14,7 +14,7 @@ interface Props {
     children?: React.ReactNode;
 }
 
-const Layout: React.FC<Props> = ({ title, global, seo, socials, children }: Props) => {
+const Layout = ({ title, global, seo, socials, children }: Props) => {
     return (
         <div className="flex min-h-screen flex-col items-center justify-center">
             <Header title={title} global={global} seo={seo} socials={socials} />

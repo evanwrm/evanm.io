@@ -9,12 +9,7 @@ interface Props extends HTMLMotionProps<"div"> {
     children?: React.ReactNode;
 }
 
-const IconButton: React.FC<Props> = ({
-    variants = buttonVariants,
-    className,
-    children,
-    ...props
-}: Props) => {
+const IconButton = ({ variants = buttonVariants, className, children, ...props }: Props) => {
     return (
         <m.div
             className={clsx(className, "cursor-pointer")}

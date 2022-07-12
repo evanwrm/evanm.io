@@ -10,13 +10,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
     reverse?: boolean;
 }
 
-const Tilt: React.FC<Props> = ({
-    className,
-    children,
-    tiltStrength = 100,
-    reset = true,
-    ...props
-}: Props) => {
+const Tilt = ({ className, children, tiltStrength = 100, reset = true, ...props }: Props) => {
     const tiltRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

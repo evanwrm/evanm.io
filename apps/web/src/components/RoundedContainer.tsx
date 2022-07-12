@@ -6,7 +6,7 @@ interface Props {
     children?: React.ReactNode;
 }
 
-const RoundedContainer: React.FC<Props> = ({ className, children }: Props) => {
+const RoundedContainer = ({ className, children }: Props) => {
     return (
         <span
             className={clsx(

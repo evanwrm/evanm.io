@@ -8,7 +8,7 @@ import Icon from "./Icon";
 
 interface Props extends HTMLAttributes<HTMLPreElement> {}
 
-const Pre: React.FC<Props> = ({ className, children, ...props }: Props) => {
+const Pre = ({ className, children, ...props }: Props) => {
     const textInput = useRef<HTMLDivElement>(null);
     const [hovered, setHovered] = useState(false);
     const [copied, setCopied] = useState(false);

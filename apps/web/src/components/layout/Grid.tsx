@@ -6,7 +6,7 @@ interface Props {
     children?: React.ReactNode;
 }
 
-const Grid: React.FC<Props> = ({ className, children }: Props) => {
+const Grid = ({ className, children }: Props) => {
     return (
         <div className={clsx(className, "grid w-full", "grid-cols-1 md:grid-cols-2")}>
             {children}

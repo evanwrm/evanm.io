@@ -9,12 +9,7 @@ interface Props extends HTMLMotionProps<"div"> {
     children?: React.ReactNode;
 }
 
-const FadeIn: React.FC<Props> = ({
-    variants = slideFadeRightVariants,
-    className,
-    children,
-    ...props
-}: Props) => {
+const FadeIn = ({ variants = slideFadeRightVariants, className, children, ...props }: Props) => {
     return (
         <m.div
             className={clsx(className)}

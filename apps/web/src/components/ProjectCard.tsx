@@ -1,4 +1,3 @@
-import React from "react";
 import { getRepositoryIcon } from "../lib/icons";
 import { Project } from "../validators/Project";
 import ResponsiveButton from "./animations/ResponsiveButton";
@@ -11,7 +10,7 @@ interface Props {
     project: Project;
 }
 
-const ProjectCard: React.FC<Props> = ({ project }: Props) => {
+const ProjectCard = ({ project }: Props) => {
     return (
         <Tilt className="max-h-screen" tiltStrength={5}>
             <div className="border-base-content/10 card bg-base-200/50 hover:ring-secondary ring-offset-base-100 group h-full w-full rounded-xl border antialiased shadow-xl ring-offset-0 transition hover:ring hover:ring-offset-4">

@@ -12,7 +12,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-const MobileDrawer: React.FC<Props> = ({ open, onClose, className, children }: Props) => {
+const MobileDrawer = ({ open, onClose, className, children }: Props) => {
     const handleClose = (e: React.MouseEvent) => {
         e.preventDefault();
         onClose();

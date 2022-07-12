@@ -8,7 +8,7 @@ interface Props extends React.HTMLAttributes<HTMLUListElement> {
     className?: string;
 }
 
-const RouteNavList: React.FC<Props> = ({ routes, className, onElementClick, ...props }) => {
+const RouteNavList = ({ routes, className, onElementClick, ...props }: Props) => {
     return (
         <ul className={clsx(className)} {...props}>
             {routes.map(route => (

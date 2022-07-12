@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import NProgress, { NProgressOptions } from "nprogress";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 interface Props {
     color?: string;
     options?: Partial<NProgressOptions>;
 }
 
-const ProgressBar: React.FC<Props> = ({ options, color }: Props) => {
+const ProgressBar = ({ options, color }: Props) => {
     const router = useRouter();
 
     const routeChangeStart = () => {

@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import NextImage from "next/future/image";
-import React from "react";
 import { getMedia, getMediaThumbnail } from "../lib/media";
 import { StrapiMedia } from "../validators/StrapiMedia";
 
@@ -12,7 +11,7 @@ interface Props {
 
 // https://plaiceholder.co/
 // https://png-pixel.com/
-export const Image: React.FC<Props> = ({ image, alt = "", className }: Props) => {
+export const Image = ({ image, alt = "", className }: Props) => {
     const { width, height, alternativeText } = image;
 
     return (

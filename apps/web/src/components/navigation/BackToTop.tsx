@@ -7,7 +7,7 @@ import ResponsiveButton from "../animations/ResponsiveButton";
 import Icon from "../Icon";
 import RoundedContainer from "../RoundedContainer";
 
-const BackToTop: React.FC = () => {
+const BackToTop = () => {
     const { hidden } = useHideOnScroll(-1, 100, true);
 
     const handleClick = (e: React.MouseEvent) => {

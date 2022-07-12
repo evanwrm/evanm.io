@@ -1,13 +1,13 @@
 import clsx from "clsx";
 import { useTheme } from "next-themes";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "./Icon";
 
 interface Props {
     className?: string;
 }
 
-const ThemeSwap: React.FC<Props> = ({ className }: Props) => {
+const ThemeSwap = ({ className }: Props) => {
     const { resolvedTheme, setTheme } = useTheme();
     const [checked, setChecked] = useState(resolvedTheme === "dark");
 

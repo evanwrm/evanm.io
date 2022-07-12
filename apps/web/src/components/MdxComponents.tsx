@@ -1,5 +1,4 @@
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote";
-import React from "react";
 import NavLink from "./navigation/NavLink";
 import Pre from "./Pre";
 
@@ -12,7 +11,7 @@ export const defaultComponents = {
     pre: Pre
 };
 
-const MdxMarkdown: React.FC<Props> = ({ components, ...props }: Props) => {
+const MdxMarkdown = ({ components, ...props }: Props) => {
     return (
         <div className="prose max-w-full">
             <MDXRemote components={{ ...defaultComponents, ...components }} {...props} />

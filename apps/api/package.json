@@ -37,6 +37,7 @@
         "strapi-prometheus": "^0.6.2"
     },
     "devDependencies": {
+        "@babel/core": "^7.18.6",
         "@babel/eslint-parser": "^7.18.2",
         "eslint": "^8.19.0",
         "eslint-config-prettier": "^8.5.0",

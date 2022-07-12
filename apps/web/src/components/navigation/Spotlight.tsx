@@ -17,7 +17,7 @@ import { generateThemeSpotlightActions } from "../../lib/spotlightActions";
 import ResponsiveButton from "../animations/ResponsiveButton";
 import Icon from "../Icon";
 
-const RenderResults: React.FC = () => {
+const RenderResults = () => {
     const { results, rootActionId } = useMatches();
 
     return (
@@ -106,7 +106,7 @@ const ResultItem = (
 };
 const ForwardResultItem = React.forwardRef(ResultItem);
 
-const Spotlight: React.FC = () => {
+const Spotlight = () => {
     const { query } = useKBar();
     const { setTheme } = useTheme();
     useRegisterActions(generateThemeSpotlightActions(setTheme));

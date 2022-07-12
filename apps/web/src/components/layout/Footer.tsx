@@ -1,5 +1,4 @@
 import { getYear } from "date-fns";
-import React from "react";
 import { getMedia } from "../../lib/media";
 import { Global } from "../../validators/Global";
 import { SocialLink } from "../../validators/Social";
@@ -13,7 +12,7 @@ interface Props {
     socials?: SocialLink[];
 }
 
-const Footer: React.FC<Props> = ({ global, socials = [] }: Props) => {
+const Footer = ({ global, socials = [] }: Props) => {
     const routes = [
         {
             path: "/",
