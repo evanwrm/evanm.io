@@ -1,7 +1,7 @@
 import { createSSGHelpers } from "@trpc/react/ssg";
 import { TRPCError } from "@trpc/server";
 import { useRegisterActions } from "kbar";
-import { GetStaticProps, GetStaticPropsResult, InferGetStaticPropsType, NextPage } from "next";
+import { GetStaticProps, GetStaticPropsResult, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
 import superjson from "superjson";
 import Layout from "../../components/layouts/Layout";
@@ -14,7 +14,7 @@ import { trpc } from "../../lib/utils/trpc";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const BlogPost: NextPage<Props> = ({ slug }: Props) => {
+const BlogPost = ({ slug }: Props) => {
     const { data: global } = trpc.proxy.global.find.useQuery({});
     const { data: seo } = trpc.proxy.seo.find.useQuery({});
     const { data: socials } = trpc.proxy.socials.find.useQuery({ sort: "id" });
@@ -29,7 +29,7 @@ const BlogPost: NextPage<Props> = ({ slug }: Props) => {
 
     return (
         <Layout title="Blog" global={global} seo={seo} socials={socials}>
-            <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-center overflow-clip p-4 duration-150">
+            <main className="flex w-full max-w-4xl flex-1 flex-col items-center justify-center overflow-clip p-4 duration-150">
                 <div className="my-6 mt-24 w-full">
                     {article && <MdxMarkdown {...article.mdxData.mdxSource} />}
                 </div>

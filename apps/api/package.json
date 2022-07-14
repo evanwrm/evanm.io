@@ -1,5 +1,5 @@
 {
-    "name": "evanm.io-api",
+    "name": "evanmio-api",
     "author": "Evan Madill <emadill@outlook.com>",
     "description": "The backend component of a portfolio website running Strapi",
     "version": "0.1.0",
@@ -15,7 +15,7 @@
         "node": ">=12.x.x <=16.x.x",
         "pnpm": ">=7.1.7"
     },
-    "packageManager": "pnpm@7.5.0",
+    "packageManager": "pnpm@7.5.1",
     "scripts": {
         "dev": "strapi develop",
         "build": "strapi build",
@@ -24,12 +24,12 @@
         "lint": "eslint --max-warnings=0 --ignore-path=../../.eslintignore ."
     },
     "dependencies": {
-        "@strapi/plugin-documentation": "4.2.2",
-        "@strapi/plugin-graphql": "4.2.2",
-        "@strapi/plugin-i18n": "4.2.2",
-        "@strapi/plugin-users-permissions": "4.2.2",
-        "@strapi/provider-upload-cloudinary": "4.2.2",
-        "@strapi/strapi": "4.2.2",
+        "@strapi/plugin-documentation": "4.2.3",
+        "@strapi/plugin-graphql": "4.2.3",
+        "@strapi/plugin-i18n": "4.2.3",
+        "@strapi/plugin-users-permissions": "4.2.3",
+        "@strapi/provider-upload-cloudinary": "4.2.3",
+        "@strapi/strapi": "4.2.3",
         "pg": "8.7.3",
         "reading-time": "^1.5.0",
         "slugify": "^1.6.5",
@@ -39,6 +39,8 @@
     "devDependencies": {
         "@babel/core": "^7.18.6",
         "@babel/eslint-parser": "^7.18.2",
+        "@changesets/cli": "^2.23.2",
+        "@types/node": "^18.0.4",
         "eslint": "^8.19.0",
         "eslint-config-prettier": "^8.5.0",
         "prettier": "^2.7.1"

@@ -45,7 +45,7 @@ const Pre = ({ className, children, ...props }: Props) => {
             ref={textInput}
             onMouseEnter={onEnter}
             onMouseLeave={onExit}
-            className="relative mx-0 my-6 overflow-hidden rounded-xl"
+            className="relative m-auto my-6 overflow-hidden rounded-xl"
         >
             <AnimatePresence>
                 {hovered && (

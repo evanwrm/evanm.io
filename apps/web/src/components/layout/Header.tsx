@@ -3,7 +3,7 @@ import { AnimatePresence, m } from "framer-motion";
 import { useKBar } from "kbar";
 import { NextSeo, NextSeoProps } from "next-seo";
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useFramerVariants } from "../../hooks/useFramerVariants";
 import { useHideOnScroll } from "../../hooks/useHideOnScroll";
 import { anticipateTransition, slideInTopVariants } from "../../lib/framerVariants";
@@ -25,7 +25,7 @@ interface Props {
     socials?: SocialLink[];
 }
 
-const DynamicMobileDrawer = dynamic(() => import("./MobileDrawer"), { ssr: false });
+const DynamicMobileDrawer = dynamic(() => import("./MobileDrawer"), { suspense: true, ssr: false });
 
 const Header = ({ title, global, seo, socials }: Props) => {
     // Ensure our Seo is compatiable with a nullable NextSeoProps
@@ -78,16 +78,21 @@ const Header = ({ title, global, seo, socials }: Props) => {
             <NextSeo {...pageSeo} />
             <Portal>
                 <AnimatePresence>
-                    {mobileOpen && (
-                        <DynamicMobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)}>
-                            <RouteNavList
-                                routes={routes}
-                                tabIndex={0}
-                                onElementClick={handleToggleOpen}
-                                className="flex h-full w-1/2 flex-col items-center justify-center tracking-widest"
-                            />
-                        </DynamicMobileDrawer>
-                    )}
+                    <Suspense fallback={null}>
+                        {mobileOpen && (
+                            <DynamicMobileDrawer
+                                open={mobileOpen}
+                                onClose={() => setMobileOpen(false)}
+                            >
+                                <RouteNavList
+                                    routes={routes}
+                                    tabIndex={0}
+                                    onElementClick={handleToggleOpen}
+                                    className="flex h-full w-1/2 flex-col items-center justify-center tracking-widest"
+                                />
+                            </DynamicMobileDrawer>
+                        )}
+                    </Suspense>
                 </AnimatePresence>
             </Portal>
             <AnimatePresence>

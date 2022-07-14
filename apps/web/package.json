@@ -1,5 +1,5 @@
 {
-    "name": "evanm.io-web",
+    "name": "evanmio-web",
     "author": "Evan Madill <emadill@outlook.com>",
     "description": "The frontend component of a portfolio website running Next.js",
     "version": "0.1.0",
@@ -15,7 +15,7 @@
         "node": ">=16.0.0",
         "pnpm": ">=7.1.7"
     },
-    "packageManager": "pnpm@7.5.0",
+    "packageManager": "pnpm@7.5.1",
     "scripts": {
         "dev": "next dev",
         "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
@@ -25,15 +25,15 @@
     },
     "dependencies": {
         "@reach/portal": "^0.17.0",
-        "@trpc/client": "^10.0.0-alpha.36",
-        "@trpc/next": "^10.0.0-alpha.36",
-        "@trpc/react": "^10.0.0-alpha.36",
-        "@trpc/server": "^10.0.0-alpha.36",
+        "@trpc/client": "^10.0.0-alpha.38",
+        "@trpc/next": "^10.0.0-alpha.38",
+        "@trpc/react": "^10.0.0-alpha.38",
+        "@trpc/server": "^10.0.0-alpha.38",
         "clipboard-copy": "^4.0.1",
         "clsx": "^1.2.1",
         "daisyui": "^2.18.1",
         "date-fns": "^2.28.0",
-        "framer-motion": "^6.4.2",
+        "framer-motion": "^6.5.1",
         "kbar": "^0.1.0-beta.36",
         "next": "^12.2.1",
         "next-compose-plugins": "^2.2.1",
@@ -59,10 +59,9 @@
         "zod": "^3.17.3"
     },
     "devDependencies": {
-        "@changesets/cli": "^2.23.1",
         "@next/bundle-analyzer": "^12.2.1",
-        "@tailwindcss/typography": "^0.5.3",
-        "@types/node": "^18.0.3",
+        "@tailwindcss/typography": "^0.5.4",
+        "@types/node": "^18.0.4",
         "@types/nprogress": "^0.2.0",
         "@types/qs": "^6.9.7",
         "@types/react": "^18.0.15",
@@ -73,7 +72,7 @@
         "eslint": "^8.19.0",
         "eslint-config-next": "^12.2.1",
         "eslint-config-prettier": "^8.5.0",
-        "next-sitemap": "^3.1.10",
+        "next-sitemap": "^3.1.11",
         "postcss": "^8.4.14",
         "prettier": "^2.7.1",
         "prettier-plugin-tailwindcss": "^0.1.12",

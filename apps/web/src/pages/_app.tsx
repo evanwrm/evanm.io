@@ -8,7 +8,7 @@ import { AppContext, AppInitialProps, AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ProgressBar from "../components/ProgressBar";
 import { generateStaticSpotlightActions } from "../lib/spotlightActions";
@@ -18,6 +18,7 @@ import "../styles/globals.css";
 import "../styles/prism.css";
 
 const DynamicSpotlight = dynamic(() => import("../components/navigation/Spotlight"), {
+    suspense: true,
     ssr: false
 });
 
@@ -78,7 +79,9 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
                             options={{ enableHistory: true, toggleShortcut: "$mod+k" }}
                         >
                             <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
-                            <DynamicSpotlight />
+                            <Suspense fallback={null}>
+                                <DynamicSpotlight />
+                            </Suspense>
                             <Component {...pageProps} />
                             {NODE_ENV !== "production" && (
                                 <div className="hidden md:block">

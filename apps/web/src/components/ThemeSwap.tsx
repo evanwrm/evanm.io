@@ -13,7 +13,6 @@ const ThemeSwap = ({ className }: Props) => {
 
     const handleTheme = () => {
         setTheme(checked ? "light" : "dark");
-        setChecked(!checked);
     };
 
     // Sync

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { getRepositoryIcon } from "../lib/icons";
 import { Project } from "../validators/Project";
 import ResponsiveButton from "./animations/ResponsiveButton";
@@ -13,7 +14,12 @@ interface Props {
 const ProjectCard = ({ project }: Props) => {
     return (
         <Tilt className="max-h-screen" tiltStrength={5}>
-            <div className="border-base-content/10 card bg-base-200/50 hover:ring-secondary ring-offset-base-100 group h-full w-full rounded-xl border antialiased shadow-xl ring-offset-0 transition hover:ring hover:ring-offset-4">
+            <div
+                className={clsx(
+                    "card bg-base-200/50 group flex h-full w-full flex-col items-stretch rounded-xl antialiased shadow-xl transition",
+                    "border-base-content/10 hover:ring-secondary ring-offset-base-100 border ring-offset-0 hover:ring hover:ring-offset-4"
+                )}
+            >
                 {project.thumbnail && (
                     <figure className="bg-base-100 h-screen max-h-48 overflow-clip">
                         <Image

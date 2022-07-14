@@ -1,4 +1,4 @@
-import { useViewportScroll } from "framer-motion";
+import { useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export const useHideOnScroll = (
@@ -6,7 +6,7 @@ export const useHideOnScroll = (
     showThreshold: number = -1,
     invert: boolean = false
 ) => {
-    const { scrollY } = useViewportScroll();
+    const { scrollY } = useScroll();
     const [hidden, setHidden] = useState(invert);
     const [travel, setTravel] = useState(0);
 

@@ -1,6 +1,6 @@
 import { createSSGHelpers } from "@trpc/react/ssg";
 import { useRegisterActions } from "kbar";
-import { GetStaticProps, GetStaticPropsResult, NextPage } from "next";
+import { GetStaticProps, GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import superjson from "superjson";
 import FadeIn from "../components/animations/FadeIn.";
@@ -15,7 +15,7 @@ import { generateHydratedSpotlightActions } from "../lib/spotlightActions";
 import { NEXT_PUBLIC_REVALIDATE_TIME } from "../lib/utils/constants";
 import { trpc } from "../lib/utils/trpc";
 
-const Home: NextPage = () => {
+const Home = () => {
     const { data: global } = trpc.proxy.global.find.useQuery({});
     const { data: seo } = trpc.proxy.seo.find.useQuery({});
     const { data: socials } = trpc.proxy.socials.find.useQuery({ sort: "id" });
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
 
     return (
         <Layout title="Home" global={global} seo={seo} socials={socials}>
-            <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-center overflow-clip p-4 duration-150">
+            <main className="flex w-full max-w-4xl flex-1 flex-col items-center justify-center overflow-clip p-4 duration-150">
                 <div className="my-6 mt-24 text-center">
                     <h1 className="text-6xl font-bold">
                         <span>Welcome to </span>
