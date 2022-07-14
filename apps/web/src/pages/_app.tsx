@@ -6,10 +6,10 @@ import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import { AppContext, AppInitialProps, AppProps } from "next/app";
 import dynamic from "next/dynamic";
-import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { Suspense, useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
+import PageSeo from "../components/PageSeo";
 import ProgressBar from "../components/ProgressBar";
 import { generateStaticSpotlightActions } from "../lib/spotlightActions";
 import { NEXT_PUBLIC_SITE_URL, NODE_ENV } from "../lib/utils/constants";
@@ -46,7 +46,7 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
     }, []);
 
     return (
-        <React.Fragment>
+        <>
             <DefaultSeo
                 openGraph={{
                     url: NEXT_PUBLIC_SITE_URL,
@@ -62,12 +62,6 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
                     ]
                 }}
             />
-            <Head>
-                <meta
-                    name="viewport"
-                    content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-                />
-            </Head>
             <LazyMotion
                 features={async () => (await import("../lib/framerFeatures")).default}
                 strict
@@ -78,6 +72,7 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
                             actions={generateStaticSpotlightActions(router)}
                             options={{ enableHistory: true, toggleShortcut: "$mod+k" }}
                         >
+                            <PageSeo />
                             <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
                             <Suspense fallback={null}>
                                 <DynamicSpotlight />
@@ -92,7 +87,7 @@ const AppWrapper: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
                     </ThemeProvider>
                 </AnimatePresence>
             </LazyMotion>
-        </React.Fragment>
+        </>
     );
 };
 

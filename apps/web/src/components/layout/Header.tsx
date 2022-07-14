@@ -1,7 +1,7 @@
 import Portal from "@reach/portal";
 import { AnimatePresence, m } from "framer-motion";
 import { useKBar } from "kbar";
-import { NextSeo, NextSeoProps } from "next-seo";
+import { NextSeoProps } from "next-seo";
 import dynamic from "next/dynamic";
 import React, { Suspense, useEffect, useState } from "react";
 import { useFramerVariants } from "../../hooks/useFramerVariants";
@@ -16,6 +16,7 @@ import ResponsiveButton from "../animations/ResponsiveButton";
 import Icon from "../Icon";
 import NavLink from "../navigation/NavLink";
 import RouteNavList from "../navigation/RouteNavList";
+import PageSeo from "../PageSeo";
 import ThemeSwap from "../ThemeSwap";
 
 interface Props {
@@ -74,8 +75,8 @@ const Header = ({ title, global, seo, socials }: Props) => {
     const github = socials?.find(social => social.socialId === "github");
 
     return (
-        <React.Fragment>
-            <NextSeo {...pageSeo} />
+        <>
+            <PageSeo {...pageSeo} />
             <Portal>
                 <AnimatePresence>
                     <Suspense fallback={null}>
@@ -160,7 +161,7 @@ const Header = ({ title, global, seo, socials }: Props) => {
                     </m.div>
                 )}
             </AnimatePresence>
-        </React.Fragment>
+        </>
     );
 };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { getDynamicIcon } from "../lib/icons";
 
 export interface IconProps {
@@ -51,7 +50,7 @@ const Icon = ({ className = "w-10 h-10 fill-current", icon }: IconProps) => {
     //         ?.toLowerCase() || "";
     const SVGIcon = getDynamicIcon(icon);
 
-    return <React.Fragment>{SVGIcon ? <SVGIcon className={className} /> : icon}</React.Fragment>;
+    return <>{SVGIcon ? <SVGIcon className={className} /> : icon}</>;
 };
 
 export default Icon;
