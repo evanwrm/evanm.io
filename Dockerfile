@@ -73,7 +73,8 @@ FROM base as builder
 # Copy Installed dependencies and source code
 COPY --from=installer /app/ .
 COPY --from=pruner /app/out/full/ .
-COPY --from=pruner /app/.git ./.git
+# Optionally add .git folder (faster object hashing for turbo), Railway doesn't allow this
+COPY --from=pruner /app/[.]git ./.git
 
 # Build the scoped project
 RUN $PACKAGE_MANAGER run turbo:build --filter=$SCOPE
