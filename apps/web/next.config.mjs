@@ -23,6 +23,9 @@ const baseConfig = {
         formats: ["image/avif", "image/webp"],
         domains: ["localhost", "res.cloudinary.com"]
     },
+    async redirects() {
+        return [{ source: "/blog/rss", destination: "/api/blog/rss", permanent: true }];
+    },
     webpack(config, _options) {
         if (analyzerMode) config.plugins.push(new DuplicatePackageCheckerPlugin());
 

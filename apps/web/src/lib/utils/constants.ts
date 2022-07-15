@@ -7,3 +7,6 @@ export const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://
 
 // Runtime
 export const NEXT_PUBLIC_REVALIDATE_TIME = parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME ?? "1");
+export const NEXT_PUBLIC_RSS_CACHE_TIME = parseInt(
+    process.env.NEXT_PUBLIC_RSS_CACHE_TIME ?? "3600"
+);

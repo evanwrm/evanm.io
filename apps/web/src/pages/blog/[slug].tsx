@@ -70,7 +70,7 @@ export const getStaticProps: GetStaticProps = async ({
 
     // Check slug exists
     try {
-        if (!slug || typeof slug != "string")
+        if (!slug || typeof slug !== "string")
             throw new TRPCError({ code: "NOT_FOUND", message: "Please provide a slug" });
 
         const articles = await fetchAPI("/articles", {
