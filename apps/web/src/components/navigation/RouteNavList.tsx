@@ -1,25 +1,26 @@
-import clsx from "clsx";
+import NavLink from "@/components/navigation/NavLink";
+import { cn } from "@/lib/utils/styles";
 import React from "react";
-import NavLink from "./NavLink";
 
 interface Props extends React.HTMLAttributes<HTMLUListElement> {
     routes: { path: string; label: string }[];
     onElementClick?: React.MouseEventHandler;
     className?: string;
+    itemClassName?: string;
 }
 
-const RouteNavList = ({ routes, className, onElementClick, ...props }: Props) => {
+const RouteNavList = ({ routes, className, itemClassName, onElementClick, ...props }: Props) => {
     return (
-        <ul className={clsx(className)} {...props}>
+        <ul className={cn(className)} {...props}>
             {routes.map(route => (
-                <li className="px-4 py-2" key={route.path}>
+                <li className={cn("px-4 py-2", itemClassName)} key={route.path}>
                     <NavLink
                         href={route.path}
                         aria-label={route.label}
                         onClick={onElementClick}
-                        className="link-underline from-secondary/20 to-secondary/80 rounded bg-gradient-to-r font-bold opacity-80 transition-[background-size] hover:opacity-100"
+                        className="link-underline from-secondary/20 to-secondary/80 rounded bg-gradient-to-r font-bold opacity-80 transition-all hover:opacity-100"
                     >
-                        {route.label}
+                        <span className="text-base-content">{route.label}</span>
                     </NavLink>
                 </li>
             ))}

@@ -21,11 +21,7 @@ export const useHideOnScroll = (
             }
         };
 
-        const unsubscribeY = scrollY.onChange(updateTravel);
-
-        return () => {
-            unsubscribeY();
-        };
+        return scrollY.onChange(updateTravel);
     }, [invert, showThreshold, scrollY]);
 
     useEffect(() => {

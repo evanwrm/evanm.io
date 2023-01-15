@@ -1,56 +1,141 @@
-import { getDynamicIcon } from "../lib/icons";
-
-export interface IconProps {
-    icon: string;
-    className?: string;
-}
+import { IconType } from "react-icons";
+import { FaFilePdf } from "react-icons/fa";
+import { HiColorSwatch, HiMenuAlt2, HiOutlineLightBulb, HiX } from "react-icons/hi";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import {
+    MdAlternateEmail,
+    MdCheckCircleOutline,
+    MdKeyboardArrowUp,
+    MdOutlineArticle,
+    MdOutlineContentCopy,
+    MdOutlineDarkMode,
+    MdOutlineKeyboardReturn,
+    MdOutlineLightMode,
+    MdOutlineMonitor
+} from "react-icons/md";
+import {
+    RiCommandLine,
+    RiExternalLinkLine,
+    RiFacebookFill,
+    RiGithubLine,
+    RiLinkedinFill,
+    RiPhoneLine,
+    RiStackOverflowLine
+} from "react-icons/ri";
+import {
+    SiBitbucket,
+    SiBookstack,
+    SiDevdotto,
+    SiDiscord,
+    SiDocker,
+    SiGit,
+    SiGithub,
+    SiGitlab,
+    SiGoogle,
+    SiGooglescholar,
+    SiJavascript,
+    SiKaggle,
+    SiLeetcode,
+    SiMedium,
+    SiNextdotjs,
+    SiNodedotjs,
+    SiOrcid,
+    SiPython,
+    SiPytorch,
+    SiReact,
+    SiResearchgate,
+    SiRss,
+    SiTwitch,
+    SiTypescript,
+    SiUnity,
+    SiYoutube
+} from "react-icons/si";
+import { VscHome } from "react-icons/vsc";
 
 /**
- * Ugly hack to get dynamic imports to work for many (svg) icon packs
- *
- * Next.js docs: https://nextjs.org/docs/advanced-features/dynamic-import
- * "Note: In import('path/to/component'), the path must be explicitly written. It can't be a template string nor a variable"
- *
- * TODO: update if a better solution is found
+ * Import only the icons needed
+ * We lose the ability to use new icons on the fly (having to redeploy)
+ * However this approach doesn't cause module loading for SSG
  */
-// const getDynamicIcon = (packageId: string, icon: string) => {
-//     /* prettier-ignore */
-//     switch (packageId) {
-//         case "ai": return dynamic<IconBaseProps>(() => import("react-icons/ai").then(mod => mod[icon]) as any);
-//         case "bs": return dynamic<IconBaseProps>(() => import("react-icons/bs").then(mod => mod[icon]) as any);
-//         case "bi": return dynamic<IconBaseProps>(() => import("react-icons/bi").then(mod => mod[icon]) as any);
-//         case "di": return dynamic<IconBaseProps>(() => import("react-icons/di").then(mod => mod[icon]) as any);
-//         case "fi": return dynamic<IconBaseProps>(() => import("react-icons/fi").then(mod => mod[icon]) as any);
-//         case "fc": return dynamic<IconBaseProps>(() => import("react-icons/fc").then(mod => mod[icon]) as any);
-//         case "fa": return dynamic<IconBaseProps>(() => import("react-icons/fa").then(mod => mod[icon]) as any);
-//         case "gi": return dynamic<IconBaseProps>(() => import("react-icons/gi").then(mod => mod[icon]) as any);
-//         case "go": return dynamic<IconBaseProps>(() => import("react-icons/go").then(mod => mod[icon]) as any);
-//         case "gr": return dynamic<IconBaseProps>(() => import("react-icons/gr").then(mod => mod[icon]) as any);
-//         case "hi": return dynamic<IconBaseProps>(() => import("react-icons/hi").then(mod => mod[icon]) as any);
-//         case "im": return dynamic<IconBaseProps>(() => import("react-icons/im").then(mod => mod[icon]) as any);
-//         case "io": return dynamic<IconBaseProps>(() => import("react-icons/io5").then(mod => mod[icon]) as any);
-//         // case "io5": return dynamic<IconBaseProps>(() => import("react-icons/io5").then(mod => mod[icon]) as any);
-//         case "md": return dynamic<IconBaseProps>(() => import("react-icons/md").then(mod => mod[icon]) as any);
-//         case "ri": return dynamic<IconBaseProps>(() => import("react-icons/ri").then(mod => mod[icon]) as any);
-//         case "ti": return dynamic<IconBaseProps>(() => import("react-icons/ti").then(mod => mod[icon]) as any);
-//         case "si": return dynamic<IconBaseProps>(() => import("react-icons/si").then(mod => mod[icon]) as any);
-//         case "vsc": return dynamic<IconBaseProps>(() => import("react-icons/vsc").then(mod => mod[icon]) as any);
-//         case "wi": return dynamic<IconBaseProps>(() => import("react-icons/wi").then(mod => mod[icon]) as any);
-//         case "cg": return dynamic<IconBaseProps>(() => import("react-icons/cg").then(mod => mod[icon]) as any);
-//         default: return dynamic<IconBaseProps>(() => import("react-icons/md").then(mod => mod[icon]) as any);
-//     }
-// };
+const Icon = {
+    // Socials
+    MdAlternateEmail,
+    RiGithubLine,
+    RiLinkedinFill,
+    SiOrcid,
+    SiResearchgate,
+    RiFacebookFill,
+    SiDiscord,
+    RiStackOverflowLine,
+    SiDevdotto,
+    SiMedium,
+    SiYoutube,
+    SiGooglescholar,
+    SiRss,
+    SiKaggle,
+    SiLeetcode,
+    RiPhoneLine,
+    SiTwitch,
+    SiGoogle,
 
-const Icon = ({ className = "w-10 h-10 fill-current", icon }: IconProps) => {
-    // const packageId =
-    //     icon
-    //         .replace(/([^A-Z])([A-Z])/g, "$1 $2")
-    //         .split(" ")
-    //         .shift()
-    //         ?.toLowerCase() || "";
-    const SVGIcon = getDynamicIcon(icon);
+    // Skills
+    SiDocker,
+    SiNodedotjs,
+    SiTypescript,
+    SiJavascript,
+    SiReact,
+    SiNextdotjs,
+    SiPytorch,
+    SiGit,
+    SiPython,
+    SiUnity,
 
-    return <>{SVGIcon ? <SVGIcon className={className} /> : icon}</>;
+    // Theme
+    MdOutlineDarkMode,
+    MdOutlineLightMode,
+    MdOutlineMonitor,
+
+    // Extras
+    HiMenuAlt2,
+    HiX,
+    RiCommandLine,
+    MdKeyboardArrowUp,
+    MdOutlineKeyboardReturn,
+    RiExternalLinkLine,
+    IoDocumentTextOutline,
+    FaFilePdf,
+    MdOutlineContentCopy,
+    MdCheckCircleOutline,
+    SiGithub,
+    SiGitlab,
+    SiBitbucket,
+    HiOutlineLightBulb,
+    MdOutlineArticle,
+    SiBookstack,
+    VscHome,
+    HiColorSwatch
 };
 
 export default Icon;
+
+export const iconAliases = {
+    SiGithub: ["github"],
+    SiGitlab: ["gitlab", "code.cs.umanitoba"],
+    SiBitbucket: ["bitbucket"],
+    SiGit: ["git"]
+};
+
+export const getIconAliased = (icon: string): IconType | null => {
+    if (icon in Icon) return (Icon as any)[icon];
+
+    const iconQuery = icon.toLowerCase();
+    for (const [key, value] of Object.entries(iconAliases)) {
+        if (key in Icon) {
+            for (const alias of value) {
+                if (iconQuery.includes(alias)) return (Icon as any)[key];
+            }
+        }
+    }
+
+    return null;
+};

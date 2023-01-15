@@ -1,16 +1,16 @@
-import { t } from "../trpc";
-import { articleRouter } from "./article";
-import { globalRouter } from "./global";
-import { projectRouter } from "./projects";
-import { publicationRouter } from "./publications";
-import { seoRouter } from "./seo";
-import { skillRouter } from "./skills";
-import { socialRouter } from "./socials";
-import { systemRouter } from "./system";
+import { articleRouter } from "@/lib/server/routers/article";
+import { projectRouter } from "@/lib/server/routers/projects";
+import { publicationRouter } from "@/lib/server/routers/publications";
+import { seoRouter } from "@/lib/server/routers/seo";
+import { settingsRouter } from "@/lib/server/routers/settings";
+import { skillRouter } from "@/lib/server/routers/skills";
+import { socialRouter } from "@/lib/server/routers/socials";
+import { systemRouter } from "@/lib/server/routers/system";
+import { router } from "@/lib/server/trpc";
 
-export const appRouter = t.router({
+export const appRouter = router({
     system: systemRouter,
-    global: globalRouter,
+    settings: settingsRouter,
     seo: seoRouter,
     socials: socialRouter,
     projects: projectRouter,

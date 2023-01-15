@@ -1,13 +1,21 @@
-import { publicationValidator } from "../../../validators/Publication";
-import { strapiQueryParameterValidator } from "../../../validators/StrapiQueryParameters";
-import { fetchAPI } from "../../api";
-import { t } from "../trpc";
+import { t } from "@/lib/server/trpc";
+import { api } from "@/lib/services/sanity/api";
+import { groqSort } from "@/lib/services/sanity/utils";
+import { publicationValidator } from "@/lib/validators/Publication";
+import { sanityQueryParameterValidator } from "@/lib/validators/sanity/SanityQueryParameters";
 
 export const publicationRouter = t.router({
     find: t.procedure
-        .input(strapiQueryParameterValidator.optional())
+        .input(sanityQueryParameterValidator.optional())
         .output(publicationValidator.array())
-        .query(async ({ input }) => {
-            return await fetchAPI("/publications", { populate: "*", ...input });
+        .query(async ({ input = {} }) => {
+            const { sort = "year desc" } = input;
+            return await api(
+                `*[_type == "publication"]{
+                    ...,
+                    "slug": slug.current,
+                    project->{...,"slug": slug.current}
+                }${groqSort(sort)}`
+            );
         })
 });

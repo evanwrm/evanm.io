@@ -1,4 +1,9 @@
-import clsx from "clsx";
+"use client";
+
+import ResponsiveButton from "@/components/animation/ResponsiveButton";
+import Icon, { getIconAliased } from "@/components/Icon";
+import { useThemeSpotlightActions } from "@/hooks/useSpotlightActions";
+import { cn } from "@/lib/utils/styles";
 import {
     ActionId,
     ActionImpl,
@@ -13,15 +18,12 @@ import {
 } from "kbar";
 import { useTheme } from "next-themes";
 import React, { useMemo } from "react";
-import { generateThemeSpotlightActions } from "../../lib/spotlightActions";
-import ResponsiveButton from "../animations/ResponsiveButton";
-import Icon from "../Icon";
 
 const RenderResults = () => {
     const { results, rootActionId } = useMatches();
 
     return (
-        <div className="scrollbar-children px-2 pb-2">
+        <div className="[&>*]:scrollbar px-2 pb-2">
             <KBarResults
                 items={results}
                 onRender={({ item, active }) =>
@@ -55,10 +57,12 @@ const ResultItem = (
         return action.ancestors.slice(index);
     }, [action.ancestors, currentRootActionId]);
 
+    const ActionIcon = typeof action.icon === "string" && getIconAliased(action.icon);
+
     return (
         <div
             ref={ref}
-            className={clsx(
+            className={cn(
                 active
                     ? "bg-base-200 border-accent border-l-2 border-solid"
                     : "border-transparent bg-transparent",
@@ -66,11 +70,7 @@ const ResultItem = (
             )}
         >
             <div className="flex items-center gap-2 text-sm">
-                {action.icon && typeof action.icon === "string" ? (
-                    <Icon className="h-6 w-6" icon={action.icon} />
-                ) : (
-                    action.icon
-                )}
+                {ActionIcon ? <ActionIcon className="h-6 w-6" /> : action.icon}
                 <div className="flex flex-col">
                     <div>
                         {ancestors.length > 0 &&
@@ -98,7 +98,7 @@ const ResultItem = (
                 </div>
             ) : (
                 <div className="flex opacity-60">
-                    <Icon className="h-6 w-6" icon="MdOutlineKeyboardReturn" />
+                    <Icon.MdOutlineKeyboardReturn className="h-6 w-6" />
                 </div>
             )}
         </div>
@@ -109,7 +109,8 @@ const ForwardResultItem = React.forwardRef(ResultItem);
 const Spotlight = () => {
     const { query } = useKBar();
     const { setTheme } = useTheme();
-    useRegisterActions(generateThemeSpotlightActions(setTheme));
+    const actions = useThemeSpotlightActions(setTheme);
+    useRegisterActions(...actions);
 
     return (
         <KBarPortal>

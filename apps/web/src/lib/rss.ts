@@ -1,20 +1,22 @@
+import { env } from "@/lib/env/server.mjs";
+import { createInnerContext } from "@/lib/server/context";
+import { appRouter } from "@/lib/server/routers/app";
+import { isReference } from "@/lib/services/sanity/utils";
+import { articleValidator } from "@/lib/validators/Article";
 import { getYear } from "date-fns";
 import { Feed } from "feed";
 import { z } from "zod";
-import { Article, articleValidator } from "../validators/Article";
-import { Global } from "../validators/Global";
-import { SocialLink } from "../validators/Social";
-import { fetchAPI } from "./api";
-import { env } from "./server/env";
 
-export const RssEnum = z.enum(["rss2", "atom1", "json1"]);
-export type RssFormat = z.infer<typeof RssEnum>;
+export const rssFormats = ["rss2", "atom1", "json1"] as const;
+export type RssFormat = (typeof rssFormats)[number];
+export const RssEnum = z.enum(rssFormats);
 
-export const generateRssFeed = async (format: RssFormat) => {
+export const generateRssFeed = async () => {
+    const caller = appRouter.createCaller(await createInnerContext());
     const [global, socials, articles] = await Promise.all([
-        fetchAPI<Global>("/global", { populate: "*" }),
-        fetchAPI<SocialLink[]>("/social-links", { populate: "*" }),
-        fetchAPI<Article[]>("/articles", { populate: "*", sort: "updatedAt:desc" })
+        caller.settings.find(),
+        caller.socials.find(),
+        caller.articles.find({ sort: "_createdAt desc" })
     ]);
     const parsedArticles = articleValidator.array().parse(articles);
 
@@ -53,20 +55,27 @@ export const generateRssFeed = async (format: RssFormat) => {
             title: article.title,
             id: article.slug,
             link: `${env.NEXT_PUBLIC_SITE_URL}/blog/${article.slug}`,
-            description: article.description || "",
+            description: article.logline ?? "",
             content: article.content,
             author: [author],
             contributor: [author],
-            date: article.updatedAt,
-            image: article.thumbnail?.url
+            date: new Date(article._updatedAt),
+            image: !isReference(article.thumbnail?.asset) ? article.thumbnail?.asset.url : undefined
         });
     });
 
-    const generatedFeed = {
-        [RssEnum.enum.rss2]: feed.rss2,
-        [RssEnum.enum.atom1]: feed.atom1,
-        [RssEnum.enum.json1]: feed.json1
-    }[format]();
+    return feed;
+};
+
+export const getRssFeed = async (format: RssFormat) => {
+    const feed = await generateRssFeed();
+
+    const feedMap: Record<RssFormat, () => string> = {
+        rss2: feed.rss2,
+        atom1: feed.atom1,
+        json1: feed.json1
+    };
+    const generatedFeed = feedMap[format]();
 
     return generatedFeed;
 };

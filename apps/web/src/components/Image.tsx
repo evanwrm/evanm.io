@@ -1,28 +1,30 @@
-import clsx from "clsx";
-import NextImage from "next/future/image";
-import { getMedia, getMediaThumbnail } from "../lib/media";
-import { StrapiMedia } from "../validators/StrapiMedia";
+import { cn } from "@/lib/utils/styles";
+import { SanityMediaAsset } from "@/lib/validators/sanity/SanityMedia";
+import NextImage from "next/image";
 
 interface Props {
-    image: StrapiMedia;
+    image: SanityMediaAsset;
     alt?: string;
+    width?: number;
+    height?: number;
     className?: string;
 }
 
 // https://plaiceholder.co/
 // https://png-pixel.com/
-export const Image = ({ image, alt = "", className }: Props) => {
-    const { width, height, alternativeText } = image;
+export const Image = ({ image, alt = "", width, height, className }: Props) => {
+    const { width: sourceWidth, height: sourceHeight } = image.metadata?.dimensions ?? {};
+    const lqip = image.metadata?.lqip ?? undefined;
 
     return (
         <NextImage
-            src={getMedia(image)}
-            alt={alternativeText || alt}
-            width={width ?? undefined}
-            height={height ?? undefined}
-            className={clsx(className, "object-cover")}
+            src={image.url}
+            alt={alt}
+            width={width ?? sourceWidth}
+            height={height ?? sourceHeight}
+            className={cn(className, "object-cover")}
             placeholder="blur"
-            blurDataURL={getMediaThumbnail(image)}
+            blurDataURL={lqip}
         />
     );
 };

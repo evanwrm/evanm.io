@@ -1,13 +1,9 @@
-import { seoValidator } from "../../../validators/Seo";
-import { strapiQueryParameterValidator } from "../../../validators/StrapiQueryParameters";
-import { fetchAPI } from "../../api";
-import { t } from "../trpc";
+import { procedure, router } from "@/lib/server/trpc";
+import { api } from "@/lib/services/sanity/api";
+import { seoValidator } from "@/lib/validators/Seo";
 
-export const seoRouter = t.router({
-    find: t.procedure
-        .input(strapiQueryParameterValidator.optional())
-        .output(seoValidator)
-        .query(async ({ input }) => {
-            return await fetchAPI("/seo", { populate: "*", ...input });
-        })
+export const seoRouter = router({
+    find: procedure.output(seoValidator).query(async () => {
+        return await api(`*[_type == "seo"][0]`);
+    })
 });

@@ -1,10 +1,18 @@
-import * as trpc from "@trpc/server";
-import * as trpcNext from "@trpc/server/adapters/next";
+import type { inferAsyncReturnType } from "@trpc/server";
+import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
 
-export const createContext = async ({ req, res }: trpcNext.CreateNextContextOptions) => {
-    const token = req.headers.authorization?.split(" ")[1];
+interface CreateInnerContextOptions extends Partial<CreateNextContextOptions> {}
 
-    return { token, req, res };
+export const createInnerContext = async (opts?: CreateInnerContextOptions) => {
+    return { req: opts?.req, res: opts?.res };
 };
 
-export type Context = Partial<trpc.inferAsyncReturnType<typeof createContext>>;
+export const createContext = async (opts: CreateNextContextOptions) => {
+    const contextInner = await createInnerContext(opts);
+    const token = opts.req.headers.authorization?.split(" ")[1];
+
+    return { ...contextInner, token, req: opts.req, res: opts.res };
+};
+
+export type InnerContext = inferAsyncReturnType<typeof createInnerContext>;
+export type Context = inferAsyncReturnType<typeof createContext>;

@@ -1,0 +1,48 @@
+import MdxMarkdown from "@/components/mdx/MdxComponents";
+import { createInnerContext } from "@/lib/server/context";
+import { appRouter } from "@/lib/server/routers/app";
+import { notFound } from "next/navigation";
+
+interface Props {
+    params: {
+        slug: string;
+    };
+}
+
+const BlogPost = async ({ params }: Props) => {
+    const caller = appRouter.createCaller(await createInnerContext());
+    const article = await caller.articles.findOne({ slug: params.slug });
+
+    if (!article) return notFound();
+
+    return (
+        <main className="flex w-full max-w-4xl flex-1 flex-col items-center justify-center">
+            <div className="my-6 mt-24 w-full">
+                <MdxMarkdown {...article.mdxData.mdxSource} />
+            </div>
+        </main>
+    );
+};
+
+export const generateStaticParams = async (): Promise<Props["params"][]> => {
+    const caller = appRouter.createCaller(await createInnerContext());
+
+    const slugs: string[] = [];
+    let page = 1,
+        pageSize = 100;
+    let articles;
+    do {
+        articles = await caller.articles.find({
+            sort: "_createdAt desc",
+            pagination: { page, pageSize }
+        });
+        slugs.push(...articles.map(article => article.slug));
+        page++;
+    } while (articles.length === pageSize);
+
+    return slugs.map(slug => ({
+        slug
+    }));
+};
+
+export default BlogPost;

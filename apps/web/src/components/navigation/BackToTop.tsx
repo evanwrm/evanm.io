@@ -1,11 +1,13 @@
-import Portal from "@reach/portal";
+"use client";
+
+import RoundedContainer from "@/components//layout/RoundedContainer";
+import ResponsiveButton from "@/components/animation/ResponsiveButton";
+import Icon from "@/components/Icon";
+import { useHideOnScroll } from "@/hooks/useHideOnScroll";
+import { anticipateTransition, fadePopVariants } from "@/lib/animation/framerVariants";
+import { Portal } from "@radix-ui/react-portal";
 import { AnimatePresence } from "framer-motion";
 import React from "react";
-import { useHideOnScroll } from "../../hooks/useHideOnScroll";
-import { anticipateTransition, fadePopVariants } from "../../lib/framerVariants";
-import ResponsiveButton from "../animations/ResponsiveButton";
-import Icon from "../Icon";
-import RoundedContainer from "../RoundedContainer";
 
 const BackToTop = () => {
     const { hidden } = useHideOnScroll(-1, 100, true);
@@ -16,9 +18,9 @@ const BackToTop = () => {
     };
 
     return (
-        <Portal>
-            <AnimatePresence>
-                {!hidden && (
+        <AnimatePresence>
+            {!hidden && (
+                <Portal>
                     <ResponsiveButton
                         className="shadow-base-content/10 btn-ghost btn-circle fixed bottom-6 right-8 z-40 flex select-none items-center justify-center bg-clip-padding shadow"
                         initial="hidden"
@@ -29,12 +31,12 @@ const BackToTop = () => {
                         onClick={handleClick}
                     >
                         <RoundedContainer>
-                            <Icon className="h-6 w-6" icon="MdKeyboardArrowUp"></Icon>
+                            <Icon.MdKeyboardArrowUp className="h-6 w-6" />
                         </RoundedContainer>
                     </ResponsiveButton>
-                )}
-            </AnimatePresence>
-        </Portal>
+                </Portal>
+            )}
+        </AnimatePresence>
     );
 };
 

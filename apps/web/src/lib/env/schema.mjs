@@ -1,0 +1,44 @@
+// @ts-check
+import { z } from "zod";
+
+export const serverSchema = z.object({
+    NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+    ANALYZE: z.enum(["true", "false"]).default("false"),
+
+    // private
+    REVALIDATE_SECRET: z.string()
+});
+
+export const clientSchema = z.object({
+    NEXT_PUBLIC_NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+    NEXT_PUBLIC_VERCEL_URL: z.string().url().optional(),
+    NEXT_PUBLIC_SITE_URL: z.string().url(),
+
+    // Strapi
+    NEXT_PUBLIC_STRAPI_URL: z.string().url(),
+
+    // Sanity
+    NEXT_PUBLIC_SANITY_URL: z.string().url(),
+    NEXT_PUBLIC_SANITY_PROJECT_ID: z.string(),
+    NEXT_PUBLIC_SANITY_DATASET: z.string(),
+    NEXT_PUBLIC_SANITY_API_VERSION: z.string(),
+
+    // Caching
+    NEXT_PUBLIC_REVALIDATE_TIME: z.number().positive().default(10),
+    NEXT_PUBLIC_RSS_CACHE_TIME: z.number().positive().default(3600)
+});
+
+/** @type {{ [k in keyof z.infer<typeof clientSchema>]: z.infer<typeof clientSchema>[k] | undefined }} */
+export const clientEnv = {
+    NEXT_PUBLIC_NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_VERCEL_URL: process.env.VERCEL_URL,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
+    NEXT_PUBLIC_SANITY_URL: process.env.NEXT_PUBLIC_SANITY_URL,
+    NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    NEXT_PUBLIC_SANITY_API_VERSION: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+    NEXT_PUBLIC_REVALIDATE_TIME:
+        parseInt(process.env.NEXT_PUBLIC_REVALIDATE_TIME ?? "") || undefined,
+    NEXT_PUBLIC_RSS_CACHE_TIME: parseInt(process.env.NEXT_PUBLIC_RSS_CACHE_TIME ?? "") || undefined
+};

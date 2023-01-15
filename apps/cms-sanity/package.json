@@ -1,0 +1,44 @@
+{
+    "name": "evanmio-api-sanity",
+    "version": "0.1.0",
+    "private": true,
+    "homepage": "https://api.evanm.io",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/evanwrm/evanm.io",
+        "directory": "apps/api"
+    },
+    "license": "MIT",
+    "author": "Evan Madill <emadill@outlook.com>",
+    "main": "package.json",
+    "scripts": {
+        "build": "sanity build",
+        "deploy": "sanity deploy",
+        "deploy-graphql": "sanity graphql deploy",
+        "dev": "sanity dev",
+        "start": "sanity start"
+    },
+    "dependencies": {
+        "@sanity/ui": "^1.0.12",
+        "@sanity/vision": "^3.2.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-is": "^18.2.0",
+        "reading-time": "2.0.0-1",
+        "sanity": "^3.2.0",
+        "sanity-plugin-cloudinary": "^1.0.1",
+        "sanity-plugin-markdown": "^3.0.1",
+        "styled-components": "^5.2.0"
+    },
+    "devDependencies": {
+        "@sanity/eslint-config-studio": "^2.0.1",
+        "eslint": "^8.31.0",
+        "prettier": "^2.8.2",
+        "typescript": "^4.9.4"
+    },
+    "packageManager": "pnpm@7.22.0",
+    "engines": {
+        "node": ">=16.0.0",
+        "pnpm": ">=7.20.0"
+    }
+}
