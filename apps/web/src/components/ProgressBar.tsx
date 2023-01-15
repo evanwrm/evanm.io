@@ -1,4 +1,6 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { usePathname } from "next/navigation";
 import NProgress, { NProgressOptions } from "nprogress";
 import { useEffect } from "react";
 
@@ -8,7 +10,7 @@ interface Props {
 }
 
 const ProgressBar = ({ options, color }: Props) => {
-    const router = useRouter();
+    const pathname = usePathname();
 
     const routeChangeStart = () => {
         NProgress.start();
@@ -21,18 +23,21 @@ const ProgressBar = ({ options, color }: Props) => {
     useEffect(() => {
         options && NProgress.configure(options);
 
-        router.events.on("routeChangeStart", routeChangeStart);
-        router.events.on("routeChangeComplete", routeChangeEnd);
-        router.events.on("routeChangeError", routeChangeEnd);
+        // TODO: Next.js router.events are not supported currently
+        routeChangeStart();
+        setTimeout(routeChangeEnd, 250);
+        // router.events.on("routeChangeStart", routeChangeStart);
+        // router.events.on("routeChangeComplete", routeChangeEnd);
+        // router.events.on("routeChangeError", routeChangeEnd);
 
         return () => {
-            router.events.off("routeChangeStart", routeChangeStart);
-            router.events.off("routeChangeComplete", routeChangeEnd);
-            router.events.off("routeChangeError", routeChangeEnd);
+            // router.events.off("routeChangeStart", routeChangeStart);
+            // router.events.off("routeChangeComplete", routeChangeEnd);
+            // router.events.off("routeChangeError", routeChangeEnd);
 
             NProgress.remove();
         };
-    }, [options, router.events]);
+    }, [options, pathname]);
 
     return (
         <style jsx global>{`

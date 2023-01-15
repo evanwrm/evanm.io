@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cn } from "@/lib/utils/styles";
 import React from "react";
 
 interface Props {
@@ -8,9 +8,7 @@ interface Props {
 
 const Grid = ({ className, children }: Props) => {
     return (
-        <div className={clsx(className, "grid w-full", "grid-cols-1 md:grid-cols-2")}>
-            {children}
-        </div>
+        <div className={cn("grid w-full", "grid-cols-1 md:grid-cols-2", className)}>{children}</div>
     );
 };
 

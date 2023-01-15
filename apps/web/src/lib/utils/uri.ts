@@ -1,12 +1,12 @@
+import { env } from "@/lib/env/client.mjs";
 import { parseRelativeUrl } from "next/dist/shared/lib/router/utils/parse-relative-url";
 import { ParsedUrl } from "next/dist/shared/lib/router/utils/parse-url";
 import { searchParamsToUrlQuery } from "next/dist/shared/lib/router/utils/querystring";
-import { NEXT_PUBLIC_SITE_URL, VERCEL_URL } from "./constants";
 
 export const getBaseUrl = () => {
     if (typeof window !== "undefined") return "";
-    if (VERCEL_URL) return VERCEL_URL;
-    return NEXT_PUBLIC_SITE_URL;
+    if (env.NEXT_PUBLIC_VERCEL_URL) return env.NEXT_PUBLIC_VERCEL_URL;
+    return env.NEXT_PUBLIC_SITE_URL;
 };
 
 // https://github.com/vercel/next.js/blob/canary/packages/next/shared/lib/router/utils/parse-url.ts

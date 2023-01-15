@@ -1,24 +1,24 @@
+import { env } from "@/lib/env/client.mjs";
+import { getRssFeed, RssFormat, rssFormats } from "@/lib/rss";
 import { NextApiRequest, NextApiResponse } from "next";
-import { generateRssFeed, RssEnum, RssFormat } from "../../../lib/rss";
-import { NEXT_PUBLIC_RSS_CACHE_TIME } from "../../../lib/utils/constants";
+import { z } from "zod";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-    const validFormat = RssEnum.safeParse(req.query.format).success;
-    const format = validFormat ? (req.query.format as RssFormat) : RssEnum.enum.rss2;
+    const formatParsed = z.enum(rssFormats).safeParse(req.query.format);
+    const format: RssFormat = formatParsed.success ? formatParsed.data : "rss2";
 
     try {
-        const feed = await generateRssFeed(format);
-        console.log(feed);
+        const feed = await getRssFeed(format);
 
-        const formatContentMap = {
-            [RssEnum.enum.rss2]: "application/xml",
-            [RssEnum.enum.atom1]: "application/xml",
-            [RssEnum.enum.json1]: "application/json"
+        const formatContentMap: Record<RssFormat, string> = {
+            rss2: "application/xml",
+            atom1: "application/xml",
+            json1: "application/json"
         };
         res.setHeader("Content-Type", formatContentMap[format]);
         res.setHeader(
             "Cache-Control",
-            `public, s-maxage=${NEXT_PUBLIC_RSS_CACHE_TIME}, stale-while-revalidate`
+            `public, s-maxage=${env.NEXT_PUBLIC_RSS_CACHE_TIME}, stale-while-revalidate`
         );
 
         return res.send(feed);

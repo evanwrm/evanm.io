@@ -1,0 +1,93 @@
+import FadeIn from "@/components/animation/FadeIn.";
+import Icon from "@/components/Icon";
+import { Image } from "@/components/Image";
+import Grid from "@/components/layout/Grid";
+import RoundedContainer from "@/components/layout/RoundedContainer";
+import ProjectCard from "@/components/ProjectCard";
+import PublicationCard from "@/components/PublicationCard";
+import { createInnerContext } from "@/lib/server/context";
+import { appRouter } from "@/lib/server/routers/app";
+import { isReference } from "@/lib/services/sanity/utils";
+
+const Home = async () => {
+    const caller = appRouter.createCaller(await createInnerContext());
+    const [settings, projects, publications] = await Promise.all([
+        caller.settings.find(),
+        caller.projects.find({ sort: "endDate desc" }),
+        caller.publications.find({ sort: "year desc" })
+    ]);
+
+    return (
+        <main className="flex w-full max-w-4xl flex-1 flex-col items-center justify-center">
+            <section
+                id="intro"
+                className="min-h-screen px-4 w-full flex flex-col justify-evenly items-center"
+            >
+                <div className="my-6 text-left">
+                    {settings.avatar && !isReference(settings.avatar?.asset) && (
+                        <div className="my-4 mx-2 sm:mx-4">
+                            <Image
+                                image={settings.avatar?.asset}
+                                alt={settings.avatar.alt ?? "Avatar"}
+                                width={96}
+                                height={96}
+                                className="h-20 w-20 sm:h-24 sm:w-24 select-none rounded-full shadow-md duration-500 hover:scale-105 transition"
+                            />
+                        </div>
+                    )}
+                    <h1 className="sm:text-5xl text-4xl font-bold">
+                        <span>Data Science, Fullstack, ML enthusiast, and Student</span>
+                    </h1>
+                    <p className="mt-12 text-2xl">
+                        <span>Get started by editing </span>
+                        <code className="bg-base-200 rounded-md p-3 font-mono text-lg">
+                            pages/index.js
+                        </code>
+                    </p>
+                </div>
+            </section>
+            <section
+                id="projects"
+                className="flex w-full flex-col px-4 justify-center items-center"
+            >
+                <FadeIn className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
+                    <h2 className="flex items-center justify-start text-2xl font-bold">
+                        <RoundedContainer>
+                            <Icon.HiOutlineLightBulb className="h-6 w-6" />
+                        </RoundedContainer>
+                        Projects
+                    </h2>
+                    <FadeIn>
+                        <Grid className="gap-8">
+                            {projects.map(project => (
+                                <ProjectCard project={project} key={project.slug} />
+                            ))}
+                        </Grid>
+                    </FadeIn>
+                </FadeIn>
+            </section>
+            <section
+                id="publications"
+                className="flex w-full flex-col px-4 justify-center items-center"
+            >
+                <FadeIn className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
+                    <h2 className="flex items-center justify-start text-2xl font-bold">
+                        <RoundedContainer>
+                            <Icon.SiBookstack className="h-6 w-6" />
+                        </RoundedContainer>
+                        Recent Publications
+                    </h2>
+                    <FadeIn>
+                        {publications.map(publication => (
+                            <div className="my-4" key={publication.slug}>
+                                <PublicationCard publication={publication} />
+                            </div>
+                        ))}
+                    </FadeIn>
+                </FadeIn>
+            </section>
+        </main>
+    );
+};
+
+export default Home;

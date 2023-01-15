@@ -7,7 +7,7 @@
     "display": "standalone",
     "orientation": "portrait-primary",
     "dir": "ltr",
-    "lang": "en-US",
+    "lang": "en",
     "icons": [
         {
             "src": "/static/favicons/android-chrome-48x48.png",

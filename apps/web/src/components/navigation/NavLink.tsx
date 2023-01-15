@@ -1,21 +1,21 @@
-import clsx from "clsx";
+import { cn } from "@/lib/utils/styles";
+import { isExternal } from "@/lib/utils/uri";
 import Link, { LinkProps } from "next/link";
 import React from "react";
-import { isExternal } from "../../lib/utils/uri";
 
-interface Props extends Pick<LinkProps, "as" | "href">, React.HTMLAttributes<HTMLAnchorElement> {
+interface Props extends Pick<LinkProps, "href">, React.HTMLAttributes<HTMLAnchorElement> {
     children?: React.ReactNode;
     className?: string;
 }
 
-const NavLink = ({ href, as, className, children, ...props }: Props) => {
+const NavLink = ({ href, className, children, ...props }: Props) => {
     const url = typeof href === "string" ? href : href.href ?? "";
 
     if (isExternal(url))
         return (
             <a
                 href={url}
-                className={clsx(className)}
+                className={cn(className)}
                 target="_blank"
                 rel="noopener noreferrer"
                 {...props}
@@ -25,10 +25,8 @@ const NavLink = ({ href, as, className, children, ...props }: Props) => {
         );
 
     return (
-        <Link href={href} as={as} passHref>
-            <a className={clsx(className)} {...props}>
-                {children}
-            </a>
+        <Link className={cn(className)} href={href} {...props}>
+            {children}
         </Link>
     );
 };

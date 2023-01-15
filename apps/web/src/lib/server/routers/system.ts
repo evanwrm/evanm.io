@@ -1,13 +1,13 @@
+import { env } from "@/lib/env/server.mjs";
+import { apiProcedure, procedure, router } from "@/lib/server/trpc";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { env } from "../env";
-import { t } from "../trpc";
 
-export const systemRouter = t.router({
-    healthz: t.procedure.query(async () => {
+export const systemRouter = router({
+    healthz: procedure.query(async () => {
         return { status: "success" };
     }),
-    revalidatez: t.procedure
+    revalidatez: apiProcedure
         .input(z.object({ path: z.string() }))
         .mutation(async ({ ctx, input }) => {
             const { token, res } = ctx;

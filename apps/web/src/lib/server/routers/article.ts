@@ -1,34 +1,44 @@
+import { mdxSerialize } from "@/lib/mdx";
+import { procedure, router } from "@/lib/server/trpc";
+import { api } from "@/lib/services/sanity/api";
+import { groqSort } from "@/lib/services/sanity/utils";
+import { Article, articleValidator } from "@/lib/validators/Article";
+import { sanityQueryParameterValidator } from "@/lib/validators/sanity/SanityQueryParameters";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { Article, articleValidator } from "../../../validators/Article";
-import { strapiQueryParameterValidator } from "../../../validators/StrapiQueryParameters";
-import { fetchAPI } from "../../api";
-import { mdxSerialize } from "../../mdx";
-import { t } from "../trpc";
 
-export const articleRouter = t.router({
-    find: t.procedure
-        .input(strapiQueryParameterValidator.optional())
+export const articleRouter = router({
+    find: procedure
+        .input(sanityQueryParameterValidator.optional())
         .output(articleValidator.array())
-        .query(async ({ input }) => {
-            return await fetchAPI("/articles", { populate: "*", ...input });
+        .query(async ({ input = {} }) => {
+            const { sort = "endDate desc" } = input;
+            return await api(
+                `*[_type == "article"]{
+                    ...,
+                    "slug":slug.current,
+                    tags[]->
+                }${groqSort(sort)}`
+            );
         }),
-    findOne: t.procedure
-        .input(z.object({ slug: z.string() }).merge(strapiQueryParameterValidator))
+    findOne: procedure
+        .input(z.object({ slug: z.string() }).merge(sanityQueryParameterValidator))
         .output(articleValidator.merge(z.object({ mdxData: z.object({ mdxSource: z.any() }) })))
         .query(async ({ input }) => {
-            const { slug, filters, ...rest } = input;
-            const articles = await fetchAPI<Article[]>("/articles", {
-                populate: "*",
-                filters: { ...filters, slug: { $eq: slug } },
-                ...rest
-            });
+            const { slug } = input;
+            const article = await api<Article>(
+                `*[_type == "article" && slug.current == $slug]{
+                    ...,
+                    "slug":slug.current,
+                    tags[]->
+                }[0]`,
+                { slug }
+            );
 
             // Cannot find article
-            if (!articles || !Array.isArray(articles) || articles.length !== 1)
-                throw new TRPCError({ code: "NOT_FOUND", message: "Article not found" });
+            if (!article) throw new TRPCError({ code: "NOT_FOUND", message: "Article not found" });
 
-            const article = articles[0];
-            return { ...article, mdxData: await mdxSerialize(article.content) };
+            const mdxData = await mdxSerialize(article.content);
+            return { ...article, mdxData };
         })
 });

@@ -1,43 +1,26 @@
+// @ts-check
 import bundleAnalyzer from "@next/bundle-analyzer";
-import DuplicatePackageCheckerPlugin from "duplicate-package-checker-webpack-plugin";
 import withPlugins from "next-compose-plugins";
 import withPWA from "next-pwa";
 import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
-import { env } from "./src/lib/server/env.js";
+import { env } from "./src/lib/env/server.mjs";
 
-// @ts-check
 const analyzerMode = env.ANALYZE === "true";
 const withBundleAnalyzer = bundleAnalyzer({ enabled: analyzerMode });
 
 /** @type {import('next').NextConfig} */
 const baseConfig = {
-    swcMinify: false, // TODO: enable when minify is fixed
     poweredByHeader: false,
     reactStrictMode: true,
-    i18n: {
-        locales: ["en-us", "en"],
-        defaultLocale: "en-us"
-    },
     images: {
         loader: "default",
         formats: ["image/avif", "image/webp"],
-        domains: ["localhost", "res.cloudinary.com"]
-    },
-    async redirects() {
-        return [{ source: "/blog/rss", destination: "/api/blog/rss", permanent: true }];
-    },
-    webpack(config, _options) {
-        if (analyzerMode) config.plugins.push(new DuplicatePackageCheckerPlugin());
-
-        return config;
+        domains: ["localhost", "res.cloudinary.com", "cdn.sanity.io"]
     },
     experimental: {
-        esmExternals: false, // TODO: enable when minify is fixed
-        browsersListForSwc: true,
+        appDir: true,
         legacyBrowsers: false,
-        images: {
-            allowFutureImage: true
-        }
+        nextScriptWorkers: true
     }
 };
 const plugins = [
@@ -53,7 +36,6 @@ const plugins = [
         },
         ["!" + PHASE_DEVELOPMENT_SERVER]
     ]
-    // withPreact TODO: readd when preact is fixed
 ];
 
 export default withPlugins(plugins, {
