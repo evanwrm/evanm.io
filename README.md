@@ -24,13 +24,13 @@ A personal portfolio website running on [Next.js](https://nextjs.org/) + [Strapi
 
 # evanm.io
 
-Portfolio website running on [Next.js](https://nextjs.org/) + [Strapi](https://strapi.io).
+Portfolio website running on [Next.js](https://nextjs.org/) + [Sanity](https://sanity.io).
 
 ## Getting Started
 
 ### Website (frontend)
 
--   [Next.js 12](https://nextjs.org)
+-   [Next.js 13](https://nextjs.org)
 -   [Preact](https://preactjs.com)
 -   [Typescript](https://www.typescriptlang.org)
 -   [Tailwind 3.0](https://tailwindcss.com)
@@ -45,10 +45,22 @@ Installation/usage instructions can be found in [apps/web](apps/web)
 
 ### API (backend)
 
+This serves as a testbed for different CMS solutions.
+
+Current production deployment:  
+**Sanity:**
+
+-   [Sanity 3](https://sanity.io)
+
+Installation/usage instructions can be found in [apps/cms-sanity](apps/cms-sanity)
+
+Alternative solutions:  
+**Strapi**:
+
 -   [Strapi 4](https://strapi.io)
 -   [PosgresSQL](https://www.postgresql.org/)
 
-Installation/usage instructions can be found in [apps/api](apps/api)
+Installation/usage instructions can be found in [apps/cms-strapi](apps/cms-strapi)
 
 ## License
 
