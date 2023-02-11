@@ -19,11 +19,11 @@ const ProjectCard = ({ project }: Props) => {
         addYears(new Date(), -1);
 
     return (
-        <Tilt className="max-h-screen bg-base-200/50" tiltStrength={5}>
+        <Tilt className="bg-base-200/50 max-h-screen" tiltStrength={5}>
             <div
                 className={cn(
                     "card group flex h-full w-full flex-col items-stretch rounded-xl antialiased shadow-md",
-                    "transition border-base-content/10 hover:ring-secondary ring-offset-base-100 border ring-offset-0 hover:ring hover:ring-offset-4"
+                    "border-base-content/10 hover:ring-secondary ring-offset-base-100 border ring-offset-0 transition hover:ring hover:ring-offset-4"
                 )}
             >
                 {project.thumbnail && !isReference(project.thumbnail.asset) && (
@@ -48,7 +48,7 @@ const ProjectCard = ({ project }: Props) => {
                                     aria-label="Repository"
                                     key={project.repositoryUrl}
                                 >
-                                    <ResponsiveButton className="flex opacity-80 text-base-content">
+                                    <ResponsiveButton className="text-base-content flex opacity-80">
                                         <RepositoryIcon className="h-6 w-6" />
                                     </ResponsiveButton>
                                 </NavLink>
@@ -59,7 +59,7 @@ const ProjectCard = ({ project }: Props) => {
                                     aria-label="Live website"
                                     key={project.siteUrl}
                                 >
-                                    <ResponsiveButton className="flex opacity-80 text-base-content">
+                                    <ResponsiveButton className="text-base-content flex opacity-80">
                                         <Icon.RiExternalLinkLine className="h-6 w-6" />
                                     </ResponsiveButton>
                                 </NavLink>

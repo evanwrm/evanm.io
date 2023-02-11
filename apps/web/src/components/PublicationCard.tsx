@@ -12,20 +12,20 @@ const PublicationCard = ({ publication }: Props) => {
     const isNew = new Date(publication.year ?? publication._createdAt) > addYears(new Date(), -1);
 
     return (
-        <div className="w-full h-full hover:scale-105 transition">
-            <div className="flex bg-base-200/50 h-full border w-full p-4 rounded-xl shadow-md border-base-content/10">
-                <div className="flex flex-1 justify-start flex-col">
+        <div className="h-full w-full transition hover:scale-105">
+            <div className="bg-base-200/50 border-base-content/10 flex h-full w-full rounded-xl border p-4 shadow-md">
+                <div className="flex flex-1 flex-col justify-start">
                     <div className="flex items-center justify-start gap-4">
-                        <h2 className="text-lg font-semibold text-base-content">
+                        <h2 className="text-base-content text-lg font-semibold">
                             {publication.title}
                         </h2>
                         {isNew && <div className="badge badge-secondary">NEW</div>}
                     </div>
-                    <div className="text-sm text-base-content">
+                    <div className="text-base-content text-sm">
                         {publication.authors.join(", ")}
                     </div>
                 </div>
-                <div className="flex justify-end items-center">
+                <div className="flex items-center justify-end">
                     <div className="flex flex-1 justify-end gap-4">
                         {publication.url && (
                             <NavLink
@@ -33,14 +33,14 @@ const PublicationCard = ({ publication }: Props) => {
                                 aria-label="Official Publication"
                                 key={publication.url}
                             >
-                                <ResponsiveButton className="flex opacity-80 text-base-content">
+                                <ResponsiveButton className="text-base-content flex opacity-80">
                                     <Icon.RiExternalLinkLine className="h-6 w-6" />
                                 </ResponsiveButton>
                             </NavLink>
                         )}
                         {publication.pdf && (
                             <NavLink href={publication.pdf} aria-label="PDF" key={publication.pdf}>
-                                <ResponsiveButton className="flex opacity-80 text-base-content">
+                                <ResponsiveButton className="text-base-content flex opacity-80">
                                     <Icon.FaFilePdf className="h-6 w-6" />
                                 </ResponsiveButton>
                             </NavLink>

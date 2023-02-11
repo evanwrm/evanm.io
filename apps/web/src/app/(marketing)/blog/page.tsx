@@ -10,11 +10,11 @@ const Blog = async () => {
         <main className="flex w-full max-w-4xl flex-1 flex-col items-center justify-center">
             <section
                 id="intro"
-                className="min-h-screen w-full px-4 flex flex-col justify-evenly items-center"
+                className="flex min-h-screen w-full flex-col items-center justify-evenly px-4"
             >
                 <div className="grid gap-y-12">
                     <div className="my-6 text-left">
-                        <h1 className="md:text-6xl sm:text-5xl text-4xl font-bold">
+                        <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl">
                             <span>Blog</span>
                         </h1>
                         <p className="mt-12 text-2xl">
@@ -26,7 +26,7 @@ const Blog = async () => {
                     </div>
                 </div>
             </section>
-            <section className="flex flex-col w-full px-4 justify-center items-center">
+            <section className="flex w-full flex-col items-center justify-center px-4">
                 {articles.map(article => (
                     <div key={article.slug}>
                         <NavLink

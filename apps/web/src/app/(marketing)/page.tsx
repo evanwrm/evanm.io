@@ -21,7 +21,7 @@ const Home = async () => {
         <main className="flex w-full max-w-4xl flex-1 flex-col items-center justify-center">
             <section
                 id="intro"
-                className="min-h-screen px-4 w-full flex flex-col justify-evenly items-center"
+                className="flex min-h-screen w-full flex-col items-center justify-evenly px-4"
             >
                 <div className="my-6 text-left">
                     {settings.avatar && !isReference(settings.avatar?.asset) && (
@@ -31,11 +31,11 @@ const Home = async () => {
                                 alt={settings.avatar.alt ?? "Avatar"}
                                 width={96}
                                 height={96}
-                                className="h-20 w-20 sm:h-24 sm:w-24 select-none rounded-full shadow-md duration-500 hover:scale-105 transition"
+                                className="h-20 w-20 select-none rounded-full shadow-md transition duration-500 hover:scale-105 sm:h-24 sm:w-24"
                             />
                         </div>
                     )}
-                    <h1 className="sm:text-5xl text-4xl font-bold">
+                    <h1 className="text-4xl font-bold sm:text-5xl">
                         <span>Data Science, Fullstack, ML enthusiast, and Student</span>
                     </h1>
                     <p className="mt-12 text-2xl">
@@ -48,7 +48,7 @@ const Home = async () => {
             </section>
             <section
                 id="projects"
-                className="flex w-full flex-col px-4 justify-center items-center"
+                className="flex w-full flex-col items-center justify-center px-4"
             >
                 <FadeIn className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
                     <h2 className="flex items-center justify-start text-2xl font-bold">
@@ -68,7 +68,7 @@ const Home = async () => {
             </section>
             <section
                 id="publications"
-                className="flex w-full flex-col px-4 justify-center items-center"
+                className="flex w-full flex-col items-center justify-center px-4"
             >
                 <FadeIn className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
                     <h2 className="flex items-center justify-start text-2xl font-bold">

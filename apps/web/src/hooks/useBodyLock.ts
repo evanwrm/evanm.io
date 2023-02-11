@@ -11,6 +11,6 @@ export const useBodyLock = () => {
         return () => {
             body.style.setProperty("overflow", originalOverflow);
             body.style.setProperty("margin-right", originalMargin);
-        }
+        };
     }, []);
 };

@@ -28,10 +28,7 @@ const MobileDrawer = ({ onClose, className, children }: Props) => {
 
     return (
         <m.div
-            className={cn(
-                className,
-                "bg-base-100 fixed left-0 top-0 z-50 h-screen w-full select-none bg-opacity-60 bg-clip-padding shadow backdrop-blur backdrop-saturate-200"
-            )}
+            className={cn(className, "fixed left-0 top-0 z-50 h-screen w-full select-none")}
             drag="x"
             dragElastic={{ left: 1, right: 0.005 }}
             dragMomentum={false}
@@ -53,7 +50,7 @@ const MobileDrawer = ({ onClose, className, children }: Props) => {
             variants={slideFadeLeftOffscreenVariants}
             transition={lightBounceTransition}
         >
-            <div className="relative flex h-screen w-full flex-col items-center justify-start">
+            <div className="bg-base-100 relative flex h-screen w-full flex-col items-center justify-start bg-opacity-60 bg-clip-padding shadow backdrop-blur backdrop-saturate-200">
                 <div className="z-10 flex w-full items-center justify-start gap-6 p-2">
                     <ResponsiveButton
                         className="btn-ghost btn-circle flex select-none items-center justify-center md:hidden"

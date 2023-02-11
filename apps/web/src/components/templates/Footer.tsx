@@ -31,7 +31,7 @@ const Footer = async () => {
                                         aria-label={social.name}
                                         key={social.socialId}
                                     >
-                                        <ResponsiveButton className="flex opacity-80 text-base-content">
+                                        <ResponsiveButton className="text-base-content flex opacity-80">
                                             <SocialIcon className="h-8 w-8" />
                                         </ResponsiveButton>
                                     </NavLink>
@@ -40,7 +40,7 @@ const Footer = async () => {
                         </div>
                     </div>
                 </div>
-                <div className="my-4 flex items-end justify-center md:justify-end opacity-80">
+                <div className="my-4 flex items-end justify-center opacity-80 md:justify-end">
                     <p className="prose">
                         © {getYear(Date.now())} {settings?.firstName} {settings?.lastName}. All
                         Rights Reserved.

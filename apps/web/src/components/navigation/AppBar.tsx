@@ -94,15 +94,15 @@ const AppBar = ({ github }: Props) => {
                                         aria-label={github.name}
                                         key={github.socialId}
                                     >
-                                        <ResponsiveButton className="flex opacity-80 text-base-content">
+                                        <ResponsiveButton className="text-base-content flex opacity-80">
                                             <Icon.SiGithub className="h-6 w-6" />
                                         </ResponsiveButton>
                                     </NavLink>
                                 )}
-                                <ResponsiveButton className="flex opacity-80 text-base-content">
+                                <ResponsiveButton className="text-base-content flex opacity-80">
                                     <SpotlightToggle className="h-6 w-6" />
                                 </ResponsiveButton>
-                                <ResponsiveButton className="flex opacity-80 text-base-content">
+                                <ResponsiveButton className="text-base-content flex opacity-80">
                                     <ThemeToggle className="h-6 w-6" />
                                 </ResponsiveButton>
                             </div>
