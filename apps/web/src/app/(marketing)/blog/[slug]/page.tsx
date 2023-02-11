@@ -1,4 +1,4 @@
-import MdxMarkdown from "@/components/mdx/MdxComponents";
+import MdxMarkdown from "@/components/mdx/MdxMarkdown";
 import { createInnerContext } from "@/lib/server/context";
 import { appRouter } from "@/lib/server/routers/app";
 import { notFound } from "next/navigation";
@@ -18,7 +18,7 @@ const BlogPost = async ({ params }: Props) => {
     return (
         <main className="flex w-full max-w-4xl flex-1 flex-col items-center justify-center">
             <div className="my-6 mt-24 w-full">
-                <MdxMarkdown {...article.mdxData.mdxSource} />
+                <MdxMarkdown source={article.content} />
             </div>
         </main>
     );

@@ -1,9 +1,16 @@
-# Sanity Clean Content Studio
+# Sanity Content Studio
 
-Congratulations, you have now installed the Sanity Content Studio, an open source real-time content editing environment connected to the Sanity backend.
+Simple Sanity CMS app.
 
-Now you can do the following things:
+## Deployment
 
--   [Read “getting started” in the docs](https://www.sanity.io/docs/introduction/getting-started?utm_source=readme)
--   [Join the community Slack](https://slack.sanity.io/?utm_source=readme)
--   [Extend and build plugins](https://www.sanity.io/docs/content-studio/extending?utm_source=readme)
+There are two options of deployment,
+
+1. deploying to a hosted instance of sanity (https://evanm.sanity.io):
+
+    ```sh
+    pnpx sanity deploy
+    ```
+
+2. The second way is to self-host Sanity studio. This can be done through any static hosting
+   provider. Here we use Railway to match other CMS deployments. This is found at https://api.evanm.io.

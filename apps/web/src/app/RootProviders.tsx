@@ -53,7 +53,10 @@ export const ClientProvider = ({ children }: Props) => {
     );
     return (
         <trpc.Provider client={trpcClient} queryClient={queryClient}>
-            <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+            <QueryClientProvider client={queryClient}>
+                {children}
+                <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
         </trpc.Provider>
     );
 };
@@ -91,7 +94,6 @@ const RootProviders = ({ children }: Props) => {
                     >
                         {/* <DynamicMeta /> */}
                         {children}
-                        <ReactQueryDevtools initialIsOpen={false} />
                     </KBarProvider>
                 </ThemeProvider>
             </LazyMotion>
