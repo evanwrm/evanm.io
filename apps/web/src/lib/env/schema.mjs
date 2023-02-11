@@ -11,7 +11,7 @@ export const serverSchema = z.object({
 
 export const clientSchema = z.object({
     NEXT_PUBLIC_NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
-    NEXT_PUBLIC_VERCEL_URL: z.string().url().optional(),
+    NEXT_PUBLIC_VERCEL_URL: z.string().optional(),
     NEXT_PUBLIC_SITE_URL: z.string().url(),
 
     // Strapi
