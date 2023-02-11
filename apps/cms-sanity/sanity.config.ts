@@ -11,6 +11,7 @@ export default defineConfig({
     title: "Portfolio",
     projectId: "l22vat26",
     dataset: "production",
+    basePath: "/",
     plugins: [
         deskTool({ structure: deskStructure }),
         visionTool(),

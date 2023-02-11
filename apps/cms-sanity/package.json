@@ -19,22 +19,22 @@
         "start": "sanity start"
     },
     "dependencies": {
-        "@sanity/ui": "^1.0.12",
-        "@sanity/vision": "^3.2.0",
+        "@sanity/ui": "^1.2.2",
+        "@sanity/vision": "^3.3.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-is": "^18.2.0",
         "reading-time": "2.0.0-1",
-        "sanity": "^3.2.0",
+        "sanity": "^3.3.1",
         "sanity-plugin-cloudinary": "^1.0.1",
-        "sanity-plugin-markdown": "^3.0.1",
+        "sanity-plugin-markdown": "^4.0.0",
         "styled-components": "^5.2.0"
     },
     "devDependencies": {
         "@sanity/eslint-config-studio": "^2.0.1",
-        "eslint": "^8.31.0",
-        "prettier": "^2.8.2",
-        "typescript": "^4.9.4"
+        "eslint": "^8.34.0",
+        "prettier": "^2.8.4",
+        "typescript": "^4.9.5"
     },
     "packageManager": "pnpm@7.22.0",
     "engines": {

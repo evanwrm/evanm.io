@@ -1,4 +1,3 @@
-import { mdxSerialize } from "@/lib/mdx";
 import { procedure, router } from "@/lib/server/trpc";
 import { api } from "@/lib/services/sanity/api";
 import { groqSort } from "@/lib/services/sanity/utils";
@@ -23,7 +22,7 @@ export const articleRouter = router({
         }),
     findOne: procedure
         .input(z.object({ slug: z.string() }).merge(sanityQueryParameterValidator))
-        .output(articleValidator.merge(z.object({ mdxData: z.object({ mdxSource: z.any() }) })))
+        .output(articleValidator)
         .query(async ({ input }) => {
             const { slug } = input;
             const article = await api<Article>(
@@ -38,7 +37,6 @@ export const articleRouter = router({
             // Cannot find article
             if (!article) throw new TRPCError({ code: "NOT_FOUND", message: "Article not found" });
 
-            const mdxData = await mdxSerialize(article.content);
-            return { ...article, mdxData };
+            return article;
         })
 });
