@@ -1,5 +1,6 @@
 import Pre from "@/components/mdx/Pre";
 import NavLink from "@/components/navigation/NavLink";
+import { cn } from "@/lib/utils/styles";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { AnchorHTMLAttributes } from "react";
@@ -18,6 +19,18 @@ export const defaultComponents = {
         <NavLink href={href} className="font-bold opacity-80 hover:opacity-100" {...props} />
     ),
     pre: Pre,
+    code: ({ className, ...props }: any) => {
+        const match = /language-(\w+)/.exec(className || "");
+        return (
+            <code
+                className={cn(
+                    className,
+                    !match && "bg-base-200 m-0.5 rounded-md p-2 font-mono text-sm"
+                )}
+                {...props}
+            />
+        );
+    },
     Image
 };
 

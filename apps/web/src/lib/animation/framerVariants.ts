@@ -28,6 +28,11 @@ export const lightBounceTransition: Transition = {
     duration: 0.5,
     bounce: 0.25
 };
+export const tweenTransition: Transition = {
+    type: "tween",
+    duration: 0.3,
+    ease: "easeInOut"
+};
 export const anticipateTransition: Transition = {
     ease: "anticipate"
 };

@@ -4,7 +4,8 @@ module.exports = {
     content: [
         "./src/app/**/*.{js,ts,jsx,tsx}",
         "./src/pages/**/*.{js,ts,jsx,tsx}",
-        "./src/components/**/*.{js,ts,jsx,tsx}"
+        "./src/components/**/*.{js,ts,jsx,tsx}",
+        "!./node_modules"
     ],
     theme: {
         extend: {
@@ -14,7 +15,11 @@ module.exports = {
             }
         }
     },
-    plugins: [require("daisyui"), require("@tailwindcss/typography")],
+    plugins: [
+        require("daisyui"),
+        require("@tailwindcss/typography"),
+        require("@tailwindcss/line-clamp")
+    ],
     daisyui: {
         themes: [
             {

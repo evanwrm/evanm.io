@@ -4,6 +4,7 @@ import ResponsiveButton from "@/components/animation/ResponsiveButton";
 import Icon from "@/components/Icon";
 import SpotlightToggle from "@/components/input/SpotlightToggle";
 import ThemeToggle from "@/components/input/ThemeToggle";
+import AnimatedRouteNavList from "@/components/navigation/AnimatedRouteNavList";
 import NavLink from "@/components/navigation/NavLink";
 import RouteNavList from "@/components/navigation/RouteNavList";
 import { headerRoutes } from "@/config/header";
@@ -38,7 +39,7 @@ const AppBar = ({ github }: Props) => {
                     <Portal>
                         <Suspense fallback={null}>
                             <DynamicMobileDrawer onClose={() => setMobileOpen(false)}>
-                                <RouteNavList
+                                <AnimatedRouteNavList
                                     routes={headerRoutes}
                                     tabIndex={0}
                                     onElementClick={handleToggleOpen}

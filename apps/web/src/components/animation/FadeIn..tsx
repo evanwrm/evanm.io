@@ -2,16 +2,22 @@
 
 import { lightBounceTransition, slideFadeRightVariants } from "@/lib/animation/framerVariants";
 import { cn } from "@/lib/utils/styles";
-import { HTMLMotionProps, m, Variants } from "framer-motion";
+import { HTMLMotionProps, m, Transition, Variants } from "framer-motion";
 import React from "react";
 
 interface Props extends HTMLMotionProps<"div"> {
     variants?: Variants;
+    transition?: Transition;
     className?: string;
     children?: React.ReactNode;
 }
 
-const FadeIn = ({ variants = slideFadeRightVariants, className, children }: Props) => {
+const FadeIn = ({
+    variants = slideFadeRightVariants,
+    transition = lightBounceTransition,
+    className,
+    children
+}: Props) => {
     return (
         <m.div
             className={cn(className)}
@@ -19,7 +25,7 @@ const FadeIn = ({ variants = slideFadeRightVariants, className, children }: Prop
             whileInView="visible"
             variants={variants}
             viewport={{ amount: 0.05 }}
-            transition={lightBounceTransition}
+            transition={transition}
         >
             {children}
         </m.div>

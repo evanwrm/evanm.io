@@ -3,6 +3,7 @@ import Icon from "@/components/Icon";
 import { Image } from "@/components/Image";
 import Grid from "@/components/layout/Grid";
 import RoundedContainer from "@/components/layout/RoundedContainer";
+import MdxMarkdown from "@/components/mdx/MdxMarkdown";
 import ProjectCard from "@/components/ProjectCard";
 import PublicationCard from "@/components/PublicationCard";
 import { createInnerContext } from "@/lib/server/context";
@@ -35,15 +36,12 @@ const Home = async () => {
                             />
                         </div>
                     )}
-                    <h1 className="text-4xl font-bold sm:text-5xl">
-                        <span>Data Science, Fullstack, ML enthusiast, and Student</span>
-                    </h1>
-                    <p className="mt-12 text-2xl">
-                        <span>Get started by editing </span>
-                        <code className="bg-base-200 rounded-md p-3 font-mono text-lg">
-                            pages/index.js
-                        </code>
-                    </p>
+                    <h1 className="text-4xl font-bold sm:text-5xl">{settings.logline}</h1>
+                    {settings.bio && (
+                        <div className="mt-12">
+                            <MdxMarkdown source={settings.bio} />
+                        </div>
+                    )}
                 </div>
             </section>
             <section
