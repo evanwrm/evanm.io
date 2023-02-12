@@ -1,9 +1,11 @@
+import { BulbOutlineIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 const skillSchema = defineType({
     name: "skill",
     title: "Skill",
     type: "document",
+    icon: BulbOutlineIcon,
     fields: [
         defineField({
             name: "skillId",

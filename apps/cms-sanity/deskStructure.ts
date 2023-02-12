@@ -1,15 +1,25 @@
 import { StructureBuilder, StructureResolverContext } from "sanity/desk";
+import { singletonSchemaTypes } from "./schemas/singletons";
 
 export const deskStructure = (S: StructureBuilder, _context: StructureResolverContext) => {
-    const singletonCollections = ["settings", "seo"];
-    const singletons = singletonCollections.map(singletonCollection =>
+    const singletons = singletonSchemaTypes.map(singletonCollection =>
         S.listItem()
-            .title(singletonCollection)
-            .child(S.document().schemaType(singletonCollection).documentId(singletonCollection))
+            .title(singletonCollection.title ?? "Untitled")
+            .icon(singletonCollection.icon)
+            .child(
+                S.document()
+                    .schemaType(singletonCollection.name)
+                    .documentId(singletonCollection.name)
+            )
     );
     const collections = S.documentTypeListItems().filter(
-        listItem => !singletonCollections.includes(listItem.getId() ?? "")
+        listItem =>
+            !singletonSchemaTypes.some(
+                singletonCollection => singletonCollection.name === listItem.getId()
+            )
     );
+
+    console.log(singletons);
 
     return S.list()
         .title("Content")

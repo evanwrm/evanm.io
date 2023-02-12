@@ -1,3 +1,4 @@
+import { CogIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 import { mediaFields } from "../fragments/media";
 
@@ -5,6 +6,7 @@ const settingsSchema = defineType({
     name: "settings",
     title: "Settings",
     type: "document",
+    icon: CogIcon,
     fields: [
         defineField({
             name: "logline",

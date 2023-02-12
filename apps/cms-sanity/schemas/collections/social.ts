@@ -1,9 +1,11 @@
+import { UsersIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 const socialSchema = defineType({
     name: "social",
     title: "Social",
     type: "document",
+    icon: UsersIcon,
     fields: [
         defineField({
             name: "socialId",

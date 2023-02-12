@@ -1,3 +1,4 @@
+import { ClipboardImageIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 import { mediaFields } from "../fragments/media";
 
@@ -5,6 +6,7 @@ const projectSchema = defineType({
     name: "project",
     title: "Project",
     type: "document",
+    icon: ClipboardImageIcon,
     fields: [
         defineField({
             name: "title",

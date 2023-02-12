@@ -1,3 +1,4 @@
+import { CommentIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 import { ReadingTimeInput } from "../../components/ReadingTimeInput";
 import { mediaFields } from "../fragments/media";
@@ -6,6 +7,7 @@ const articleSchema = defineType({
     name: "article",
     title: "Article",
     type: "document",
+    icon: CommentIcon,
     fields: [
         defineField({
             name: "title",

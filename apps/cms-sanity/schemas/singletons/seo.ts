@@ -1,3 +1,4 @@
+import { ChartUpwardIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 const openGraphMediaSchema = defineField({
@@ -138,6 +139,7 @@ const seoSchema = defineType({
     name: "seo",
     title: "SEO",
     type: "document",
+    icon: ChartUpwardIcon,
     fields: [
         defineField({
             name: "title",

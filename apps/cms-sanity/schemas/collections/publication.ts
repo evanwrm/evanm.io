@@ -1,9 +1,11 @@
+import { BookIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 const publicationSchema = defineType({
     name: "publication",
     title: "Publication",
     type: "document",
+    icon: BookIcon,
     fields: [
         defineField({
             name: "title",
