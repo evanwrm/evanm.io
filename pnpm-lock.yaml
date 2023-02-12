@@ -94,6 +94,7 @@ importers:
       '@types/qs': ^6.9.7
       '@types/react': ^18.0.28
       '@types/react-dom': ^18.0.6
+      '@vercel/analytics': ^0.1.8
       autoprefixer: ^10.4.7
       clipboard-copy: ^4.0.1
       clsx: ^1.2.1
@@ -144,6 +145,7 @@ importers:
       '@trpc/next': 10.11.0_hb64v5getr4snhchgxedc75tim
       '@trpc/react-query': 10.11.0_pd24flhgibbklsiexyzlzr3eia
       '@trpc/server': 10.11.0
+      '@vercel/analytics': 0.1.8_hl5kmaqgjr2sdn7zxf6g5dkfwy
       clipboard-copy: 4.0.1
       clsx: 1.2.1
       daisyui: 2.50.0_gbtt6ss3tbiz4yjtvdr6fbrj44
@@ -4978,6 +4980,14 @@ packages:
       - '@codemirror/language'
       - '@codemirror/lint'
       - '@codemirror/search'
+    dev: false
+
+  /@vercel/analytics/0.1.8_hl5kmaqgjr2sdn7zxf6g5dkfwy:
+    resolution: {integrity: sha512-PQrOI8BJ9qUiVJuQfnKiJd15eDjDJH9TBKsNeMrtelT4NAk7d9mBVz1CoZkvoFnHQ0OW7Xnqmr1F2nScfAnznQ==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.3.0-next-0f4a83596-20230110
     dev: false
 
   /@videojs/http-streaming/2.14.3_video.js@7.20.3:
