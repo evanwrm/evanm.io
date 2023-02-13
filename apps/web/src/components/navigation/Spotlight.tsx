@@ -64,7 +64,7 @@ const ResultItem = (
             ref={ref}
             className={cn(
                 active
-                    ? "bg-base-200 border-accent border-l-2 border-solid"
+                    ? "bg-base-200 border-secondary border-l-2 border-solid"
                     : "border-transparent bg-transparent",
                 "flex cursor-pointer items-center justify-between rounded px-4 py-2"
             )}
@@ -115,7 +115,7 @@ const Spotlight = () => {
     return (
         <KBarPortal>
             <KBarPositioner className="bg-base-100 fixed z-50 h-screen select-none bg-opacity-60 bg-clip-padding shadow backdrop-blur-sm backdrop-saturate-200">
-                <KBarAnimator className="border-base-content/25 bg-base-100 text-base-content shadow-primary/25 w-full max-w-2xl overflow-hidden rounded-lg border bg-opacity-80 bg-clip-padding shadow-2xl backdrop-blur-sm backdrop-saturate-200 md:w-2/3">
+                <KBarAnimator className="border-base-content/25 bg-base-100 text-base-content shadow-secondary/25 w-full max-w-2xl overflow-hidden rounded-lg border bg-opacity-80 bg-clip-padding shadow-2xl backdrop-blur-sm backdrop-saturate-200 md:w-2/3">
                     <div className="mr-4 flex flex-row items-center justify-between">
                         <KBarSearch className="bg-base-100 text-base-content box-border w-full border-none bg-opacity-0 p-5 text-base outline-none" />
                         <ResponsiveButton className="flex">

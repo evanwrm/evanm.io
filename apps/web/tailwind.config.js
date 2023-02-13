@@ -24,21 +24,23 @@ module.exports = {
         themes: [
             {
                 light: {
-                    primary: "#66cc8a",
-                    secondary: "#ea5234",
-                    accent: "#223d30",
-                    neutral: "#181a2a",
+                    primary: "#ed3b53",
+                    secondary: "#13acf2",
+                    accent: "#e9411a",
+                    neutral: "#eaeaea",
                     "base-100": "#ffffff",
+                    "base-200": "#ededed",
+                    "base-300": "#dbdbdb",
                     "--rounded-box": "0.5rem",
                     "--rounded-btn": ".25rem"
                 }
             },
             {
                 dark: {
-                    primary: "#7dd3fc",
-                    secondary: "#ed3b53",
-                    accent: "#13acf2",
-                    neutral: "#171618",
+                    primary: "#ed3b53",
+                    secondary: "#13acf2",
+                    accent: "#e9411a",
+                    neutral: "#1a1a1a",
                     "base-100": "#070707",
                     "base-200": "#151515",
                     "base-300": "#232323",

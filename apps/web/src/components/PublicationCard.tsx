@@ -19,7 +19,7 @@ const PublicationCard = ({ publication }: Props) => {
                         <h2 className="text-base-content text-lg font-semibold">
                             {publication.title}
                         </h2>
-                        {isNew && <div className="badge badge-secondary">NEW</div>}
+                        {isNew && <div className="badge badge-primary">NEW</div>}
                     </div>
                     <div className="text-base-content text-sm">
                         {publication.authors.join(", ")}

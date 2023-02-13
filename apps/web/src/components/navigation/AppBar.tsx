@@ -77,7 +77,7 @@ const AppBar = ({ github }: Props) => {
                                 >
                                     <div className="text-base-content inline font-bold">
                                         <span className="text-base-content">evanm</span>
-                                        <span className="text-secondary">.io</span>
+                                        <span className="text-primary">.io</span>
                                     </div>
                                 </NavLink>
                             </div>

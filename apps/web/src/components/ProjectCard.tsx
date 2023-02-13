@@ -23,7 +23,7 @@ const ProjectCard = ({ project }: Props) => {
             <div
                 className={cn(
                     "card group flex h-full w-full flex-col items-stretch rounded-xl antialiased shadow-md",
-                    "border-base-content/10 hover:ring-secondary ring-offset-base-100 border ring-offset-0 transition hover:ring hover:ring-offset-4"
+                    "border-base-content/10 hover:ring-primary ring-offset-base-100 border ring-offset-0 transition hover:ring hover:ring-offset-4"
                 )}
             >
                 {project.thumbnail && !isReference(project.thumbnail.asset) && (
@@ -40,7 +40,7 @@ const ProjectCard = ({ project }: Props) => {
                 <div className="card-body w-full gap-y-8 shadow-inner">
                     <div className="flex w-full items-center gap-4">
                         <h2 className="text-base-content text-lg font-semibold">{project.title}</h2>
-                        {isNew && <div className="badge badge-secondary">NEW</div>}
+                        {isNew && <div className="badge badge-primary">NEW</div>}
                         <div className="flex flex-1 justify-end gap-4">
                             {project.repositoryUrl && RepositoryIcon && (
                                 <NavLink
@@ -74,7 +74,7 @@ const ProjectCard = ({ project }: Props) => {
 
                             return (
                                 <div
-                                    className="badge badge-outline text-base-content hover:text-primary focus:text-primary gap-2 py-3 transition"
+                                    className="badge text-base-content hover:text-primary focus:text-primary gap-2 py-3 transition"
                                     key={skill.skillId}
                                 >
                                     {SkillIcon && <SkillIcon className="inline-block h-4 w-4" />}

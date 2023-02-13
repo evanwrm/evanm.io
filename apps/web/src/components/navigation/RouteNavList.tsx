@@ -18,7 +18,7 @@ const RouteNavList = ({ routes, className, itemClassName, onElementClick, ...pro
                         href={route.path}
                         aria-label={route.label}
                         onClick={onElementClick}
-                        className="link-underline from-secondary/20 to-secondary/80 rounded bg-gradient-to-r font-bold opacity-80 transition-all hover:opacity-100"
+                        className="link-underline from-primary/20 to-primary/80 rounded bg-gradient-to-r font-bold opacity-80 transition-all hover:opacity-100"
                     >
                         <span className="text-base-content">{route.label}</span>
                     </NavLink>

@@ -53,7 +53,7 @@
 
 @layer base {
     * {
-        @apply selection:bg-primary selection:text-primary-content;
+        @apply selection:bg-secondary selection:text-secondary-content;
     }
 
     html {
