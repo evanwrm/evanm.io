@@ -1,5 +1,4 @@
-import FadeIn from "@/components/animation/FadeIn.";
-import BlogCard from "@/components/BlogCard";
+import ArticleSearch from "@/components/layouts/ArticleSearch";
 import { createInnerContext } from "@/lib/server/context";
 import { appRouter } from "@/lib/server/routers/app";
 
@@ -16,18 +15,11 @@ const Blog = async () => {
                 <div className="grid gap-y-12">
                     <div className="my-6 text-left">
                         <h1 className="text-4xl font-bold sm:text-5xl">Latest Posts</h1>
-                        {/* TODO: add searchbar */}
                     </div>
                 </div>
             </section>
             <section className="flex w-full flex-col items-center justify-center px-4">
-                <div className="my-6 w-full">
-                    {articles.map(article => (
-                        <FadeIn key={article.slug}>
-                            <BlogCard article={article} />
-                        </FadeIn>
-                    ))}
-                </div>
+                <ArticleSearch articles={articles} />
             </section>
         </main>
     );

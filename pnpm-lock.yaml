@@ -122,6 +122,7 @@ importers:
       autoprefixer: ^10.4.7
       clipboard-copy: ^4.0.1
       clsx: ^1.2.1
+      command-score: ^0.1.2
       cross-env: ^7.0.3
       daisyui: ^2.50.0
       date-fns: ^2.28.0
@@ -172,6 +173,7 @@ importers:
       '@vercel/analytics': 0.1.8_hl5kmaqgjr2sdn7zxf6g5dkfwy
       clipboard-copy: 4.0.1
       clsx: 1.2.1
+      command-score: 0.1.2
       daisyui: 2.50.0_gbtt6ss3tbiz4yjtvdr6fbrj44
       date-fns: 2.29.3
       feed: 4.2.2
@@ -5062,7 +5064,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.19.6_@babel+core@7.20.12
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: 4.1.1
+      vite: 4.1.1_@types+node@18.13.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5643,7 +5645,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
+      styled-components: 5.3.6_cqoiog4sem7cb3ovuo3xdjdyve
     dev: false
 
   /babel-plugin-syntax-jsx/6.18.0:

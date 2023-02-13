@@ -1,8 +1,8 @@
 import FadeIn from "@/components/animation/FadeIn.";
 import Icon from "@/components/Icon";
 import { Image } from "@/components/Image";
-import Grid from "@/components/layout/Grid";
-import RoundedContainer from "@/components/layout/RoundedContainer";
+import Grid from "@/components/layouts/Grid";
+import RoundedContainer from "@/components/layouts/RoundedContainer";
 import MdxMarkdown from "@/components/mdx/MdxMarkdown";
 import ProjectCard from "@/components/ProjectCard";
 import PublicationCard from "@/components/PublicationCard";

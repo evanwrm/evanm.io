@@ -1,6 +1,6 @@
 import { IconType } from "react-icons";
 import { FaFilePdf } from "react-icons/fa";
-import { HiColorSwatch, HiMenuAlt2, HiOutlineLightBulb, HiX } from "react-icons/hi";
+import { HiColorSwatch, HiMenuAlt2, HiOutlineEye, HiOutlineLightBulb, HiX } from "react-icons/hi";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import {
     MdAccessTime,
@@ -115,7 +115,8 @@ const Icon = {
     SiBookstack,
     VscHome,
     HiColorSwatch,
-    MdAccessTime
+    MdAccessTime,
+    HiOutlineEye
 };
 
 export default Icon;

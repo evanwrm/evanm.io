@@ -1,8 +1,8 @@
 "use client";
 
-import RoundedContainer from "@/components//layout/RoundedContainer";
 import ResponsiveButton from "@/components/animation/ResponsiveButton";
 import Icon from "@/components/Icon";
+import RoundedContainer from "@/components/layouts/RoundedContainer";
 import { useHideOnScroll } from "@/hooks/useHideOnScroll";
 import { anticipateTransition, fadePopVariants } from "@/lib/animation/framerVariants";
 import { Portal } from "@radix-ui/react-portal";
