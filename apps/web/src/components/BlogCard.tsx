@@ -39,12 +39,17 @@ const BlogCard = ({ article }: Props) => {
                     <span className="opacity-80">
                         {formatDistance(new Date(article._createdAt), new Date())} ago
                     </span>
-                    <div className="mt-1 flex items-center italic opacity-60">
-                        <Icon.MdAccessTime className="h-5 w-5" />
-                        <span className="mx-2 font-semibold">
+                    <div className="mt-1 flex items-center justify-center text-sm italic opacity-60">
+                        <span className="mr-1 font-semibold">
                             {Math.ceil(article.stats.time / 1000)}
                         </span>
                         <span>min read</span>
+                        <Icon.MdAccessTime className="ml-2 h-4 w-4" />
+                    </div>
+                    <div className="flex items-center justify-center text-sm italic opacity-60">
+                        <span className="mr-1 font-semibold">{Math.ceil(article.stats.views)}</span>
+                        <span>views</span>
+                        <Icon.HiOutlineEye className="ml-2 h-4 w-4" />
                     </div>
                 </div>
             </div>

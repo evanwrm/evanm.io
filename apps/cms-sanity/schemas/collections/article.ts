@@ -103,7 +103,16 @@ const articleSchema = defineType({
                         }
                     },
                     { strict: false }
-                )
+                ),
+                defineField({
+                    name: "views",
+                    title: "Views",
+                    type: "number",
+                    description:
+                        "Number of views this article has received. This is a read-only field.",
+                    initialValue: 0,
+                    readOnly: true
+                })
             ]
         })
     ]

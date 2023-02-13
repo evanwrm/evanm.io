@@ -5,6 +5,9 @@ export const serverSchema = z.object({
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
     ANALYZE: z.enum(["true", "false"]).default("false"),
 
+    // Sanity
+    SANITY_APP_TOKEN: z.string().optional(),
+
     // private
     REVALIDATE_SECRET: z.string()
 });

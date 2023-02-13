@@ -14,7 +14,8 @@ export const articleValidator = z
         media: z.array(sanityMediaValidator).nullish(),
         stats: z.object({
             time: z.number(),
-            words: z.number()
+            words: z.number(),
+            views: z.number()
         })
     })
     .merge(sanityDocumentValidator);

@@ -2,7 +2,7 @@
 
 import { fuzzySearch } from "@/lib/utils/search";
 import { cn } from "@/lib/utils/styles";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 interface Props<T = string> {
     placeholder?: string;
@@ -18,7 +18,7 @@ const AutocompleteInput = <T = string,>({
     onChange
 }: Props<T>) => {
     const [query, setQuery] = useState("");
-    const [results, setResults] = useState<T[]>([]);
+    const [, setResults] = useState<T[]>([]);
 
     const handleChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,10 +32,6 @@ const AutocompleteInput = <T = string,>({
         },
         [options, getSearchContext, onChange]
     );
-
-    useEffect(() => {
-        console.log(results);
-    }, [results]);
 
     return (
         <input

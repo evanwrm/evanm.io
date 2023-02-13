@@ -30,11 +30,15 @@ const ArticleSearch = ({ articles }: Props) => {
                 <p className="py-2 text-sm opacity-80">Search for articles.</p>
             </div>
             <div className="my-6 w-full">
-                {filteredArticles.map(article => (
-                    <FadeIn key={article.slug}>
-                        <BlogCard article={article} />
-                    </FadeIn>
-                ))}
+                {filteredArticles.length ? (
+                    filteredArticles.map(article => (
+                        <FadeIn key={article.slug}>
+                            <BlogCard article={article} />
+                        </FadeIn>
+                    ))
+                ) : (
+                    <span className="opacity-80">No articles found.</span>
+                )}
             </div>
         </>
     );

@@ -1,3 +1,4 @@
+import ViewCounter from "@/components/analytics/ViewCounter";
 import MdxMarkdown from "@/components/mdx/MdxMarkdown";
 import { createInnerContext } from "@/lib/server/context";
 import { appRouter } from "@/lib/server/routers/app";
@@ -23,6 +24,7 @@ const BlogPost = async ({ params }: Props) => {
             >
                 <div className="my-6 w-full">
                     <MdxMarkdown source={article.content} />
+                    <ViewCounter documentId={article._id} />
                 </div>
             </section>
         </main>

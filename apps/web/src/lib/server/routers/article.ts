@@ -1,5 +1,6 @@
+import { env } from "@/lib/env/server.mjs";
 import { procedure, router } from "@/lib/server/trpc";
-import { api } from "@/lib/services/sanity/api";
+import { api, sanityClient } from "@/lib/services/sanity/api";
 import { groqSort } from "@/lib/services/sanity/utils";
 import { Article, articleValidator } from "@/lib/validators/Article";
 import { sanityQueryParameterValidator } from "@/lib/validators/sanity/SanityQueryParameters";
@@ -38,5 +39,17 @@ export const articleRouter = router({
             if (!article) throw new TRPCError({ code: "NOT_FOUND", message: "Article not found" });
 
             return article;
+        }),
+    incrementViews: procedure
+        .input(z.object({ documentId: z.string() }))
+        .mutation(async ({ input }) => {
+            const { documentId } = input;
+
+            // Increment views
+            await sanityClient
+                .patch(documentId)
+                .inc({ "stats.views": 1 })
+                .commit({ token: env.SANITY_APP_TOKEN })
+                .catch(console.error);
         })
 });
