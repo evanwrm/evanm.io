@@ -12,7 +12,7 @@ interface Props<T = string> {
 }
 
 const AutocompleteInput = <T = string,>({
-    placeholder = "Search Query...",
+    placeholder = "Search...",
     options,
     getSearchContext,
     onChange

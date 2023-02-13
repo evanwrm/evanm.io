@@ -23,7 +23,11 @@ const ArticleSearch = ({ articles }: Props) => {
                 <AutocompleteInput
                     options={articles}
                     getSearchContext={article =>
-                        [article.title, article.logline, article.tags?.join(" ")].join(" ")
+                        [
+                            article.title,
+                            article.logline,
+                            article.tags?.flatMap(tag => [tag.name]).join(" ")
+                        ].join(" ")
                     }
                     onChange={handleFilter}
                 />
