@@ -2,6 +2,7 @@ import ViewCounter from "@/components/analytics/ViewCounter";
 import MdxMarkdown from "@/components/mdx/MdxMarkdown";
 import { createInnerContext } from "@/lib/server/context";
 import { appRouter } from "@/lib/server/routers/app";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface Props {
@@ -9,6 +10,15 @@ interface Props {
         slug: string;
     };
 }
+
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+    const caller = appRouter.createCaller(await createInnerContext());
+    const article = await caller.articles.findOne({ slug: params.slug });
+
+    return {
+        title: article?.title
+    };
+};
 
 const BlogPost = async ({ params }: Props) => {
     const caller = appRouter.createCaller(await createInnerContext());

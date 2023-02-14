@@ -137,7 +137,6 @@ importers:
       next-mdx-remote: 4.3.0
       next-pwa: ^5.5.4
       next-sanity: ^4.1.2
-      next-seo: ^5.4.0
       next-sitemap: ^3.1.52
       next-themes: ^0.2.0
       nprogress: ^0.2.0
@@ -184,7 +183,6 @@ importers:
       next-mdx-remote: 4.3.0_2xkiepx55lbxuosncqxlmfghfq
       next-pwa: 5.6.0_5lvpah2cl4plzv7g264s3nacme
       next-sanity: 4.1.2_s37pa4ha2rvpnak4o4lfuipl5a
-      next-seo: 5.15.0_pk4rko7bo4cs3sd2ceso5phb2m
       next-themes: 0.2.1_pk4rko7bo4cs3sd2ceso5phb2m
       nprogress: 0.2.0
       react: 18.3.0-next-0f4a83596-20230110
@@ -10160,18 +10158,6 @@ packages:
       styled-components: 5.3.6_cqoiog4sem7cb3ovuo3xdjdyve
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /next-seo/5.15.0_pk4rko7bo4cs3sd2ceso5phb2m:
-    resolution: {integrity: sha512-LGbcY91yDKGMb7YI+28n3g+RuChUkt6pXNpa8FkfKkEmNiJkeRDEXTnnjVtwT9FmMhG6NH8qwHTelGrlYm9rgg==}
-    peerDependencies:
-      next: ^8.1.1-canary.54 || >=9.0.0
-      react: '>=16.0.0'
-      react-dom: '>=16.0.0'
-    dependencies:
-      next: 13.1.7-canary.11_gybxxewjyawa426ujxdppbomya
-      react: 18.3.0-next-0f4a83596-20230110
-      react-dom: 18.3.0-next-0f4a83596-20230110_hl5kmaqgjr2sdn7zxf6g5dkfwy
     dev: false
 
   /next-sitemap/3.1.52_sqgkepu6dhkbdjm7c7gjsdpwmi:

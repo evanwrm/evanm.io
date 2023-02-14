@@ -1,12 +1,13 @@
 import { sanityDocumentValidator } from "@/lib/validators/sanity/SanityDocument";
 import { z } from "zod";
 
-export const twitterValidator = z.object({
-    handle: z.string().optional(),
-    site: z.string().optional(),
-    cardType: z.string().optional()
-});
-export type Twitter = z.infer<typeof twitterValidator>;
+export const authorsValidator = z.array(
+    z.object({
+        name: z.string(),
+        url: z.string().optional()
+    })
+);
+export type Authors = z.infer<typeof authorsValidator>;
 
 export const openGraphProfileValidator = z.object({
     firstName: z.string().nullish(),
@@ -36,12 +37,23 @@ export type OpenGraphMediaProfile = z.infer<typeof openGraphProfileValidator>;
 export type OpenGraphMedia = z.infer<typeof openGraphMediaValidator>;
 export type OpenGraph = z.infer<typeof openGraphValidator>;
 
+export const twitterValidator = z.object({
+    creator: z.string().optional(),
+    site: z.string().optional(),
+    cardType: z.string().optional()
+});
+export type Twitter = z.infer<typeof twitterValidator>;
+
 // See NextSeoProps
 export const seoValidator = z
     .object({
         title: z.string().nullish(),
         titleTemplate: z.string().nullish(),
         description: z.string().nullish(),
+        authors: authorsValidator.nullish(),
+        keywords: z.array(z.string()).nullish(),
+        creator: z.string().nullish(),
+        publisher: z.string().nullish(),
         canonical: z.string().nullish(),
         openGraph: openGraphValidator.nullish(),
         twitter: twitterValidator.nullish()

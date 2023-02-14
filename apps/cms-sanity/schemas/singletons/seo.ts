@@ -1,6 +1,31 @@
 import { ChartUpwardIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
+const authorsSchema = defineField({
+    name: "authors",
+    title: "Authors",
+    type: "array",
+    of: [
+        defineField({
+            name: "author",
+            title: "Author",
+            type: "object",
+            fields: [
+                defineField({
+                    name: "name",
+                    title: "Name",
+                    type: "string"
+                }),
+                defineField({
+                    name: "url",
+                    title: "URL",
+                    type: "string"
+                })
+            ]
+        })
+    ]
+});
+
 const openGraphMediaSchema = defineField({
     name: "openGraphMedia",
     title: "OpenGraph Media",
@@ -118,8 +143,8 @@ const twitterSchema = defineField({
     type: "object",
     fields: [
         defineField({
-            name: "handle",
-            title: "Handle",
+            name: "creator",
+            title: "Creator",
             type: "string"
         }),
         defineField({
@@ -155,6 +180,23 @@ const seoSchema = defineType({
             name: "description",
             title: "Description",
             type: "text"
+        }),
+        authorsSchema,
+        defineField({
+            name: "keywords",
+            title: "Keywords",
+            type: "array",
+            of: [{ type: "string" }]
+        }),
+        defineField({
+            name: "creator",
+            title: "Creator",
+            type: "string"
+        }),
+        defineField({
+            name: "publisher",
+            title: "Publisher",
+            type: "string"
         }),
         defineField({
             name: "canonical",

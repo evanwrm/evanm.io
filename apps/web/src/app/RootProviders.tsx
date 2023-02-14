@@ -92,7 +92,6 @@ const RootProviders = ({ children }: Props) => {
                         actions={actions}
                         options={{ enableHistory: true, toggleShortcut: "$mod+k" }}
                     >
-                        {/* <DynamicMeta /> */}
                         {children}
                     </KBarProvider>
                 </ThemeProvider>

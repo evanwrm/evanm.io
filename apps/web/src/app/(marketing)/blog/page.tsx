@@ -1,6 +1,11 @@
 import ArticleSearch from "@/components/layouts/ArticleSearch";
 import { createInnerContext } from "@/lib/server/context";
 import { appRouter } from "@/lib/server/routers/app";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Blog"
+};
 
 const Blog = async () => {
     const caller = appRouter.createCaller(await createInnerContext());
