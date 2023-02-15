@@ -41,16 +41,14 @@ export const generateMetadata = async (): Promise<Metadata> => {
     const caller = appRouter.createCaller(await createInnerContext());
     const seo = await caller.seo.find();
 
-    const defaultTitle = "evanm.io";
-    const defaultApplicationName = "evanm.io PWA";
     return {
-        // chartSet is automatically added
+        // charSet is automatically added
         title: {
-            default: seo.title ?? defaultTitle,
-            template: seo.titleTemplate ?? `%s | ${defaultTitle}`
+            default: seo.title ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,
+            template: seo.titleTemplate ?? `%s | ${env.NEXT_PUBLIC_DEFAULT_SITE_TITLE}`
         },
         description: seo.description ?? undefined,
-        applicationName: defaultApplicationName,
+        applicationName: env.NEXT_PUBLIC_DEFAULT_APPLICATION_NAME,
         authors: seo.authors,
         keywords: seo.keywords,
         referrer: "origin-when-cross-origin",
@@ -94,10 +92,10 @@ export const generateMetadata = async (): Promise<Metadata> => {
             ]
         },
         openGraph: {
-            title: seo.title ?? defaultTitle,
+            title: seo.title ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,
             description: seo.description ?? undefined,
             url: seo.openGraph?.url ?? env.NEXT_PUBLIC_SITE_URL,
-            siteName: seo.openGraph?.site_name ?? defaultTitle,
+            siteName: seo.openGraph?.site_name ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,
             locale: seo.openGraph?.locale ?? "en_US",
             type: "website",
             images: [
@@ -105,28 +103,28 @@ export const generateMetadata = async (): Promise<Metadata> => {
                     url: `${env.NEXT_PUBLIC_SITE_URL}/static/favicons/apple-touch-icon.png`,
                     width: 180,
                     height: 180,
-                    alt: `${defaultTitle} logo`
+                    alt: `${env.NEXT_PUBLIC_DEFAULT_SITE_TITLE} logo`
                 },
                 ...((seo.openGraph?.images as any) ?? [])
             ]
         },
         twitter: {
             card: "summary",
-            title: seo.title ?? defaultTitle,
+            title: seo.title ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,
             description: seo.description ?? undefined,
             images: [
                 {
                     url: `${env.NEXT_PUBLIC_SITE_URL}/static/favicons/apple-touch-icon.png`,
                     width: 180,
                     height: 180,
-                    alt: `${defaultTitle} logo`
+                    alt: `${env.NEXT_PUBLIC_DEFAULT_SITE_TITLE} logo`
                 },
                 ...((seo.openGraph?.images as any) ?? [])
             ]
         },
         appleWebApp: {
             capable: true,
-            title: defaultApplicationName,
+            title: env.NEXT_PUBLIC_DEFAULT_APPLICATION_NAME,
             statusBarStyle: "default",
             startupImage: "/static/favicons/apple-touch-icon.png"
         },

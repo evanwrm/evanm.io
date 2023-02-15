@@ -1,13 +1,17 @@
 import { Context, InnerContext } from "@/lib/server/context";
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
+import { OpenApiMeta } from "trpc-openapi";
 
-export const t = initTRPC.context<InnerContext>().create({
-    transformer: superjson,
-    errorFormatter({ shape }) {
-        return shape;
-    }
-});
+export const t = initTRPC
+    .meta<OpenApiMeta>()
+    .context<InnerContext>()
+    .create({
+        transformer: superjson,
+        errorFormatter({ shape }) {
+            return shape;
+        }
+    });
 
 export const middleware = t.middleware;
 export const router = t.router;

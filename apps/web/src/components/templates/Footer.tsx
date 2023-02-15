@@ -9,7 +9,7 @@ import { getYear } from "date-fns";
 
 const Footer = async () => {
     const caller = appRouter.createCaller(await createInnerContext());
-    const [settings, socials] = await Promise.all([caller.settings.find(), caller.socials.find()]);
+    const [socials, settings] = await Promise.all([caller.socials.find(), caller.settings.find()]);
 
     return (
         <footer className="mt-8 w-full overflow-clip p-4 md:max-w-7xl">

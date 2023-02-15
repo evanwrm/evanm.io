@@ -1,8 +1,8 @@
 {
-    "name": "evanm.io PWA",
+    "name": "evanm.io Portfolio",
     "short_name": "evanm.io",
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#000",
+    "background_color": "#000",
     "start_url": "/",
     "display": "standalone",
     "orientation": "portrait-primary",

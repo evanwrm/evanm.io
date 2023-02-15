@@ -9,16 +9,6 @@ const settingsSchema = defineType({
     icon: CogIcon,
     fields: [
         defineField({
-            name: "logline",
-            title: "Logline",
-            type: "text"
-        }),
-        defineField({
-            name: "bio",
-            title: "Bio",
-            type: "markdown"
-        }),
-        defineField({
             name: "firstName",
             title: "First Name",
             type: "string"

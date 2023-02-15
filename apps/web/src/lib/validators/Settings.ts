@@ -4,8 +4,6 @@ import { z } from "zod";
 
 export const settingsValidator = z
     .object({
-        logline: z.string().nullish(),
-        bio: z.string().nullish(),
         firstName: z.string().nullish(),
         lastName: z.string().nullish(),
         avatar: sanityMediaValidator.nullish(),

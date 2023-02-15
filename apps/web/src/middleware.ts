@@ -1,8 +1,9 @@
 import { createInnerContext } from "@/lib/server/context";
-import { settingsRouter } from "@/lib/server/routers/settings";
+import { settingsRouter } from "@/lib/server/routers/singletons/settings";
 import { isReference } from "@/lib/services/sanity/utils";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { env } from "./lib/env/client.mjs";
 
 export const middleware = async (request: NextRequest) => {
     const url = request.nextUrl.clone();
@@ -19,8 +20,10 @@ export const middleware = async (request: NextRequest) => {
             return NextResponse.redirect(new URL(resume.asset.url), 307);
     }
     // RSS
-    if (["/rss"].includes(url.pathname)) return NextResponse.redirect("/api/blog/rss", 307);
-    if (["/blog/rss"].includes(url.pathname)) return NextResponse.redirect("/api/blog/rss", 308);
+    if (["/rss"].includes(url.pathname))
+        return NextResponse.redirect(`${env.NEXT_PUBLIC_SITE_URL}/api/blog/rss`, 307);
+    if (["/blog/rss"].includes(url.pathname))
+        return NextResponse.redirect(`${env.NEXT_PUBLIC_SITE_URL}/api/blog/rss`, 308);
 
     return NextResponse.next();
 };

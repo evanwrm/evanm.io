@@ -41,7 +41,15 @@ export const articleRouter = router({
             return article;
         }),
     incrementViews: procedure
+        .meta({
+            openapi: {
+                method: "POST",
+                path: "/collections/article/incrementViews",
+                tags: ["Collections"]
+            }
+        })
         .input(z.object({ documentId: z.string() }))
+        .output(z.void())
         .mutation(async ({ input }) => {
             const { documentId } = input;
 

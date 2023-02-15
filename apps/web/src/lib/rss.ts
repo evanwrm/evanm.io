@@ -13,10 +13,10 @@ export const RssEnum = z.enum(rssFormats);
 
 export const generateRssFeed = async () => {
     const caller = appRouter.createCaller(await createInnerContext());
-    const [global, socials, articles] = await Promise.all([
-        caller.settings.find(),
+    const [articles, socials, global] = await Promise.all([
+        caller.articles.find({ sort: "_createdAt desc" }),
         caller.socials.find(),
-        caller.articles.find({ sort: "_createdAt desc" })
+        caller.settings.find()
     ]);
     const parsedArticles = articleValidator.array().parse(articles);
 

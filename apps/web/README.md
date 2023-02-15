@@ -18,6 +18,16 @@ Alternatively, we can analyze bundle sizes by setting the `ANALYZE` environment 
 ANALYZE=true pnpm build
 ```
 
+## OpenAPI
+
+The portfolio supports the [OpenAPI](https://www.openapis.org/) spec through [trpc-openapi](https://github.com/jlalmes/trpc-openapi). This contains a built in Swagger UI, available at the `https://localhost:3000/docs`.
+
+Alternatively, you can view the current spec with [Swagger](https://swagger.io/) by running:
+
+```sh
+pnpx swagger-viewer --open -- http://localhost:3000/api/openapi.json
+```
+
 ## Deployment
 
 For deployment, we will deploy to [Vercel](https://vercel.com/). Development hooks can be setup to listen for changes on the Git repo, and automatically deploy changes.

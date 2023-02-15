@@ -4,11 +4,27 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 export const systemRouter = router({
-    healthz: procedure.query(async () => {
-        return { status: "success" };
-    }),
+    healthz: procedure
+        .meta({
+            openapi: {
+                method: "GET",
+                path: "/healthz"
+            }
+        })
+        .input(z.void())
+        .output(z.object({ status: z.string() }))
+        .query(async () => {
+            return { status: "success" };
+        }),
     revalidatez: apiProcedure
+        .meta({
+            openapi: {
+                method: "POST",
+                path: "/revalidatez"
+            }
+        })
         .input(z.object({ path: z.string() }))
+        .output(z.object({ status: z.string() }))
         .mutation(async ({ ctx, input }) => {
             const { token, res } = ctx;
             const { path } = input;
@@ -22,7 +38,7 @@ export const systemRouter = router({
 
             try {
                 await res?.revalidate(path);
-                return res?.json({ status: "success" });
+                return { status: "success" };
             } catch (err) {
                 // If there was an error, Next.js will continue
                 // to show the last successfully generated page

@@ -1,4 +1,6 @@
 import { StructureBuilder, StructureResolverContext } from "sanity/desk";
+import { collectionSchemaTypes } from "./schemas/collections";
+import { pageSchemaTypes } from "./schemas/pages";
 import { singletonSchemaTypes } from "./schemas/singletons";
 
 export const deskStructure = (S: StructureBuilder, _context: StructureResolverContext) => {
@@ -12,16 +14,19 @@ export const deskStructure = (S: StructureBuilder, _context: StructureResolverCo
                     .documentId(singletonCollection.name)
             )
     );
-    const collections = S.documentTypeListItems().filter(
-        listItem =>
-            !singletonSchemaTypes.some(
-                singletonCollection => singletonCollection.name === listItem.getId()
-            )
+    const pages = pageSchemaTypes.map(pageCollection =>
+        S.listItem()
+            .title(pageCollection.title ?? "Untitled")
+            .icon(pageCollection.icon)
+            .child(S.document().schemaType(pageCollection.name).documentId(pageCollection.name))
     );
-
-    console.log(singletons);
+    const collections = S.documentTypeListItems().filter(listItem =>
+        collectionSchemaTypes.some(
+            singletonCollection => singletonCollection.name === listItem.getId()
+        )
+    );
 
     return S.list()
         .title("Content")
-        .items([...singletons, S.divider(), ...collections]);
+        .items([...pages, S.divider(), ...collections, S.divider(), ...singletons]);
 };

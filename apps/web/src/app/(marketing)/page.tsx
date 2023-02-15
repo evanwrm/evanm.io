@@ -17,10 +17,11 @@ export const metadata: Metadata = {
 
 const Home = async () => {
     const caller = appRouter.createCaller(await createInnerContext());
-    const [settings, projects, publications] = await Promise.all([
-        caller.settings.find(),
+    const [landing, projects, publications, settings] = await Promise.all([
+        caller.landing.find(),
         caller.projects.find({ sort: "endDate desc" }),
-        caller.publications.find({ sort: "year desc" })
+        caller.publications.find({ sort: "year desc" }),
+        caller.settings.find()
     ]);
 
     return (
@@ -41,10 +42,10 @@ const Home = async () => {
                             />
                         </div>
                     )}
-                    <h1 className="text-4xl font-bold sm:text-5xl">{settings.logline}</h1>
-                    {settings.bio && (
+                    <h1 className="text-4xl font-bold sm:text-5xl">{landing.logline}</h1>
+                    {landing.intro && (
                         <div className="mt-12">
-                            <MdxMarkdown source={settings.bio} />
+                            <MdxMarkdown source={landing.intro} />
                         </div>
                     )}
                 </div>
