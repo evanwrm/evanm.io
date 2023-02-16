@@ -19,6 +19,8 @@ export const educationValidator = z
     .object({
         educationLevel: educationLevelValidator,
         school: z.string(),
+        slug: z.string(),
+        degree: z.string().nullish(),
         location: z.string().nullish(),
         siteUrl: z.string().nullish(),
         description: z.string().nullish(),

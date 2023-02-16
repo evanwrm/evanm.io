@@ -13,6 +13,7 @@ export const skillRouter = router({
             return await api(
                 `*[_type == "skill"]{
                     ...,
+                    "slug":slug.current,
                     projects[]->{...,"slug": slug.current}
                 }${groqSort(sort)}`
             );

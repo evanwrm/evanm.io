@@ -20,7 +20,7 @@ export const projectRouter = router({
                         ..., 
                         "slug": slug.current
                     },
-                    skills[]->
+                    skills[]->{...,"slug":slug.current}
                 }${groqSort(sort)}`
             );
         })

@@ -10,6 +10,11 @@ export const experienceRouter = router({
         .output(experienceValidator.array())
         .query(async ({ input = {} }) => {
             const { sort = "name asc" } = input;
-            return await api(`*[_type == "experience"]${groqSort(sort)}`);
+            return await api(`*[_type == "experience"]{
+                ...,
+                "slug":slug.current,
+                thumbnail{title,alt,asset->},
+                media[]{title,alt,asset->}
+            }${groqSort(sort)}`);
         })
 });

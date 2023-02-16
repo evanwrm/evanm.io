@@ -19,11 +19,11 @@ const ProjectCard = ({ project }: Props) => {
         addYears(new Date(), -1);
 
     return (
-        <Tilt className="bg-base-200/50 max-h-screen" tiltStrength={5}>
+        <Tilt className="bg-base-200/50 h-full max-h-screen" tiltStrength={5}>
             <div
                 className={cn(
                     "card group flex h-full w-full flex-col items-stretch rounded-xl antialiased shadow-md",
-                    "border-base-content/10 hover:ring-primary ring-offset-base-100 border ring-offset-0 transition hover:ring hover:ring-offset-4"
+                    "border-base-content/10 hover:ring-primary ring-offset-base-100 border ring-offset-0 transition duration-500 hover:ring hover:ring-offset-4"
                 )}
             >
                 {project.thumbnail && !isReference(project.thumbnail.asset) && (
@@ -33,7 +33,7 @@ const ProjectCard = ({ project }: Props) => {
                             alt={project.thumbnail.alt ?? project.title}
                             width={426}
                             height={240}
-                            className="h-full w-full transition group-hover:scale-105"
+                            className="h-full w-full transition duration-500 group-hover:scale-105"
                         />
                     </figure>
                 )}
@@ -75,7 +75,7 @@ const ProjectCard = ({ project }: Props) => {
                             return (
                                 <div
                                     className="badge text-base-content hover:text-primary focus:text-primary gap-2 py-3 transition"
-                                    key={skill.skillId}
+                                    key={skill.slug}
                                 >
                                     {SkillIcon && <SkillIcon className="inline-block h-4 w-4" />}
                                     {skill.name}

@@ -9,8 +9,8 @@ import { z } from "zod";
 
 // TOOD: zod inference on mutally recursive types
 export interface Skill extends SanityDocument {
-    skillId: string;
     name: string;
+    slug: string;
     iconId: string;
     description?: string | null;
     url?: string | null;
@@ -20,8 +20,8 @@ export interface Skill extends SanityDocument {
 export const skillValidator: z.ZodType<Skill> = z.lazy(() =>
     z
         .object({
-            skillId: z.string(),
             name: z.string(),
+            slug: z.string(),
             description: z.string().nullish(),
             url: z.string().url().nullish(),
             iconId: z.string(),

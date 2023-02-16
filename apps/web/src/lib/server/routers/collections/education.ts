@@ -10,6 +10,11 @@ export const educationRouter = router({
         .output(educationValidator.array())
         .query(async ({ input = {} }) => {
             const { sort = "name asc" } = input;
-            return await api(`*[_type == "education"]${groqSort(sort)}`);
+            return await api(`*[_type == "education"]{
+                ...,
+                "slug":slug.current,
+                thumbnail{title,alt,asset->},
+                media[]{title,alt,asset->}
+            }${groqSort(sort)}`);
         })
 });

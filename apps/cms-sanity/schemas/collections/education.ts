@@ -24,6 +24,21 @@ const educationSchema = defineType({
             validation: Rule => Rule.required()
         }),
         defineField({
+            name: "slug",
+            title: "Slug",
+            type: "slug",
+            options: {
+                source: "educationLevel",
+                maxLength: 96
+            },
+            validation: Rule => Rule.required()
+        }),
+        defineField({
+            name: "degree",
+            title: "Degree",
+            type: "string"
+        }),
+        defineField({
             name: "location",
             title: "Location",
             type: "string"

@@ -21,6 +21,7 @@ export const experienceValidator = z
     .object({
         role: z.string(),
         company: z.string(),
+        slug: z.string(),
         employmentType: experienceTypeValidator,
         locationType: locationTypeValidator.nullish(),
         location: z.string().nullish(),

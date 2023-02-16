@@ -30,7 +30,7 @@ const BlogPost = async ({ params }: Props) => {
         <main className="flex w-full max-w-4xl flex-1 flex-col items-center justify-center">
             <section
                 id="intro"
-                className="mt-24 flex w-full flex-col items-center justify-evenly px-4"
+                className="flex w-full flex-col items-center justify-evenly px-4 first:mt-24"
             >
                 <div className="my-6 w-full">
                     <MdxMarkdown source={article.content} />

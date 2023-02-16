@@ -15,7 +15,7 @@ const Blog = async () => {
         <main className="flex w-full max-w-4xl flex-1 flex-col items-center justify-start">
             <section
                 id="intro"
-                className="mt-24 flex w-full flex-col items-start justify-evenly px-4"
+                className="flex w-full flex-col items-start justify-evenly px-4 first:mt-24"
             >
                 <div className="grid gap-y-12">
                     <div className="my-6 text-left">
@@ -23,7 +23,7 @@ const Blog = async () => {
                     </div>
                 </div>
             </section>
-            <section className="flex w-full flex-col items-center justify-center px-4">
+            <section className="flex w-full flex-col items-center justify-center px-4 first:mt-24">
                 <ArticleSearch articles={articles} />
             </section>
         </main>

@@ -9,7 +9,7 @@ interface Props {
 
 const BlogCard = ({ article }: Props) => {
     return (
-        <div className="border-base-200 w-full border-t border-solid py-2" key={article.slug}>
+        <div className="border-base-200 w-full border-t border-solid py-2">
             <div className="flex flex-row items-center justify-between">
                 <div>
                     <NavLink
