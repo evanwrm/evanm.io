@@ -4,7 +4,7 @@ import { z } from "zod";
 
 export const courseValidator = z.object({
     name: z.string(),
-    instructor: z.string()
+    instructor: z.string().nullish()
 });
 
 export const educationLevelValidator = z.enum([

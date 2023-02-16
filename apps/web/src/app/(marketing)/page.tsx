@@ -1,4 +1,5 @@
 import FadeIn from "@/components/animation/FadeIn.";
+import EducationCard from "@/components/EducationCard";
 import ExperienceCard from "@/components/ExperienceCard";
 import Icon from "@/components/Icon";
 import { Image } from "@/components/Image";
@@ -18,8 +19,9 @@ export const metadata: Metadata = {
 
 const Home = async () => {
     const caller = appRouter.createCaller(await createInnerContext());
-    const [landing, experiences, projects, publications, settings] = await Promise.all([
+    const [landing, educations, experiences, projects, publications, settings] = await Promise.all([
         caller.landing.find(),
+        caller.education.find({ sort: ["endDate desc", "startDate desc"] }),
         caller.experience.find({ sort: ["endDate desc", "startDate desc"] }),
         caller.projects.find({ sort: "endDate desc" }),
         caller.publications.find({ sort: "year desc" }),
@@ -67,9 +69,31 @@ const Home = async () => {
                             Experience
                         </h2>
                         <FadeIn>
-                            {experiences.map((experience, i) => (
+                            {experiences.map(experience => (
                                 <FadeIn key={experience.slug}>
                                     <ExperienceCard experience={experience} />
+                                </FadeIn>
+                            ))}
+                        </FadeIn>
+                    </FadeIn>
+                </section>
+            )}
+            {landing.includeEducation && (
+                <section
+                    id="education"
+                    className="flex w-full flex-col items-center justify-center px-4 first:mt-24"
+                >
+                    <FadeIn className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
+                        <h2 className="flex items-center justify-start text-2xl font-bold">
+                            <RoundedContainer>
+                                <Icon.FaGraduationCap className="h-6 w-6" />
+                            </RoundedContainer>
+                            Education
+                        </h2>
+                        <FadeIn>
+                            {educations.map(education => (
+                                <FadeIn key={education.slug}>
+                                    <EducationCard education={education} />
                                 </FadeIn>
                             ))}
                         </FadeIn>
