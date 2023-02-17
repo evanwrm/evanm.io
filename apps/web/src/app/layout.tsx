@@ -91,6 +91,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
                 }
             ]
         },
+        manifest: "/manifest.webmanifest",
         openGraph: {
             title: seo.title ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,
             description: seo.description ?? undefined,
@@ -144,10 +145,6 @@ const RootLayout = ({ children }: Props) => {
             className={cn(fontSans.variable, fontMono.variable)}
             suppressHydrationWarning
         >
-            <head>
-                {/* TODO: remove if moved to metadata */}
-                <link rel="manifest" href="/manifest.webmanifest" />
-            </head>
             <body className="scrollbar transition duration-150">
                 <RootProviders>
                     <Analytics />
