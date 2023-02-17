@@ -3,7 +3,6 @@ import { getRssFeed, RssFormat, rssFormats } from "@/lib/rss";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-// TODO: check appdir route support
 export const GET = async (req: NextRequest) => {
     const formatParsed = z.enum(rssFormats).safeParse(req.nextUrl.searchParams.get("format"));
     const format: RssFormat = formatParsed.success ? formatParsed.data : "rss2";

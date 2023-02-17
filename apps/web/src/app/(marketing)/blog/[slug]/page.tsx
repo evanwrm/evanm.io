@@ -63,4 +63,4 @@ export const generateStaticParams = async (): Promise<Props["params"][]> => {
 };
 
 export default BlogPost;
-export const revalidate = 3600;
+export const revalidate = 60;
