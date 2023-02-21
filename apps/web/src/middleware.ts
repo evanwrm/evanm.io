@@ -21,9 +21,9 @@ export const middleware = async (request: NextRequest) => {
     }
     // RSS
     if (["/rss"].includes(url.pathname))
-        return NextResponse.redirect(`${env.NEXT_PUBLIC_SITE_URL}/api/blog/rss`, 307);
+        return NextResponse.redirect(`${env.NEXT_PUBLIC_SITE_URL}/rss.xml`, 301);
     if (["/blog/rss"].includes(url.pathname))
-        return NextResponse.redirect(`${env.NEXT_PUBLIC_SITE_URL}/api/blog/rss`, 308);
+        return NextResponse.redirect(`${env.NEXT_PUBLIC_SITE_URL}/rss.xml`, 301);
 
     return NextResponse.next();
 };

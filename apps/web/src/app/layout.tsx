@@ -8,9 +8,9 @@ import { appRouter } from "@/lib/server/routers/app";
 import { cn } from "@/lib/utils/styles";
 import "@/styles/globals.css";
 import "@/styles/prism.css";
-import { Fira_Code, Plus_Jakarta_Sans } from "@next/font/google";
 import "katex/dist/katex.css";
 import type { Metadata } from "next";
+import { Fira_Code, Plus_Jakarta_Sans } from "next/font/google";
 import React from "react";
 
 const fontSans = Plus_Jakarta_Sans({
