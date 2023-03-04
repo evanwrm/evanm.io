@@ -21,7 +21,7 @@ export const useHideOnScroll = (
             }
         };
 
-        return scrollY.onChange(updateTravel);
+        return scrollY.on("change", updateTravel);
     }, [invert, showThreshold, scrollY]);
 
     useEffect(() => {

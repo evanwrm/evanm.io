@@ -25,7 +25,6 @@ export const fuzzySearch = <T = string>(
             results.push({ score, document, context });
         }
     }
-    console.log(results);
 
     // sort by score
     const rankedResults = results.sort(function (a, b) {
