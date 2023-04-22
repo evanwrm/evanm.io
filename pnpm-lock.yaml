@@ -118,7 +118,7 @@ importers:
       '@types/react': ^18.0.33
       '@types/react-dom': ^18.0.11
       '@types/swagger-ui-react': ^4.18.0
-      '@vercel/analytics': ^0.1.11
+      '@vercel/analytics': ^1.0.0
       autoprefixer: ^10.4.14
       clipboard-copy: ^4.0.1
       clsx: ^1.2.1
@@ -170,7 +170,7 @@ importers:
       '@trpc/next': 10.19.1_l3bx3p4psurwv22kijyf5nsgga
       '@trpc/react-query': 10.19.1_xgp27xye5rdicnp3hg5ln3e7re
       '@trpc/server': 10.19.1
-      '@vercel/analytics': 0.1.11_hl5kmaqgjr2sdn7zxf6g5dkfwy
+      '@vercel/analytics': 1.0.0_hl5kmaqgjr2sdn7zxf6g5dkfwy
       clipboard-copy: 4.0.1
       clsx: 1.2.1
       command-score: 0.1.2
@@ -5087,13 +5087,13 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.37.0
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
     dev: false
 
   /@types/eslint/8.37.0:
     resolution: {integrity: sha512-Piet7dG2JBuDIfohBngQ3rCt7MgO9xCO4xIMKxBThCq5PNRB91IjlJ10eJVwfoNtvTErmxLzwBZ7rHZtbOMmFQ==}
     dependencies:
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
     dev: false
 
@@ -5552,8 +5552,8 @@ packages:
       - '@codemirror/search'
     dev: false
 
-  /@vercel/analytics/0.1.11_hl5kmaqgjr2sdn7zxf6g5dkfwy:
-    resolution: {integrity: sha512-mj5CPR02y0BRs1tN3oZcBNAX9a8NxsIUl9vElDPcqxnMfP0RbRc9fI9Ud7+QDg/1Izvt5uMumsr+6YsmVHcyuw==}
+  /@vercel/analytics/1.0.0_hl5kmaqgjr2sdn7zxf6g5dkfwy:
+    resolution: {integrity: sha512-RQmj7pv82JwGDHrnKeRc6TtSw2U7rWNubc2IH0ernTzWTj02yr9zvIYiYJeztsBzrJtWv7m8Nz6vxxb+cdEtJw==}
     peerDependencies:
       react: ^16.8||^17||^18
     dependencies:
