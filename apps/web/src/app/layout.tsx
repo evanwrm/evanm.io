@@ -42,6 +42,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
     const seo = await caller.seo.find();
 
     return {
+        metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
         // charSet is automatically added
         title: {
             default: seo.title ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,

@@ -18,7 +18,6 @@ const baseConfig = {
         domains: ["localhost", "res.cloudinary.com", "cdn.sanity.io"]
     },
     experimental: {
-        appDir: true,
         legacyBrowsers: false,
         nextScriptWorkers: true
     }
