@@ -40,7 +40,7 @@
         "sanity-plugin-markdown": "^4.1.0",
         "styled-components": "^5.3.11",
         "unified": "^10.1.2",
-        "vfile-reporter": "^7.0.5"
+        "vfile-reporter": "^8.0.0"
     },
     "devDependencies": {
         "@sanity/eslint-config-studio": "^2.0.1",
