@@ -38,7 +38,7 @@
         "sanity": "^3.11.3",
         "sanity-plugin-cloudinary": "^1.1.1",
         "sanity-plugin-markdown": "^4.1.0",
-        "styled-components": "^5.3.11",
+        "styled-components": "^6.0.0",
         "unified": "^10.1.2",
         "vfile-reporter": "^7.0.5"
     },
