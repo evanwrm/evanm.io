@@ -55,7 +55,7 @@
         "remark-math": "^5.1.1",
         "sharp": "^0.32.1",
         "superjson": "^1.12.3",
-        "swagger-ui-react": "4.19.0",
+        "swagger-ui-react": "5.4.2",
         "trpc-openapi": "^1.2.0",
         "zod": "^3.21.4"
     },
