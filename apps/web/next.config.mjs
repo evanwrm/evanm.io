@@ -1,7 +1,7 @@
 // @ts-check
+import withPWA from "@ducanh2912/next-pwa";
 import bundleAnalyzer from "@next/bundle-analyzer";
 import withPlugins from "next-compose-plugins";
-import withPWA from "next-pwa";
 import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 import { env } from "./src/lib/env/server.mjs";
 

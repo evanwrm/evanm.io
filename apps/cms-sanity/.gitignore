@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# vercel
+.vercel
+
 # Compiled Sanity Studio
 /dist
 

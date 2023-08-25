@@ -12,7 +12,7 @@ import remarkMath from "remark-math";
 import remarkParse from "remark-parse/lib";
 import remarkRehype from "remark-rehype";
 import { StringInputProps } from "sanity";
-import { MarkdownInput as SanityMarkdownInput, MarkdownInputProps } from "sanity-plugin-markdown";
+import { MarkdownInputProps, MarkdownInput as SanityMarkdownInput } from "sanity-plugin-markdown";
 import { unified } from "unified";
 import { reporter } from "vfile-reporter";
 
@@ -34,7 +34,7 @@ export const MarkdownInput = (props: StringInputProps) => {
                         .use(rehypeStringify) // compile
                         .process(markdownText, (err, file) => {
                             if (err) console.error(err);
-                            console.log(reporter(file));
+                            if (file) console.log(reporter(file));
                             setTimeout(() => {
                                 preview.innerHTML = String(file?.value);
                             });
