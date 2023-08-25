@@ -17,14 +17,12 @@ const MarketingLayout = ({ children }: Props) => {
     return (
         <MarketingProviders>
             <div className="flex min-h-screen flex-col items-center justify-center overflow-clip">
-                {/* @ts-expect-error Server Component */}
                 <Header title="Home" />
                 <HexBackdrop className="text-base-content/40 mt-16" />
                 {/* <Suspense fallback={null}> */}
                 <Spotlight />
                 {/* </Suspense> */}
                 <RouteTransition>{children}</RouteTransition>
-                {/* @ts-expect-error Server Component */}
                 <Footer />
             </div>
         </MarketingProviders>

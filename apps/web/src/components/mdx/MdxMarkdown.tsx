@@ -32,12 +32,11 @@ export const defaultComponents = {
         );
     },
     Image
-};
+} as MDXRemoteProps["components"];
 
 const MdxMarkdown = ({ components, source = "", ...props }: Partial<Props>) => {
     return (
         <div className="prose max-w-full">
-            {/* @ts-expect-error Server Component */}
             <MDXRemote
                 source={source}
                 components={{ ...defaultComponents, ...components }}
@@ -52,7 +51,7 @@ const MdxMarkdown = ({ components, source = "", ...props }: Partial<Props>) => {
                             rehypeCodeTitles,
                             rehypePrism
                         ]
-                    },
+                    } as any, // TODO: update types
                     parseFrontmatter: true
                 }}
                 {...props}

@@ -13,4 +13,4 @@ There are two options of deployment,
     ```
 
 2. The second way is to self-host Sanity studio. This can be done through any static hosting
-   provider. Here we use Railway to match other CMS deployments. This is found at https://api.evanm.io.
+   provider. Here we use Vercel to match other deployments. This is found at https://api.evanm.io.
