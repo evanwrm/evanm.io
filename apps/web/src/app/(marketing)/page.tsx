@@ -37,13 +37,13 @@ const Home = async () => {
                 >
                     <div className="my-6 text-left">
                         {settings.avatar && !isReference(settings.avatar?.asset) && (
-                            <div className="my-4 mx-2 sm:mx-4">
+                            <div className="mx-2 my-4 sm:mx-4">
                                 <Image
                                     image={settings.avatar?.asset}
                                     alt={settings.avatar.alt ?? "Avatar"}
-                                    width={96}
-                                    height={96}
-                                    className="h-20 w-20 select-none rounded-full shadow-md transition duration-500 hover:scale-105 sm:h-24 sm:w-24"
+                                    width={128}
+                                    height={128}
+                                    className="h-20 w-20 select-none rounded-full shadow-md transition duration-500 will-change-transform hover:scale-105 sm:h-24 sm:w-24"
                                 />
                             </div>
                         )}

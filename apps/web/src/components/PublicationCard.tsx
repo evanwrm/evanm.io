@@ -1,8 +1,8 @@
 import NavLink from "@/components/navigation/NavLink";
 import { Publication } from "@/lib/validators/Publication";
 import { addYears } from "date-fns";
-import ResponsiveButton from "./animation/ResponsiveButton";
 import Icon from "./Icon";
+import ResponsiveButton from "./animation/ResponsiveButton";
 
 interface Props {
     publication: Publication;
@@ -12,7 +12,7 @@ const PublicationCard = ({ publication }: Props) => {
     const isNew = new Date(publication.year ?? publication._createdAt) > addYears(new Date(), -1);
 
     return (
-        <div className="h-full w-full transition duration-300 hover:scale-105">
+        <div className="h-full w-full transition duration-300 will-change-transform hover:scale-105">
             <div className="bg-base-200/50 border-base-content/10 flex h-full w-full rounded-xl border p-4 shadow-md">
                 <div className="flex flex-1 flex-col justify-start">
                     <div className="flex items-center justify-start gap-4">

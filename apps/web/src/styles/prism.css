@@ -10,6 +10,7 @@
 [data-theme="light"] {
     --prism-background: #f1f1f1ff;
     --prism-selection: #bdc2d861;
+    --prism-active-line: #fbfbfb;
 
     --prism-token-namespace: #186ec4ff;
     --prism-token-variable: #db1200ff;
@@ -24,6 +25,7 @@
 [data-theme="dark"] {
     --prism-background: #1a1a24ff;
     --prism-selection: #67769660;
+    --prism-active-line: #101015;
 
     --prism-token-namespace: #e5c07bff;
     --prism-token-variable: #d55fdeff;
@@ -40,10 +42,10 @@
  * Rehype Prism Plus
 */
 .rehype-code-title {
-    @apply border-base-content/10 text-base-content rounded-t-xl border-b bg-[color:var(--prism-background)] p-2 px-6 font-mono text-xs font-bold;
+    @apply border-base-300 border-b-base-content/10 text-base-content rounded-t-lg border bg-[color:var(--prism-active-line)] p-4 px-6 font-mono text-xs font-bold;
 }
 .rehype-code-title + div {
-    @apply mt-0 rounded-b-xl rounded-t-none;
+    @apply mt-0 rounded-t-none;
 }
 
 /**
@@ -68,7 +70,7 @@
 }
 
 .line-number::before {
-    @apply mr-4 -ml-2 inline-block w-4 text-right text-[color:var(--prism-line-number)] content-[attr(line)];
+    @apply -ml-2 mr-4 inline-block w-4 text-right text-[color:var(--prism-line-number)] content-[attr(line)];
 }
 
 /**

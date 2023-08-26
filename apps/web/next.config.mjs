@@ -12,6 +12,7 @@ const withBundleAnalyzer = bundleAnalyzer({ enabled: analyzerMode });
 const baseConfig = {
     poweredByHeader: false,
     reactStrictMode: true,
+    swcMinify: true,
     images: {
         loader: "default",
         formats: ["image/avif", "image/webp"],

@@ -28,8 +28,8 @@ const Tilt = ({ className, children, tiltStrength = 100, reset = true, ...props 
         ) => {
             const percentX = (e.pageX - rect.left) / rect.width;
             const percentY = (e.pageY - rect.top) / rect.height;
-            const rotateY = (tiltStrength / 2 - tiltStrength * percentX).toFixed(2);
-            const rotateX = -(tiltStrength / 2 - tiltStrength * percentY).toFixed(2);
+            const rotateX = (tiltStrength / 2 - tiltStrength * percentY).toFixed(3);
+            const rotateY = -(tiltStrength / 2 - tiltStrength * percentX).toFixed(3);
 
             referenceEl.style.transform = `perspective(${1000}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1, 1, 1)`;
         };
@@ -62,7 +62,7 @@ const Tilt = ({ className, children, tiltStrength = 100, reset = true, ...props 
     }, [tiltRef, tiltStrength, reset]);
 
     return (
-        <div ref={tiltRef} className={cn(className)} {...props}>
+        <div ref={tiltRef} className={cn("will-change-transform", className)} {...props}>
             {children}
         </div>
     );

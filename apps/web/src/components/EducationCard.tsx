@@ -16,7 +16,7 @@ const EducationCard = ({ education }: Props) => {
             <div className="flex items-center justify-between">
                 <div className="flex items-center justify-start">
                     {education.thumbnail && !isReference(education.thumbnail.asset) && (
-                        <figure className="bg-base-100 h-12 w-12 overflow-clip rounded-full shadow transition duration-500 hover:scale-105">
+                        <figure className="bg-base-100 h-12 w-12 overflow-clip rounded-full shadow transition duration-500 will-change-transform hover:scale-105">
                             <Image
                                 image={education.thumbnail.asset}
                                 alt={education.thumbnail.alt ?? education.school}

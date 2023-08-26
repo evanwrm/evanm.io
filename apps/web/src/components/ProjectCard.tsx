@@ -33,7 +33,7 @@ const ProjectCard = ({ project }: Props) => {
                             alt={project.thumbnail.alt ?? project.title}
                             width={426}
                             height={240}
-                            className="h-full w-full transition duration-500 group-hover:scale-105"
+                            className="h-full w-full transition duration-500 will-change-transform group-hover:scale-105"
                         />
                     </figure>
                 )}

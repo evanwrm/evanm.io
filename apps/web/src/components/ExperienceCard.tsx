@@ -16,7 +16,7 @@ const ExperienceCard = ({ experience }: Props) => {
             <div className="flex items-center justify-between">
                 <div className="flex items-center justify-start">
                     {experience.thumbnail && !isReference(experience.thumbnail.asset) && (
-                        <figure className="bg-base-100 h-12 w-12 overflow-clip rounded-full shadow transition duration-500 hover:scale-105">
+                        <figure className="bg-base-100 h-12 w-12 overflow-clip rounded-full shadow transition duration-500 will-change-transform hover:scale-105">
                             <Image
                                 image={experience.thumbnail.asset}
                                 alt={experience.thumbnail.alt ?? experience.company}
