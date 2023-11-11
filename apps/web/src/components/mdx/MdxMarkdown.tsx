@@ -1,18 +1,24 @@
 import Pre from "@/components/mdx/Pre";
 import NavLink from "@/components/navigation/NavLink";
 import { cn } from "@/lib/utils/styles";
-import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
+import { compile, run } from "@mdx-js/mdx";
+import type { MDXComponents, MDXProps } from "mdx/types";
 import Image from "next/image";
 import { AnchorHTMLAttributes } from "react";
+import * as runtime from "react/jsx-runtime";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeKatex from "rehype-katex";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
+import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 
-interface Props extends MDXRemoteProps {}
+type Props = MDXProps & {
+    components?: MDXComponents;
+    source?: string;
+};
 
 export const defaultComponents = {
     a: ({ className, href = "", ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) => (
@@ -32,30 +38,28 @@ export const defaultComponents = {
         );
     },
     Image
-} as MDXRemoteProps["components"];
+} satisfies MDXComponents;
 
-const MdxMarkdown = ({ components, source = "", ...props }: Partial<Props>) => {
+const MdxMarkdown = async ({ components, source = "", ...props }: Props) => {
+    const code = String(
+        await compile(source, {
+            outputFormat: "function-body",
+            format: "mdx",
+            remarkPlugins: [remarkFrontmatter, remarkGfm, remarkMath],
+            rehypePlugins: [
+                rehypeSlug,
+                rehypeAutolinkHeadings,
+                rehypeKatex,
+                rehypeCodeTitles,
+                rehypePrism
+            ]
+        })
+    );
+    const { default: Content } = await run(code, { ...(runtime as any), baseUrl: import.meta.url });
+
     return (
         <div className="prose max-w-full">
-            <MDXRemote
-                source={source}
-                components={{ ...defaultComponents, ...components }}
-                options={{
-                    mdxOptions: {
-                        format: "mdx",
-                        remarkPlugins: [remarkGfm, remarkMath],
-                        rehypePlugins: [
-                            rehypeSlug,
-                            rehypeAutolinkHeadings,
-                            rehypeKatex,
-                            rehypeCodeTitles,
-                            rehypePrism
-                        ]
-                    } as any, // TODO: update types
-                    parseFrontmatter: true
-                }}
-                {...props}
-            />
+            <Content components={{ ...defaultComponents, ...components }} {...props} />
         </div>
     );
 };

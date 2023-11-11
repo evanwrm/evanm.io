@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils/styles";
 import "@/styles/globals.css";
 import "@/styles/prism.css";
 import "katex/dist/katex.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fira_Code, Plus_Jakarta_Sans } from "next/font/google";
 import React from "react";
 
@@ -53,13 +53,6 @@ export const generateMetadata = async (): Promise<Metadata> => {
         authors: seo.authors,
         keywords: seo.keywords,
         referrer: "origin-when-cross-origin",
-        themeColor: "#000",
-        colorScheme: "dark light",
-        viewport: {
-            width: "device-width",
-            initialScale: 1,
-            minimumScale: 1
-        },
         creator: seo.creator,
         publisher: seo.publisher,
         robots: {
@@ -136,6 +129,13 @@ export const generateMetadata = async (): Promise<Metadata> => {
             telephone: false
         }
     };
+};
+export const viewport: Viewport = {
+    themeColor: "#000",
+    colorScheme: "dark light",
+    width: "device-width",
+    initialScale: 1,
+    minimumScale: 1
 };
 
 const RootLayout = ({ children }: Props) => {

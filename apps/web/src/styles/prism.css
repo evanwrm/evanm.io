@@ -42,7 +42,7 @@
  * Rehype Prism Plus
 */
 .rehype-code-title {
-    @apply border-base-300 border-b-base-content/10 text-base-content rounded-t-lg border bg-[color:var(--prism-active-line)] p-4 px-6 font-mono text-xs font-bold;
+    @apply border-base-300/50 border-b-base-content/10 text-base-content rounded-t-lg border bg-[color:var(--prism-active-line)] p-4 px-6 font-mono text-xs font-bold;
 }
 .rehype-code-title + div {
     @apply mt-0 rounded-t-none;

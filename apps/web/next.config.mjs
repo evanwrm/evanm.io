@@ -16,10 +16,13 @@ const baseConfig = {
     images: {
         loader: "default",
         formats: ["image/avif", "image/webp"],
-        domains: ["localhost", "res.cloudinary.com", "cdn.sanity.io"]
+        remotePatterns: [
+            { hostname: "localhost" },
+            { hostname: "res.cloudinary.com" },
+            { hostname: "cdn.sanity.io" }
+        ]
     },
     experimental: {
-        legacyBrowsers: false,
         nextScriptWorkers: true
     }
 };
