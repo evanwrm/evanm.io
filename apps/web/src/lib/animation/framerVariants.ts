@@ -5,17 +5,34 @@ export const fadePopVariants: Variants = {
     hidden: { scale: 0, opacity: 0 },
     visible: { scale: 1, opacity: 1, transitionEnd: { scale: 1, opacity: 1 } }
 };
+
+export type SlideDirection = "left" | "right" | "top" | "bottom";
+export const slideFadeLeftVariants: Variants = {
+    hidden: { x: -25, opacity: 0 },
+    visible: { x: 0, opacity: 1, transitionEnd: { x: 0, opacity: 1 } }
+};
 export const slideFadeRightVariants: Variants = {
     hidden: { x: 25, opacity: 0 },
     visible: { x: 0, opacity: 1, transitionEnd: { x: 0, opacity: 1 } }
 };
+export const slideFadeTopVariants: Variants = {
+    hidden: { y: -75, opacity: 0 },
+    visible: { y: 0, opacity: 1, transitionEnd: { y: 0, opacity: 1 } }
+};
+export const slideFadeBottomVariants: Variants = {
+    hidden: { y: 75, opacity: 0 },
+    visible: { y: 0, opacity: 1, transitionEnd: { y: 0, opacity: 1 } }
+};
+export const slideFadeRegistry = {
+    left: slideFadeLeftVariants,
+    right: slideFadeRightVariants,
+    top: slideFadeTopVariants,
+    bottom: slideFadeBottomVariants
+};
+
 export const slideFadeLeftOffscreenVariants: Variants = {
     hidden: { x: -400, opacity: 0 },
     visible: { x: 0, opacity: 1, transitionEnd: { x: 0, opacity: 1 } }
-};
-export const slideInTopVariants: Variants = {
-    hidden: { y: -75, opacity: 0 },
-    visible: { y: 0.1, opacity: 1, transitionEnd: { y: 0, opacity: 1 } }
 };
 export const buttonVariants: Variants = {
     hover: { scale: 1.1, opacity: 1, y: -4 },

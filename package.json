@@ -23,7 +23,6 @@
         "g:lint-check": "pnpm -r --parallel run lint",
         "g:format-check": "prettier --check .",
         "g:format-fix": "prettier --write .",
-        "g:changeset": "changeset",
         "g:clean": "rm -rf pnpm-lock.yaml node_modules && pnpm -r --parallel exec rm -rf pnpm-lock.yaml node_modules",
         "turbo:dev": "turbo run dev",
         "turbo:build": "turbo run build",
@@ -37,7 +36,6 @@
     "devDependencies": {
         "@babel/core": "^7.23.3",
         "@babel/eslint-parser": "^7.23.3",
-        "@changesets/cli": "^2.26.2",
         "@commitlint/cli": "^18.4.0",
         "@commitlint/config-conventional": "^18.4.0",
         "@types/node": "^20.9.0",

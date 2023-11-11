@@ -12,6 +12,9 @@ module.exports = {
             fontFamily: {
                 sans: ["var(--font-sans)", ...fontFamily.sans],
                 mono: ["var(--font-mono)", ...fontFamily.mono]
+            },
+            height: {
+                screen: ["100vh", "100dvh"]
             }
         }
     },

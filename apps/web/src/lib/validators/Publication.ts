@@ -1,8 +1,8 @@
 import { Project, projectValidator } from "@/lib/validators/Project";
 import {
     SanityDocument,
-    sanityDocumentValidator,
     SanityReference,
+    sanityDocumentValidator,
     sanityReferencesValidator
 } from "@/lib/validators/sanity/SanityDocument";
 import { z } from "zod";

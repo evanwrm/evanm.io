@@ -10,7 +10,7 @@ import RouteNavList from "@/components/navigation/RouteNavList";
 import { headerRoutes } from "@/config/header";
 import { useFramerVariants } from "@/hooks/useFramerVariants";
 import { useHideOnScroll } from "@/hooks/useHideOnScroll";
-import { anticipateTransition, slideInTopVariants } from "@/lib/animation/framerVariants";
+import { anticipateTransition, slideFadeTopVariants } from "@/lib/animation/framerVariants";
 import { SocialLink } from "@/lib/validators/Social";
 import { Portal } from "@radix-ui/react-portal";
 import { AnimatePresence, m } from "framer-motion";
@@ -26,7 +26,7 @@ const DynamicMobileDrawer = React.lazy(() => import("@/components/navigation/Mob
 const AppBar = ({ github }: Props) => {
     const { hidden } = useHideOnScroll(80, 60);
     const [mobileOpen, setMobileOpen] = useState(false);
-    const headerVariants = useFramerVariants(slideInTopVariants, { disableMountAnimation: true });
+    const headerVariants = useFramerVariants(slideFadeTopVariants, { disableMountAnimation: true });
 
     const handleToggleOpen = (_e: React.MouseEvent) => {
         setMobileOpen(!mobileOpen);
@@ -37,7 +37,7 @@ const AppBar = ({ github }: Props) => {
             <AnimatePresence>
                 {mobileOpen && (
                     <Portal>
-                        <Suspense fallback={null}>
+                        <Suspense>
                             <DynamicMobileDrawer onClose={() => setMobileOpen(false)}>
                                 <AnimatedRouteNavList
                                     routes={headerRoutes}

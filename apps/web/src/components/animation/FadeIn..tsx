@@ -1,30 +1,36 @@
 "use client";
 
-import { lightBounceTransition, slideFadeRightVariants } from "@/lib/animation/framerVariants";
+import {
+    SlideDirection,
+    lightBounceTransition,
+    slideFadeRegistry
+} from "@/lib/animation/framerVariants";
 import { cn } from "@/lib/utils/styles";
-import { HTMLMotionProps, m, Transition, Variants } from "framer-motion";
+import { Transition, Variants, m } from "framer-motion";
 import React from "react";
 
-interface Props extends HTMLMotionProps<"div"> {
-    variants?: Variants;
+interface Props {
+    variants?: Variants | SlideDirection;
     transition?: Transition;
     className?: string;
     children?: React.ReactNode;
 }
 
 const FadeIn = ({
-    variants = slideFadeRightVariants,
+    variants = "bottom",
     transition = lightBounceTransition,
     className,
     children
 }: Props) => {
+    const variant = typeof variants === "string" ? slideFadeRegistry[variants] : variants;
+
     return (
         <m.div
             className={cn(className)}
             initial="hidden"
             whileInView="visible"
-            variants={variants}
-            viewport={{ amount: 0.05 }}
+            variants={variant}
+            viewport={{ amount: 0.1 }}
             transition={transition}
         >
             {children}
