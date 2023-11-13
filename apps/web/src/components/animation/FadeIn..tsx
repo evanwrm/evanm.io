@@ -12,6 +12,7 @@ import React from "react";
 interface Props {
     variants?: Variants | SlideDirection;
     transition?: Transition;
+    once?: boolean;
     className?: string;
     children?: React.ReactNode;
 }
@@ -19,6 +20,7 @@ interface Props {
 const FadeIn = ({
     variants = "bottom",
     transition = lightBounceTransition,
+    once = true,
     className,
     children
 }: Props) => {
@@ -30,7 +32,7 @@ const FadeIn = ({
             initial="hidden"
             whileInView="visible"
             variants={variant}
-            viewport={{ amount: 0.1 }}
+            viewport={{ amount: 0.1, once }}
             transition={transition}
         >
             {children}
