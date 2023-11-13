@@ -1,5 +1,6 @@
 import Icon, { getIconAliased } from "@/components/Icon";
 import NavLink from "@/components/navigation/NavLink";
+import Badge from "@/components/ui/Badge";
 import { Article } from "@/lib/validators/Article";
 import { formatDistance } from "date-fns";
 
@@ -22,15 +23,12 @@ const BlogCard = ({ article }: Props) => {
                     <div className="mt-2 pb-2 pt-1">
                         {article.tags?.map(tag => {
                             const SkillIcon = tag.iconId ? getIconAliased(tag.iconId) : null;
+                            const icon = SkillIcon && <SkillIcon />;
 
                             return (
-                                <div
-                                    className="badge text-base-content hover:text-primary focus:text-primary gap-2 py-3 transition"
-                                    key={tag.name}
-                                >
-                                    {SkillIcon && <SkillIcon className="inline-block h-4 w-4" />}
+                                <Badge startIcon={icon} key={tag.name}>
                                     {tag.name}
-                                </div>
+                                </Badge>
                             );
                         })}
                     </div>

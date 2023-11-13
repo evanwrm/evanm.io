@@ -1,8 +1,9 @@
-import ResponsiveButton from "@/components/animation/ResponsiveButton";
-import Tilt from "@/components/animation/Tilt";
 import Icon, { getIconAliased } from "@/components/Icon";
 import { Image } from "@/components/Image";
+import ResponsiveButton from "@/components/animation/ResponsiveButton";
+import Tilt from "@/components/animation/Tilt";
 import NavLink from "@/components/navigation/NavLink";
+import Badge from "@/components/ui/Badge";
 import { isReference } from "@/lib/services/sanity/utils";
 import { cn } from "@/lib/utils/styles";
 import { Project } from "@/lib/validators/Project";
@@ -14,9 +15,9 @@ interface Props {
 
 const ProjectCard = ({ project }: Props) => {
     const RepositoryIcon = project.repositoryUrl && getIconAliased(project.repositoryUrl);
+    const newThreshold = addYears(new Date(), -1);
     const isNew =
-        new Date(project.endDate ?? project.startDate ?? project._createdAt) >
-        addYears(new Date(), -1);
+        new Date(project.endDate ?? project.startDate ?? project._createdAt) > newThreshold;
 
     return (
         <Tilt className="bg-base-200/50 h-full max-h-screen" tiltStrength={5}>
@@ -71,15 +72,12 @@ const ProjectCard = ({ project }: Props) => {
                         {project.skills?.map(skill => {
                             if (isReference(skill)) return null;
                             const SkillIcon = getIconAliased(skill.iconId);
+                            const icon = SkillIcon && <SkillIcon />;
 
                             return (
-                                <div
-                                    className="badge text-base-content hover:text-primary focus:text-primary gap-2 py-3 transition"
-                                    key={skill.slug}
-                                >
-                                    {SkillIcon && <SkillIcon className="inline-block h-4 w-4" />}
+                                <Badge startIcon={icon} key={skill.slug}>
                                     {skill.name}
-                                </div>
+                                </Badge>
                             );
                         })}
                     </div>
