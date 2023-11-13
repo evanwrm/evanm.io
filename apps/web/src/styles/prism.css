@@ -1,11 +1,11 @@
 :root {
-    --prism-foreground: hsl(var(--bc)); /* #abb2bfff */
+    --prism-foreground: oklch(var(--bc)); /* #abb2bfff */
 
     --prism-line-inserted: #00809b33; /* Set inserted line (+) color */
     --prism-line-deleted: #ff000033; /* Set deleted line (-) color */
     --prism-highlight-background: #00bcf233; /* Set highlight bg color */
     --prism-highlight-border: #00bcf299; /* Set highlight accent border color */
-    --prism-line-number: hsl(var(--bc) / 0.25); /* Line number color */
+    --prism-line-number: oklch(var(--bc) / 0.25); /* Line number color */
 }
 [data-theme="light"] {
     --prism-background: #f1f1f1ff;
