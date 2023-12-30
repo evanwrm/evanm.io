@@ -1,8 +1,6 @@
 // @ts-check
-import withPWA from "@ducanh2912/next-pwa";
 import bundleAnalyzer from "@next/bundle-analyzer";
-import withPlugins from "next-compose-plugins";
-import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
+import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from "next/constants.js";
 import { env } from "./src/lib/env/server.mjs";
 
 const analyzerMode = env.ANALYZE === "true";
@@ -26,23 +24,21 @@ const baseConfig = {
         nextScriptWorkers: true
     }
 };
-const plugins = [
-    [withBundleAnalyzer],
-    [
-        withPWA,
-        {
-            pwa: {
-                dest: "public",
-                register: true
-                // sw: "service-worker.js"
-            }
-        },
-        ["!" + PHASE_DEVELOPMENT_SERVER]
-    ]
-];
 
-export default withPlugins(plugins, {
-    ...baseConfig,
-    ["!" + PHASE_DEVELOPMENT_SERVER]: {},
-    [PHASE_DEVELOPMENT_SERVER]: {}
-});
+const nextConfig = async (phase, { defaultConfig }) => {
+    const optional = (plugin, phases) => (phases.includes(phase) ? plugin : config => config);
+    const plugins = [
+        withBundleAnalyzer,
+        optional(
+            async config =>
+                (await import("@serwist/next")).default({
+                    swSrc: "src/app/sw.ts",
+                    swDest: "public/sw.js"
+                })(config),
+            [PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD]
+        )
+    ];
+
+    return plugins.reduce((config, plugin) => plugin(config), { ...defaultConfig, ...baseConfig });
+};
+export default nextConfig;

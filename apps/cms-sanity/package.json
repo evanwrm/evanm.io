@@ -19,8 +19,8 @@
         "start": "sanity start"
     },
     "dependencies": {
-        "@sanity/ui": "^1.9.2",
-        "@sanity/vision": "^3.19.2",
+        "@sanity/ui": "^1.9.3",
+        "@sanity/vision": "^3.23.4",
         "easymde": "^2.18.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -36,18 +36,18 @@
         "remark-math": "^6.0.0",
         "remark-parse": "^11.0.0",
         "remark-rehype": "^11.0.0",
-        "sanity": "^3.19.2",
+        "sanity": "^3.23.4",
         "sanity-plugin-cloudinary": "^1.1.1",
         "sanity-plugin-markdown": "^4.1.0",
-        "styled-components": "^6.1.1",
+        "styled-components": "^6.1.6",
         "unified": "^11.0.4",
         "vfile-reporter": "^8.1.0"
     },
     "devDependencies": {
         "@sanity/eslint-config-studio": "^3.0.1",
-        "eslint": "^8.53.0",
-        "prettier": "^3.1.0",
-        "typescript": "^5.2.2"
+        "eslint": "^8.56.0",
+        "prettier": "^3.1.1",
+        "typescript": "^5.3.3"
     },
     "packageManager": "pnpm@8.5.1",
     "engines": {

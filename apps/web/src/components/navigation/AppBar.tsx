@@ -54,7 +54,7 @@ const AppBar = ({ github }: Props) => {
             <AnimatePresence>
                 {!hidden && (
                     <m.nav
-                        className="shadow-base-content/10 bg-base-100 min-h-16 fixed top-0 z-40 flex w-full items-center justify-center bg-opacity-60 bg-clip-padding p-2 shadow backdrop-blur backdrop-saturate-200"
+                        className="shadow-base-content/10 bg-base-100 fixed top-0 z-40 flex h-16 w-full items-center justify-center bg-opacity-60 bg-clip-padding p-2 shadow backdrop-blur backdrop-saturate-200"
                         initial="hidden"
                         animate="visible"
                         exit="hidden"
@@ -72,7 +72,7 @@ const AppBar = ({ github }: Props) => {
                                 </ResponsiveButton>
                                 <NavLink
                                     href="/"
-                                    aria-label="Home"
+                                    aria-label="evanm.io"
                                     className="ml-2 opacity-80 transition-all hover:opacity-100"
                                 >
                                     <div className="text-base-content inline font-bold">
