@@ -71,7 +71,7 @@ jobs:
                   path: apps/web/.next/analyze/__bundle_analysis.json
 
             - name: Download base branch bundle stats
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v4
               if: success() && github.event.number
               with:
                   workflow: nextjs_bundle_analysis.yml
