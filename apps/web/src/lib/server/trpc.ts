@@ -13,10 +13,7 @@ export const t = initTRPC
         }
     });
 
-export const middleware = t.middleware;
-export const router = t.router;
-
-export const procedure = t.procedure;
+export const { router, middleware, procedure, createCallerFactory } = t;
 export const apiProcedure = procedure.use(opts => {
     if (!opts.ctx.req || !opts.ctx.res) {
         throw new Error("You are missing `req` or `res` in your call.");

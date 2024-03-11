@@ -1,8 +1,8 @@
+import Icon from "@/components/Icon";
+import ResponsiveButton from "@/components/animation/ResponsiveButton";
 import NavLink from "@/components/navigation/NavLink";
 import { Publication } from "@/lib/validators/Publication";
 import { addYears } from "date-fns";
-import Icon from "./Icon";
-import ResponsiveButton from "./animation/ResponsiveButton";
 
 interface Props {
     publication: Publication;

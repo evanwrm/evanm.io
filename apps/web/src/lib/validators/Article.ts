@@ -1,7 +1,7 @@
+import { tagValidator } from "@/lib/validators/Tag";
 import { sanityDocumentValidator } from "@/lib/validators/sanity/SanityDocument";
 import { sanityMediaValidator } from "@/lib/validators/sanity/SanityMedia";
 import { z } from "zod";
-import { tagValidator } from "./Tag";
 
 export const articleValidator = z
     .object({

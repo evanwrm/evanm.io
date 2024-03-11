@@ -4,11 +4,11 @@ import NavLink from "@/components/navigation/NavLink";
 import RouteNavList from "@/components/navigation/RouteNavList";
 import { headerRoutes } from "@/config/header";
 import { createInnerContext } from "@/lib/server/context";
-import { appRouter } from "@/lib/server/routers/app";
+import { createCaller } from "@/lib/server/routers/app";
 import { getYear } from "date-fns";
 
 const Footer = async () => {
-    const caller = appRouter.createCaller(await createInnerContext());
+    const caller = createCaller(await createInnerContext());
     const [socials, settings] = await Promise.all([caller.socials.find(), caller.settings.find()]);
 
     return (
@@ -21,7 +21,7 @@ const Footer = async () => {
                             tabIndex={0}
                             className="flex flex-row"
                         />
-                        <div className="mt-4 ml-4 flex space-x-4">
+                        <div className="ml-4 mt-4 flex space-x-4">
                             {socials.map(social => {
                                 const SocialIcon = getIconAliased(social.iconId);
 

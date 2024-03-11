@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import NProgress, { NProgressOptions } from "nprogress";
 import { useEffect } from "react";
 
@@ -10,34 +9,15 @@ interface Props {
 }
 
 const ProgressBar = ({ options, color }: Props) => {
-    const pathname = usePathname();
-
-    const routeChangeStart = () => {
-        NProgress.start();
-    };
-
-    const routeChangeEnd = () => {
-        NProgress.done();
-    };
-
     useEffect(() => {
-        options && NProgress.configure(options);
-
-        // TODO: Next.js router.events are not supported currently
-        routeChangeStart();
-        setTimeout(routeChangeEnd, 250);
-        // router.events.on("routeChangeStart", routeChangeStart);
-        // router.events.on("routeChangeComplete", routeChangeEnd);
-        // router.events.on("routeChangeError", routeChangeEnd);
+        if (options) NProgress.configure(options);
+        NProgress.start();
 
         return () => {
-            // router.events.off("routeChangeStart", routeChangeStart);
-            // router.events.off("routeChangeComplete", routeChangeEnd);
-            // router.events.off("routeChangeError", routeChangeEnd);
-
+            NProgress.done();
             NProgress.remove();
         };
-    }, [options, pathname]);
+    }, [options]);
 
     return (
         <style jsx global>{`
@@ -61,7 +41,9 @@ const ProgressBar = ({ options, color }: Props) => {
                 right: 0px;
                 width: 100px;
                 height: 100%;
-                box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+                box-shadow:
+                    0 0 10px #29d,
+                    0 0 5px #29d;
                 opacity: 1;
                 -webkit-transform: rotate(3deg) translate(0px, -4px);
                 -ms-transform: rotate(3deg) translate(0px, -4px);

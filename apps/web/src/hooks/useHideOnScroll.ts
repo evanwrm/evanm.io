@@ -16,7 +16,7 @@ export const useHideOnScroll = (
                 setTravel(0);
                 setHidden(invert);
             } else {
-                const delta = scrollY.get() - scrollY.getPrevious();
+                const delta = scrollY.get() - (scrollY.getPrevious() ?? 0);
                 setTravel(prevTravel => prevTravel + delta);
             }
         };

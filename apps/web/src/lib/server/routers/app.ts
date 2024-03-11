@@ -9,7 +9,7 @@ import { landingRouter } from "@/lib/server/routers/pages/landing";
 import { seoRouter } from "@/lib/server/routers/singletons/seo";
 import { settingsRouter } from "@/lib/server/routers/singletons/settings";
 import { systemRouter } from "@/lib/server/routers/system";
-import { router } from "@/lib/server/trpc";
+import { createCallerFactory, router } from "@/lib/server/trpc";
 
 export const appRouter = router({
     // page
@@ -28,5 +28,6 @@ export const appRouter = router({
     // special
     system: systemRouter
 });
+export const createCaller = createCallerFactory(appRouter);
 
 export type AppRouter = typeof appRouter;

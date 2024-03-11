@@ -9,7 +9,7 @@ import MdxMarkdown from "@/components/mdx/MdxMarkdown";
 import ProjectCard from "@/components/ProjectCard";
 import PublicationCard from "@/components/PublicationCard";
 import { createInnerContext } from "@/lib/server/context";
-import { appRouter } from "@/lib/server/routers/app";
+import { createCaller } from "@/lib/server/routers/app";
 import { isReference } from "@/lib/services/sanity/utils";
 import { Metadata } from "next";
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 const Home = async () => {
-    const caller = appRouter.createCaller(await createInnerContext());
+    const caller = createCaller(await createInnerContext());
     const [landing, educations, experiences, projects, publications, settings] = await Promise.all([
         caller.landing.find(),
         caller.education.find({ sort: ["endDate desc", "startDate desc"] }),

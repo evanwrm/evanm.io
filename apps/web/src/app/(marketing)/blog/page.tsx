@@ -1,6 +1,6 @@
 import ArticleSearch from "@/components/layouts/ArticleSearch";
 import { createInnerContext } from "@/lib/server/context";
-import { appRouter } from "@/lib/server/routers/app";
+import { createCaller } from "@/lib/server/routers/app";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const Blog = async () => {
-    const caller = appRouter.createCaller(await createInnerContext());
+    const caller = createCaller(await createInnerContext());
     const articles = await caller.articles.find({ sort: "_createdAt desc" });
 
     return (

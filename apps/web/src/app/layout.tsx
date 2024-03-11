@@ -1,17 +1,17 @@
 import RootProviders from "@/app/RootProviders";
 import Analytics from "@/components/analytics/Analytics";
 import BackToTop from "@/components/navigation/BackToTop";
-import ProgressBar from "@/components/ProgressBar";
 import { env } from "@/lib/env/client.mjs";
 import { createInnerContext } from "@/lib/server/context";
-import { appRouter } from "@/lib/server/routers/app";
+import { createCaller } from "@/lib/server/routers/app";
 import { cn } from "@/lib/utils/styles";
 import "@/styles/globals.css";
 import "@/styles/prism.css";
 import "katex/dist/katex.css";
 import type { Metadata, Viewport } from "next";
 import { Fira_Code, Plus_Jakarta_Sans } from "next/font/google";
-import React from "react";
+import React, { Suspense } from "react";
+import Loading from "./loading";
 
 const fontSans = Plus_Jakarta_Sans({
     subsets: ["latin"],
@@ -38,7 +38,7 @@ interface Props {
 // };
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const caller = appRouter.createCaller(await createInnerContext());
+    const caller = createCaller(await createInnerContext());
     const seo = await caller.seo.find();
 
     return {
@@ -149,8 +149,7 @@ const RootLayout = ({ children }: Props) => {
             <body className="scrollbar transition duration-150">
                 <RootProviders>
                     <Analytics />
-                    <ProgressBar options={{ showSpinner: false, trickleSpeed: 300 }} />
-                    {children}
+                    <Suspense fallback={<Loading />}>{children}</Suspense>
                     <BackToTop />
                 </RootProviders>
             </body>
