@@ -9,7 +9,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import remarkParse from "remark-parse/lib";
+import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { StringInputProps } from "sanity";
 import { MarkdownInputProps, MarkdownInput as SanityMarkdownInput } from "sanity-plugin-markdown";

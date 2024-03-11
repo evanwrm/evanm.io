@@ -1,4 +1,4 @@
-import { StructureBuilder, StructureResolverContext } from "sanity/desk";
+import { StructureBuilder, StructureResolverContext } from "sanity/structure";
 import { collectionSchemaTypes } from "./schemas/collections";
 import { pageSchemaTypes } from "./schemas/pages";
 import { singletonSchemaTypes } from "./schemas/singletons";

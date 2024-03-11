@@ -2,7 +2,7 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { cloudinaryAssetSourcePlugin, cloudinaryImageSource } from "sanity-plugin-cloudinary";
 import { markdownSchema } from "sanity-plugin-markdown";
-import { deskTool } from "sanity/desk";
+import { structureTool } from "sanity/structure";
 import { MarkdownInput } from "./components/MarkdownInput";
 import { deskStructure } from "./deskStructure";
 import { schemaTypes } from "./schemas";
@@ -14,7 +14,7 @@ export default defineConfig({
     dataset: "production",
     basePath: "/",
     plugins: [
-        deskTool({ structure: deskStructure }),
+        structureTool({ structure: deskStructure }),
         visionTool(),
         cloudinaryAssetSourcePlugin(),
         markdownSchema({ input: MarkdownInput })
