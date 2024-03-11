@@ -8,13 +8,17 @@ interface Props {
 }
 
 const ViewCounter = ({ documentId }: Props) => {
-    const mutation = trpc.articles.incrementViews.useMutation();
+    const { mutate } = trpc.articles.incrementViews.useMutation();
     useEffect(() => {
         const registerView = async () => {
-            mutation.mutate({ documentId });
+            try {
+                mutate({ documentId });
+            } catch (error) {
+                console.error("Failed to register view", error);
+            }
         };
         registerView();
-    }, [documentId]);
+    }, [documentId, mutate]);
 
     return null;
 };
