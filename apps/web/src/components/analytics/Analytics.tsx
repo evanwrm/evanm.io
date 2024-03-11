@@ -1,9 +1,15 @@
 "use client";
 
-import { Analytics as NextAnalytics } from "@vercel/analytics/react";
+import { Analytics as NextAnalytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const Analytics = () => {
-    return <NextAnalytics />;
+    return (
+        <>
+            <NextAnalytics />
+            <SpeedInsights />
+        </>
+    );
 };
 
 export default Analytics;
