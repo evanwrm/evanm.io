@@ -1,10 +1,24 @@
-import { defaultCache } from "@serwist/next/browser";
-import { installSerwist } from "@serwist/sw";
+import { defaultCache } from "@serwist/next/worker";
+import { Serwist } from "@serwist/sw";
 
-installSerwist({
+const serwist = new Serwist();
+const revision = crypto.randomUUID();
+
+serwist.install({
     precacheEntries: (self as any).__SW_MANIFEST,
     skipWaiting: true,
     clientsClaim: true,
     navigationPreload: true,
-    runtimeCaching: defaultCache
+    runtimeCaching: defaultCache,
+    fallbacks: {
+        entries: [
+            {
+                url: "/",
+                revision,
+                matcher({ request }) {
+                    return request.destination === "document";
+                }
+            }
+        ]
+    }
 });

@@ -32,6 +32,7 @@ const nextConfig = async (phase, { defaultConfig }) => {
         optional(
             async config =>
                 (await import("@serwist/next")).default({
+                    cacheOnNavigation: true,
                     swSrc: "src/app/sw.ts",
                     swDest: "public/sw.js"
                 })(config),
