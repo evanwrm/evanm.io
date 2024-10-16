@@ -1,4 +1,4 @@
-import { ArticleSearch } from "@/components/layouts/article-search";
+import { ArticleSearch } from "@/components/article-search";
 import { createInnerContext } from "@/lib/server/context";
 import { createCaller } from "@/lib/server/routers/app";
 import { Metadata } from "next";

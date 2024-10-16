@@ -43,7 +43,6 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
     return {
         metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
-        // charSet is automatically added
         title: {
             default: seo.title ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,
             template: seo.titleTemplate ?? `%s | ${env.NEXT_PUBLIC_DEFAULT_SITE_TITLE}`
@@ -85,7 +84,6 @@ export const generateMetadata = async (): Promise<Metadata> => {
                 }
             ]
         },
-        manifest: "/manifest.webmanifest",
         openGraph: {
             title: seo.title ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,
             description: seo.description ?? undefined,

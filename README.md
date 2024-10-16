@@ -70,6 +70,7 @@ Installation/usage instructions can be found in [apps/cms-strapi](apps/cms-strap
 ## TODO
 
 -   upgrade nextjs
+-   spotlight shortcuts + search children
 -   remove strapi
 -   remove trpc (-> jotai)
 -   remove commandScore

@@ -5,15 +5,15 @@ import { createCaller } from "@/lib/server/routers/app";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+type Params = { slug: string };
 interface Props {
-    params: {
-        slug: string;
-    };
+    params: Promise<Params>;
 }
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+    const slug = (await params).slug;
     const caller = createCaller(await createInnerContext());
-    const article = await caller.articles.findOne({ slug: params.slug });
+    const article = await caller.articles.findOne({ slug });
 
     return {
         title: article?.title
@@ -21,8 +21,9 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 };
 
 export default async function BlogPost({ params }: Props) {
+    const slug = (await params).slug;
     const caller = createCaller(await createInnerContext());
-    const article = await caller.articles.findOne({ slug: params.slug });
+    const article = await caller.articles.findOne({ slug });
 
     if (!article) return notFound();
 
@@ -34,7 +35,7 @@ export default async function BlogPost({ params }: Props) {
     );
 }
 
-export const generateStaticParams = async (): Promise<Props["params"][]> => {
+export const generateStaticParams = async (): Promise<Params[]> => {
     const caller = createCaller(await createInnerContext());
 
     const slugs: string[] = [];
