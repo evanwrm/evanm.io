@@ -20,9 +20,7 @@ const baseConfig = {
             { hostname: "cdn.sanity.io" }
         ]
     },
-    experimental: {
-        nextScriptWorkers: true
-    }
+    experimental: { nextScriptWorkers: true }
 };
 
 const nextConfig = async (phase, { defaultConfig }) => {

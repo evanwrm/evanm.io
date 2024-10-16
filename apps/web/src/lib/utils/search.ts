@@ -1,5 +1,6 @@
-// @ts-ignore
+// @ts-nocheck
 import commandScore from "command-score";
+// import { defaultFilter } from "cmdk";
 
 interface SearchResults<T = string> {
     score: number;
@@ -20,7 +21,7 @@ export const fuzzySearch = <T = string>(
     for (let i = 0; i < documents.length; i++) {
         const document = documents[i];
         const context = contexts[i];
-        const score = commandScore(context, query);
+        const score = commandScore(context, query, []);
         if (score > 0) {
             results.push({ score, document, context });
         }

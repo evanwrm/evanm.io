@@ -1,10 +1,10 @@
-import RootProviders from "@/app/RootProviders";
-import Analytics from "@/components/analytics/Analytics";
-import BackToTop from "@/components/navigation/BackToTop";
+import { RootProvider } from "@/app/root-provider";
+import Analytics from "@/components/analytics/analytics";
+import BackToTop from "@/components/navigation/back-to-top";
 import { env } from "@/lib/env/client.mjs";
 import { createInnerContext } from "@/lib/server/context";
 import { createCaller } from "@/lib/server/routers/app";
-import { cn } from "@/lib/utils/styles";
+import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import "@/styles/prism.css";
 import "katex/dist/katex.css";
@@ -90,7 +90,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
             title: seo.title ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,
             description: seo.description ?? undefined,
             url: seo.openGraph?.url ?? env.NEXT_PUBLIC_SITE_URL,
-            siteName: seo.openGraph?.site_name ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,
+            siteName: seo.openGraph?.siteName ?? env.NEXT_PUBLIC_DEFAULT_SITE_TITLE,
             locale: seo.openGraph?.locale ?? "en_US",
             type: "website",
             images: [
@@ -138,7 +138,7 @@ export const viewport: Viewport = {
     minimumScale: 1
 };
 
-const RootLayout = ({ children }: Props) => {
+export default function Layout({ children }: Props) {
     return (
         <html
             lang="en"
@@ -146,15 +146,17 @@ const RootLayout = ({ children }: Props) => {
             className={cn(fontSans.variable, fontMono.variable)}
             suppressHydrationWarning
         >
-            <body className="scrollbar transition duration-150">
-                <RootProviders>
-                    <Analytics />
-                    <Suspense fallback={<Loading />}>{children}</Suspense>
-                    <BackToTop />
-                </RootProviders>
+            <body className="scrollbar bg-background text-foreground transition duration-150">
+                <RootProvider>
+                    <div vaul-drawer-wrapper="">
+                        <div className="bg-background relative flex min-h-screen flex-col overflow-clip">
+                            <Analytics />
+                            <Suspense fallback={<Loading />}>{children}</Suspense>
+                            <BackToTop />
+                        </div>
+                    </div>
+                </RootProvider>
             </body>
         </html>
     );
-};
-
-export default RootLayout;
+}

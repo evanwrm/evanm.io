@@ -1,5 +1,5 @@
 // @ts-check
-// const { env } = require("./src/lib/env/server.mjs");
+// import { env } from "./src/lib/env/server.mjs";
 
 /** @type {import('next-sitemap').IConfig} */
 const sitemapConfig = {
@@ -11,4 +11,4 @@ const sitemapConfig = {
     exclude: ["/api", "/admin", "/404"]
 };
 
-module.exports = sitemapConfig;
+export default sitemapConfig;

@@ -6,8 +6,7 @@
     --prism-highlight-background: #00bcf233; /* Set highlight bg color */
     --prism-highlight-border: #00bcf299; /* Set highlight accent border color */
     --prism-line-number: oklch(var(--bc) / 0.25); /* Line number color */
-}
-[data-theme="light"] {
+
     --prism-background: #f1f1f1ff;
     --prism-selection: #bdc2d861;
     --prism-active-line: #fbfbfb;
@@ -22,7 +21,7 @@
     --prism-token-string: #04801fff;
     --prism-token-comment: #898a8fff;
 }
-[data-theme="dark"] {
+.dark {
     --prism-background: #1a1a24ff;
     --prism-selection: #67769660;
     --prism-active-line: #101015;
@@ -42,7 +41,7 @@
  * Rehype Prism Plus
 */
 .rehype-code-title {
-    @apply border-base-300/50 border-b-base-content/10 text-base-content rounded-t-lg border bg-[color:var(--prism-active-line)] p-4 px-6 font-mono text-xs font-bold;
+    @apply border-b-border rounded-t-lg border-b-2 bg-[color:var(--prism-background)] p-4 px-6 font-mono text-xs font-semibold;
 }
 .rehype-code-title + div {
     @apply mt-0 rounded-t-none;

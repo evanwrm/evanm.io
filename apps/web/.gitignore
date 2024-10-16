@@ -14,3 +14,7 @@ out/
 
 # misc
 .vscode/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

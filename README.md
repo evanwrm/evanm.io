@@ -30,14 +30,15 @@ Portfolio website running on [Next.js](https://nextjs.org/) + [Sanity](https://s
 
 ### Website (frontend)
 
--   [Next.js 13](https://nextjs.org)
--   [Preact](https://preactjs.com)
--   [Typescript](https://www.typescriptlang.org)
--   [Tailwind 3.0](https://tailwindcss.com)
+-   [Next.js](https://nextjs.org) + [React](https://react.dev/)
+-   [shadcn/ui](https://ui.shadcn.com/)
+-   [Tailwind](https://tailwindcss.com)
+-   [MDX](https://mdxjs.com)
 -   [Framer Motion](https://www.framer.com/motion)
 -   [tRPC](https://trpc.io/)
 -   [Vitest](https://vitest.dev/)
 -   [Playwright](https://playwright.dev/)
+-   [Typescript](https://www.typescriptlang.org)
 
 Installation/usage instructions can be found in [apps/web](apps/web)
 
@@ -65,3 +66,10 @@ Installation/usage instructions can be found in [apps/cms-strapi](apps/cms-strap
 ## License
 
 [MIT](LICENSE)
+
+## TODO
+
+-   upgrade nextjs
+-   remove strapi
+-   remove trpc (-> jotai)
+-   remove commandScore

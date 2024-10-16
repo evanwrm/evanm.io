@@ -28,7 +28,7 @@ export const openGraphValidator = z.object({
     type: z.string().nullish(),
     title: z.string().nullish(),
     description: z.string().nullish(),
-    site_name: z.string().nullish(),
+    siteName: z.string().nullish(),
     locale: z.string().nullish(),
     images: z.array(openGraphMediaValidator).nullish(),
     profile: openGraphProfileValidator.nullish()
