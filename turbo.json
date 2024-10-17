@@ -6,7 +6,8 @@
         },
         "build": {
             "dependsOn": ["^build"],
-            "outputs": [".next/**", "dist/**", "build/**"]
+            "outputs": [".next/**", "dist/**", "build/**"],
+            "env": ["NODE_ENV", "ANALYZE", "SANITY_APP_TOKEN", "REVALIDATE_SECRET"]
         },
         "start": {
             "dependsOn": ["^build"],

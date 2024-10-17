@@ -136,7 +136,7 @@ export const PublicationCard = ({ publication }: Props) => {
                             Abstract
                         </AccordionTrigger>
                         <AccordionContent>
-                            <div className="prose text-left text-sm">{publication.abstract}</div>
+                            <p className="prose text-left text-sm">{publication.abstract}</p>
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
