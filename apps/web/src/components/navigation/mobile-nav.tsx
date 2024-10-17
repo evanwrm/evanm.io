@@ -28,7 +28,12 @@ export const MobileNav = ({ routes }: Props) => {
     return (
         <Drawer direction="left" noBodyStyles>
             <DrawerTrigger className="md:hidden" asChild>
-                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    aria-label="Open navigation"
+                    className="h-8 w-8 rounded-full"
+                >
                     <Icon.CgMenuLeft className="h-6 w-6" />
                 </Button>
             </DrawerTrigger>

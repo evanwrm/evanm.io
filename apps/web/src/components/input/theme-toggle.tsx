@@ -65,7 +65,7 @@ export const ThemeToggle = () => {
     return (
         <ToggleGroup type="single" size="sm" value={theme} onValueChange={handleTheme}>
             <Tooltip>
-                <ToggleGroupItem value="dark" className="rounded-full" asChild>
+                <ToggleGroupItem value="dark" aria-label="dark" className="rounded-full" asChild>
                     <TooltipTrigger>
                         <Icon.MoonIcon className="h-4 w-4" />
                     </TooltipTrigger>
@@ -73,7 +73,7 @@ export const ThemeToggle = () => {
                 <TooltipContent>Dark</TooltipContent>
             </Tooltip>
             <Tooltip>
-                <ToggleGroupItem value="light" className="rounded-full" asChild>
+                <ToggleGroupItem value="light" aria-label="light" className="rounded-full" asChild>
                     <TooltipTrigger>
                         <Icon.SunIcon className="h-4 w-4" />
                     </TooltipTrigger>
@@ -81,7 +81,12 @@ export const ThemeToggle = () => {
                 <TooltipContent>Light</TooltipContent>
             </Tooltip>
             <Tooltip>
-                <ToggleGroupItem value="system" className="rounded-full" asChild>
+                <ToggleGroupItem
+                    value="system"
+                    aria-label="system"
+                    className="rounded-full"
+                    asChild
+                >
                     <TooltipTrigger>
                         <Icon.DesktopIcon className="h-4 w-4" />
                     </TooltipTrigger>

@@ -39,8 +39,8 @@ export default async function Home() {
                                 <Image
                                     image={settings.avatar?.asset}
                                     alt={settings.avatar.alt ?? "Avatar"}
-                                    width={256}
-                                    height={256}
+                                    width={128}
+                                    height={128}
                                     className="h-20 w-20 select-none rounded-full shadow-md transition duration-500 will-change-transform hover:scale-105 sm:h-24 sm:w-24"
                                 />
                             </div>

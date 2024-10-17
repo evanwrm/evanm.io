@@ -15,7 +15,7 @@
     "scripts": {
         "build": "next build && next-sitemap",
         "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
-        "dev": "next dev",
+        "dev": "next dev --experimental-https",
         "lint": "next lint --ignore-path=../../.eslintignore",
         "start": "next start"
     },

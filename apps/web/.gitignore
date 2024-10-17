@@ -1,6 +1,7 @@
 # Next.js
 .next/
 out/
+certificates/
 
 # vercel
 .vercel

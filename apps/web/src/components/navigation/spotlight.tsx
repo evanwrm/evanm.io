@@ -239,6 +239,7 @@ function SpotlightTrigger({ onClick, className }: SpotlightTriggerProps) {
             variant="ghost"
             size="icon"
             onClick={onClick}
+            aria-label="Spotlight"
             className={cn("h-6 w-6 hover:bg-transparent", className)}
         >
             <Icon.RiCommandLine className="h-6 w-6" />
@@ -247,14 +248,15 @@ function SpotlightTrigger({ onClick, className }: SpotlightTriggerProps) {
     // return (
     //     <Button
     //         variant="outline"
+    //         onClick={onClick}
     //         className={cn(
     //             "bg-muted/50 text-muted-foreground relative h-8 justify-start rounded pr-12 text-sm font-normal shadow-none",
     //             className
     //         )}
-    //         onClick={onClick}
+    //         aria-label="Spotlight"
     //     >
     //         <span className="inline-flex">Search...</span>
-    //         <kbd className="bg-muted pointer-events-none absolute right-2 flex h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-xs font-medium">
+    //         <kbd className="bg-muted pointer-events-none absolute right-2 flex h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-xs font-medium uppercase">
     //             <span className="text-xs">⌘</span>K
     //         </kbd>
     //     </Button>
