@@ -14,11 +14,14 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 
-type Props = MDXProps & {
-    components?: MDXComponents;
-    source?: string;
-    className?: string;
-};
+// TODO: Remove on react 19 support
+declare module "mdx/types" {
+    namespace JSX {
+        type Element = runtime.JSX.Element;
+        type ElementClass = runtime.JSX.ElementClass;
+        type IntrinsicElements = runtime.JSX.IntrinsicElements;
+    }
+}
 
 export const defaultComponents = {
     a: ({ className, href = "", ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
@@ -42,7 +45,13 @@ export const defaultComponents = {
             />
         );
     },
-    Image
+    Image: Image as any // TODO: Remove on react 19 support
+} satisfies MDXComponents;
+
+type Props = MDXProps & {
+    components?: MDXComponents;
+    source?: string;
+    className?: string;
 };
 
 export const Markdown = async ({ components, source = "", className, ...props }: Props) => {
