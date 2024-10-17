@@ -14,7 +14,7 @@ interface Props {
     project: Project;
 }
 
-const ProjectCard = ({ project }: Props) => {
+export const ProjectCard = ({ project }: Props) => {
     const RepositoryIcon = project.repositoryUrl && getIcon(project.repositoryUrl);
     const newThreshold = addYears(new Date(), -1);
     const isNew =
@@ -39,15 +39,8 @@ const ProjectCard = ({ project }: Props) => {
                 )}
                 <CardHeader>
                     <div className="flex w-full items-center gap-4">
-                        <CardTitle className="flex items-center gap-2">
-                            {project.title}
-                            {isNew && (
-                                <Badge variant="secondary" className="bg-red-600 text-white">
-                                    NEW
-                                </Badge>
-                            )}
-                        </CardTitle>
-                        <div className="flex flex-1 justify-end gap-4">
+                        <CardTitle>{project.title}</CardTitle>
+                        <div className="flex flex-1 justify-end gap-2">
                             {project.repositoryUrl && RepositoryIcon && (
                                 <Link href={project.repositoryUrl} aria-label="Repository">
                                     <HoverButton>
@@ -61,6 +54,14 @@ const ProjectCard = ({ project }: Props) => {
                                         <Icon.RiExternalLinkLine className="h-6 w-6" />
                                     </HoverButton>
                                 </Link>
+                            )}
+                            {isNew && (
+                                <Badge
+                                    variant="secondary"
+                                    className="bg-red-600 text-white hover:bg-red-600"
+                                >
+                                    NEW
+                                </Badge>
                             )}
                         </div>
                     </div>
@@ -84,5 +85,3 @@ const ProjectCard = ({ project }: Props) => {
         </Tilt>
     );
 };
-
-export default ProjectCard;
