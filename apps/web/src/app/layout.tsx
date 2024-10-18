@@ -2,8 +2,7 @@ import { RootProvider } from "@/app/root-provider";
 import Analytics from "@/components/analytics/analytics";
 import BackToTop from "@/components/navigation/back-to-top";
 import { env } from "@/lib/env/client.mjs";
-import { createInnerContext } from "@/lib/server/context";
-import { createCaller } from "@/lib/server/routers/app";
+import { seoFind } from "@/lib/services/sanity/api";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import "@/styles/prism.css";
@@ -15,11 +14,13 @@ import Loading from "./loading";
 
 const fontSans = Plus_Jakarta_Sans({
     subsets: ["latin"],
-    variable: "--font-sans"
+    variable: "--font-sans",
+    display: "swap"
 });
 const fontMono = Fira_Code({
     subsets: ["latin"],
-    variable: "--font-mono"
+    variable: "--font-mono",
+    display: "swap"
 });
 
 interface Props {
@@ -38,8 +39,7 @@ interface Props {
 // };
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const caller = createCaller(await createInnerContext());
-    const seo = await caller.seo.find();
+    const seo = await seoFind();
 
     return {
         metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),

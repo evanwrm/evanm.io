@@ -1,8 +1,7 @@
 import { env } from "@/lib/env/server.mjs";
-import { createInnerContext } from "@/lib/server/context";
-import { createCaller } from "@/lib/server/routers/app";
+import { articleFind, settingsFind, socialFind } from "@/lib/services/sanity/api";
 import { isReference } from "@/lib/services/sanity/utils";
-import { articleValidator } from "@/lib/validators/Article";
+import { articleValidator } from "@/lib/validators/article";
 import { getYear } from "date-fns";
 import { Feed } from "feed";
 import { z } from "zod";
@@ -12,11 +11,10 @@ export type RssFormat = (typeof rssFormats)[number];
 export const RssEnum = z.enum(rssFormats);
 
 export const generateRssFeed = async () => {
-    const caller = createCaller(await createInnerContext());
     const [articles, socials, global] = await Promise.all([
-        caller.articles.find({ sort: "_createdAt desc" }),
-        caller.socials.find(),
-        caller.settings.find()
+        articleFind({ sort: "_createdAt desc" }),
+        socialFind({}),
+        settingsFind()
     ]);
     const parsedArticles = articleValidator.array().parse(articles);
 

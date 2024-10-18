@@ -2,7 +2,7 @@ import { Icon, getIcon } from "@/components/icon";
 import { Link } from "@/components/navigation/link";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Article } from "@/lib/validators/Article";
+import { Article } from "@/lib/validators/article";
 import { formatDistance } from "date-fns";
 
 interface Props {

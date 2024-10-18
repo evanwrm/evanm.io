@@ -1,6 +1,6 @@
 import { getAPIURL } from "@/lib/services/strapi/api";
-import { isExternal } from "@/lib/utils/uri";
-import { StrapiMedia } from "@/lib/validators/strapi/StrapiMedia";
+import { isExternal } from "@/lib/uri";
+import { StrapiMedia } from "@/lib/validators/strapi/strapi-media";
 
 export const getMedia = (media: StrapiMedia) => {
     const { url } = media;

@@ -5,7 +5,7 @@ import { Markdown } from "@/components/mdx/markdown";
 import { Link } from "@/components/navigation/link";
 import { isReference } from "@/lib/services/sanity/utils";
 import { cn } from "@/lib/utils";
-import { Experience } from "@/lib/validators/Experience";
+import { Experience } from "@/lib/validators/experience";
 import { format } from "date-fns";
 
 interface Props {

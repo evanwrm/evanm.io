@@ -10,7 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { Publication } from "@/lib/validators/Publication";
+import { Publication } from "@/lib/validators/publication";
 import { DotFilledIcon, StarFilledIcon } from "@radix-ui/react-icons";
 import { addYears } from "date-fns";
 
@@ -98,7 +98,7 @@ export const PublicationCard = ({ publication }: Props) => {
                         )}
                         {publication.award && (
                             <Tooltip>
-                                <TooltipTrigger>
+                                <TooltipTrigger aria-label="Award">
                                     <StarFilledIcon className="h-4 w-4 text-yellow-500" />
                                 </TooltipTrigger>
                                 <TooltipContent>

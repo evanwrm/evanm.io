@@ -1,5 +1,5 @@
 import { env } from "@/lib/env/client.mjs";
-import { StrapiQueryParameters } from "@/lib/validators/strapi/StrapiQueryParameters";
+import { StrapiQueryParameters } from "@/lib/validators/strapi/strapi-query-parameters";
 import { stringify } from "qs";
 
 export interface APIResponse<T = unknown> {
@@ -18,9 +18,7 @@ export const api = async <T>(
     flattenData: boolean = true
 ): Promise<T> => {
     const mergedOptions: RequestInit = {
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         ...options
     };
 

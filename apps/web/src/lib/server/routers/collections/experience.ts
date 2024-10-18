@@ -1,8 +1,8 @@
 import { procedure, router } from "@/lib/server/trpc";
 import { api } from "@/lib/services/sanity/api";
 import { groqSort } from "@/lib/services/sanity/utils";
-import { experienceValidator } from "@/lib/validators/Experience";
-import { sanityQueryParameterValidator } from "@/lib/validators/sanity/SanityQueryParameters";
+import { experienceValidator } from "@/lib/validators/experience";
+import { sanityQueryParameterValidator } from "@/lib/validators/sanity/sanity-query-parameters";
 
 export const experienceRouter = router({
     find: procedure

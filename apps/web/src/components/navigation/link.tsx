@@ -1,5 +1,5 @@
+import { isExternal } from "@/lib/uri";
 import { cn } from "@/lib/utils";
-import { isExternal } from "@/lib/utils/uri";
 import NextLink, { LinkProps } from "next/link";
 import React, { forwardRef } from "react";
 

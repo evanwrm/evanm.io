@@ -2,19 +2,11 @@
 
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { env } from "@/lib/env/client.mjs";
-import { trpc } from "@/lib/utils/trpc";
-import { getBaseUrl } from "@/lib/utils/uri";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { httpBatchLink, httpLink, loggerLink, splitLink } from "@trpc/react-query";
 import { LazyMotion } from "framer-motion";
 import { ThemeProvider } from "next-themes";
-import { useEffect, useState } from "react";
-import SuperJSON from "superjson";
-
-interface Props {
-    children: React.ReactNode;
-}
+import { useEffect } from "react";
 
 // TODO: dynamic meta not supported
 // const DynamicMeta = () => {
@@ -26,39 +18,11 @@ interface Props {
 //     );
 // };
 
-export const ClientProvider = ({ children }: Props) => {
-    const url = `${getBaseUrl()}/api/trpc`;
-    const [queryClient] = useState(
-        () => new QueryClient({ defaultOptions: { queries: { staleTime: Infinity } } })
-    );
-    const [trpcClient] = useState(() =>
-        trpc.createClient({
-            links: [
-                loggerLink({
-                    enabled: opts =>
-                        env.NEXT_PUBLIC_NODE_ENV === "development" ||
-                        (opts.direction === "down" && opts.result instanceof Error)
-                }),
-                splitLink({
-                    condition(op) {
-                        return op.context.skipBatch === true;
-                    },
-                    true: httpLink({ url }),
-                    false: httpBatchLink({ url, maxURLLength: 2048 })
-                })
-            ],
-            transformer: SuperJSON
-        })
-    );
-    return (
-        <trpc.Provider client={trpcClient} queryClient={queryClient}>
-            <QueryClientProvider client={queryClient}>
-                {children}
-                <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
-            </QueryClientProvider>
-        </trpc.Provider>
-    );
-};
+const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: Infinity } } });
+
+interface Props {
+    children: React.ReactNode;
+}
 
 export const RootProvider = ({ children }: Props) => {
     useEffect(() => {
@@ -79,7 +43,7 @@ export const RootProvider = ({ children }: Props) => {
     }, []);
 
     return (
-        <ClientProvider>
+        <QueryClientProvider client={queryClient}>
             <LazyMotion
                 features={() => import("@/lib/animation/framer-features").then(res => res.default)}
                 strict
@@ -93,6 +57,7 @@ export const RootProvider = ({ children }: Props) => {
                     <TooltipProvider delayDuration={300}>{children}</TooltipProvider>
                 </ThemeProvider>
             </LazyMotion>
-        </ClientProvider>
+            <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
+        </QueryClientProvider>
     );
 };

@@ -4,7 +4,7 @@ import { FadeIn } from "@/components/animation/fade-in";
 import { BlogCard } from "@/components/blog-card";
 import { AutocompleteInput } from "@/components/input/autocomplete-input";
 import { Label } from "@/components/ui/label";
-import { Article } from "@/lib/validators/Article";
+import { Article } from "@/lib/validators/article";
 import { useState } from "react";
 
 interface Props {

@@ -1,6 +1,6 @@
 "use client";
 
-import { trpc } from "@/lib/utils/trpc";
+import { articleIncrementViews } from "@/lib/services/api";
 import { useEffect } from "react";
 
 interface Props {
@@ -8,17 +8,14 @@ interface Props {
 }
 
 const ViewCounter = ({ documentId }: Props) => {
-    const { mutate } = trpc.articles.incrementViews.useMutation();
     useEffect(() => {
-        const registerView = async () => {
-            try {
-                mutate({ documentId });
-            } catch (error) {
-                console.error("Failed to register view", error);
-            }
+        const registerView = () => {
+            articleIncrementViews({ documentId }).catch(e =>
+                console.error("Failed to register view", e)
+            );
         };
         registerView();
-    }, [documentId, mutate]);
+    }, [documentId]);
 
     return null;
 };

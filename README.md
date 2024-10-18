@@ -33,9 +33,10 @@ Portfolio website running on [Next.js](https://nextjs.org/) + [Sanity](https://s
 -   [Next.js](https://nextjs.org) + [React](https://react.dev/)
 -   [shadcn/ui](https://ui.shadcn.com/)
 -   [Tailwind](https://tailwindcss.com)
+-   [Jotai](https://jotai.org/)
 -   [MDX](https://mdxjs.com)
 -   [Framer Motion](https://www.framer.com/motion)
--   [tRPC](https://trpc.io/)
+-   [Tanstack Query](https://tanstack.com/query)
 -   [Vitest](https://vitest.dev/)
 -   [Playwright](https://playwright.dev/)
 -   [Typescript](https://www.typescriptlang.org)
@@ -73,4 +74,5 @@ Installation/usage instructions can be found in [apps/cms-strapi](apps/cms-strap
 -   spotlight shortcuts + search children
 -   remove strapi
 -   remove trpc (-> jotai)
+-   add openapi back
 -   remove commandScore

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { SanityMediaAsset } from "@/lib/validators/sanity/SanityMedia";
+import { SanityMediaAsset } from "@/lib/validators/sanity/sanity-media";
 import NextImage from "next/image";
 
 interface Props {

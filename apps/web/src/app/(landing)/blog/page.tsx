@@ -1,6 +1,5 @@
 import { ArticleSearch } from "@/components/article-search";
-import { createInnerContext } from "@/lib/server/context";
-import { createCaller } from "@/lib/server/routers/app";
+import { articleFind } from "@/lib/services/sanity/api";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,8 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Blog() {
-    const caller = createCaller(await createInnerContext());
-    const articles = await caller.articles.find({ sort: "_createdAt desc" });
+    const articles = await articleFind({ sort: "_createdAt desc" });
 
     return (
         <>

@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { isReference } from "@/lib/services/sanity/utils";
 import { cn } from "@/lib/utils";
-import { Project } from "@/lib/validators/Project";
+import { Project } from "@/lib/validators/project";
 import { addYears } from "date-fns";
 
 interface Props {

@@ -1,4 +1,4 @@
-import { SanityReference } from "@/lib/validators/sanity/SanityDocument";
+import { SanityReference } from "@/lib/validators/sanity/sanity-document";
 
 export const groqSort = (sort: string | string[] | null | undefined) => {
     const sortPart = (Array.isArray(sort) ? sort : [sort]).map(s => `order(${s})`).join("|");

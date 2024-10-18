@@ -6,8 +6,14 @@ import { Image } from "@/components/image";
 import { Markdown } from "@/components/mdx/markdown";
 import { ProjectCard } from "@/components/project-card";
 import { PublicationCard } from "@/components/publication-card";
-import { createInnerContext } from "@/lib/server/context";
-import { createCaller } from "@/lib/server/routers/app";
+import {
+    educationFind,
+    experienceFind,
+    landingFind,
+    projectFind,
+    publicationFind,
+    settingsFind
+} from "@/lib/services/sanity/api";
 import { isReference } from "@/lib/services/sanity/utils";
 import { Metadata } from "next";
 
@@ -16,14 +22,13 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-    const caller = createCaller(await createInnerContext());
     const [landing, educations, experiences, projects, publications, settings] = await Promise.all([
-        caller.landing.find(),
-        caller.education.find({ sort: ["endDate desc", "startDate desc"] }),
-        caller.experience.find({ sort: ["endDate desc", "startDate desc"] }),
-        caller.projects.find({ sort: "endDate desc" }),
-        caller.publications.find({ sort: "year desc" }),
-        caller.settings.find()
+        landingFind(),
+        educationFind({ sort: ["endDate desc", "startDate desc"] }),
+        experienceFind({ sort: ["endDate desc", "startDate desc"] }),
+        projectFind({ sort: "endDate desc" }),
+        publicationFind({ sort: "year desc" }),
+        settingsFind()
     ]);
 
     return (

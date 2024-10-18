@@ -1,8 +1,8 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
+import { fuzzySearch } from "@/lib/search";
 import { cn } from "@/lib/utils";
-import { fuzzySearch } from "@/lib/utils/search";
 import { useCallback, useState } from "react";
 
 interface Props<T = string> extends React.InputHTMLAttributes<HTMLInputElement> {

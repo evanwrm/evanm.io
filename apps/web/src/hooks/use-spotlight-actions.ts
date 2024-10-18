@@ -1,16 +1,24 @@
 import { SpotlightAction } from "@/components/navigation/spotlight";
 import { env } from "@/lib/env/client.mjs";
 import { isReference } from "@/lib/services/sanity/utils";
-import { trpc } from "@/lib/utils/trpc";
+import { Seo } from "@/lib/validators/seo";
+import { Settings } from "@/lib/validators/settings";
+import { SocialLink } from "@/lib/validators/social";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 
-export const useSpotlightActions = (): SpotlightAction[] => {
+interface SpotlightActionsOptions {
+    socials: SocialLink[];
+    seo: Seo;
+    settings: Settings;
+}
+export const useSpotlightActions = ({
+    socials,
+    seo,
+    settings
+}: SpotlightActionsOptions): SpotlightAction[] => {
     const router = useRouter();
     const { setTheme } = useTheme();
-    const { data: settings } = trpc.settings.find.useQuery();
-    const { data: seo } = trpc.seo.find.useQuery();
-    const { data: socials = [] } = trpc.socials.find.useQuery();
 
     const github = socials?.find(social => social.socialId === "github");
     const cvUrl = !isReference(settings?.cv?.asset) && settings?.cv?.asset.url;
