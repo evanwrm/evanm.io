@@ -10,7 +10,7 @@ First, run the development server:
 pnpm dev
 ```
 
-Now, we can open [http://localhost:3000](http://localhost:3000) and begin developement.
+Now, we can open [https://localhost:3000](https://localhost:3000) and begin developement.
 
 Alternatively, we can analyze bundle sizes by setting the `ANALYZE` environment variable, and building the app:
 
@@ -25,7 +25,7 @@ The portfolio supports the [OpenAPI](https://www.openapis.org/) spec through [tr
 Alternatively, you can view the current spec with [Swagger](https://swagger.io/) by running:
 
 ```sh
-pnpx swagger-viewer --open -- http://localhost:3000/api/openapi.json
+pnpx swagger-viewer --open -- https://localhost:3000/api/openapi.json
 ```
 
 ## Deployment

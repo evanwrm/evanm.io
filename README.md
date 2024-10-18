@@ -8,7 +8,7 @@
 
 <div align="center">
 
-A personal portfolio website running on [Next.js](https://nextjs.org/) + [Strapi](https://strapi.io).
+A personal portfolio website running on [Next.js](https://nextjs.org/) + [Sanity](https://www.sanity.io/).
 
 [![Website](https://img.shields.io/website/https/evanm.io?down_color=red&down_message=down&up_message=up&style=flat-square)](https://evanm.io)
 ![GitHub last commit](https://img.shields.io/github/last-commit/evanwrm/evanm.io?style=flat-square)
@@ -21,10 +21,6 @@ A personal portfolio website running on [Next.js](https://nextjs.org/) + [Strapi
 [![Twitter](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Twitter)](https://twitter.com/<USER>)
 -->
 </div>
-
-# evanm.io
-
-Portfolio website running on [Next.js](https://nextjs.org/) + [Sanity](https://sanity.io).
 
 ## Getting Started
 
@@ -72,7 +68,5 @@ Installation/usage instructions can be found in [apps/cms-strapi](apps/cms-strap
 
 -   upgrade nextjs
 -   spotlight shortcuts + search children
--   remove strapi
--   remove trpc (-> jotai)
 -   add openapi back
 -   remove commandScore

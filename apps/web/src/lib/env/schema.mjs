@@ -23,9 +23,6 @@ export const clientSchema = z.object({
     NEXT_PUBLIC_OPENAPI_DESCIPTION: z.string().default("OpenAPI compliant REST API"),
     NEXT_PUBLIC_OPENAPI_VERSION: z.string().default("1.0.0"),
 
-    // Strapi
-    NEXT_PUBLIC_STRAPI_URL: z.string().url(),
-
     // Sanity
     NEXT_PUBLIC_SANITY_URL: z.string().url(),
     NEXT_PUBLIC_SANITY_PROJECT_ID: z.string(),
@@ -47,8 +44,6 @@ export const clientEnv = {
     // OpenAPI
     NEXT_PUBLIC_OPENAPI_DESCIPTION: process.env.NEXT_PUBLIC_OPENAPI_DESCIPTION,
     NEXT_PUBLIC_OPENAPI_VERSION: process.env.NEXT_PUBLIC_OPENAPI_VERSION,
-    // Strapi
-    NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
     // Sanity
     NEXT_PUBLIC_SANITY_URL: process.env.NEXT_PUBLIC_SANITY_URL,
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,

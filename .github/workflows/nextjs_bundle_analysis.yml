@@ -46,8 +46,6 @@ jobs:
               env:
                   # Public
                   NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
-                  # Strapi
-                  NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
                   # Sanity
                   NEXT_PUBLIC_SANITY_URL: ${{ secrets.NEXT_PUBLIC_SANITY_URL }}
                   NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
