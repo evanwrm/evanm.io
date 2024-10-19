@@ -1,30 +1,36 @@
-import { env } from "@/lib/env/client.mjs";
 import { getRssFeed, RssFormat, rssFormats } from "@/lib/rss";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { z } from "zod";
 
+const schema = z.object({ format: z.enum(rssFormats) });
+
 export const GET = async (req: NextRequest) => {
-    const formatParsed = z.enum(rssFormats).safeParse(req.nextUrl.searchParams.get("format"));
-    const format: RssFormat = formatParsed.success ? formatParsed.data : "rss2";
+    const params = req.nextUrl.searchParams;
+    const { success, data } = schema.safeParse({ format: params.get("format") ?? "rss2" });
+    if (!success)
+        return Response.json(
+            { message: "Invalid request.", status: "error", now: Date.now() },
+            { status: 400 }
+        );
+    const { format } = data;
 
     try {
         const feed = await getRssFeed(format);
-
         const formatContentMap: Record<RssFormat, string> = {
             rss2: "application/xml",
             atom1: "application/xml",
             json1: "application/json"
         };
-
         return new Response(feed, {
-            headers: {
-                "Content-Type": formatContentMap[format],
-                "Cache-Control": `public, s-maxage=${env.NEXT_PUBLIC_RSS_CACHE_TIME}, stale-while-revalidate`
-            },
+            headers: { "Content-Type": formatContentMap[format] },
             status: 200
         });
     } catch (e) {
-        return NextResponse.json({ message: "Failed to generate feed." }, { status: 500 });
+        console.error(e);
+        return Response.json(
+            { message: "Failed to generate feed.", status: "error", now: Date.now() },
+            { status: 500 }
+        );
     }
 };
 

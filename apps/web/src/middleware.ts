@@ -1,8 +1,8 @@
-import { settingsFind } from "@/lib/services/sanity/api";
+import { env } from "@/lib/env/client.mjs";
+import { settingsFind } from "@/lib/services/sanity/queries";
 import { isReference } from "@/lib/services/sanity/utils";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { env } from "./lib/env/client.mjs";
 
 export const middleware = async (request: NextRequest) => {
     const url = request.nextUrl.clone();

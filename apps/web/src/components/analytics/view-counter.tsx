@@ -1,6 +1,6 @@
 "use client";
 
-import { articleIncrementViews } from "@/lib/services/api";
+import { articleIncrementViews } from "@/lib/services/sanity/actions";
 import { useEffect } from "react";
 
 interface Props {
@@ -9,12 +9,9 @@ interface Props {
 
 const ViewCounter = ({ documentId }: Props) => {
     useEffect(() => {
-        const registerView = () => {
-            articleIncrementViews({ documentId }).catch(e =>
-                console.error("Failed to register view", e)
-            );
-        };
-        registerView();
+        articleIncrementViews({ documentId }).catch(e =>
+            console.error("Failed to register view", e)
+        );
     }, [documentId]);
 
     return null;

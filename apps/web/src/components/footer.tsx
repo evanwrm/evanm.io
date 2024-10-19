@@ -3,7 +3,7 @@ import { getIcon } from "@/components/icon";
 import { ThemeToggle } from "@/components/input/theme-toggle";
 import { Link } from "@/components/navigation/link";
 import { MainNav } from "@/components/navigation/main-nav";
-import { socialFind } from "@/lib/services/sanity/api";
+import { socialFind } from "@/lib/services/sanity/queries";
 import { getYear } from "date-fns";
 
 interface Props {

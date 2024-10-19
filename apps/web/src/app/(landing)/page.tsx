@@ -13,7 +13,7 @@ import {
     projectFind,
     publicationFind,
     settingsFind
-} from "@/lib/services/sanity/api";
+} from "@/lib/services/sanity/queries";
 import { isReference } from "@/lib/services/sanity/utils";
 import { Metadata } from "next";
 

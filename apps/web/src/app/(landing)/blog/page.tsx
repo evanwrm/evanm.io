@@ -1,5 +1,5 @@
 import { ArticleSearch } from "@/components/article-search";
-import { articleFind } from "@/lib/services/sanity/api";
+import { articleFind } from "@/lib/services/sanity/queries";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

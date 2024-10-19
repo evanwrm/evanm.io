@@ -2,7 +2,7 @@ import { HexBackground } from "@/components/background-hex";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { env } from "@/lib/env/client.mjs";
-import { seoFind, settingsFind, socialFind } from "@/lib/services/sanity/api";
+import { seoFind, settingsFind, socialFind } from "@/lib/services/sanity/queries";
 import React from "react";
 
 const headerRoutes = [

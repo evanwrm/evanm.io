@@ -1,6 +1,6 @@
 import ViewCounter from "@/components/analytics/view-counter";
 import { Markdown } from "@/components/mdx/markdown";
-import { articleFind, articleFindOne } from "@/lib/services/sanity/api";
+import { articleFind, articleFindOne } from "@/lib/services/sanity/queries";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 

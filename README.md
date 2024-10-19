@@ -68,5 +68,4 @@ Installation/usage instructions can be found in [apps/cms-strapi](apps/cms-strap
 
 -   upgrade nextjs
 -   spotlight shortcuts + search children
--   add openapi back
 -   remove commandScore

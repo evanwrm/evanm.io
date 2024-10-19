@@ -1,14 +1,12 @@
 import { env } from "@/lib/env/server.mjs";
-import { articleFind, settingsFind, socialFind } from "@/lib/services/sanity/api";
+import { articleFind, settingsFind, socialFind } from "@/lib/services/sanity/queries";
 import { isReference } from "@/lib/services/sanity/utils";
 import { articleValidator } from "@/lib/validators/article";
 import { getYear } from "date-fns";
 import { Feed } from "feed";
-import { z } from "zod";
 
 export const rssFormats = ["rss2", "atom1", "json1"] as const;
 export type RssFormat = (typeof rssFormats)[number];
-export const RssEnum = z.enum(rssFormats);
 
 export const generateRssFeed = async () => {
     const [articles, socials, global] = await Promise.all([
@@ -67,7 +65,6 @@ export const generateRssFeed = async () => {
 
 export const getRssFeed = async (format: RssFormat) => {
     const feed = await generateRssFeed();
-
     const feedMap: Record<RssFormat, () => string> = {
         rss2: feed.rss2,
         atom1: feed.atom1,

@@ -1,7 +1,9 @@
 import { Pre } from "@/components/mdx/pre";
 import { Link } from "@/components/navigation/link";
 import { cn } from "@/lib/utils";
+import "@/styles/prism.css";
 import { compile, run } from "@mdx-js/mdx";
+import "katex/dist/katex.css";
 import type { MDXComponents, MDXProps } from "mdx/types";
 import Image from "next/image";
 import * as runtime from "react/jsx-runtime";
@@ -24,10 +26,10 @@ declare module "mdx/types" {
 }
 
 export const defaultComponents = {
-    a: ({ className, href = "", ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+    a: ({ href = "", className, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
         <Link
             href={href}
-            className="text-foreground/80 hover:text-foreground font-semibold"
+            className={cn("text-foreground/80 hover:text-foreground font-semibold", className)}
             {...props}
         />
     ),
