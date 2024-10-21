@@ -8,7 +8,7 @@ const sitemapConfig = {
     priority: 0.7,
     sitemapSize: 5000,
     generateRobotsTxt: true,
-    exclude: ["/api", "/admin", "/404"]
+    exclude: ["/api", "/admin", "/404", "/manifest.webmanifest"]
 };
 
 export default sitemapConfig;
