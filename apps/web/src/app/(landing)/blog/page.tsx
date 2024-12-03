@@ -2,6 +2,8 @@ import { ArticleSearch } from "@/components/article-search";
 import { articleFind } from "@/lib/services/sanity/queries";
 import { Metadata } from "next";
 
+export const experimental_ppr = true;
+
 export const metadata: Metadata = {
     title: "Blog"
 };

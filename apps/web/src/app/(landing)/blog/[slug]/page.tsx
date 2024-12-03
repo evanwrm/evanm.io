@@ -4,6 +4,8 @@ import { articleFind, articleFindOne } from "@/lib/services/sanity/queries";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export const experimental_ppr = true;
+
 type Params = { slug: string };
 interface Props {
     params: Promise<Params>;

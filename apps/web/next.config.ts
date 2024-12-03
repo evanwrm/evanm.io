@@ -19,7 +19,7 @@ const baseConfig: NextConfig = {
             { hostname: "cdn.sanity.io" }
         ]
     },
-    experimental: { nextScriptWorkers: true }
+    experimental: { nextScriptWorkers: true, ppr: "incremental" }
 };
 
 export default withBundleAnalyzer(baseConfig);

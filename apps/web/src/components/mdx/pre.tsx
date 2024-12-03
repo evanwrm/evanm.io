@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { anticipateTransition, fadePopVariants } from "@/lib/animation/framer-variants";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, delay, m } from "framer-motion";
-import { HTMLAttributes, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-interface Props extends HTMLAttributes<HTMLPreElement> {}
+interface Props extends React.HTMLAttributes<HTMLPreElement> {}
 
 export const Pre = ({ className, children, ...props }: Props) => {
     const ref = useRef<HTMLDivElement>(null);
