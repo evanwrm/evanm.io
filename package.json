@@ -56,5 +56,11 @@
     "engines": {
         "node": ">=20.0.0",
         "pnpm": ">=9.12.1"
+    },
+    "pnpm": {
+        "overrides": {
+            "@types/react": "npm:types-react@19.0.0-rc.1",
+            "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+        }
     }
 }

@@ -17,7 +17,6 @@ import {
 import { isReference } from "@/lib/services/sanity/utils";
 import { Metadata } from "next";
 
-export const experimental_ppr = true;
 export const revalidate = 60;
 
 export const metadata: Metadata = {

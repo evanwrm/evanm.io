@@ -4,7 +4,6 @@ import { articleFind, articleFindOne } from "@/lib/services/sanity/queries";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export const experimental_ppr = true;
 export const revalidate = 60;
 
 type Params = { slug: string };

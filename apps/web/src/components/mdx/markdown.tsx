@@ -16,15 +16,6 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 
-// TODO: Remove on react 19 support
-declare module "mdx/types" {
-    namespace JSX {
-        type Element = runtime.JSX.Element;
-        type ElementClass = runtime.JSX.ElementClass;
-        type IntrinsicElements = runtime.JSX.IntrinsicElements;
-    }
-}
-
 export const defaultComponents = {
     a: ({ href = "", className, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
         <Link
@@ -47,7 +38,7 @@ export const defaultComponents = {
             />
         );
     },
-    Image: Image as any // TODO: Remove on react 19 support
+    Image
 } satisfies MDXComponents;
 
 type Props = MDXProps & {
