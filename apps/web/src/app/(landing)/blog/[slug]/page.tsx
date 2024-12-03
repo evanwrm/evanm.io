@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export const experimental_ppr = true;
+export const revalidate = 60;
 
 type Params = { slug: string };
 interface Props {
@@ -47,5 +48,3 @@ export const generateStaticParams = async (): Promise<Params[]> => {
 
     return slugs.map(slug => ({ slug }));
 };
-
-export const revalidate = 60;

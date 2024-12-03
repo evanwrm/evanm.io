@@ -2,6 +2,8 @@ import { getRssFeed, RssFormat, rssFormats } from "@/lib/rss";
 import { NextRequest } from "next/server";
 import { z } from "zod";
 
+export const revalidate = 3600;
+
 const schema = z.object({ format: z.enum(rssFormats) });
 
 export const GET = async (req: NextRequest) => {
@@ -33,5 +35,3 @@ export const GET = async (req: NextRequest) => {
         );
     }
 };
-
-export const revalidate = 3600;

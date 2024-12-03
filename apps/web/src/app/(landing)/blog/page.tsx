@@ -3,6 +3,7 @@ import { articleFind } from "@/lib/services/sanity/queries";
 import { Metadata } from "next";
 
 export const experimental_ppr = true;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
     title: "Blog"
@@ -26,5 +27,3 @@ export default async function Blog() {
         </>
     );
 }
-
-export const revalidate = 60;
