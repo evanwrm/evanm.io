@@ -3,13 +3,6 @@
     "version": "0.1.0",
     "private": true,
     "homepage": "https://api.evanm.io",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/evanwrm/evanm.io",
-        "directory": "apps/api"
-    },
-    "license": "MIT",
-    "author": "Evan Madill <emadill@outlook.com>",
     "main": "package.json",
     "scripts": {
         "build": "sanity build",
@@ -53,9 +46,5 @@
         "prettier": "^3.4.1",
         "typescript": "^5.7.2"
     },
-    "packageManager": "pnpm@9.12.1",
-    "engines": {
-        "node": ">=20.0.0",
-        "pnpm": ">=9.12.1"
-    }
+    "packageManager": "pnpm@10.21.0"
 }

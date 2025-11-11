@@ -4,13 +4,6 @@
     "private": true,
     "description": "The frontend component of a portfolio website running Next.js",
     "homepage": "https://evanm.io",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/evanwrm/evanm.io",
-        "directory": "apps/web"
-    },
-    "license": "MIT",
-    "author": "Evan Madill <emadill@outlook.com>",
     "type": "module",
     "scripts": {
         "build": "next build && next-sitemap",
@@ -89,11 +82,7 @@
         "tailwindcss-animate": "^1.0.7",
         "typescript": "5.7.2"
     },
-    "packageManager": "pnpm@9.12.1",
-    "engines": {
-        "node": ">=20.0.0",
-        "pnpm": ">=9.12.1"
-    },
+    "packageManager": "pnpm@10.21.0",
     "nextBundleAnalysis": {
         "budget": 153600,
         "budgetPercentIncreaseRed": 10,
