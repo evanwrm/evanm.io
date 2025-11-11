@@ -16,8 +16,7 @@ const baseConfig: NextConfig = {
             { hostname: "res.cloudinary.com" },
             { hostname: "cdn.sanity.io" }
         ]
-    },
-    experimental: { nextScriptWorkers: true }
+    }
 };
 
 export default withBundleAnalyzer(baseConfig);

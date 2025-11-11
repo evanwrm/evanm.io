@@ -21,16 +21,16 @@ export const ProjectCard = ({ project }: Props) => {
         new Date(project.endDate ?? project.startDate ?? project._createdAt) > newThreshold;
 
     return (
-        <Tilt tiltStrength={5} className="bg-background h-full max-h-screen">
+        <Tilt tiltStrength={5} className="h-full max-h-screen bg-background">
             <Card
                 className={cn(
                     "group flex h-full flex-col overflow-hidden",
-                    "ring-offset-background hover:ring-input border ring-offset-0 transition duration-500 hover:ring hover:ring-offset-4"
+                    "border ring-offset-0 ring-offset-background transition duration-500 hover:ring hover:ring-input hover:ring-offset-4"
                 )}
             >
                 {project.thumbnail && !isReference(project.thumbnail.asset) && (
                     <Image
-                        image={project.thumbnail.asset}
+                        src={project.thumbnail.asset}
                         alt={project.thumbnail.alt ?? project.title}
                         width={426}
                         height={240}

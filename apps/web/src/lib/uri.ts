@@ -25,7 +25,9 @@ export const parseUrl = (url: string): ParsedUrl => {
         port: parsedURL.port,
         protocol: parsedURL.protocol,
         query: searchParamsToUrlQuery(parsedURL.searchParams),
-        search: parsedURL.search
+        search: parsedURL.search,
+        slashes:
+            parsedURL.href.slice(parsedURL.protocol.length, parsedURL.protocol.length + 2) === "//"
     };
 };
 

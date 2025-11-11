@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
 import { SanityMediaAsset } from "@/lib/validators/sanity/sanity-media";
+import type { StaticImport } from "next/dist/shared/lib/get-img-props";
 import NextImage from "next/image";
 
 interface Props {
-    image: SanityMediaAsset;
+    src: string | StaticImport | SanityMediaAsset;
     alt?: string;
     width?: number;
     height?: number;
@@ -12,16 +13,19 @@ interface Props {
 
 // https://plaiceholder.co/
 // https://png-pixel.com/
-export const Image = ({ image, alt = "", width, height, className }: Props) => {
-    const { width: sourceWidth, height: sourceHeight } = image.metadata?.dimensions ?? {};
-    const lqip = image.metadata?.lqip ?? undefined;
-
+export const Image = ({ src, alt = "", width, height, className }: Props) => {
+    const isSanity = typeof src === "object" && "url" in src;
+    const url = isSanity ? src.url : src;
+    const w = width ?? (isSanity ? src.metadata?.dimensions.width : undefined);
+    const h = height ?? (isSanity ? src.metadata?.dimensions.height : undefined);
+    const lqip = isSanity ? (src.metadata?.lqip ?? undefined) : undefined;
     return (
         <NextImage
-            src={image.url}
+            src={url}
             alt={alt}
-            width={width ?? sourceWidth}
-            height={height ?? sourceHeight}
+            width={w}
+            height={h}
+            fill={!width && !height}
             className={cn(className, "object-cover")}
             placeholder="blur"
             blurDataURL={lqip}

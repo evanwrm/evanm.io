@@ -1,7 +1,6 @@
 import { isExternal } from "@/lib/uri";
 import { cn } from "@/lib/utils";
-import NextLink, { LinkProps } from "next/link";
-import React, { forwardRef } from "react";
+import NextLink, { type LinkProps } from "next/link";
 
 interface Props
     extends Pick<LinkProps, "href">,
@@ -10,31 +9,25 @@ interface Props
     className?: string;
 }
 
-const Link = forwardRef<HTMLAnchorElement, Props>(
-    ({ href, className, children, ...props }: Props, ref) => {
-        const url = typeof href === "string" ? href : (href.href ?? "");
+export function Link({ href, className, children, ...props }: Props) {
+    const url = typeof href === "string" ? href : (href.href ?? "");
 
-        if (isExternal(url))
-            return (
-                <a
-                    ref={ref}
-                    href={url}
-                    className={cn(className)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    {...props}
-                >
-                    {children}
-                </a>
-            );
-
+    if (isExternal(url))
         return (
-            <NextLink className={cn(className)} href={href} {...props}>
+            <a
+                href={url}
+                className={cn(className)}
+                target="_blank"
+                rel="noopener noreferrer"
+                {...props}
+            >
                 {children}
-            </NextLink>
+            </a>
         );
-    }
-);
-Link.displayName = "Link";
 
-export { Link };
+    return (
+        <NextLink className={cn(className)} href={href} {...props}>
+            {children}
+        </NextLink>
+    );
+}

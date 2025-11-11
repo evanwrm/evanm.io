@@ -6,26 +6,21 @@ import {
     slideFadeRegistry
 } from "@/lib/animation/framer-variants";
 import { cn } from "@/lib/utils";
-import { Transition, Variants, m } from "framer-motion";
-import React from "react";
+import { HTMLMotionProps, m } from "framer-motion";
 
-interface Props {
-    variants?: Variants | SlideDirection;
-    transition?: Transition;
+interface Props extends HTMLMotionProps<"div"> {
+    direction?: SlideDirection;
     once?: boolean;
-    className?: string;
-    children?: React.ReactNode;
 }
 
 export const FadeIn = ({
-    variants = "bottom",
+    direction = "bottom",
     transition = lightBounceTransition,
     once = true,
     className,
     children
 }: Props) => {
-    const variant = typeof variants === "string" ? slideFadeRegistry[variants] : variants;
-
+    const variant = slideFadeRegistry[direction];
     return (
         <m.div
             className={cn(className)}

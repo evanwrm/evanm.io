@@ -27,7 +27,7 @@ export const ExperienceCard = ({ experience, className }: Props) => {
                 <div className="flex items-start">
                     {experience.thumbnail?.asset && !isReference(experience.thumbnail.asset) && (
                         <Image
-                            image={experience.thumbnail?.asset}
+                            src={experience.thumbnail?.asset}
                             alt={experience.thumbnail?.alt ?? experience.company}
                             width={128}
                             height={128}
@@ -48,7 +48,7 @@ export const ExperienceCard = ({ experience, className }: Props) => {
                                 </Link>
                             )}
                         </div>
-                        <span className="text-muted-foreground text-sm sm:text-base">
+                        <span className="text-sm text-muted-foreground sm:text-base">
                             {experience.role}
                         </span>
                     </div>
@@ -64,7 +64,7 @@ export const ExperienceCard = ({ experience, className }: Props) => {
                     {startDate} - {endDate}
                 </span>
                 {experience.location && (
-                    <div className="text-muted-foreground flex items-center text-xs italic sm:mt-1 sm:text-sm">
+                    <div className="flex items-center text-xs italic text-muted-foreground sm:mt-1 sm:text-sm">
                         <span className="font-semibold">{experience.location}</span>
                         <Icon.HiOutlineLocationMarker className="ml-2 h-4 w-4" />
                     </div>

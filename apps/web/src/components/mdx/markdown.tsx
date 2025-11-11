@@ -1,3 +1,4 @@
+import { Image } from "@/components/image";
 import { Pre } from "@/components/mdx/pre";
 import { Link } from "@/components/navigation/link";
 import { cn } from "@/lib/utils";
@@ -5,7 +6,6 @@ import "@/styles/prism.css";
 import { compile, run } from "@mdx-js/mdx";
 import "katex/dist/katex.css";
 import type { MDXComponents, MDXProps } from "mdx/types";
-import Image from "next/image";
 import * as runtime from "react/jsx-runtime";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCodeTitles from "rehype-code-titles";
@@ -20,7 +20,7 @@ export const defaultComponents = {
     a: ({ href = "", className, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
         <Link
             href={href}
-            className={cn("text-foreground/80 hover:text-foreground font-semibold", className)}
+            className={cn("font-semibold text-foreground/80 hover:text-foreground", className)}
             {...props}
         />
     ),
@@ -32,7 +32,7 @@ export const defaultComponents = {
                 className={cn(
                     className,
                     !match &&
-                        "bg-secondary rounded-md p-1 font-mono text-sm before:content-none after:content-none"
+                        "rounded-md bg-secondary p-1 font-mono text-sm before:content-none after:content-none"
                 )}
                 {...props}
             />

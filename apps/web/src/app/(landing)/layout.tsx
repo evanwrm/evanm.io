@@ -3,7 +3,6 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { env } from "@/lib/env/client.mjs";
 import { seoFind, settingsFind, socialFind } from "@/lib/services/sanity/queries";
-import React from "react";
 
 const headerRoutes = [
     {
@@ -34,7 +33,7 @@ export default async function LandingLayout({ children }: Props) {
     return (
         <>
             <Header socials={socials} seo={seo} settings={settings} routes={headerRoutes} />
-            <HexBackground className="text-foreground/40 h-48" />
+            <HexBackground className="h-48 text-foreground/40" />
             <main className="flex flex-1 flex-col">{children}</main>
             <Footer routes={headerRoutes} />
         </>

@@ -44,7 +44,7 @@ export default async function Home() {
                         {settings.avatar && !isReference(settings.avatar?.asset) && (
                             <div className="mx-2 sm:mx-4">
                                 <Image
-                                    image={settings.avatar?.asset}
+                                    src={settings.avatar?.asset}
                                     alt={settings.avatar.alt ?? "Avatar"}
                                     width={128}
                                     height={128}
@@ -67,7 +67,7 @@ export default async function Home() {
                 <section id="experience" className="mx-auto w-full max-w-screen-xl p-4">
                     <FadeIn className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
                         <h2 className="flex items-center justify-start text-2xl font-bold">
-                            <div className="bg-background mr-2 rounded-full border p-2">
+                            <div className="mr-2 rounded-full border bg-background p-2">
                                 <Icon.FaToolbox className="h-6 w-6" />
                             </div>
                             Experience
@@ -80,7 +80,7 @@ export default async function Home() {
                                 >
                                     <ExperienceCard
                                         experience={experience}
-                                        className="prose-li:my-px my-4"
+                                        className="my-4 prose-li:my-px"
                                     />
                                 </FadeIn>
                             ))}
@@ -92,7 +92,7 @@ export default async function Home() {
                 <section id="education" className="mx-auto w-full max-w-screen-xl p-4">
                     <FadeIn className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
                         <h2 className="flex items-center justify-start text-2xl font-bold">
-                            <div className="bg-background mr-2 rounded-full border p-2">
+                            <div className="mr-2 rounded-full border bg-background p-2">
                                 <Icon.FaGraduationCap className="h-6 w-6" />
                             </div>
                             Education
@@ -102,7 +102,7 @@ export default async function Home() {
                                 <FadeIn key={education.slug} className="border-t first:border-none">
                                     <EducationCard
                                         education={education}
-                                        className="prose-li:my-px my-4"
+                                        className="my-4 prose-li:my-px"
                                     />
                                 </FadeIn>
                             ))}
@@ -114,7 +114,7 @@ export default async function Home() {
                 <section id="projects" className="mx-auto w-full max-w-screen-xl p-4">
                     <FadeIn className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
                         <h2 className="flex items-center justify-start text-2xl font-bold">
-                            <div className="bg-background mr-2 rounded-full border p-2">
+                            <div className="mr-2 rounded-full border bg-background p-2">
                                 <Icon.HiOutlineLightBulb className="h-6 w-6" />
                             </div>
                             Projects
@@ -135,7 +135,7 @@ export default async function Home() {
                 <section id="publications" className="mx-auto w-full max-w-screen-xl p-4">
                     <FadeIn className="my-6 flex w-full scroll-mt-16 flex-col gap-8">
                         <h2 className="flex items-center justify-start text-2xl font-bold">
-                            <div className="bg-background mr-2 rounded-full border p-2">
+                            <div className="mr-2 rounded-full border bg-background p-2">
                                 <Icon.SiBookstack className="h-6 w-6" />
                             </div>
                             Recent Publications

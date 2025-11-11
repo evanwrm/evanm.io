@@ -3,15 +3,6 @@
     "version": "0.1.0",
     "private": true,
     "description": "Evan's personal portfolio website",
-    "keywords": [
-        "portfolio",
-        "nextjs",
-        "sanity"
-    ],
-    "homepage": "https://evanm.io",
-    "bugs": {
-        "url": "https://github.com/evanwrm/evanm.io/issues"
-    },
     "repository": {
         "type": "git",
         "url": "https://github.com/evanwrm/evanm.io"
@@ -29,38 +20,20 @@
         "turbo:start": "turbo run start",
         "turbo:test": "turbo run test",
         "turbo:lint": "turbo run lint",
-        "deps:update": "pnpm up -irL",
-        "lint-staged": "lint-staged",
-        "prepare": "is-ci || husky install"
+        "deps:update": "pnpm up -irL"
     },
     "devDependencies": {
-        "@babel/core": "^7.26.0",
-        "@babel/eslint-parser": "^7.25.9",
-        "@commitlint/cli": "^19.6.0",
-        "@commitlint/config-conventional": "^19.6.0",
-        "@types/node": "^22.10.1",
-        "cross-env": "^7.0.3",
+        "@babel/core": "^7.28.5",
+        "@babel/eslint-parser": "^7.28.5",
+        "@types/node": "^24.10.1",
+        "cross-env": "^10.1.0",
         "eslint": "^8.57.0",
         "eslint-config-prettier": "^9.1.0",
-        "husky": "^9.1.7",
-        "is-ci": "^3.0.1",
-        "lint-staged": "^15.2.10",
         "npm-run-all": "^4.1.5",
-        "prettier": "^3.4.1",
-        "prettier-plugin-packagejson": "^2.5.6",
-        "shell-quote": "^1.8.2",
-        "turbo": "^2.3.3",
-        "typescript": "5.7.2"
+        "prettier": "^3.6.2",
+        "prettier-plugin-packagejson": "^2.5.19",
+        "turbo": "^2.6.1",
+        "typescript": "5.9.3"
     },
-    "packageManager": "pnpm@9.12.1",
-    "engines": {
-        "node": ">=20.0.0",
-        "pnpm": ">=9.12.1"
-    },
-    "pnpm": {
-        "overrides": {
-            "@types/react": "npm:types-react@19.0.0-rc.1",
-            "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
-        }
-    }
+    "packageManager": "pnpm@10.21.0"
 }

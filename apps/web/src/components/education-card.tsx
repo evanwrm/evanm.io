@@ -25,7 +25,7 @@ export const EducationCard = ({ education, className }: Props) => {
                 <div className="flex items-start">
                     {education.thumbnail?.asset && !isReference(education.thumbnail.asset) && (
                         <Image
-                            image={education.thumbnail.asset}
+                            src={education.thumbnail.asset}
                             alt={education.thumbnail.alt ?? education.school}
                             width={64}
                             height={64}
@@ -46,7 +46,7 @@ export const EducationCard = ({ education, className }: Props) => {
                                 </Link>
                             )}
                         </div>
-                        <span className="text-muted-foreground text-sm sm:text-base">
+                        <span className="text-sm text-muted-foreground sm:text-base">
                             {education.degree}
                         </span>
                     </div>
@@ -63,13 +63,13 @@ export const EducationCard = ({ education, className }: Props) => {
                 </span>
                 <div className="flex flex-col items-end">
                     {education.location && (
-                        <div className="text-muted-foreground flex items-center text-xs italic sm:mt-1 sm:text-sm">
+                        <div className="flex items-center text-xs italic text-muted-foreground sm:mt-1 sm:text-sm">
                             <span className="font-semibold">{education.location}</span>
                             <Icon.HiOutlineLocationMarker className="ml-2 h-4 w-4" />
                         </div>
                     )}
                     {education.gpa && (
-                        <div className="text-muted-foreground flex items-center text-xs italic sm:mt-1 sm:text-sm">
+                        <div className="flex items-center text-xs italic text-muted-foreground sm:mt-1 sm:text-sm">
                             <span className="mr-1 font-semibold">{education.gpa}</span>
                             <span>GPA</span>
                         </div>
