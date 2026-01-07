@@ -16,26 +16,22 @@ A personal portfolio website running on [Next.js](https://nextjs.org/) + [Sanity
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/evanwrm/evanm.io?style=flat-square)
 ![GitHub](https://img.shields.io/github/license/evanwrm/evanm.io?style=flat-square)
 
-<!-- These are examples of badges you might also want to add to your README. Update the URLs accordingly.
-[![Coveralls](https://img.shields.io/coveralls/github/<USER>/evanm.io/main.svg)](https://coveralls.io/r/<USER>/evanm.io)
-[![Twitter](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Twitter)](https://twitter.com/<USER>)
--->
 </div>
 
 ## Getting Started
 
 ### Website (frontend)
 
--   [Next.js](https://nextjs.org) + [React](https://react.dev/)
--   [shadcn/ui](https://ui.shadcn.com/)
--   [Tailwind](https://tailwindcss.com)
--   [Jotai](https://jotai.org/)
--   [MDX](https://mdxjs.com)
--   [Framer Motion](https://www.framer.com/motion)
--   [Tanstack Query](https://tanstack.com/query)
--   [Vitest](https://vitest.dev/)
--   [Playwright](https://playwright.dev/)
--   [Typescript](https://www.typescriptlang.org)
+- [Next.js](https://nextjs.org) + [React](https://react.dev/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Tailwind](https://tailwindcss.com)
+- [Jotai](https://jotai.org/)
+- [MDX](https://mdxjs.com)
+- [Framer Motion](https://www.framer.com/motion)
+- [Tanstack Query](https://tanstack.com/query)
+- [Vitest](https://vitest.dev/)
+- [Playwright](https://playwright.dev/)
+- [Typescript](https://www.typescriptlang.org)
 
 Installation/usage instructions can be found in [apps/web](apps/web)
 
@@ -43,22 +39,9 @@ Installation/usage instructions can be found in [apps/web](apps/web)
 
 ### API (backend)
 
-This serves as a testbed for different CMS solutions.
-
-Current production deployment:  
-**Sanity:**
-
--   [Sanity 3](https://sanity.io)
+[Sanity](https://sanity.io) is used for content management and delivery.
 
 Installation/usage instructions can be found in [apps/cms-sanity](apps/cms-sanity)
-
-Alternative solutions:  
-**Strapi**:
-
--   [Strapi 4](https://strapi.io)
--   [PosgresSQL](https://www.postgresql.org/)
-
-Installation/usage instructions can be found in [apps/cms-strapi](apps/cms-strapi)
 
 ## License
 
@@ -66,6 +49,5 @@ Installation/usage instructions can be found in [apps/cms-strapi](apps/cms-strap
 
 ## TODO
 
--   upgrade nextjs
--   spotlight shortcuts + search children
--   remove commandScore
+- spotlight shortcuts + search children
+- remove commandScore
