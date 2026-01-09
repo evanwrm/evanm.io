@@ -1,5 +1,5 @@
 // @ts-check
-// import { env } from "./src/lib/env/server.mjs";
+// import { env } from "./lib/env/server.mjs";
 
 /** @type {import('next-sitemap').IConfig} */
 const sitemapConfig = {
@@ -8,7 +8,7 @@ const sitemapConfig = {
     priority: 0.7,
     sitemapSize: 5000,
     generateRobotsTxt: true,
-    exclude: ["/api", "/admin", "/404", "/manifest.webmanifest"]
+    exclude: ["/api", "/admin", "/404", "/manifest.webmanifest"],
 };
 
 export default sitemapConfig;
