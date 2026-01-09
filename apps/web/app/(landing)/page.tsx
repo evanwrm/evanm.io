@@ -3,6 +3,7 @@ import {
     ChevronRightIcon,
     GraduationCapIcon,
     LightbulbIcon,
+    TerminalIcon,
     WrenchIcon,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -58,7 +59,8 @@ function IntroSection({ landing, settings }: IntroSectionProps) {
                         />
                     </div>
                 )}
-                <h1 className="mt-6 text-balance font-extrabold text-4xl tracking-tight lg:text-5xl">
+                <h1 className="mt-6 flex items-end text-balance font-extrabold text-4xl tracking-tight lg:text-5xl">
+                    <TerminalIcon className="mr-2 size-6 text-muted-foreground" />
                     {landing.logline}
                 </h1>
                 {landing.intro && (

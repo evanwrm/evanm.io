@@ -262,7 +262,7 @@ export function SpotlightItem({
             className="group/item relative justify-between"
         >
             <div className="absolute top-0 left-0 h-full w-0.5 origin-center scale-y-0 bg-primary transition-transform duration-200 group-data-[selected=true]/item:scale-y-100" />
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
                 {icon && <span className="size-3.5">{icon}</span>}
                 <div className="flex flex-col">
                     <span>

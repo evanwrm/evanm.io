@@ -1,15 +1,21 @@
 import { MailIcon, PhoneIcon, RssIcon } from "lucide-react";
 import {
+    SiAndroid as Android,
+    SiApacheairflow as Apacheairflow,
     SiBitbucket as Bitbucket,
+    SiD3Dotjs as D3Js,
     SiDevdotto as Devdotto,
     SiDiscord as Discord,
     SiDocker as Docker,
+    SiDotnet as Dotnet,
     SiFacebook as Facebook,
+    SiFastapi as Fastapi,
     SiGit as Git,
     SiGithub as Github,
     SiGitlab as Gitlab,
     SiGoogle as Google,
     SiGooglescholar as GoogleScholar,
+    SiHuggingface as Huggingface,
     SiInstagram as Instagram,
     SiJavascript as Javascript,
     SiKaggle as Kaggle,
@@ -19,6 +25,7 @@ import {
     SiNextdotjs as Nextjs,
     SiNodedotjs as Nodejs,
     SiOrcid as Orcid,
+    SiPostgresql as Postgresql,
     SiPython as Python,
     SiPytorch as Pytorch,
     SiReact as React,
@@ -26,9 +33,11 @@ import {
     SiStackoverflow as StackOverflow,
     SiSteam as Steam,
     SiStrava as Strava,
+    SiThreads as Threads,
     SiTwitch as Twitch,
     SiTypescript as Typescript,
     SiUnity as Unity,
+    SiX as X,
     SiYoutube as Youtube,
 } from "react-icons/si";
 
@@ -65,6 +74,8 @@ export const Icon = {
     // Social Platforms
     Facebook,
     Instagram,
+    Threads,
+    X,
     Linkedin,
     Google,
     Youtube,
@@ -75,6 +86,7 @@ export const Icon = {
     Medium,
     Devdotto,
     StackOverflow,
+    Huggingface,
     RssIcon,
 
     // Development & Code
@@ -84,14 +96,20 @@ export const Icon = {
     Git,
 
     // Tech & Skills
+    Apacheairflow,
+    Android,
     Docker,
+    Dotnet,
     Nodejs,
     Typescript,
     Javascript,
     React,
     Nextjs,
+    D3Js,
     Pytorch,
     Python,
+    Fastapi,
+    Postgresql,
     Unity,
 
     // Academic

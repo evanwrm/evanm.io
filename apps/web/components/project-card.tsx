@@ -22,7 +22,7 @@ interface Props {
     maxSkillsToShow?: number;
 }
 
-export const ProjectCard = ({ project, maxSkillsToShow = 4 }: Props) => {
+export const ProjectCard = ({ project, maxSkillsToShow = 6 }: Props) => {
     const RepositoryIcon =
         project.repositoryUrl && getIcon(project.repositoryUrl);
     const newThreshold = addYears(new Date(), -1);
@@ -91,7 +91,7 @@ export const ProjectCard = ({ project, maxSkillsToShow = 4 }: Props) => {
                 </CardContent>
                 {project.skills && project.skills.length > 0 && (
                     <CardFooter className="mt-auto flex flex-wrap gap-1 pt-0">
-                        {project.skills.slice(0, 4).map(skill => {
+                        {project.skills.slice(0, maxSkillsToShow).map(skill => {
                             if (isReference(skill)) return null;
                             const SkillIcon = getIcon(skill.iconId);
                             return (

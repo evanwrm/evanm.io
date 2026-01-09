@@ -31,7 +31,7 @@ export async function Footer({ routes }: Props) {
                                     key={social.socialId}
                                 >
                                     <HoverButton>
-                                        <SocialIcon className="h-5 w-5" />
+                                        <SocialIcon className="h-4 w-4" />
                                     </HoverButton>
                                 </Link>
                             ) : null;

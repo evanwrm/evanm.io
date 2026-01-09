@@ -17,18 +17,19 @@ jobs:
         steps:
             - uses: actions/checkout@v5
 
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10
+
             - name: Set up node
               uses: actions/setup-node@v5
               with:
                   node-version: "22.x"
+                  cache: "pnpm"
 
             - name: Install dependencies
-              uses: pnpm/action-setup@v4
-              with:
-                  version: 10
-                  run_install: |
-                      - recursive: true
-                        args: [--frozen-lockfile]
+              run: pnpm install --frozen-lockfile
 
             - name: Restore next build
               uses: actions/cache@v4
