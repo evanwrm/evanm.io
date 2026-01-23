@@ -11,12 +11,17 @@ const settingsSchema = defineType({
         defineField({
             name: "firstName",
             title: "First Name",
-            type: "string"
+            type: "string",
         }),
         defineField({
             name: "lastName",
             title: "Last Name",
-            type: "string"
+            type: "string",
+        }),
+        defineField({
+            name: "location",
+            title: "Location",
+            type: "string",
         }),
         defineField({
             name: "avatar",
@@ -24,24 +29,24 @@ const settingsSchema = defineType({
             type: "image",
             fields: [...mediaFields],
             options: {
-                hotspot: true
-            }
+                hotspot: true,
+            },
         }),
         defineField({
             name: "cv",
             title: "CV",
             type: "file",
             fields: [...mediaFields],
-            options: { accept: ".pdf" }
+            options: { accept: ".pdf" },
         }),
         defineField({
             name: "resume",
             title: "Resume",
             type: "file",
             fields: [...mediaFields],
-            options: { accept: ".pdf" }
-        })
-    ]
+            options: { accept: ".pdf" },
+        }),
+    ],
 });
 
 export default settingsSchema;
