@@ -175,7 +175,7 @@ export function SpotlightInput({
         useSpotlight();
 
     return (
-        <InputGroup className="h-11 rounded-b-none border-none shadow-none has-[[data-slot=input-group-control]:focus-visible]:ring-0">
+        <InputGroup className="h-11 rounded-b-none border-border/50 border-b shadow-none has-[[data-slot=input-group-control]:focus-visible]:border-border/50 has-[[data-slot=input-group-control]:focus-visible]:ring-0 dark:bg-card">
             <InputGroupAddon>
                 <SearchIcon />
             </InputGroupAddon>
