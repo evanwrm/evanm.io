@@ -56,7 +56,7 @@ export function Pre({
         <pre
             {...props}
             className={cn(
-                "scrollbar m-0! bg-transparent! p-3 [&>code]:bg-transparent [&>code]:p-0",
+                "scrollbar m-0! bg-transparent! p-3 [&>code]:whitespace-pre [&>code]:bg-transparent [&>code]:p-0",
                 className,
             )}
         >
