@@ -6,7 +6,16 @@ import ViewCounter from "@/components/analytics/view-counter";
 import { getIcon } from "@/components/icon";
 import { Image } from "@/components/image";
 import { Markdown } from "@/components/mdx/markdown";
+import { Link } from "@/components/navigation/link";
 import { Badge } from "@/components/ui/badge";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
     articleFind,
@@ -41,6 +50,25 @@ export default async function BlogPost({ params }: Props) {
 
     return (
         <div className="mx-auto w-full max-w-5xl px-4 py-12">
+            <Breadcrumb className="mb-6">
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/">Home</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/blog">Blog</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>{article.title}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
             <div className="flex flex-col gap-4">
                 <h1 className="text-balance font-extrabold text-4xl tracking-tight lg:text-5xl">
                     {article.title}

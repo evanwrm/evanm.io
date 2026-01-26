@@ -92,7 +92,7 @@ export function Code({ className, ...props }: CodeProps) {
         <code
             className={cn(
                 className,
-                "mx-0.5 rounded-md bg-card px-1.5 py-1 before:content-none after:content-none",
+                "mx-0.5 inline-flex max-w-full overflow-auto whitespace-nowrap rounded-md bg-card px-1.5 py-1 before:content-none after:content-none",
             )}
             {...props}
         />
