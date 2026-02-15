@@ -1,11 +1,6 @@
 "use client";
 
-import {
-    ChevronRightIcon,
-    CommandIcon,
-    CornerDownLeftIcon,
-    SearchIcon,
-} from "lucide-react";
+import { ChevronRightIcon, CornerDownLeftIcon, SearchIcon } from "lucide-react";
 import {
     createContext,
     useCallback,
@@ -15,7 +10,6 @@ import {
     useRef,
     useState,
 } from "react";
-import { Button } from "@/components/ui/button";
 import {
     CommandDialog,
     CommandGroup,
@@ -297,17 +291,21 @@ export function SpotlightItem({
 export function SpotlightTrigger({ className }: { className?: string }) {
     const { setOpen } = useSpotlight();
     return (
-        <Button
-            variant="ghost"
-            size="icon"
+        <button
+            type="button"
             onClick={() => setOpen(true)}
             aria-label="Open spotlight"
             className={cn(
+                "flex h-8 items-center gap-2 rounded-lg border border-input/50 bg-muted/30 px-2 text-muted-foreground text-sm transition-colors hover:border-input hover:bg-muted/50 sm:w-48 sm:px-3",
                 className,
-                "text-muted-foreground hover:text-foreground",
             )}
         >
-            <CommandIcon className="size-5" />
-        </Button>
+            <SearchIcon className="size-4" />
+            <span className="hidden flex-1 text-left sm:inline">Search...</span>
+            <KbdGroup className="hidden sm:inline-flex">
+                <Kbd>⌘</Kbd>
+                <Kbd>K</Kbd>
+            </KbdGroup>
+        </button>
     );
 }

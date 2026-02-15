@@ -33,6 +33,60 @@ export const metadata: Metadata = {
     title: "Home",
 };
 
+export default async function Home() {
+    const [landing, educations, experiences, projects, publications, settings] =
+        await Promise.all([
+            landingFind(),
+            educationFind({ sort: ["endDate desc", "startDate desc"] }),
+            experienceFind({ sort: ["endDate desc", "startDate desc"] }),
+            projectFind({ sort: "endDate desc" }),
+            publicationFind({ sort: "year desc" }),
+            settingsFind(),
+        ]);
+
+    return (
+        <TocProvider>
+            <div className="flex flex-col">
+                {landing.includeIntro && (
+                    <IntroSection landing={landing} settings={settings} />
+                )}
+                <div className="mx-auto flex w-full max-w-7xl gap-8 p-4">
+                    <main className="min-w-0 flex-1 space-y-16">
+                        {landing.includeExperience && (
+                            <ExperienceSection experiences={experiences} />
+                        )}
+                        {landing.includeEducation && (
+                            <EducationSection educations={educations} />
+                        )}
+                        {landing.includeProjects && (
+                            <ProjectsSection projects={projects} />
+                        )}
+                        {landing.includePublications && (
+                            <PublicationsSection publications={publications} />
+                        )}
+                    </main>
+                    <aside className="sticky top-24 hidden w-48 shrink-0 self-start xl:block">
+                        <TocNav>
+                            <TocNavItem id="experience">
+                                <WrenchIcon /> Experience
+                            </TocNavItem>
+                            <TocNavItem id="education">
+                                <GraduationCapIcon /> Education
+                            </TocNavItem>
+                            <TocNavItem id="projects">
+                                <LightbulbIcon /> Projects
+                            </TocNavItem>
+                            <TocNavItem id="publications">
+                                <BookOpenIcon /> Publications
+                            </TocNavItem>
+                        </TocNav>
+                    </aside>
+                </div>
+            </div>
+        </TocProvider>
+    );
+}
+
 interface IntroSectionProps {
     landing: Landing;
     settings: Settings;
@@ -143,59 +197,5 @@ function PublicationsSection({ publications }: PublicationsSectionProps) {
                 </div>
             </FadeIn>
         </TocSection>
-    );
-}
-
-export default async function Home() {
-    const [landing, educations, experiences, projects, publications, settings] =
-        await Promise.all([
-            landingFind(),
-            educationFind({ sort: ["endDate desc", "startDate desc"] }),
-            experienceFind({ sort: ["endDate desc", "startDate desc"] }),
-            projectFind({ sort: "endDate desc" }),
-            publicationFind({ sort: "year desc" }),
-            settingsFind(),
-        ]);
-
-    return (
-        <TocProvider>
-            <div className="flex flex-col">
-                {landing.includeIntro && (
-                    <IntroSection landing={landing} settings={settings} />
-                )}
-                <div className="mx-auto flex w-full max-w-7xl gap-8 p-4">
-                    <main className="min-w-0 flex-1 space-y-16">
-                        {landing.includeExperience && (
-                            <ExperienceSection experiences={experiences} />
-                        )}
-                        {landing.includeEducation && (
-                            <EducationSection educations={educations} />
-                        )}
-                        {landing.includeProjects && (
-                            <ProjectsSection projects={projects} />
-                        )}
-                        {landing.includePublications && (
-                            <PublicationsSection publications={publications} />
-                        )}
-                    </main>
-                    <aside className="sticky top-24 hidden w-48 shrink-0 self-start xl:block">
-                        <TocNav>
-                            <TocNavItem id="experience">
-                                <WrenchIcon /> Experience
-                            </TocNavItem>
-                            <TocNavItem id="education">
-                                <GraduationCapIcon /> Education
-                            </TocNavItem>
-                            <TocNavItem id="projects">
-                                <LightbulbIcon /> Projects
-                            </TocNavItem>
-                            <TocNavItem id="publications">
-                                <BookOpenIcon /> Publications
-                            </TocNavItem>
-                        </TocNav>
-                    </aside>
-                </div>
-            </div>
-        </TocProvider>
     );
 }

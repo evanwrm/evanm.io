@@ -17,9 +17,8 @@ export async function Footer({ routes }: Props) {
             <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left">
                 <div className="flex flex-col gap-6 md:items-start">
                     <MainNav
-                        routes={routes}
-                        tabIndex={0}
-                        className="flex-wrap justify-center md:justify-start"
+                        links={routes}
+                        className="flex flex-wrap justify-center md:justify-start"
                     />
                     <div className="flex items-center justify-center gap-4">
                         {socials.map(social => {

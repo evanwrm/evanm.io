@@ -19,10 +19,9 @@ import { lightBounceTransition } from "@/lib/animation/framer-variants";
 import { cn } from "@/lib/utils";
 
 interface Props {
-    routes: { href: string; label: string }[];
+    links: { href: string; label: string }[];
 }
-
-export const MobileNav = ({ routes }: Props) => {
+export const MobileNav = ({ links }: Props) => {
     const pathname = usePathname();
 
     return (
@@ -60,39 +59,33 @@ export const MobileNav = ({ routes }: Props) => {
                 </DrawerHeader>
                 <div className="flex flex-col items-start justify-start px-4">
                     <Separator className="my-2" />
-                    <ul className="flex flex-col gap-4 p-2">
-                        {routes.map((route, i) => (
-                            <FadeIn
-                                key={route.href}
-                                transition={{
-                                    ...lightBounceTransition,
-                                    delay: i * 0.05,
-                                }}
+                    {links.map((link, i) => (
+                        <FadeIn
+                            key={link.href}
+                            transition={{
+                                ...lightBounceTransition,
+                                delay: i * 0.05,
+                            }}
+                        >
+                            <div
+                                className={cn(
+                                    "w-full p-2 text-foreground/80 transition hover:text-foreground",
+                                    pathname === link.href
+                                        ? "text-foreground"
+                                        : "",
+                                )}
                             >
-                                <li
-                                    className={cn(
-                                        "text-foreground/60 text-xs hover:text-foreground/80",
-                                        pathname === route.href
-                                            ? "text-foreground"
-                                            : "",
-                                    )}
-                                >
-                                    <DrawerClose asChild>
-                                        <Link
-                                            href={route.href}
-                                            aria-label={route.label}
-                                            className={cn(
-                                                "text-center align-middle font-semibold transition-all",
-                                                "link-underline rounded bg-linear-to-r from-red-600/20 to-red-600/80",
-                                            )}
-                                        >
-                                            {route.label}
-                                        </Link>
-                                    </DrawerClose>
-                                </li>
-                            </FadeIn>
-                        ))}
-                    </ul>
+                                <DrawerClose asChild>
+                                    <Link
+                                        href={link.href}
+                                        className="h-full font-semibold text-xs"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </DrawerClose>
+                            </div>
+                        </FadeIn>
+                    ))}
                 </div>
             </DrawerContent>
         </Drawer>

@@ -42,15 +42,14 @@ interface Props {
     seo: Seo;
     settings: Settings;
 }
-
-export const Header = ({ routes, socials, seo, settings }: Props) => {
+export function Header({ routes, socials, seo, settings }: Props) {
     const yPos = useScrollY();
     const { hidden } = useHideOnScroll({ threshold: 80, showThreshold: 60 });
 
     return (
-        <nav
+        <header
             className={cn(
-                "sticky top-0 z-40 flex h-16 items-center justify-center p-4 transition-all",
+                "sticky top-0 z-40 flex h-16 items-center justify-between px-4 transition-all",
                 yPos > 196
                     ? "border-border/60 border-b bg-background/60 bg-clip-padding backdrop-blur backdrop-saturate-200"
                     : "border-transparent bg-transparent",
@@ -59,27 +58,19 @@ export const Header = ({ routes, socials, seo, settings }: Props) => {
                     : "",
             )}
         >
-            <div className="flex w-1/2 items-center justify-start">
-                <MobileNav routes={routes} />
+            <div className="flex items-center gap-2">
+                <MobileNav links={routes} />
                 <Link
                     href="/"
                     aria-label="evanm.io"
-                    className="ml-2 text-foreground/80 transition-all hover:text-foreground"
+                    className="font-bold text-foreground/80 transition-all hover:text-foreground"
                 >
-                    <div className="inline font-bold">
-                        <span>evanm</span>
-                        <span className="text-red-600">.io</span>
-                    </div>
+                    <span>evanm</span>
+                    <span className="text-red-600">.io</span>
                 </Link>
-                <div className="ml-8 hidden md:flex">
-                    <MainNav
-                        routes={routes}
-                        tabIndex={0}
-                        className="flex flex-row"
-                    />
-                </div>
+                <MainNav links={routes} className="ml-8" />
             </div>
-            <div className="mr-2 flex w-1/2 items-center justify-end gap-6">
+            <div className="flex items-center gap-2 sm:gap-4">
                 <Spotlight>
                     <SpotlightTrigger />
                     <SpotlightList>
@@ -92,9 +83,9 @@ export const Header = ({ routes, socials, seo, settings }: Props) => {
                     </SpotlightList>
                 </Spotlight>
             </div>
-        </nav>
+        </header>
     );
-};
+}
 
 interface SpotlightCommandsProps {
     socials: SocialLink[];

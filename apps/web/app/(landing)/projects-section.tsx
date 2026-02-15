@@ -12,7 +12,6 @@ interface ProjectsSectionProps {
     projects: Project[];
     maxVisible?: number;
 }
-
 export function ProjectsSection({
     projects,
     maxVisible = 6,

@@ -4,43 +4,29 @@ import { usePathname } from "next/navigation";
 import { Link } from "@/components/navigation/link";
 import { cn } from "@/lib/utils";
 
-interface Props extends React.ComponentPropsWithoutRef<"ul"> {
-    routes: { href: string; label: string }[];
+interface Props {
+    links: { href: string; label: string }[];
     className?: string;
-    itemClassName?: string;
 }
-
-export const MainNav = ({
-    routes,
-    className,
-    itemClassName,
-    ...props
-}: Props) => {
+export const MainNav = ({ links, className }: Props) => {
     const pathname = usePathname();
 
     return (
-        <ul className={cn("flex gap-4", className)} {...props}>
-            {routes.map(route => (
-                <li
+        <nav className={cn("hidden gap-x-8 md:flex", className)}>
+            {links.map(link => (
+                <Link
+                    key={link.href}
+                    href={link.href}
                     className={cn(
-                        "text-foreground/60 text-xs hover:text-foreground/80",
-                        pathname === route.href ? "text-foreground" : "",
-                        itemClassName,
+                        "text-sm/6 transition-colors hover:text-foreground",
+                        pathname === link.href
+                            ? "text-foreground"
+                            : "text-muted-foreground",
                     )}
-                    key={route.href}
                 >
-                    <Link
-                        href={route.href}
-                        aria-label={route.label}
-                        className={cn(
-                            "text-center align-middle font-semibold transition-all",
-                            "link-underline rounded bg-linear-to-r from-red-600/20 to-red-600/80",
-                        )}
-                    >
-                        {route.label}
-                    </Link>
-                </li>
+                    {link.label}
+                </Link>
             ))}
-        </ul>
+        </nav>
     );
 };
