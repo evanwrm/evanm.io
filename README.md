@@ -25,10 +25,8 @@ A personal portfolio website running on [Next.js](https://nextjs.org/) + [Sanity
 - [Next.js](https://nextjs.org) + [React](https://react.dev/)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Tailwind](https://tailwindcss.com)
-- [Jotai](https://jotai.org/)
 - [MDX](https://mdxjs.com)
 - [Framer Motion](https://www.framer.com/motion)
-- [Tanstack Query](https://tanstack.com/query)
 - [Vitest](https://vitest.dev/)
 - [Playwright](https://playwright.dev/)
 - [Typescript](https://www.typescriptlang.org)
@@ -39,15 +37,10 @@ Installation/usage instructions can be found in [apps/web](apps/web)
 
 ### API (backend)
 
-[Sanity](https://sanity.io) is used for content management and delivery.
+[Sanity](https://sanity.io) is used for content management and delivery. 
 
 Installation/usage instructions can be found in [apps/cms-sanity](apps/cms-sanity)
 
 ## License
 
 [MIT](LICENSE)
-
-## TODO
-
-- spotlight shortcuts + search children
-- remove commandScore
