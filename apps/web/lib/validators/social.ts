@@ -1,13 +1,13 @@
-import { z } from "zod";
-import { sanityDocumentValidator } from "@/lib/validators/sanity/sanity-document";
+import * as z from "zod";
+import { sanityDocumentValidator } from "@/lib/validators/sanity";
 
 export const socialValidator = z
     .object({
         socialId: z.string(),
         name: z.string(),
         description: z.string().nullish(),
-        url: z.string().url(),
+        url: z.url(),
         iconId: z.string(),
     })
-    .merge(sanityDocumentValidator);
+    .extend(sanityDocumentValidator.shape);
 export type SocialLink = z.infer<typeof socialValidator>;

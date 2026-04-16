@@ -1,0 +1,78 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+    class?: string;
+    tiltStrength?: number;
+}
+
+const { class: classProp, tiltStrength = 4, ...props } = Astro.props;
+---
+
+<div
+    data-tilt=""
+    data-tilt-strength={tiltStrength}
+    role="group"
+    class={cn(
+        "transition-transform duration-200 ease-spring will-change-transform",
+        classProp,
+    )}
+    {...props}
+>
+    <slot />
+</div>
+
+<script>
+    const initTilt = () => {
+        document.querySelectorAll("[data-tilt]").forEach(element => {
+            if (!(element instanceof HTMLElement)) return;
+            if (element.dataset.tiltInitialized === "true") return;
+
+            element.dataset.tiltInitialized = "true";
+
+            const strength = Number(element.dataset.tiltStrength ?? "4");
+            let frameId = 0;
+            let clientX = 0;
+            let clientY = 0;
+
+            const updateTransform = () => {
+                frameId = 0;
+
+                const rect = element.getBoundingClientRect();
+                const x = (clientX - rect.left) / rect.width - 0.5;
+                const y = (clientY - rect.top) / rect.height - 0.5;
+
+                const dx = -y * strength
+                const dy = x * strength;
+                element.style.transform = `perspective(1000px) rotateX(${dx}deg) rotateY(${dy}deg)`;
+            };
+
+            element.addEventListener("pointerenter", () => {
+                element.style.transitionDuration = "0ms";
+            });
+
+            element.addEventListener("pointermove", event => {
+                clientX = event.clientX;
+                clientY = event.clientY;
+
+                if (frameId) return;
+                frameId = requestAnimationFrame(updateTransform);
+            });
+
+            element.addEventListener("pointerleave", () => {
+                if (frameId) {
+                    cancelAnimationFrame(frameId);
+                    frameId = 0;
+                }
+                element.style.transform = "";
+                element.style.transitionDuration = "";
+            });
+        });
+    };
+
+    initTilt();
+
+    document.addEventListener("astro:after-swap", () => {
+        initTilt();
+    });
+</script>

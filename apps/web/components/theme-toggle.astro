@@ -1,0 +1,66 @@
+---
+import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const themes = [
+    { id: "dark", label: "Dark", icon: MoonIcon, rounded: "rounded-l-md" },
+    { id: "light", label: "Light", icon: SunIcon, rounded: "" },
+    { id: "system", label: "System", icon: MonitorIcon, rounded: "rounded-r-md"},
+];
+---
+
+<div class="group/toggle-group flex w-fit items-center rounded-md" id="theme-toggle">
+    {themes.map(({ id, label, icon: Icon, rounded }) => (
+        <Button
+            variant="ghost"
+            size="sm"
+            aria-label={label}
+            data-theme={id}
+            className={cn(
+                "theme-btn rounded-none px-3 text-muted-foreground hover:text-muted-foreground data-active:bg-muted/80 data-active:text-foreground",
+                rounded,
+            )}
+        >
+            <Icon className="size-3" />
+        </Button>
+    ))}
+</div>
+
+<script>
+    import {
+        THEME_CHANGE_EVENT,
+        THEME_STORAGE_KEY,
+        getTheme,
+        setTheme,
+    } from "@/lib/theme";
+
+    const root = document.getElementById("theme-toggle");
+    if (root) {
+        const buttons = Array.from(root.querySelectorAll<HTMLElement>(".theme-btn"));
+        if (buttons.length > 0) {
+            function updateButtons() {
+                const current = getTheme();
+                buttons.forEach((btn) => {
+                    const t = btn.dataset.theme;
+                    if (t === current) btn.setAttribute("data-active", "");
+                    else btn.removeAttribute("data-active");
+                });
+            }
+
+            buttons.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const theme = btn.dataset.theme;
+                    if (theme) setTheme(theme);
+                });
+            });
+
+            window.addEventListener(THEME_CHANGE_EVENT, updateButtons);
+            window.addEventListener("storage", (event) => {
+                if (event.key === THEME_STORAGE_KEY) updateButtons();
+            });
+
+            updateButtons();
+        }
+    }
+</script>

@@ -1,0 +1,58 @@
+---
+import EducationSection from "@/components/home/education-section.astro";
+import ExperienceSection from "@/components/home/experience-section.astro";
+import IntroSection from "@/components/home/intro-section.astro";
+import ProjectsSection from "@/components/home/projects-section.astro";
+import PublicationsSection from "@/components/home/publications-section.astro";
+import SectionToc from "@/components/home/section-toc";
+import MainLayout from "@/components/layouts/main-layout.astro";
+import SeoPage from "@/components/seo-page.astro";
+import {
+    educationFind,
+    experienceFind,
+    landingFind,
+    projectFind,
+    publicationFind,
+    settingsFind,
+} from "@/lib/sanity/queries";
+
+export const prerender = true;
+
+const [landing, educations, experiences, projects, publications, settings] =
+    await Promise.all([
+        landingFind(),
+        educationFind({ sort: ["endDate desc", "startDate desc"] }),
+        experienceFind({ sort: ["endDate desc", "startDate desc"] }),
+        projectFind({ sort: "endDate desc" }),
+        publicationFind({ sort: "year desc" }),
+        settingsFind(),
+    ]);
+---
+
+<MainLayout>
+    <SeoPage slot="head" title="Home" />
+    <div class="flex flex-col">
+        {landing.includeIntro && (
+            <IntroSection landing={landing} settings={settings} />
+        )}
+        <div class="mx-auto flex w-full max-w-7xl gap-8 p-4">
+            <main class="min-w-0 flex-1 space-y-16">
+                {landing.includeExperience && (
+                    <ExperienceSection experiences={experiences} />
+                )}
+                {landing.includeEducation && (
+                    <EducationSection educations={educations} />
+                )}
+                {landing.includeProjects && (
+                    <ProjectsSection projects={projects} />
+                )}
+                {landing.includePublications && (
+                    <PublicationsSection publications={publications} />
+                )}
+            </main>
+            <aside class="sticky top-24 hidden w-48 shrink-0 self-start xl:block">
+                <SectionToc client:idle />
+            </aside>
+        </div>
+    </div>
+</MainLayout>

@@ -3,26 +3,22 @@
     "version": "0.1.0",
     "private": true,
     "description": "Evan's personal portfolio website",
+    "license": "MIT",
+    "author": "Evan Madill <emadill@outlook.com>",
     "repository": {
         "type": "git",
         "url": "https://github.com/evanwrm/evanm.io"
     },
-    "license": "MIT",
-    "author": "Evan Madill <emadill@outlook.com>",
     "scripts": {
-        "g:lint-check": "pnpm -r --parallel run lint",
+        "lint": "oxlint",
+        "lint:fix": "oxlint --fix",
+        "fmt": "oxfmt --write",
         "g:clean": "rm -rf pnpm-lock.yaml node_modules && pnpm -r --parallel exec rm -rf pnpm-lock.yaml node_modules",
-        "turbo:dev": "turbo run dev",
-        "turbo:build": "turbo run build",
-        "turbo:start": "turbo run start",
-        "turbo:test": "turbo run test",
-        "turbo:lint": "turbo run lint",
         "deps:update": "pnpm up -irL"
     },
     "devDependencies": {
-        "@biomejs/biome": "^2.3.11",
-        "turbo": "^2.7.3",
-        "typescript": "5.9.3"
+        "oxfmt": "^0.44.0",
+        "oxlint": "^1.59.0"
     },
     "packageManager": "pnpm@10.21.0"
 }

@@ -27,9 +27,8 @@ export const fuzzySearch = <T = string>(
     }
 
     // sort by score
-    const rankedResults = results.sort((a, b) => {
+    return results.sort((a, b) => {
         if (a.score === b.score) return a.context.localeCompare(b.context);
         return b.score - a.score;
     });
-    return rankedResults;
 };

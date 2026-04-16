@@ -1,0 +1,39 @@
+---
+import BaseLayout from "./base-layout.astro";
+import Header from "@/components/header.astro";
+import Footer from "@/components/footer.astro";
+import BackToTop from "@/components/back-to-top.astro";
+import HexBackground from "@/components/hex-background.astro";
+import { settingsFind, socialFind } from "@/lib/sanity/queries";
+
+interface Props {
+    showHexBackground?: boolean;
+}
+
+const { showHexBackground = true } = Astro.props;
+
+const headerRoutes = [
+    { href: "/", label: "Home" },
+    { href: "/cv", label: "CV" },
+];
+
+const [socials, settings] = await Promise.all([
+    socialFind(),
+    settingsFind(),
+]);
+---
+
+<BaseLayout>
+    <slot slot="head" name="head" />
+    {showHexBackground && <HexBackground class="h-48 text-foreground/40" />}
+    <Header
+        routes={headerRoutes}
+        socials={socials}
+        settings={settings}
+    />
+    <main class="flex flex-1 flex-col">
+        <slot />
+    </main>
+    <BackToTop />
+    <Footer routes={headerRoutes} socials={socials} />
+</BaseLayout>

@@ -1,0 +1,122 @@
+---
+import { HeaderSpotlight } from "@/components/header-spotlight";
+import { Link } from "@/components/link";
+import { MainNav } from "@/components/main-nav";
+import { MobileNav } from "@/components/mobile-nav";
+import type { Settings } from "@/lib/validators/settings";
+import type { SocialLink } from "@/lib/validators/social"
+
+interface Props {
+    routes: { href: string; label: string }[];
+    socials: SocialLink[];
+    settings: Settings;
+}
+
+const { routes, socials, settings } = Astro.props;
+const siteUrl = Astro.site?.origin ?? "https://evanm.io";
+const pathname = Astro.url.pathname;
+---
+
+<header
+    id="main-header"
+    class="sticky top-0 z-40 flex h-16 items-center justify-between px-4 transition-all border-transparent bg-transparent"
+>
+    <div class="flex items-center gap-2">
+        <MobileNav links={routes} pathname={pathname} client:idle />
+        <Link
+            href="/"
+            aria-label="evanm.io"
+            className="font-bold text-foreground/80 transition-all hover:text-foreground"
+        >
+            <span>evanm</span>
+            <span class="text-red-600">.io</span>
+        </Link>
+        <MainNav links={routes} pathname={pathname} className="ml-8" />
+    </div>
+    <div class="flex items-center gap-2 sm:gap-4">
+        <HeaderSpotlight
+            socials={socials}
+            settings={settings}
+            siteUrl={siteUrl}
+            client:idle
+        />
+    </div>
+</header>
+
+<script>
+    const header = document.getElementById("main-header");
+    if (header) {
+        const threshold = 80;
+        const showThreshold = 60;
+        let lastY = window.scrollY;
+        let travel = 0;
+        
+        function updateScrolledState(y: number) {
+            if (y > 196) {
+                header.classList.add(
+                    "border-border/60",
+                    "border-b",
+                    "bg-background/60",
+                    "bg-clip-padding",
+                    "backdrop-blur",
+                    "backdrop-saturate-200",
+                );
+                header.classList.remove("border-transparent", "bg-transparent");
+            } else {
+                header.classList.remove(
+                    "border-border/60",
+                    "border-b",
+                    "bg-background/60",
+                    "bg-clip-padding",
+                    "backdrop-blur",
+                    "backdrop-saturate-200",
+                );
+                header.classList.add("border-transparent", "bg-transparent");
+            }
+        }
+    
+        function setHidden(hidden: boolean) {
+            if (hidden) {
+                header.classList.add(
+                    "pointer-events-none",
+                    "scale-[102%]",
+                    "select-none",
+                    "opacity-0",
+                );
+            } else {
+                header.classList.remove(
+                    "pointer-events-none",
+                    "scale-[102%]",
+                    "select-none",
+                    "opacity-0",
+                );
+            }
+        }
+    
+        function onScroll() {
+            const y = window.scrollY;
+            const delta = y - lastY;
+            lastY = y;
+    
+            updateScrolledState(y);
+            if (y < showThreshold) {
+                travel = 0;
+                setHidden(false);
+                return;
+            }
+    
+            travel += delta;
+            if (travel > threshold) {
+                setHidden(true);
+                travel = 0;
+            } else if (travel < -threshold) {
+                setHidden(false);
+                travel = 0;
+            }
+        }
+    
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+    }
+
+</script>

@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { sanityDocumentValidator } from "@/lib/validators/sanity/sanity-document";
+import * as z from "zod";
+import { sanityDocumentValidator } from "@/lib/validators/sanity";
 
 export const authorsValidator = z.array(
     z.object({
@@ -17,34 +17,53 @@ export const openGraphProfileValidator = z.object({
 });
 export const openGraphMediaValidator = z.object({
     url: z.string(),
-    width: z.number().nullish(),
-    height: z.number().nullish(),
+    secureUrl: z.string().nullish(),
     alt: z.string().nullish(),
     type: z.string().nullish(),
-    secureUrl: z.string().nullish(),
+    width: z.number().nullish(),
+    height: z.number().nullish(),
 });
 export const openGraphValidator = z.object({
-    url: z.string().nullish(),
-    type: z.string().nullish(),
     title: z.string().nullish(),
     description: z.string().nullish(),
+    determiner: z.enum(["a", "an", "the", "auto", ""]).nullish(),
+    emails: z.union([z.string(), z.array(z.string())]).nullish(),
+    phoneNumbers: z.union([z.string(), z.array(z.string())]).nullish(),
+    faxNumbers: z.union([z.string(), z.array(z.string())]).nullish(),
     siteName: z.string().nullish(),
     locale: z.string().nullish(),
+    alternateLocale: z.union([z.string(), z.array(z.string())]).nullish(),
     images: z.array(openGraphMediaValidator).nullish(),
+    audio: z.array(openGraphMediaValidator).nullish(),
+    videos: z.array(openGraphMediaValidator).nullish(),
+    url: z.string().nullish(),
+    countryName: z.string().nullish(),
+    ttl: z.number().nullish(),
+    type: z.string().nullish(),
+    publishedTime: z.string().nullish(),
+    modifiedTime: z.string().nullish(),
+    authors: z.array(z.string()).nullish(),
+    tags: z.array(z.string()).nullish(),
     profile: openGraphProfileValidator.nullish(),
 });
 export type OpenGraphMediaProfile = z.infer<typeof openGraphProfileValidator>;
 export type OpenGraphMedia = z.infer<typeof openGraphMediaValidator>;
+export type OpenGraphAudio = z.infer<typeof openGraphMediaValidator>;
+export type OpenGraphVideo = z.infer<typeof openGraphMediaValidator>;
 export type OpenGraph = z.infer<typeof openGraphValidator>;
 
 export const twitterValidator = z.object({
-    creator: z.string().optional(),
-    site: z.string().optional(),
+    title: z.string().nullish(),
+    description: z.string().nullish(),
+    images: z.array(openGraphMediaValidator).nullish(),
     cardType: z.string().optional(),
+    site: z.string().optional(),
+    siteId: z.string().nullish(),
+    creator: z.string().optional(),
+    creatorId: z.string().nullish(),
 });
 export type Twitter = z.infer<typeof twitterValidator>;
 
-// See NextSeoProps
 export const seoValidator = z
     .object({
         title: z.string().nullish(),
@@ -52,11 +71,11 @@ export const seoValidator = z
         description: z.string().nullish(),
         authors: authorsValidator.nullish(),
         keywords: z.array(z.string()).nullish(),
+        canonical: z.string().nullish(),
         creator: z.string().nullish(),
         publisher: z.string().nullish(),
-        canonical: z.string().nullish(),
         openGraph: openGraphValidator.nullish(),
         twitter: twitterValidator.nullish(),
     })
-    .merge(sanityDocumentValidator);
+    .extend(sanityDocumentValidator.shape);
 export type Seo = z.infer<typeof seoValidator>;

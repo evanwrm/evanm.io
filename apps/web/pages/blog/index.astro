@@ -1,0 +1,45 @@
+---
+import { EyeIcon, FileTextIcon, PenLineIcon } from "lucide-react";
+import { ArticleSearch } from "@/components/blog/article-search";
+import MainLayout from "@/components/layouts/main-layout.astro";
+import SeoPage from "@/components/seo-page.astro";
+import { articleFind } from "@/lib/sanity/queries";
+
+const articles = await articleFind({ sort: "_createdAt desc" });
+const totalWords = articles.reduce((sum, a) => sum + a.stats.words, 0);
+const totalViews = articles.reduce((sum, a) => sum + a.stats.views, 0);
+---
+
+<MainLayout>
+    <SeoPage slot="head" title="Blog" />
+    <div class="mx-auto w-full max-w-3xl px-4 py-12">
+        <div class="transition duration-500 ease-spring motion-safe:md:opacity-0 motion-safe:md:translate-y-20 motion-safe:md:intersect:opacity-100 motion-safe:md:intersect:translate-y-0 intersect-once intersect-quarter flex flex-col gap-6">
+            <div
+                class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-muted-foreground text-xs"
+            >
+                <div class="flex items-center gap-1.5">
+                    <FileTextIcon className="size-3" />
+                    <span class="font-medium text-foreground">
+                        {articles.length}
+                    </span>
+                    <span>articles</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <PenLineIcon className="size-3" />
+                    <span class="font-medium text-foreground">
+                        {totalWords.toLocaleString()}
+                    </span>
+                    <span>words</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <EyeIcon className="size-3" />
+                    <span class="font-medium text-foreground">
+                        {totalViews.toLocaleString()}
+                    </span>
+                    <span>views</span>
+                </div>
+            </div>
+            <ArticleSearch articles={articles} client:load />
+        </div>
+    </div>
+</MainLayout>

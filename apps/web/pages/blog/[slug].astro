@@ -1,0 +1,150 @@
+---
+import { format } from "date-fns";
+import { CalendarIcon, ClockIcon, EyeIcon } from "lucide-react";
+import ViewCounter from "@/components/analytics/view-counter";
+import { getIcon } from "@/components/icon";
+import { Image } from "@/components/image";
+import MainLayout from "@/components/layouts/main-layout.astro";
+import { Markdown } from "@/components/mdx/markdown";
+import SeoPage from "@/components/seo-page.astro";
+import { Badge } from "@/components/ui/badge";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
+import { articleFindOne, settingsFind } from "@/lib/sanity/queries";
+import { isReference } from "@/lib/sanity/utils";
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const [article, settings] = await Promise.all([
+    articleFindOne({ slug: slug! }),
+    settingsFind(),
+]);
+if (!article) return new Response(null, { status: 404 });
+
+const readingTime = Math.ceil(article.stats.time / 60000);
+const author = `${settings.firstName} ${settings.lastName}`;
+const avatar = settings.avatar && !isReference(settings.avatar.asset)
+        ? {
+              url: settings.avatar.asset.url,
+              width: 20,
+              height: 20,
+              alt: settings.avatar.alt ?? author,
+        }
+        : null;
+const thumbnail =
+    article.thumbnail && !isReference(article.thumbnail.asset)
+        ? {
+              url: article.thumbnail.asset.url,
+              width: 1200,
+              height: 630,
+              alt: article.thumbnail.alt ?? article.title,
+          }
+        : null;
+---
+
+<MainLayout>
+    <SeoPage
+        slot="head"
+        title={article.title}
+        description={article.logline ?? undefined}
+        openGraph={{
+            type: "article",
+            images: thumbnail ? [thumbnail] : undefined,
+            publishedTime: article._createdAt,
+            modifiedTime: article._updatedAt,
+            authors: [author],
+            tags: article.tags?.map((tag) => tag.name),
+        }}
+    />
+    <div class="mx-auto w-full max-w-5xl px-4 py-12">
+        <Breadcrumb className="mb-6">
+            <BreadcrumbList>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                    <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                    <BreadcrumbPage>{article.title}</BreadcrumbPage>
+                </BreadcrumbItem>
+            </BreadcrumbList>
+        </Breadcrumb>
+        <div class="flex flex-col gap-4">
+            <h1 class="text-balance font-extrabold text-4xl tracking-tight lg:text-5xl">
+                {article.title}
+            </h1>
+            <div class="flex flex-wrap gap-x-4 gap-y-2 font-mono text-muted-foreground text-xs">
+                {avatar && (
+                    <div class="flex items-center gap-2">
+                        <Image
+                            src={avatar.url}
+                            alt={avatar.alt}
+                            width={avatar.width}
+                            height={avatar.height}
+                            className="rounded-full ring-1 ring-border/50"
+                        />
+                        <span class="font-medium text-foreground">
+                            {settings.firstName} {settings.lastName}
+                        </span>
+                    </div>
+                )}
+                <Separator orientation="vertical" className="data-[orientation=vertical]:h-auto" />
+                <div class="flex items-center gap-1.5">
+                    <CalendarIcon className="size-3.5" />
+                    <span>
+                        {format(new Date(article._createdAt), "MMM dd, yyyy")}
+                    </span>
+                </div>
+                <Separator orientation="vertical" className="data-[orientation=vertical]:h-auto" />
+                <div class="flex items-center gap-1.5">
+                    <ClockIcon className="size-3.5" />
+                    <span>{readingTime} min read</span>
+                </div>
+                <Separator orientation="vertical" className="data-[orientation=vertical]:h-auto" />
+                <div class="flex items-center gap-1.5">
+                    <EyeIcon className="size-3.5" />
+                    <span>{article.stats.views.toLocaleString()} views</span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            {article.tags && article.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2">
+                    {article.tags.map((tag) => {
+                        const TagIcon = tag.iconId ? getIcon(tag.iconId) : null;
+                        return (
+                            <Badge variant="outline" className="rounded-full border-border/50 bg-background/50 px-2 py-0.5 font-normal text-[10px]">
+                                {TagIcon && <TagIcon className="mr-1 size-2.5" />}
+                                {tag.name}
+                            </Badge>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
+        {thumbnail && (
+            <div class="relative aspect-video w-full overflow-hidden rounded-xl border border-border/60 bg-muted/30 shadow-sm">
+                <Image
+                    src={thumbnail.url}
+                    alt={thumbnail.alt}
+                    width={thumbnail.width}
+                    height={thumbnail.height}
+                    className="h-full w-full"
+                />
+            </div>
+        )}
+        <Markdown source={article.content} className="mt-12 mb-8" />
+        <ViewCounter documentId={article._id} client:idle />
+    </div>
+</MainLayout>

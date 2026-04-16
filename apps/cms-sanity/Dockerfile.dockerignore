@@ -1,0 +1,23 @@
+# root
+/*
+
+!/package.json
+!/pnpm-lock.yaml
+!/pnpm-workspace.yaml
+!/.npmrc
+!/apps/
+
+# apps/cms-sanity
+/apps/*
+!/apps/cms-sanity/
+
+/apps/cms-sanity/*
+!/apps/cms-sanity/package.json
+!/apps/cms-sanity/deskStructure.ts
+!/apps/cms-sanity/nginx.conf
+!/apps/cms-sanity/sanity.cli.ts
+!/apps/cms-sanity/sanity.config.ts
+!/apps/cms-sanity/tsconfig.json
+!/apps/cms-sanity/components/
+!/apps/cms-sanity/schemas/
+!/apps/cms-sanity/static/

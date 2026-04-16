@@ -1,6 +1,8 @@
-import { z } from "zod";
-import { sanityDocumentValidator } from "@/lib/validators/sanity/sanity-document";
-import { sanityMediaValidator } from "@/lib/validators/sanity/sanity-media";
+import * as z from "zod";
+import {
+    sanityDocumentValidator,
+    sanityMediaValidator,
+} from "@/lib/validators/sanity";
 
 export const courseValidator = z.object({
     name: z.string(),
@@ -17,19 +19,19 @@ export const educationLevelValidator = z.enum([
 
 export const educationValidator = z
     .object({
-        educationLevel: educationLevelValidator,
-        school: z.string(),
         slug: z.string(),
+        school: z.string(),
         degree: z.string().nullish(),
         location: z.string().nullish(),
-        siteUrl: z.string().nullish(),
-        description: z.string().nullish(),
         gpa: z.string().nullish(),
-        courses: z.array(courseValidator).nullish(),
         startDate: z.string().nullish(),
         endDate: z.string().nullish(),
+        description: z.string().nullish(),
+        siteUrl: z.string().nullish(),
+        courses: z.array(courseValidator).nullish(),
+        educationLevel: educationLevelValidator,
         thumbnail: sanityMediaValidator.nullish(),
         media: z.array(sanityMediaValidator).nullish(),
     })
-    .merge(sanityDocumentValidator);
+    .extend(sanityDocumentValidator.shape);
 export type Education = z.infer<typeof educationValidator>;

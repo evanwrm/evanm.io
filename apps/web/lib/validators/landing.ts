@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { sanityDocumentValidator } from "@/lib/validators/sanity/sanity-document";
+import * as z from "zod";
+import { sanityDocumentValidator } from "@/lib/validators/sanity";
 
 export const landingValidator = z
     .object({
@@ -14,5 +14,5 @@ export const landingValidator = z
         includePublications: z.boolean().nullish(),
         includeSkills: z.boolean().nullish(),
     })
-    .merge(sanityDocumentValidator);
+    .extend(sanityDocumentValidator.shape);
 export type Landing = z.infer<typeof landingValidator>;

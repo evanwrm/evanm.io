@@ -2,9 +2,10 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
-@source "../**/*.{js,ts,jsx,tsx}";
+@source "../**/*.{js,ts,jsx,tsx,astro}";
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant intersect (&:not([no-intersect]));
 
 @theme inline {
     --font-sans: var(--font-sans);
@@ -46,6 +47,7 @@
     --color-sidebar-ring: var(--sidebar-ring);
     --color-selection: var(--selection);
     --color-selection-foreground: var(--selection-foreground);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 :root {
@@ -166,22 +168,14 @@
         background: hsl(var(--scrollbar-track));
         border-radius: 4px;
     }
-    .scrollbar::-webkit-scrollbar-track:active,
-    .scrollbar::-webkit-scrollbar-track:hover {
-        background: hsl(var(--scrollbar-track));
-    }
 
     /* Scrollbar thumb */
     .scrollbar::-webkit-scrollbar-thumb {
         background: var(--scrollbar);
         border-radius: 1rem;
     }
-    .scrollbar::-webkit-scrollbar-thumb:active {
-        background-color: var(--scrollbar-hover);
-    }
     .scrollbar::-webkit-scrollbar-thumb:hover {
         background: var(--scrollbar-hover);
-        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
     }
 
     /* shiki */
@@ -217,15 +211,5 @@
     }
     code[data-line-numbers-max-digits="4"] > [data-line]::before {
         width: 2.25rem;
-    }
-
-    .link-underline {
-        background-size: 0 3px;
-        background-position: 0 100%;
-        background-repeat: no-repeat;
-    }
-    .link-underline:hover {
-        background-size: 100% 3px;
-        background-position: 0 100%;
     }
 }

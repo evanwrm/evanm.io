@@ -1,0 +1,79 @@
+---
+import { ChevronUpIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+---
+
+<div
+    id="back-to-top"
+    class="group pointer-events-none fixed right-8 bottom-6 z-40 scale-0 opacity-0 transition-all duration-300"
+>
+    <Button
+        id="back-to-top-btn"
+        variant="outline"
+        size="icon"
+        aria-label="Back to top"
+    >
+        <ChevronUpIcon className="h-6 w-6 transition group-hover:-translate-y-1" />
+    </Button>
+</div>
+
+<script>
+    const btn = document.getElementById("back-to-top-btn");
+    const container = document.getElementById("back-to-top");
+    if (btn && container) {
+        const showThreshold = 100;
+        let lastY = window.scrollY;
+
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            scrollTo({ top: 0 });
+        });
+
+        const setVisible = (visible: boolean) => {
+            if (visible) {
+                container.classList.remove(
+                    "pointer-events-none",
+                    "scale-0",
+                    "opacity-0",
+                );
+                container.classList.add(
+                    "pointer-events-auto",
+                    "scale-100",
+                    "opacity-100",
+                );
+                return;
+            }
+
+            container.classList.remove(
+                "pointer-events-auto",
+                "scale-100",
+                "opacity-100",
+            );
+            container.classList.add(
+                "pointer-events-none",
+                "scale-0",
+                "opacity-0",
+            );
+        };
+
+        const updateVisibility = () => {
+            const y = window.scrollY;
+            const delta = y - lastY;
+            lastY = y;
+
+            if (y < showThreshold) {
+                setVisible(false);
+                return;
+            }
+
+            if (delta < -1) {
+                setVisible(true);
+            } else if (delta > 1) {
+                setVisible(false);
+            }
+        };
+
+        window.addEventListener("scroll", updateVisibility, { passive: true });
+        updateVisibility();
+    }
+</script>

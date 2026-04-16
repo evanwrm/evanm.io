@@ -1,6 +1,8 @@
-import { z } from "zod";
-import { sanityDocumentValidator } from "@/lib/validators/sanity/sanity-document";
-import { sanityMediaValidator } from "@/lib/validators/sanity/sanity-media";
+import * as z from "zod";
+import {
+    sanityDocumentValidator,
+    sanityMediaValidator,
+} from "@/lib/validators/sanity";
 
 export const experienceTypeValidator = z.enum([
     "selfemployed",
@@ -19,18 +21,18 @@ export const locationTypeValidator = z.enum(["remote", "onsite", "hybrid"]);
 
 export const experienceValidator = z
     .object({
-        role: z.string(),
-        company: z.string(),
         slug: z.string(),
-        employmentType: experienceTypeValidator,
-        locationType: locationTypeValidator.nullish(),
+        company: z.string(),
+        role: z.string(),
         location: z.string().nullish(),
-        siteUrl: z.string().nullish(),
-        description: z.string().nullish(),
+        locationType: locationTypeValidator.nullish(),
+        employmentType: experienceTypeValidator,
         startDate: z.string().nullish(),
         endDate: z.string().nullish(),
+        siteUrl: z.string().nullish(),
+        description: z.string().nullish(),
         thumbnail: sanityMediaValidator.nullish(),
         media: z.array(sanityMediaValidator).nullish(),
     })
-    .merge(sanityDocumentValidator);
+    .extend(sanityDocumentValidator.shape);
 export type Experience = z.infer<typeof experienceValidator>;

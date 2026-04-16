@@ -1,0 +1,110 @@
+---
+import { ChevronRightIcon, LightbulbIcon } from "lucide-react";
+import Tilt from "@/components/tilt.astro";
+import { ProjectCard } from "@/components/home/project-card";
+import type { Project } from "@/lib/validators/project";
+import { cn } from "@/lib/utils";
+
+interface Props {
+    projects: Project[];
+    maxVisible?: number;
+}
+
+const { projects, maxVisible = 6 } = Astro.props;
+const hasMore = projects.length > maxVisible;
+const getProjectItemClass = (index: number) =>
+    cn(
+        "transition duration-500 ease-spring motion-safe:md:opacity-0 motion-safe:md:translate-y-20 motion-safe:md:intersect:opacity-100 motion-safe:md:intersect:translate-y-0 intersect-once intersect-quarter h-full",
+        index >= maxVisible && hasMore && "hidden",
+    );
+---
+
+<section
+    id="projects"
+    class="scroll-mt-20"
+    data-projects-section=""
+    data-max-visible={maxVisible}
+>
+    <div class="transition duration-500 ease-spring motion-safe:md:opacity-0 motion-safe:md:translate-y-20 motion-safe:md:intersect:opacity-100 motion-safe:md:intersect:translate-y-0 intersect-once intersect-quarter flex w-full flex-col gap-6">
+        <h2 class="flex items-center justify-start font-bold text-2xl">
+            <div class="mr-3 rounded-full border border-border/60 bg-background/80 p-2 backdrop-blur-sm">
+                <LightbulbIcon className="size-5" />
+            </div>
+            Projects
+        </h2>
+        <div class="flex flex-col gap-8">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {projects.map((project, i) => (
+                    <Tilt
+                        class={getProjectItemClass(i)}
+                        data-project-item=""
+                    >
+                        <ProjectCard project={project} />
+                    </Tilt>
+                ))}
+            </div>
+            {hasMore && (
+                <button
+                    type="button"
+                    data-projects-toggle=""
+                    aria-expanded="false"
+                    class="inline cursor-pointer text-muted-foreground/70 text-xs transition-colors hover:text-foreground"
+                >
+                    <span class="inline-flex items-center gap-0.5 rounded-sm px-1 py-0.5">
+                        <ChevronRightIcon className="size-3 transition-transform duration-200" data-projects-chevron="" />
+                        <span data-projects-toggle-text="">
+                            Show More
+                        </span>
+                    </span>
+                </button>
+            )}
+        </div>
+    </div>
+</section>
+
+<script>
+    const initProjectSections = () => {
+        document
+            .querySelectorAll("[data-projects-section]")
+            .forEach(section => {
+                if (!(section instanceof HTMLElement)) return;
+                if (section.dataset.projectsInitialized === "true") return;
+                section.dataset.projectsInitialized = "true";
+
+                const toggle = section.querySelector("[data-projects-toggle]");
+                if (!(toggle instanceof HTMLButtonElement)) return;
+
+                const maxVisible = Number(section.dataset.maxVisible ?? "6");
+                const items = Array.from(section.querySelectorAll("[data-project-item]"));
+                const chevron = section.querySelector("[data-projects-chevron]");
+                const text = section.querySelector("[data-projects-toggle-text]");
+
+                let expanded = false;
+
+                toggle.addEventListener("click", () => {
+                    expanded = !expanded;
+                    toggle.setAttribute("aria-expanded", String(expanded));
+
+                    items.forEach((item, index) => {
+                        if (index >= maxVisible) {
+                            item.classList.toggle("hidden", !expanded);
+                        }
+                    });
+
+                    chevron?.classList.toggle("rotate-90", expanded);
+
+                    if (text) {
+                        text.textContent = expanded
+                            ? "Show Less"
+                            : "Show More";
+                    }
+                });
+            });
+    };
+
+    initProjectSections();
+
+    document.addEventListener("astro:after-swap", () => {
+        initProjectSections();
+    });
+</script>

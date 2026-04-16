@@ -1,36 +1,20 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "astro/tsconfigs/strict",
+    "include": [
+        ".astro/types.d.ts",
+        "**/*.astro",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.js"
+    ],
+    "exclude": ["node_modules", "dist"],
     "compilerOptions": {
-        "allowJs": true,
         "baseUrl": ".",
-        "declaration": true,
-        "declarationMap": true,
-        "esModuleInterop": true,
-        "incremental": true,
-        "isolatedModules": true,
-        "jsx": "react-jsx",
-        "lib": ["ESNext", "DOM", "DOM.Iterable"],
-        "module": "esnext",
-        "moduleDetection": "force",
-        "moduleResolution": "bundler",
-        "noEmit": true,
-        "noUncheckedIndexedAccess": false,
         "paths": {
             "@/*": ["./*"]
         },
-        "removeComments": true,
-        "resolveJsonModule": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "target": "es2022",
-        "plugins": [{ "name": "next" }]
-    },
-    "include": [
-        "**/*.ts",
-        "**/*.tsx",
-        "./**/*.js",
-        ".next/dev/types/**/*.ts",
-        ".next/types/**/*.ts"
-    ],
-    "exclude": ["node_modules", ".next"]
+        "jsx": "react-jsx",
+        "jsxImportSource": "react",
+        "plugins": [{ "name": "@astrojs/ts-plugin" }]
+    }
 }

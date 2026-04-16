@@ -1,0 +1,29 @@
+---
+import { BookOpenIcon } from "lucide-react";
+import { PublicationCard } from "@/components/home/publication-card";
+import type { Publication } from "@/lib/validators/publication";
+
+interface Props {
+    publications: Publication[];
+}
+
+const { publications } = Astro.props;
+---
+
+<section id="publications" class="scroll-mt-20">
+    <div class="transition duration-500 ease-spring motion-safe:md:opacity-0 motion-safe:md:translate-y-20 motion-safe:md:intersect:opacity-100 motion-safe:md:intersect:translate-y-0 intersect-once intersect-quarter flex w-full flex-col gap-6">
+        <h2 class="flex items-center justify-start font-bold text-2xl">
+            <div class="mr-3 rounded-full border border-border/60 bg-background/80 p-2 backdrop-blur-sm">
+                <BookOpenIcon className="size-5" />
+            </div>
+            Publications
+        </h2>
+        <div class="rounded-xl border border-border/60 bg-card/50 p-3 backdrop-blur-sm">
+            {publications.map((publication) => (
+                <div class="transition duration-500 ease-spring motion-safe:md:opacity-0 motion-safe:md:translate-y-20 motion-safe:md:intersect:opacity-100 motion-safe:md:intersect:translate-y-0 intersect-once intersect-quarter">
+                    <PublicationCard publication={publication} />
+                </div>
+            ))}
+        </div>
+    </div>
+</section>

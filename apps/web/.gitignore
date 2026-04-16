@@ -1,7 +1,6 @@
-# Next.js
-.next/
-out/
-certificates/
+# Astro
+.astro/
+dist/
 
 # vercel
 .vercel

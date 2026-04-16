@@ -1,35 +1,62 @@
-import type { StaticImport } from "next/dist/shared/lib/get-img-props";
-import NextImage from "next/image";
+import type { ImageOutputFormat, ImageQuality } from "astro";
+import { getImage } from "astro:assets";
 import { cn } from "@/lib/utils";
-import type { SanityMediaAsset } from "@/lib/validators/sanity/sanity-media";
+import type { SanityMediaAsset } from "@/lib/validators/sanity";
 
 export interface Props {
-    src: string | StaticImport | SanityMediaAsset;
+    src: string | SanityMediaAsset;
     alt?: string;
     width?: number;
     height?: number;
+    format?: ImageOutputFormat;
+    quality?: ImageQuality;
     className?: string;
 }
 
 // https://plaiceholder.co/
 // https://png-pixel.com/
-export const Image = ({ src, alt = "", width, height, className }: Props) => {
+export async function Image({
+    src,
+    alt = "",
+    width,
+    height,
+    format = "webp",
+    quality = "mid",
+    className,
+}: Props) {
     const isSanity = typeof src === "object" && "url" in src;
     const url = isSanity ? src.url : src;
     const w = width ?? (isSanity ? src.metadata?.dimensions.width : undefined);
     const h =
         height ?? (isSanity ? src.metadata?.dimensions.height : undefined);
     const lqip = isSanity ? (src.metadata?.lqip ?? undefined) : undefined;
+
+    const optimized = await getImage({
+        src: url,
+        width: w,
+        height: h,
+        format,
+        quality,
+    });
+
     return (
-        <NextImage
-            src={url}
+        <img
+            src={optimized.src}
             alt={alt}
             width={w}
             height={h}
-            fill={!width && !height}
-            className={cn(className, "object-cover")}
-            placeholder="blur"
-            blurDataURL={lqip}
+            loading="lazy"
+            decoding="async"
+            className={cn("object-cover", className)}
+            style={
+                lqip
+                    ? {
+                          backgroundImage: `url(${lqip})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                      }
+                    : {}
+            }
         />
     );
-};
+}

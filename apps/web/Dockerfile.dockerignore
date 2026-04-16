@@ -1,0 +1,23 @@
+# root
+/*
+
+!/package.json
+!/pnpm-lock.yaml
+!/pnpm-workspace.yaml
+!/.npmrc
+!/apps/
+
+# apps/web
+/apps/*
+!/apps/web/
+
+/apps/web/*
+!/apps/web/package.json
+!/apps/web/astro.config.ts
+!/apps/web/postcss.config.mjs
+!/apps/web/tsconfig.json
+!/apps/web/components/
+!/apps/web/lib/
+!/apps/web/pages/
+!/apps/web/public/
+!/apps/web/styles/

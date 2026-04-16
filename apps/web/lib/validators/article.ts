@@ -1,6 +1,8 @@
-import { z } from "zod";
-import { sanityDocumentValidator } from "@/lib/validators/sanity/sanity-document";
-import { sanityMediaValidator } from "@/lib/validators/sanity/sanity-media";
+import * as z from "zod";
+import {
+    sanityDocumentValidator,
+    sanityMediaValidator,
+} from "@/lib/validators/sanity";
 import { tagValidator } from "@/lib/validators/tag";
 
 export const articleValidator = z
@@ -18,5 +20,5 @@ export const articleValidator = z
             views: z.number(),
         }),
     })
-    .merge(sanityDocumentValidator);
+    .extend(sanityDocumentValidator.shape);
 export type Article = z.infer<typeof articleValidator>;

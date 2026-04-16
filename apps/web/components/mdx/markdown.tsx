@@ -1,22 +1,22 @@
-import { compile, run } from "@mdx-js/mdx";
-import rehypePrettyCode from "rehype-pretty-code";
-import { Image } from "@/components/image";
-import { Code, Pre } from "@/components/mdx/code-block";
-import { Link } from "@/components/navigation/link";
 import "katex/dist/katex.css";
+import { compile, run } from "@mdx-js/mdx";
 import type { Element, Root } from "hast";
-import type { MDXComponents, MDXProps } from "mdx/types";
+import type { MDXComponents } from "mdx/types";
 import * as runtime from "react/jsx-runtime";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeKatex from "rehype-katex";
+import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { visit } from "unist-util-visit";
+import { Image } from "@/components/image";
+import { Code, Pre } from "@/components/mdx/code-block";
+import { Link } from "@/components/link";
 import { cn } from "@/lib/utils";
 
-export const defaultComponents = {
+const defaultComponents: MDXComponents = {
     a: ({
         href = "",
         className,
@@ -25,28 +25,25 @@ export const defaultComponents = {
         <Link
             href={href}
             className={cn(
-                "font-semibold text-foreground/80 hover:text-foreground",
+                "text-foreground/80 hover:text-foreground font-semibold",
                 className,
             )}
             {...props}
         />
     ),
+    img: ({ src, alt }: React.ComponentPropsWithoutRef<"img">) => (
+        <Image src={src ?? ""} alt={alt} />
+    ),
     pre: Pre,
     code: Code,
-    Image,
-} satisfies MDXComponents;
-
-type Props = MDXProps & {
-    components?: MDXComponents;
-    source?: string;
-    className?: string;
 };
-export async function Markdown({
-    components,
-    source = "",
-    className,
-    ...props
-}: Props) {
+
+interface Props {
+    source: string;
+    className?: string;
+    components?: MDXComponents;
+}
+export async function Markdown({ source = "", className, components }: Props) {
     const code = String(
         await compile(source, {
             outputFormat: "function-body",
@@ -77,10 +74,7 @@ export async function Markdown({
 
     return (
         <div className={cn("prose max-w-full", className)}>
-            <Content
-                components={{ ...defaultComponents, ...components }}
-                {...props}
-            />
+            <Content components={{ ...defaultComponents, ...components }} />
         </div>
     );
 }

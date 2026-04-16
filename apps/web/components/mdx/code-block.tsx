@@ -1,7 +1,4 @@
-"use client";
-
 import { CheckIcon, CopyIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 import { Terminal } from "@/components/terminal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -15,58 +12,42 @@ export function Pre({
     "data-title": title,
     ...props
 }: PreProps) {
-    const ref = useRef<HTMLDivElement>(null);
-    const [copied, setCopied] = useState(false);
-
-    useEffect(() => {
-        if (!copied) return;
-        const timeout = setTimeout(() => setCopied(false), 2000);
-        return () => clearTimeout(timeout);
-    }, [copied]);
-
-    const handleCopy = () => {
-        navigator.clipboard.writeText(ref.current?.textContent ?? "");
-        setCopied(true);
-    };
-
-    const copyButton = (
-        <div className="absolute top-1.5 right-1.5 z-10 scale-90 opacity-0 transition-all duration-200 group-hover:scale-100 group-hover:opacity-100">
-            <Button
-                variant="ghost"
-                size="icon"
-                aria-label="Copy code"
-                onClick={handleCopy}
-                className="relative bg-transparent"
-            >
-                <CheckIcon
-                    className={cn("absolute h-6 w-6 transition", {
-                        "text-emerald-600 opacity-100": copied,
-                        "scale-0 opacity-0": !copied,
-                    })}
-                />
-                <CopyIcon
-                    className={cn("absolute h-6 w-6 transition", {
-                        "scale-0 text-emerald-600 opacity-0": copied,
-                    })}
-                />
-            </Button>
-        </div>
-    );
     const preElement = (
         <pre
             {...props}
             className={cn(
-                "scrollbar m-0! bg-transparent! p-3 [&>code]:whitespace-pre [&>code]:bg-transparent [&>code]:p-0",
+                "scrollbar m-0! bg-transparent! p-3 [&>code]:bg-transparent [&>code]:p-0 [&>code]:whitespace-pre",
                 className,
             )}
         >
             {children}
         </pre>
     );
+    const copyButton = (
+        <div className="absolute top-1.5 right-1.5 z-10 scale-90 opacity-0 transition-all duration-200 group-hover:scale-100 group-hover:opacity-100">
+            <Button
+                variant="ghost"
+                size="icon"
+                type="button"
+                aria-label="Copy code"
+                data-copy-button
+                className="relative bg-transparent"
+            >
+                <CheckIcon
+                    data-check-icon
+                    className="absolute h-6 w-6 scale-0 text-green-500 opacity-0 transition"
+                />
+                <CopyIcon
+                    data-copy-icon
+                    className="absolute h-6 w-6 transition"
+                />
+            </Button>
+        </div>
+    );
 
     if (title) {
         return (
-            <div ref={ref} className="group relative m-auto">
+            <div data-code-block className="group relative m-auto">
                 <Terminal title={title}>
                     {copyButton}
                     {preElement}
@@ -77,8 +58,8 @@ export function Pre({
 
     return (
         <div
-            ref={ref}
-            className="group relative m-auto rounded-md border bg-card shadow-md backdrop-blur-lg"
+            data-code-block
+            className="group bg-card relative m-auto rounded-md border shadow-md backdrop-blur-lg"
         >
             {copyButton}
             {preElement}
@@ -92,7 +73,7 @@ export function Code({ className, ...props }: CodeProps) {
         <code
             className={cn(
                 className,
-                "mx-0.5 inline-flex max-w-full overflow-auto whitespace-nowrap rounded-md bg-card px-1.5 py-1 before:content-none after:content-none",
+                "bg-card mx-0.5 inline-flex max-w-full overflow-auto rounded-md px-1.5 py-1 whitespace-nowrap before:content-none after:content-none",
             )}
             {...props}
         />

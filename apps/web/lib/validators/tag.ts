@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { sanityDocumentValidator } from "@/lib/validators/sanity/sanity-document";
+import * as z from "zod";
+import { sanityDocumentValidator } from "@/lib/validators/sanity";
 
 export const tagValidator = z
     .object({
@@ -7,5 +7,5 @@ export const tagValidator = z
         description: z.string().nullish(),
         iconId: z.string().nullish(),
     })
-    .merge(sanityDocumentValidator);
+    .extend(sanityDocumentValidator.shape);
 export type Tag = z.infer<typeof tagValidator>;

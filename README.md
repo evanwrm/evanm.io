@@ -8,7 +8,7 @@
 
 <div align="center">
 
-A personal portfolio website running on [Next.js](https://nextjs.org/) + [Sanity](https://www.sanity.io/).
+A personal portfolio website running on [Astro](https://astro.build/) + [Sanity](https://www.sanity.io/).
 
 [![Website](https://img.shields.io/website/https/evanm.io?down_color=red&down_message=down&up_message=up&style=flat-square)](https://evanm.io)
 ![GitHub last commit](https://img.shields.io/github/last-commit/evanwrm/evanm.io?style=flat-square)
@@ -22,16 +22,14 @@ A personal portfolio website running on [Next.js](https://nextjs.org/) + [Sanity
 
 ### Website (frontend)
 
-- [Next.js](https://nextjs.org) + [React](https://react.dev/)
+- [Astro](https://astro.build/) + [React](https://react.dev/)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Tailwind](https://tailwindcss.com)
 - [MDX](https://mdxjs.com)
-- [Framer Motion](https://www.framer.com/motion)
 - [Vitest](https://vitest.dev/)
-- [Playwright](https://playwright.dev/)
 - [Typescript](https://www.typescriptlang.org)
 
-Installation/usage instructions can be found in [apps/web](apps/web)
+Installation/usage instructions can be found in [apps/web](apps/web).
 
 ![Google Chrome Lighthouse](https://user-images.githubusercontent.com/66049888/171770773-cbccf8e9-d29d-41aa-b4d4-b49ecf7baf54.gif)
 

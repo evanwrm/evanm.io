@@ -1,6 +1,8 @@
-import { z } from "zod";
-import { sanityDocumentValidator } from "@/lib/validators/sanity/sanity-document";
-import { sanityMediaValidator } from "@/lib/validators/sanity/sanity-media";
+import * as z from "zod";
+import {
+    sanityDocumentValidator,
+    sanityMediaValidator,
+} from "@/lib/validators/sanity";
 
 export const settingsValidator = z
     .object({
@@ -11,5 +13,5 @@ export const settingsValidator = z
         cv: sanityMediaValidator.nullish(),
         resume: sanityMediaValidator.nullish(),
     })
-    .merge(sanityDocumentValidator);
+    .extend(sanityDocumentValidator.shape);
 export type Settings = z.infer<typeof settingsValidator>;

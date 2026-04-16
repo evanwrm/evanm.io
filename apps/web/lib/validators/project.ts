@@ -1,21 +1,19 @@
-import { z } from "zod";
+import * as z from "zod";
 import {
     type Publication,
     publicationValidator,
 } from "@/lib/validators/publication";
 import {
     type SanityDocument,
+    type SanityMedia,
     type SanityReference,
     sanityDocumentValidator,
-    sanityReferencesValidator,
-} from "@/lib/validators/sanity/sanity-document";
-import {
-    type SanityMedia,
     sanityMediaValidator,
-} from "@/lib/validators/sanity/sanity-media";
+    sanityReferenceValidator,
+} from "@/lib/validators/sanity";
 import { type Skill, skillValidator } from "@/lib/validators/skill";
 
-// TOOD: zod inference on mutally recursive types
+// TODO: zod inference on mutually recursive types
 export interface Project extends SanityDocument {
     title: string;
     slug: string;
@@ -46,12 +44,12 @@ export const projectValidator: z.ZodType<Project> = z.lazy(() =>
             media: z.array(sanityMediaValidator).nullish(),
             publications: z
                 .array(
-                    z.union([publicationValidator, sanityReferencesValidator]),
+                    z.union([publicationValidator, sanityReferenceValidator]),
                 )
                 .nullish(),
             skills: z
-                .array(z.union([skillValidator, sanityReferencesValidator]))
+                .array(z.union([skillValidator, sanityReferenceValidator]))
                 .nullish(),
         })
-        .merge(sanityDocumentValidator),
+        .extend(sanityDocumentValidator.shape),
 );

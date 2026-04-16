@@ -1,0 +1,215 @@
+---
+import { seoFind } from "@/lib/sanity/queries";
+import type {
+    Authors,
+    OpenGraph,
+    OpenGraphMedia,
+    Twitter,
+} from "@/lib/validators/seo";
+
+type MetaTag = { content: string; name?: string; property?: string };
+interface Props {
+    title?: string;
+    description?: string;
+    authors?: Authors;
+    keywords?: string[];
+    canonical?: string;
+    creator?: string;
+    publisher?: string;
+    noindex?: boolean;
+    nofollow?: boolean;
+    openGraph?: OpenGraph;
+    twitter?: Twitter;
+}
+
+const {
+    title,
+    description,
+    canonical,
+    noindex = false,
+    nofollow = false,
+    authors,
+    keywords,
+    creator,
+    publisher,
+    openGraph,
+    twitter,
+} = Astro.props;
+
+const resolveMedia = (media?: OpenGraphMedia[] | null) =>
+    media?.length
+        ? media.filter((item): item is OpenGraphMedia => Boolean(item?.url))
+        : undefined;
+
+const meta = (
+    key: string,
+    content?: string | null,
+    kind: "name" | "property" = "name",
+) => (content ? { [kind]: key, content } : undefined);
+const metaAll = <T,>(
+    key: string,
+    values?: T | T[] | null,
+    kind: "name" | "property" = "name",
+    fields?: [string, (item: T) => string | null | undefined][],
+) => {
+    const items = !values ? [] : Array.isArray(values) ? values : [values];
+    if (!fields) return items.map(v => meta(key, v as string, kind));
+    return items.flatMap(item =>
+        fields
+            .map(([suffix, fn]) => meta(`${key}${suffix}`, fn(item), kind))
+            .filter(Boolean),
+    );
+};
+
+const siteSeo = await seoFind();
+if (!siteSeo.title) {
+    throw new Error("Site SEO title is required.");
+}
+
+const origin = Astro.site?.origin ?? Astro.url.origin;
+const canonicalUrl =
+    canonical ??
+    siteSeo.canonical ??
+    `${origin}${Astro.url.pathname}${Astro.url.search}`;
+const pageTitle = title ?? siteSeo.title;
+const resolvedTitle =
+    siteSeo.titleTemplate?.replace(/%s/g, pageTitle) ?? pageTitle;
+const resolvedDescription = description ?? siteSeo.description ?? undefined;
+const resolvedAuthors = authors ?? siteSeo.authors ?? undefined;
+const resolvedKeywords = keywords ?? siteSeo.keywords ?? undefined;
+const resolvedCreator = creator ?? siteSeo.creator ?? undefined;
+const resolvedPublisher = publisher ?? siteSeo.publisher ?? undefined;
+
+const openGraphImages =
+    resolveMedia(openGraph?.images) ?? resolveMedia(siteSeo.openGraph?.images);
+const openGraphAudio =
+    resolveMedia(openGraph?.audio) ?? resolveMedia(siteSeo.openGraph?.audio);
+const openGraphVideos =
+    resolveMedia(openGraph?.videos) ?? resolveMedia(siteSeo.openGraph?.videos);
+const openGraphMeta: OpenGraph = {
+    ...siteSeo.openGraph,
+    ...openGraph,
+    title: openGraph?.title ?? resolvedTitle,
+    description: openGraph?.description ?? resolvedDescription,
+    url: openGraph?.url ?? siteSeo.openGraph?.url ?? canonicalUrl,
+    type: openGraph?.type ?? siteSeo.openGraph?.type ?? "website",
+    images: openGraphImages,
+    audio: openGraphAudio,
+    videos: openGraphVideos,
+};
+
+const twitterImages = resolveMedia(twitter?.images) ?? openGraphImages;
+const twitterMeta: Twitter = {
+    ...siteSeo.twitter,
+    ...twitter,
+    title: twitter?.title ?? openGraphMeta.title ?? resolvedTitle,
+    description:
+        twitter?.description ??
+        openGraphMeta.description ??
+        resolvedDescription,
+    images: twitterImages,
+    cardType:
+        twitter?.cardType ??
+        siteSeo.twitter?.cardType ??
+        (twitterImages?.length || openGraphImages?.length
+            ? "summary_large_image"
+            : "summary"),
+};
+
+const metaTags: MetaTag[] = [
+    meta("description", resolvedDescription),
+    meta(
+        "keywords",
+        resolvedKeywords?.length ? resolvedKeywords.join(", ") : undefined,
+    ),
+    ...(resolvedAuthors?.map(author => meta("author", author.name)) ?? []),
+    meta("creator", resolvedCreator),
+    meta("publisher", resolvedPublisher),
+    meta(
+        "robots",
+        `${noindex ? "noindex" : "index"}, ${nofollow ? "nofollow" : "follow"}`,
+    ),
+
+    meta("og:title", openGraphMeta.title, "property"),
+    meta("og:description", openGraphMeta.description, "property"),
+    meta("og:url", openGraphMeta.url, "property"),
+    meta("og:determiner", openGraphMeta.determiner, "property"),
+    ...metaAll("og:email", openGraphMeta.emails, "property"),
+    ...metaAll("og:phone_number", openGraphMeta.phoneNumbers, "property"),
+    ...metaAll("og:fax_number", openGraphMeta.faxNumbers, "property"),
+    meta("og:site_name", openGraphMeta.siteName, "property"),
+    meta("og:locale", openGraphMeta.locale, "property"),
+    ...metaAll(
+        "og:locale:alternate",
+        openGraphMeta.alternateLocale,
+        "property",
+    ),
+    meta("og:country-name", openGraphMeta.countryName, "property"),
+    meta(
+        "og:ttl",
+        typeof openGraphMeta.ttl === "number"
+            ? String(openGraphMeta.ttl)
+            : undefined,
+        "property",
+    ),
+    meta("og:type", openGraphMeta.type ?? "website", "property"),
+    ...metaAll("og:image", openGraphImages, "property", [
+        ["", m => m.url],
+        [":width", m => (m.width ? String(m.width) : undefined)],
+        [":height", m => (m.height ? String(m.height) : undefined)],
+        [":alt", m => m.alt],
+    ]),
+    ...metaAll("og:audio", openGraphAudio, "property", [
+        ["", m => m.url],
+        [":secure_url", m => m.secureUrl],
+        [":type", m => m.type],
+    ]),
+    ...metaAll("og:video", openGraphVideos, "property", [
+        ["", m => m.url],
+        [":secure_url", m => m.secureUrl],
+        [":type", m => m.type],
+        [":width", m => (m.width ? String(m.width) : undefined)],
+        [":height", m => (m.height ? String(m.height) : undefined)],
+    ]),
+
+    ...(openGraphMeta.type === "article"
+        ? [
+              meta(
+                  "article:published_time",
+                  openGraphMeta.publishedTime,
+                  "property",
+              ),
+              meta(
+                  "article:modified_time",
+                  openGraphMeta.modifiedTime,
+                  "property",
+              ),
+              ...metaAll("article:author", openGraphMeta.authors, "property"),
+              ...metaAll("article:tag", openGraphMeta.tags, "property"),
+          ].filter(Boolean)
+        : []),
+
+    meta("twitter:card", twitterMeta.cardType ?? "summary"),
+    meta("twitter:title", twitterMeta.title),
+    meta("twitter:description", twitterMeta.description),
+    ...metaAll("twitter:image", twitterImages, "name", [
+        ["", m => m.url],
+        [":alt", m => m.alt],
+    ]),
+    meta("twitter:site", twitterMeta.site),
+    meta("twitter:site:id", twitterMeta.siteId),
+    meta("twitter:creator", twitterMeta.creator),
+    meta("twitter:creator:id", twitterMeta.creatorId),
+].filter((tag): tag is MetaTag => Boolean(tag));
+---
+
+<title>{resolvedTitle}</title>
+<link rel="canonical" href={canonicalUrl} />
+
+{metaTags.map((tag) => (
+    <meta
+        name={tag.name}
+        property={tag.property}
+        content={tag.content}
+    />
+))}
