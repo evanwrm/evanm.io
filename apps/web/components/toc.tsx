@@ -9,6 +9,7 @@ import {
     useState,
 } from "react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 interface TocContextValue {
@@ -29,6 +30,7 @@ interface TocNavProps {
     children: React.ReactNode;
 }
 export function TocNav({ children }: TocNavProps) {
+    const { t } = useTranslations();
     const [items, setItems] = useState<Set<string>>(new Set());
     const [activeId, setActiveId] = useState("");
 
@@ -73,7 +75,7 @@ export function TocNav({ children }: TocNavProps) {
         <TocContext.Provider value={value}>
             <nav className="flex flex-col gap-4">
                 <p className="text-muted-foreground/70 ml-4 font-mono text-[10px] tracking-widest uppercase">
-                    On This Page
+                    {t("toc.onThisPage")}
                 </p>
                 <div className="relative flex flex-col">
                     <div className="bg-border/40 absolute top-2 bottom-2 left-0 w-px" />

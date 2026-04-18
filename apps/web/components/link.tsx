@@ -1,5 +1,6 @@
 import type { VariantProps } from "class-variance-authority";
 import { Button, type buttonVariants } from "@/components/ui/button";
+import { localizedPath } from "@/lib/i18n";
 import { isExternal } from "@/lib/uri";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +22,7 @@ export function Link({ href = "", className, children, ...props }: Props) {
         );
 
     return (
-        <a href={href} className={cn(className)} {...props}>
+        <a href={localizedPath(href)} className={cn(className)} {...props}>
             {children}
         </a>
     );

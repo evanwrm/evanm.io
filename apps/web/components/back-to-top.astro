@@ -1,6 +1,9 @@
 ---
 import { ChevronUpIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "@/lib/i18n";
+
+const { t } = useTranslations();
 ---
 
 <div
@@ -11,7 +14,7 @@ import { Button } from "@/components/ui/button";
         id="back-to-top-btn"
         variant="outline"
         size="icon"
-        aria-label="Back to top"
+        aria-label={t("nav.backToTop")}
     >
         <ChevronUpIcon className="h-6 w-6 transition group-hover:-translate-y-1" />
     </Button>

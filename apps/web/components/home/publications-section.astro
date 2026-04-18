@@ -1,6 +1,7 @@
 ---
 import { BookOpenIcon } from "lucide-react";
-import { PublicationCard } from "@/components/home/publication-card";
+import PublicationCard from "@/components/home/publication-card.astro";
+import { useTranslations } from "@/lib/i18n";
 import type { Publication } from "@/lib/validators/publication";
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const { publications } = Astro.props;
+const { t } = useTranslations();
 ---
 
 <section id="publications" class="scroll-mt-20">
@@ -16,7 +18,7 @@ const { publications } = Astro.props;
             <div class="mr-3 rounded-full border border-border/60 bg-background/80 p-2 backdrop-blur-sm">
                 <BookOpenIcon className="size-5" />
             </div>
-            Publications
+            {t("home.publications")}
         </h2>
         <div class="rounded-xl border border-border/60 bg-card/50 p-3 backdrop-blur-sm">
             {publications.map((publication) => (

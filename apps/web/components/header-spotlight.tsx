@@ -2,6 +2,7 @@ import {
     BookOpenIcon,
     CopyIcon,
     FileTextIcon,
+    GlobeIcon,
     HomeIcon,
     LightbulbIcon,
     MonitorIcon,
@@ -21,6 +22,12 @@ import {
     useSpotlight,
 } from "@/components/spotlight";
 import { CommandEmpty, CommandList } from "@/components/ui/command";
+import {
+    localeInfo,
+    localizedPath,
+    setLocale,
+    useTranslations,
+} from "@/lib/i18n";
 import { isReference } from "@/lib/sanity/utils";
 import { setTheme } from "@/lib/theme";
 import type { Settings } from "@/lib/validators/settings";
@@ -36,11 +43,19 @@ export function HeaderSpotlight({
     settings,
     siteUrl,
 }: SpotlightHeaderProps) {
+    const { t } = useTranslations();
+
     return (
         <Spotlight>
-            <SpotlightTrigger />
-            <SpotlightList>
-                <SpotlightInput />
+            <SpotlightTrigger
+                label={t("spotlight.search")}
+                aria-label={t("spotlight.open")}
+            />
+            <SpotlightList
+                title={t("spotlight.title")}
+                description={t("spotlight.description")}
+            >
+                <SpotlightInput placeholder={t("spotlight.placeholder")} />
                 <SpotlightCommands
                     socials={socials}
                     settings={settings}
@@ -61,6 +76,7 @@ function SpotlightCommands({
     settings,
     siteUrl,
 }: SpotlightCommandsProps) {
+    const { t, name: langName } = useTranslations();
     const { pushPage } = useSpotlight();
 
     const github = socials?.find((social: any) => social.socialId === "github");
@@ -71,8 +87,8 @@ function SpotlightCommands({
 
     return (
         <CommandList className="scrollbar">
-            <CommandEmpty>No results found.</CommandEmpty>
-            <SpotlightGroup heading="General" page="home">
+            <CommandEmpty>{t("spotlight.noResults")}</CommandEmpty>
+            <SpotlightGroup heading={t("spotlight.general")} page="home">
                 <SpotlightItem
                     value="copy"
                     icon={<CopyIcon />}
@@ -80,7 +96,7 @@ function SpotlightCommands({
                     keywords={["copy", "paste", "url", "website", "domain"]}
                     onSelect={() => navigator.clipboard.writeText(siteUrl)}
                 >
-                    Copy URL
+                    {t("common.copyUrl")}
                 </SpotlightItem>
                 <SpotlightItem
                     value="source"
@@ -91,20 +107,20 @@ function SpotlightCommands({
                         open(`${github?.url}/${new URL(siteUrl).hostname}`)
                     }
                 >
-                    View Source
+                    {t("common.viewSource")}
                 </SpotlightItem>
             </SpotlightGroup>
-            <SpotlightGroup heading="Navigation" page="home">
+            <SpotlightGroup heading={t("spotlight.navigation")} page="home">
                 <SpotlightItem
                     value="home"
                     icon={<HomeIcon />}
                     shortcut={["g", "h"]}
                     keywords={["home", "index", "main"]}
                     onSelect={() => {
-                        window.location.href = "/";
+                        window.location.href = localizedPath("/");
                     }}
                 >
-                    Home
+                    {t("common.home")}
                 </SpotlightItem>
                 <SpotlightItem
                     value="projects"
@@ -117,10 +133,10 @@ function SpotlightCommands({
                         "hobby",
                     ]}
                     onSelect={() => {
-                        window.location.href = "/#projects";
+                        window.location.href = localizedPath("/#projects");
                     }}
                 >
-                    Projects
+                    {t("home.projects")}
                 </SpotlightItem>
                 <SpotlightItem
                     value="publications"
@@ -128,10 +144,10 @@ function SpotlightCommands({
                     shortcut={["g", "c"]}
                     keywords={["paper", "academia", "research", "school"]}
                     onSelect={() => {
-                        window.location.href = "/#publications";
+                        window.location.href = localizedPath("/#publications");
                     }}
                 >
-                    Publications
+                    {t("home.publications")}
                 </SpotlightItem>
                 <SpotlightItem
                     value="blog"
@@ -139,10 +155,10 @@ function SpotlightCommands({
                     shortcut={["g", "b"]}
                     keywords={["article", "writing", "words"]}
                     onSelect={() => {
-                        window.location.href = "/blog";
+                        window.location.href = localizedPath("/blog");
                     }}
                 >
-                    Blog
+                    {t("common.blog")}
                 </SpotlightItem>
                 {cvUrl && (
                     <SpotlightItem
@@ -152,12 +168,12 @@ function SpotlightCommands({
                         keywords={["resume", "curriculum vitae", "job", "work"]}
                         onSelect={() => open(cvUrl)}
                     >
-                        Resume
+                        {t("common.resume")}
                     </SpotlightItem>
                 )}
             </SpotlightGroup>
             {socials && socials.length > 0 && (
-                <SpotlightGroup heading="Socials" page="home">
+                <SpotlightGroup heading={t("spotlight.socials")} page="home">
                     {socials.map((social: any) => {
                         const SocialIcon = getIcon(social.iconId);
                         return (
@@ -179,46 +195,92 @@ function SpotlightCommands({
                     })}
                 </SpotlightGroup>
             )}
-            <SpotlightGroup heading="Preferences" page="home">
+            <SpotlightGroup heading={t("spotlight.preferences")} page="home">
+                <SpotlightItem
+                    value="language"
+                    icon={<GlobeIcon />}
+                    keywords={[
+                        "language",
+                        "locale",
+                        "translation",
+                        "i18n",
+                        langName,
+                    ]}
+                    subtitle={langName}
+                    onSelect={() => pushPage("language")}
+                    closeOnSelect={false}
+                >
+                    {t("spotlight.changeLanguage")}
+                </SpotlightItem>
                 <SpotlightItem
                     value="theme"
                     icon={<PaletteIcon />}
                     shortcut={["p", "t"]}
                     keywords={["theme", "color", "dark", "light", "background"]}
-                    subtitle="Choose the application theme"
+                    subtitle={t("theme.chooseTheme")}
                     onSelect={() => pushPage("theme")}
                     closeOnSelect={false}
                 >
-                    Change Theme
+                    {t("theme.changeTheme")}
                 </SpotlightItem>
             </SpotlightGroup>
-            <SpotlightGroup heading="Theme" page="theme">
+            <SpotlightGroup heading={t("spotlight.languages")} page="language">
+                <SpotlightItem
+                    value="language-browser-default"
+                    icon={<GlobeIcon />}
+                    keywords={[
+                        "language",
+                        "locale",
+                        "browser",
+                        "system",
+                        "auto",
+                    ]}
+                    breadcrumb={t("spotlight.changeLanguage")}
+                    onSelect={() => setLocale(null)}
+                >
+                    {t("theme.system")}
+                </SpotlightItem>
+                {Object.entries(localeInfo).map(([locale, info]) => (
+                    <SpotlightItem
+                        key={locale}
+                        value={`language-${locale}`}
+                        icon={<GlobeIcon />}
+                        keywords={["language", "locale", locale, info.name]}
+                        breadcrumb={t("spotlight.changeLanguage")}
+                        subtitle={locale}
+                        onSelect={() => setLocale(locale as any)}
+                    >
+                        {info.name}
+                    </SpotlightItem>
+                ))}
+            </SpotlightGroup>
+            <SpotlightGroup heading={t("theme.changeTheme")} page="theme">
                 <SpotlightItem
                     value="light"
                     icon={<SunIcon />}
                     keywords={["light", "day", "theme"]}
-                    breadcrumb="Theme"
+                    breadcrumb={t("theme.changeTheme")}
                     onSelect={() => setTheme("light")}
                 >
-                    Light
+                    {t("theme.light")}
                 </SpotlightItem>
                 <SpotlightItem
                     value="dark"
                     icon={<MoonIcon />}
                     keywords={["dark", "night", "theme"]}
-                    breadcrumb="Theme"
+                    breadcrumb={t("theme.changeTheme")}
                     onSelect={() => setTheme("dark")}
                 >
-                    Dark
+                    {t("theme.dark")}
                 </SpotlightItem>
                 <SpotlightItem
                     value="system"
                     icon={<MonitorIcon />}
                     keywords={["system", "default", "reset", "theme"]}
-                    breadcrumb="Theme"
+                    breadcrumb={t("theme.changeTheme")}
                     onSelect={() => setTheme("system")}
                 >
-                    System
+                    {t("theme.system")}
                 </SpotlightItem>
             </SpotlightGroup>
         </CommandList>

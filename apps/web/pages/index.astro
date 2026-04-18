@@ -7,6 +7,7 @@ import PublicationsSection from "@/components/home/publications-section.astro";
 import SectionToc from "@/components/home/section-toc";
 import MainLayout from "@/components/layouts/main-layout.astro";
 import SeoPage from "@/components/seo-page.astro";
+import { useTranslations } from "@/lib/i18n";
 import {
     educationFind,
     experienceFind,
@@ -16,7 +17,8 @@ import {
     settingsFind,
 } from "@/lib/sanity/queries";
 
-export const prerender = true;
+export const prerender = false;
+const { t } = useTranslations();
 
 const [landing, educations, experiences, projects, publications, settings] =
     await Promise.all([
@@ -30,7 +32,7 @@ const [landing, educations, experiences, projects, publications, settings] =
 ---
 
 <MainLayout>
-    <SeoPage slot="head" title="Home" />
+    <SeoPage slot="head" title={t("common.home")} />
     <div class="flex flex-col">
         {landing.includeIntro && (
             <IntroSection landing={landing} settings={settings} />

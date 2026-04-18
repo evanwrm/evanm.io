@@ -1,6 +1,7 @@
 ---
 import { GraduationCapIcon } from "lucide-react";
-import { EducationCard } from "@/components/home/education-card";
+import EducationCard from "@/components/home/education-card.astro";
+import { useTranslations } from "@/lib/i18n";
 import type { Education } from "@/lib/validators/education";
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const { educations } = Astro.props;
+const { t } = useTranslations();
 ---
 
 <section id="education" class="scroll-mt-20">
@@ -16,7 +18,7 @@ const { educations } = Astro.props;
             <div class="mr-3 rounded-full border border-border/60 bg-background/80 p-2 backdrop-blur-sm">
                 <GraduationCapIcon className="size-5" />
             </div>
-            Education
+            {t("home.education")}
         </h2>
         <div class="rounded-xl border border-border/60 bg-card/50 p-3 backdrop-blur-sm">
             {educations.map((education) => (

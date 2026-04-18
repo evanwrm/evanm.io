@@ -3,12 +3,15 @@ import { MoveLeftIcon } from "lucide-react";
 import BaseLayout from "@/components/layouts/base-layout.astro";
 import { ButtonLink } from "@/components/link";
 import SeoPage from "@/components/seo-page.astro";
+import { useTranslations } from "@/lib/i18n";
+
+const { t } = useTranslations();
 ---
 
 <BaseLayout>
     <SeoPage
         slot="head"
-        title="404 Not Found"
+        title={t("error.notFoundTitle")}
         noindex={true}
         nofollow={true}
     />
@@ -19,15 +22,15 @@ import SeoPage from "@/components/seo-page.astro";
             </h1>
             <div class="space-y-2">
                 <h2 class="font-bold text-2xl tracking-tight">
-                    Page not found
+                    {t("error.notFoundHeading")}
                 </h2>
                 <p class="text-muted-foreground">
-                    The page you're looking for doesn't exist.
+                    {t("error.notFoundDescription")}
                 </p>
             </div>
             <ButtonLink href="/" variant="link" className="mt-4 gap-2">
                 <MoveLeftIcon className="size-4" />
-                Back to Home
+                {t("nav.backToHome")}
             </ButtonLink>
         </div>
     </div>

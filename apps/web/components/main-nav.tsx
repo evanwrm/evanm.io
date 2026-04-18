@@ -1,4 +1,5 @@
 import { Link } from "@/components/link";
+import { localizedPath } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -15,7 +16,7 @@ export function MainNav({ links, pathname, className }: Props) {
                     href={link.href}
                     className={cn(
                         "hover:text-foreground text-sm/6 transition-colors",
-                        pathname === link.href
+                        pathname === localizedPath(link.href)
                             ? "text-foreground"
                             : "text-muted-foreground",
                     )}

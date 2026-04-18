@@ -5,21 +5,24 @@ import {
     WrenchIcon,
 } from "lucide-react";
 import { TocNav, TocNavItem } from "@/components/toc";
+import { useTranslations } from "@/lib/i18n";
 
 export default function SectionToc() {
+    const { t } = useTranslations();
+
     return (
         <TocNav>
             <TocNavItem id="experience">
-                <WrenchIcon /> Experience
+                <WrenchIcon /> {t("home.experience")}
             </TocNavItem>
             <TocNavItem id="education">
-                <GraduationCapIcon /> Education
+                <GraduationCapIcon /> {t("home.education")}
             </TocNavItem>
             <TocNavItem id="projects">
-                <LightbulbIcon /> Projects
+                <LightbulbIcon /> {t("home.projects")}
             </TocNavItem>
             <TocNavItem id="publications">
-                <BookOpenIcon /> Publications
+                <BookOpenIcon /> {t("home.publications")}
             </TocNavItem>
         </TocNav>
     );

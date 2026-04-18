@@ -1,0 +1,15 @@
+---
+import { defaultLocale, locales } from "@/lib/i18n/locales";
+
+export const prerender = false;
+
+const { lang, path } = Astro.params;
+
+const isValid =
+    lang &&
+    lang !== defaultLocale &&
+    (locales as readonly string[]).includes(lang);
+if (!isValid) return new Response(null, { status: 404 });
+
+return Astro.rewrite(`/${path ?? ""}`);
+---

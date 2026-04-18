@@ -5,6 +5,7 @@ import { Image } from "@/components/image";
 import { Link } from "@/components/link";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { useTranslations } from "@/lib/i18n";
 import { isReference } from "@/lib/sanity/utils";
 import { cn } from "@/lib/utils";
 import type { Article } from "@/lib/validators/article";
@@ -14,12 +15,19 @@ interface Props {
     className?: string;
 }
 export function BlogCard({ article, className }: Props) {
+    const { t, dateLocale, formatNumber } = useTranslations();
     const readingTime = Math.ceil(article.stats.time / 60000);
+
+    const formatTimeAgo = (date: string | number | Date) =>
+        formatDistance(date, new Date(), {
+            addSuffix: true,
+            locale: dateLocale,
+        });
 
     return (
         <Link
             href={`/blog/${article.slug}`}
-            aria-label={`Read ${article.title}`}
+            aria-label={`${t("common.readMore")}: ${article.title}`}
         >
             <article
                 className={cn(
@@ -44,11 +52,7 @@ export function BlogCard({ article, className }: Props) {
                     <div className="min-w-0 flex-1">
                         <div className="text-muted-foreground mb-2 flex flex-wrap gap-2 font-mono text-xs">
                             <span className="group-hover:text-foreground/70 tabular-nums transition-colors">
-                                {formatDistance(
-                                    new Date(article._createdAt),
-                                    new Date(),
-                                    { addSuffix: true },
-                                )}
+                                {formatTimeAgo(article._createdAt)}
                             </span>
                             <Separator
                                 orientation="vertical"
@@ -56,7 +60,8 @@ export function BlogCard({ article, className }: Props) {
                             />
                             <span className="inline-flex items-center gap-1">
                                 <ClockIcon className="size-3" />
-                                {readingTime} min read
+                                {formatNumber(readingTime)}{" "}
+                                {t("common.minRead")}
                             </span>
                             <Separator
                                 orientation="vertical"
@@ -64,7 +69,8 @@ export function BlogCard({ article, className }: Props) {
                             />
                             <span className="inline-flex items-center gap-1">
                                 <EyeIcon className="size-3" />
-                                {article.stats.views.toLocaleString()} views
+                                {formatNumber(article.stats.views)}{" "}
+                                {t("common.views")}
                             </span>
                         </div>
                         <h2 className="text-foreground/90 group-hover:text-foreground mb-1 text-sm leading-snug font-semibold tracking-tight transition-colors sm:text-base">
@@ -104,7 +110,7 @@ export function BlogCard({ article, className }: Props) {
                                 )}
                             </div>
                             <span className="text-muted-foreground group-hover:text-primary inline-flex items-center gap-1 text-xs opacity-0 transition-all duration-200 group-hover:translate-x-1 group-hover:opacity-100">
-                                Read more
+                                {t("common.readMore")}
                                 <ArrowRightIcon className="size-3" />
                             </span>
                         </div>

@@ -12,8 +12,8 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { visit } from "unist-util-visit";
 import { Image } from "@/components/image";
-import { Code, Pre } from "@/components/mdx/code-block";
 import { Link } from "@/components/link";
+import { Code, Pre } from "@/components/mdx/code-block";
 import { cn } from "@/lib/utils";
 
 const defaultComponents: MDXComponents = {

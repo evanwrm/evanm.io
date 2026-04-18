@@ -71,8 +71,5 @@ const { class: classProp, tiltStrength = 4, ...props } = Astro.props;
     };
 
     initTilt();
-
-    document.addEventListener("astro:after-swap", () => {
-        initTilt();
-    });
+    document.addEventListener("astro:after-swap", initTilt);
 </script>

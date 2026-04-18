@@ -1,5 +1,4 @@
 ---
-import { format } from "date-fns";
 import { CalendarIcon, ClockIcon, EyeIcon } from "lucide-react";
 import ViewCounter from "@/components/analytics/view-counter";
 import { getIcon } from "@/components/icon";
@@ -17,12 +16,14 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
+import { localizedPath, useTranslations } from "@/lib/i18n";
 import { articleFindOne, settingsFind } from "@/lib/sanity/queries";
 import { isReference } from "@/lib/sanity/utils";
 
 export const prerender = false;
 
 const { slug } = Astro.params;
+const { t, formatNumber, formatDate } = useTranslations();
 const [article, settings] = await Promise.all([
     articleFindOne({ slug: slug! }),
     settingsFind(),
@@ -65,14 +66,18 @@ const thumbnail =
         }}
     />
     <div class="mx-auto w-full max-w-5xl px-4 py-12">
-        <Breadcrumb className="mb-6">
+        <Breadcrumb className="mb-6" aria-label={t("nav.breadcrumb")}>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                    <BreadcrumbLink href={localizedPath("/")}>
+                        {t("common.home")}
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                    <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
+                    <BreadcrumbLink href={localizedPath("/blog")}>
+                        {t("common.blog")}
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
@@ -102,19 +107,21 @@ const thumbnail =
                 <Separator orientation="vertical" className="data-[orientation=vertical]:h-auto" />
                 <div class="flex items-center gap-1.5">
                     <CalendarIcon className="size-3.5" />
-                    <span>
-                        {format(new Date(article._createdAt), "MMM dd, yyyy")}
-                    </span>
+                    <span>{formatDate(article._createdAt)}</span>
                 </div>
                 <Separator orientation="vertical" className="data-[orientation=vertical]:h-auto" />
                 <div class="flex items-center gap-1.5">
                     <ClockIcon className="size-3.5" />
-                    <span>{readingTime} min read</span>
+                    <span>
+                        {formatNumber(readingTime)} {t("common.minRead")}
+                    </span>
                 </div>
                 <Separator orientation="vertical" className="data-[orientation=vertical]:h-auto" />
                 <div class="flex items-center gap-1.5">
                     <EyeIcon className="size-3.5" />
-                    <span>{article.stats.views.toLocaleString()} views</span>
+                    <span>
+                        {formatNumber(article.stats.views)} {t("common.views")}
+                    </span>
                 </div>
             </div>
         </div>

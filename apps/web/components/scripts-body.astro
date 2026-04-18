@@ -1,34 +1,3 @@
----
-import { THEME_CHANGE_EVENT, THEME_STORAGE_KEY } from "@/lib/theme";
----
-
-<!-- Theme -->
-<script
-    is:inline
-    define:vars={{ themeChangeEvent: THEME_CHANGE_EVENT, themeStorageKey: THEME_STORAGE_KEY }}
->
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const getTheme = () => localStorage.getItem(themeStorageKey) || "system";
-    const applyTheme = (theme) => {
-        const resolvedTheme =
-            theme === "dark" ||
-            (theme === "system" && media.matches)
-                ? "dark"
-                : "light";
-
-        const event = new CustomEvent(themeChangeEvent, { detail: { theme, resolvedTheme } });
-        document.documentElement.classList.toggle("dark", resolvedTheme === "dark");
-        window.dispatchEvent(event);
-    };
-
-    applyTheme(getTheme());
-
-    media.addEventListener("change", () => {
-        if (getTheme() === "system") applyTheme("system");
-    });
-</script>
-
 <!-- Intersection Observer (https://github.com/heidkaemper/tailwindcss-intersect) -->
 <script is:inline>
     const getThreshold = element => {
@@ -92,7 +61,6 @@ import { THEME_CHANGE_EVENT, THEME_STORAGE_KEY } from "@/lib/theme";
     };
 
     Observer.start();
-
     document.addEventListener("astro:after-swap", () => {
         Observer.start();
     });

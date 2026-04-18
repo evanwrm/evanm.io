@@ -1,0 +1,60 @@
+---
+import { defaultLocale, locales } from "@/lib/i18n/locales";
+import { THEME_CHANGE_EVENT, THEME_STORAGE_KEY } from "@/lib/theme";
+---
+
+<!-- Theme -->
+<script
+    is:inline
+    define:vars={{ themeChangeEvent: THEME_CHANGE_EVENT, themeStorageKey: THEME_STORAGE_KEY }}
+>
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const getTheme = () => localStorage.getItem(themeStorageKey) || "system";
+    const applyTheme = theme => {
+        const resolvedTheme =
+            theme === "dark" || (theme === "system" && media.matches)
+                ? "dark"
+                : "light";
+
+        const event = new CustomEvent(themeChangeEvent, {
+            detail: { theme, resolvedTheme },
+        });
+        document.documentElement.classList.toggle(
+            "dark",
+            resolvedTheme === "dark",
+        );
+        window.dispatchEvent(event);
+    };
+
+    applyTheme(getTheme());
+
+    media.addEventListener("change", () => {
+        if (getTheme() === "system") applyTheme("system");
+    });
+</script>
+
+<!-- Locale -->
+<script
+    is:inline
+    define:vars={{ locs: [...locales], def: defaultLocale }}
+>
+    const match = document.cookie.match(/(?:^|; )locale=([^;]+)/);
+    const pref = match ? decodeURIComponent(match[1]) : null;
+
+    if (pref && locs.includes(pref)) {
+        const path = window.location.pathname;
+        const first = path.split("/")[1] || "";
+        const isLoc = locs.includes(first);
+        const current = isLoc ? first : def;
+
+        if (current !== pref) {
+            const rest = (isLoc ? path.slice(first.length + 1) : path) || "/";
+            const target =
+                pref === def ? rest : `/${pref}${rest === "/" ? "" : rest}`;
+            window.location.replace(
+                target + window.location.search + window.location.hash,
+            );
+        }
+    }
+</script>

@@ -16,6 +16,7 @@ import {
     InputGroupInput,
     InputGroupText,
 } from "@/components/ui/input-group";
+import { useTranslations } from "@/lib/i18n";
 import { fuzzySearch } from "@/lib/search";
 import type { Article } from "@/lib/validators/article";
 
@@ -23,6 +24,7 @@ interface Props {
     articles: Article[];
 }
 export function ArticleSearch({ articles }: Props) {
+    const { t, formatNumber } = useTranslations();
     const [query, setQuery] = useState("");
     const [filteredArticles, setFilteredArticles] =
         useState<Article[]>(articles);
@@ -58,7 +60,7 @@ export function ArticleSearch({ articles }: Props) {
                     </InputGroupText>
                 </InputGroupAddon>
                 <InputGroupInput
-                    placeholder="Search articles..."
+                    placeholder={t("blog.searchPlaceholder")}
                     value={query}
                     onChange={handleSearch}
                 />
@@ -67,7 +69,7 @@ export function ArticleSearch({ articles }: Props) {
                         <InputGroupButton
                             size="icon-xs"
                             onClick={clearSearch}
-                            aria-label="Clear search"
+                            aria-label={t("blog.clearSearch")}
                         >
                             <XIcon />
                         </InputGroupButton>
@@ -76,8 +78,10 @@ export function ArticleSearch({ articles }: Props) {
             </InputGroup>
             {query && (
                 <p className="text-muted-foreground ml-1 font-mono text-xs">
-                    {filteredArticles.length} result
-                    {filteredArticles.length === 1 ? "" : "s"}
+                    {formatNumber(filteredArticles.length)}{" "}
+                    {filteredArticles.length === 1
+                        ? t("blog.result")
+                        : t("blog.results")}
                 </p>
             )}
             <div className="border-border/60 bg-card/50 rounded-xl border p-3 backdrop-blur-sm">
@@ -91,15 +95,15 @@ export function ArticleSearch({ articles }: Props) {
                             <EmptyMedia variant="icon">
                                 <SearchIcon />
                             </EmptyMedia>
-                            <EmptyTitle>No articles found</EmptyTitle>
+                            <EmptyTitle>{t("blog.noArticlesFound")}</EmptyTitle>
                             <EmptyDescription>
-                                Try a different search term or{" "}
+                                {t("blog.noArticlesDescription")}{" "}
                                 <Button
                                     variant="link"
                                     onClick={clearSearch}
                                     className="text-primary px-1 font-medium hover:underline"
                                 >
-                                    clear your search
+                                    {t("blog.clearYourSearch")}
                                 </Button>
                             </EmptyDescription>
                         </EmptyHeader>

@@ -1,13 +1,19 @@
 ---
 import { Font } from "astro:assets";
 import Analytics from "@/components/analytics/analytics.astro";
-import BasicScripts from "@/components/basic-scripts.astro";
+import ScriptsBody from "@/components/scripts-body.astro";
+import ScriptsHead from "@/components/scripts-head.astro";
+import { useTranslations } from "@/lib/i18n";
 import "@/styles/globals.css";
+
+const { locale, dir } = useTranslations();
 ---
 
 <!doctype html>
-<html lang="en" dir="ltr" class="scroll-smooth">
+<html lang={locale} dir={dir} class="scroll-smooth">
     <head>
+        <ScriptsHead />
+        
         <!-- Meta -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
@@ -68,6 +74,6 @@ import "@/styles/globals.css";
             <Analytics />
             <slot />
         </div>
-        <BasicScripts />
+        <ScriptsBody />
     </body>
 </html>

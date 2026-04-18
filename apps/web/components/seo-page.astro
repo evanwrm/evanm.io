@@ -1,5 +1,7 @@
 ---
 import { seoFind } from "@/lib/sanity/queries";
+import { localeInfo, useTranslations } from "@/lib/i18n";
+import { locales, type Locale } from "@/lib/i18n/locales";
 import type {
     Authors,
     OpenGraph,
@@ -20,6 +22,7 @@ interface Props {
     nofollow?: boolean;
     openGraph?: OpenGraph;
     twitter?: Twitter;
+    locale?: Locale;
 }
 
 const {
@@ -34,6 +37,7 @@ const {
     publisher,
     openGraph,
     twitter,
+    locale,
 } = Astro.props;
 
 const resolveMedia = (media?: OpenGraphMedia[] | null) =>
@@ -66,7 +70,11 @@ if (!siteSeo.title) {
     throw new Error("Site SEO title is required.");
 }
 
+const { og: ogLocale } = useTranslations(locale);
 const origin = Astro.site?.origin ?? Astro.url.origin;
+const defaultAlternateLocales = locales
+    .map(l => localeInfo[l].og)
+    .filter(l => l !== ogLocale);
 const canonicalUrl =
     canonical ??
     siteSeo.canonical ??
@@ -93,6 +101,9 @@ const openGraphMeta: OpenGraph = {
     description: openGraph?.description ?? resolvedDescription,
     url: openGraph?.url ?? siteSeo.openGraph?.url ?? canonicalUrl,
     type: openGraph?.type ?? siteSeo.openGraph?.type ?? "website",
+    locale: openGraph?.locale ?? ogLocale,
+    alternateLocale:
+        openGraph?.alternateLocale ?? defaultAlternateLocales,
     images: openGraphImages,
     audio: openGraphAudio,
     videos: openGraphVideos,

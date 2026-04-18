@@ -1,6 +1,7 @@
 ---
 import { WrenchIcon } from "lucide-react";
-import { ExperienceCard } from "@/components/home/experience-card";
+import ExperienceCard from "@/components/home/experience-card.astro";
+import { useTranslations } from "@/lib/i18n";
 import type { Experience } from "@/lib/validators/experience";
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const { experiences } = Astro.props;
+const { t } = useTranslations();
 ---
 
 <section id="experience" class="scroll-mt-20">
@@ -16,7 +18,7 @@ const { experiences } = Astro.props;
             <div class="mr-3 rounded-full border border-border/60 bg-background/80 p-2 backdrop-blur-sm">
                 <WrenchIcon className="size-5" />
             </div>
-            Experience
+            {t("home.experience")}
         </h2>
         <div class="rounded-xl border border-border/60 bg-card/50 p-3 backdrop-blur-sm">
             {experiences.map((experience) => (

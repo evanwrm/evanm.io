@@ -4,6 +4,7 @@ import Header from "@/components/header.astro";
 import Footer from "@/components/footer.astro";
 import BackToTop from "@/components/back-to-top.astro";
 import HexBackground from "@/components/hex-background.astro";
+import { useTranslations } from "@/lib/i18n";
 import { settingsFind, socialFind } from "@/lib/sanity/queries";
 
 interface Props {
@@ -11,10 +12,10 @@ interface Props {
 }
 
 const { showHexBackground = true } = Astro.props;
-
+const { t } = useTranslations();
 const headerRoutes = [
-    { href: "/", label: "Home" },
-    { href: "/cv", label: "CV" },
+    { href: "/", label: t("common.home") },
+    { href: "/cv", label: t("common.resume") },
 ];
 
 const [socials, settings] = await Promise.all([

@@ -118,10 +118,10 @@ interface SpotlightListProps {
     className?: string;
 }
 export function SpotlightList({
-    children,
-    className,
     title = "Spotlight",
     description = "Search for commands and actions",
+    children,
+    className,
 }: SpotlightListProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { open, setOpen, bounceRef } = useSpotlight();
@@ -276,20 +276,28 @@ export function SpotlightItem({
     );
 }
 
-export function SpotlightTrigger({ className }: { className?: string }) {
+interface SpotlightTriggerProps extends React.ComponentProps<"button"> {
+    label?: React.ReactNode;
+}
+export function SpotlightTrigger({
+    label = "Search...",
+    className,
+    ...props
+}: SpotlightTriggerProps) {
     const { setOpen } = useSpotlight();
     return (
         <button
             type="button"
-            onClick={() => setOpen(true)}
             aria-label="Open spotlight"
+            onClick={() => setOpen(true)}
             className={cn(
                 "border-input/50 bg-muted/30 text-muted-foreground hover:border-input hover:bg-muted/50 flex h-8 items-center gap-2 rounded-lg border px-2 text-sm transition-colors sm:w-48 sm:px-3",
                 className,
             )}
+            {...props}
         >
             <SearchIcon className="size-4" />
-            <span className="hidden flex-1 text-left sm:inline">Search...</span>
+            <span className="hidden flex-1 text-left sm:inline">{label}</span>
             <KbdGroup className="hidden sm:inline-flex">
                 <Kbd>⌘</Kbd>
                 <Kbd>K</Kbd>

@@ -1,12 +1,15 @@
 ---
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
+const { t } = useTranslations();
+
 const themes = [
-    { id: "dark", label: "Dark", icon: MoonIcon, rounded: "rounded-l-md" },
-    { id: "light", label: "Light", icon: SunIcon, rounded: "" },
-    { id: "system", label: "System", icon: MonitorIcon, rounded: "rounded-r-md"},
+    { id: "dark", label: t("theme.dark"), icon: MoonIcon, rounded: "rounded-l-md" },
+    { id: "light", label: t("theme.light"), icon: SunIcon, rounded: "" },
+    { id: "system", label: t("theme.system"), icon: MonitorIcon, rounded: "rounded-r-md"},
 ];
 ---
 

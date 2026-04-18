@@ -1,6 +1,7 @@
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { Terminal } from "@/components/terminal";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 export interface PreProps extends React.ComponentPropsWithoutRef<"pre"> {
@@ -12,6 +13,8 @@ export function Pre({
     "data-title": title,
     ...props
 }: PreProps) {
+    const { t } = useTranslations();
+
     const preElement = (
         <pre
             {...props}
@@ -29,7 +32,7 @@ export function Pre({
                 variant="ghost"
                 size="icon"
                 type="button"
-                aria-label="Copy code"
+                aria-label={t("common.copyCode")}
                 data-copy-button
                 className="relative bg-transparent"
             >
