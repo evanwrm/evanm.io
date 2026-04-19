@@ -11,7 +11,7 @@ import { useTranslations } from "@/lib/i18n";
 import {
     educationFind,
     experienceFind,
-    landingFind,
+    homeFind,
     projectFind,
     publicationFind,
     settingsFind,
@@ -20,9 +20,9 @@ import {
 export const prerender = false;
 const { t } = useTranslations();
 
-const [landing, educations, experiences, projects, publications, settings] =
+const [home, educations, experiences, projects, publications, settings] =
     await Promise.all([
-        landingFind(),
+        homeFind(),
         educationFind({ sort: ["endDate desc", "startDate desc"] }),
         experienceFind({ sort: ["endDate desc", "startDate desc"] }),
         projectFind({ sort: "endDate desc" }),
@@ -34,21 +34,21 @@ const [landing, educations, experiences, projects, publications, settings] =
 <MainLayout>
     <SeoPage slot="head" title={t("common.home")} />
     <div class="flex flex-col">
-        {landing.includeIntro && (
-            <IntroSection landing={landing} settings={settings} />
+        {home.includeIntro && (
+            <IntroSection home={home} settings={settings} />
         )}
         <div class="mx-auto flex w-full max-w-7xl gap-8 p-4">
             <main class="min-w-0 flex-1 space-y-16">
-                {landing.includeExperience && (
+                {home.includeExperience && (
                     <ExperienceSection experiences={experiences} />
                 )}
-                {landing.includeEducation && (
+                {home.includeEducation && (
                     <EducationSection educations={educations} />
                 )}
-                {landing.includeProjects && (
+                {home.includeProjects && (
                     <ProjectsSection projects={projects} />
                 )}
-                {landing.includePublications && (
+                {home.includePublications && (
                     <PublicationsSection publications={publications} />
                 )}
             </main>

@@ -1,8 +1,9 @@
 import * as z from "zod";
 import { sanityDocumentValidator } from "@/lib/validators/sanity";
 
-export const landingValidator = z
+export const homeValidator = z
     .object({
+        heading: z.string().nullish(),
         logline: z.string().nullish(),
         intro: z.string().nullish(),
         includeIntro: z.boolean().nullish(),
@@ -15,4 +16,4 @@ export const landingValidator = z
         includeSkills: z.boolean().nullish(),
     })
     .extend(sanityDocumentValidator.shape);
-export type Landing = z.infer<typeof landingValidator>;
+export type Home = z.infer<typeof homeValidator>;

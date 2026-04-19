@@ -8,6 +8,9 @@ export interface Props {
     alt?: string;
     width?: number;
     height?: number;
+    loading?: "eager" | "lazy";
+    fetchPriority?: "auto" | "high" | "low";
+    decoding?: "sync" | "async" | "auto";
     format?: ImageOutputFormat;
     quality?: ImageQuality;
     className?: string;
@@ -20,6 +23,9 @@ export async function Image({
     alt = "",
     width,
     height,
+    loading = "lazy",
+    fetchPriority = "auto",
+    decoding = "async",
     format = "webp",
     quality = "mid",
     className,
@@ -45,8 +51,9 @@ export async function Image({
             alt={alt}
             width={w}
             height={h}
-            loading="lazy"
-            decoding="async"
+            loading={loading}
+            fetchPriority={fetchPriority}
+            decoding={decoding}
             className={cn("object-cover", className)}
             style={
                 lqip

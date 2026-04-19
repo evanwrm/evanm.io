@@ -1,3 +1,3 @@
-import landingPageSchema from "./landing";
+import homePageSchema from "./home";
 
-export const pageSchemaTypes = [landingPageSchema];
+export const pageSchemaTypes = [homePageSchema];

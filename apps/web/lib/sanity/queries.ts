@@ -5,7 +5,7 @@ import { validatePromise } from "@/lib/validate";
 import { articleValidator } from "@/lib/validators/article";
 import { educationValidator } from "@/lib/validators/education";
 import { experienceValidator } from "@/lib/validators/experience";
-import { landingValidator } from "@/lib/validators/landing";
+import { homeValidator } from "@/lib/validators/home";
 import { projectValidator } from "@/lib/validators/project";
 import { publicationValidator } from "@/lib/validators/publication";
 import { sanityQueryParamValidator } from "@/lib/validators/sanity";
@@ -160,10 +160,10 @@ export async function skillFind({ sort = "name desc" }: SkillFindRequest = {}) {
 
 // pages
 
-export async function landingFind() {
+export async function homeFind() {
     return validatePromise(
-        sanityClient.fetch(`*[_type == "landing"][0]`),
-        landingValidator,
+        sanityClient.fetch(`*[_type == "home"][0]`),
+        homeValidator,
     );
 }
 
