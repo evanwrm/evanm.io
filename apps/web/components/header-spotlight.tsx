@@ -28,21 +28,14 @@ import {
     setLocale,
     useTranslations,
 } from "@/lib/i18n";
-import { isReference } from "@/lib/sanity/utils";
 import { setTheme } from "@/lib/theme";
-import type { Settings } from "@/lib/validators/settings";
 import type { SocialLink } from "@/lib/validators/social";
 
 interface SpotlightHeaderProps {
     socials: SocialLink[];
-    settings: Settings;
     siteUrl: string;
 }
-export function HeaderSpotlight({
-    socials,
-    settings,
-    siteUrl,
-}: SpotlightHeaderProps) {
+export function HeaderSpotlight({ socials, siteUrl }: SpotlightHeaderProps) {
     const { t } = useTranslations();
 
     return (
@@ -56,11 +49,7 @@ export function HeaderSpotlight({
                 description={t("spotlight.description")}
             >
                 <SpotlightInput placeholder={t("spotlight.placeholder")} />
-                <SpotlightCommands
-                    socials={socials}
-                    settings={settings}
-                    siteUrl={siteUrl}
-                />
+                <SpotlightCommands socials={socials} siteUrl={siteUrl} />
             </SpotlightList>
         </Spotlight>
     );
@@ -68,22 +57,13 @@ export function HeaderSpotlight({
 
 interface SpotlightCommandsProps {
     socials: SocialLink[];
-    settings: Settings;
     siteUrl: string;
 }
-function SpotlightCommands({
-    socials,
-    settings,
-    siteUrl,
-}: SpotlightCommandsProps) {
+function SpotlightCommands({ socials, siteUrl }: SpotlightCommandsProps) {
     const { t, name: langName } = useTranslations();
     const { pushPage } = useSpotlight();
 
     const github = socials?.find((social: any) => social.socialId === "github");
-    const cvUrl =
-        settings?.cv && !isReference(settings.cv.asset) && settings.cv.asset.url
-            ? settings.cv.asset.url
-            : false;
 
     return (
         <CommandList className="scrollbar">
@@ -160,17 +140,24 @@ function SpotlightCommands({
                 >
                     {t("common.blog")}
                 </SpotlightItem>
-                {cvUrl && (
-                    <SpotlightItem
-                        value="cv"
-                        icon={<FileTextIcon />}
-                        shortcut={["g", "r"]}
-                        keywords={["resume", "curriculum vitae", "job", "work"]}
-                        onSelect={() => open(cvUrl)}
-                    >
-                        {t("common.resume")}
-                    </SpotlightItem>
-                )}
+                <SpotlightItem
+                    value="resume"
+                    icon={<FileTextIcon />}
+                    shortcut={["g", "r"]}
+                    keywords={[
+                        "resume",
+                        "curriculum vitae",
+                        "cv",
+                        "job",
+                        "work",
+                        "request",
+                    ]}
+                    onSelect={() => {
+                        window.location.href = localizedPath("/resume");
+                    }}
+                >
+                    {t("common.resume")}
+                </SpotlightItem>
             </SpotlightGroup>
             {socials && socials.length > 0 && (
                 <SpotlightGroup heading={t("spotlight.socials")} page="home">

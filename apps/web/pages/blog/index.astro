@@ -7,7 +7,6 @@ import { useTranslations } from "@/lib/i18n";
 import { articleFind } from "@/lib/sanity/queries";
 
 export const prerender = false;
-
 const { t, formatNumber } = useTranslations();
 const articles = await articleFind({ sort: "_createdAt desc" });
 const totalWords = articles.reduce((sum, a) => sum + a.stats.words, 0);

@@ -34,7 +34,7 @@ export const publicationValidator: z.ZodType<Publication> = z.lazy(() =>
             booktitle: z.string().nullish(),
             journal: z.string().nullish(),
             pages: z.string().nullish(),
-            year: z.string().date(),
+            year: z.iso.date(),
             organization: z.string().nullish(),
             url: z.url().nullish(),
             pdf: z.url().nullish(),

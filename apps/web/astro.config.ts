@@ -10,7 +10,10 @@ const adapter =
     process.env.ASTRO_ADAPTER === "node"
         ? node({ mode: "standalone" })
         : vercel({
-              isr: { expiration: 60 },
+              isr: {
+                  expiration: 60,
+                  exclude: [/^\/_actions\//, /^\/api\//],
+              },
               maxDuration: 30,
               imageService: true,
           });

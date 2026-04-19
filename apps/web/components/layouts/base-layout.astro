@@ -12,15 +12,25 @@ const { locale, dir } = useTranslations();
 <!doctype html>
 <html lang={locale} dir={dir} class="scroll-smooth">
     <head>
-        <ScriptsHead />
-        
         <!-- Meta -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+
+        <!-- Seo -->
+        <slot name="head" />
+        
+        <!-- Fonts -->
+        <Font cssVariable="--font-sans" />
+        <Font cssVariable="--font-mono" />
+
+        <!-- 4. Theme Colors -->
         <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#fff" media="(prefers-color-scheme: light)" />
         <meta name="color-scheme" content="dark light" />
         
+        <ScriptsHead />
+
+        <!-- Low Meta -->
         <meta name="application-name" content="evanm.io Portfolio" />
         <meta name="referrer" content="origin-when-cross-origin" />
         <meta name="format-detection" content="telephone=no, address=no, email=no" />
@@ -60,11 +70,6 @@ const { locale, dir } = useTranslations();
             rel="apple-touch-startup-image"
             href="/static/favicons/apple-touch-icon.png"
         />
-
-        <slot name="head" />
-
-        <Font cssVariable="--font-sans" />
-        <Font cssVariable="--font-mono" />
     </head>
     <body class="scrollbar bg-background text-foreground transition duration-150">
         <div

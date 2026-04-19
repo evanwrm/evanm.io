@@ -29,7 +29,7 @@ export const experienceValidator = z
         employmentType: experienceTypeValidator,
         startDate: z.string().nullish(),
         endDate: z.string().nullish(),
-        siteUrl: z.string().nullish(),
+        siteUrl: z.url().nullish(),
         description: z.string().nullish(),
         thumbnail: sanityMediaValidator.nullish(),
         media: z.array(sanityMediaValidator).nullish(),

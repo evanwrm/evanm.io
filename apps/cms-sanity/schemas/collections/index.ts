@@ -3,6 +3,7 @@ import educationSchema from "./education";
 import experienceSchema from "./experience";
 import projectSchema from "./project";
 import publicationSchema from "./publication";
+import resumeRequestSchema from "./resumeRequest";
 import skillSchema from "./skill";
 import socialSchema from "./social";
 import tagSchema from "./tag";
@@ -13,6 +14,7 @@ export const collectionSchemaTypes = [
     experienceSchema,
     projectSchema,
     publicationSchema,
+    resumeRequestSchema,
     skillSchema,
     socialSchema,
     tagSchema

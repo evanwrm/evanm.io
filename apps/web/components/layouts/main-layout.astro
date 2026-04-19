@@ -5,7 +5,7 @@ import Footer from "@/components/footer.astro";
 import BackToTop from "@/components/back-to-top.astro";
 import HexBackground from "@/components/hex-background.astro";
 import { useTranslations } from "@/lib/i18n";
-import { settingsFind, socialFind } from "@/lib/sanity/queries";
+import { socialFind } from "@/lib/sanity/queries";
 
 interface Props {
     showHexBackground?: boolean;
@@ -15,23 +15,16 @@ const { showHexBackground = true } = Astro.props;
 const { t } = useTranslations();
 const headerRoutes = [
     { href: "/", label: t("common.home") },
-    { href: "/cv", label: t("common.resume") },
+    { href: "/blog", label: t("common.blog") },
 ];
 
-const [socials, settings] = await Promise.all([
-    socialFind(),
-    settingsFind(),
-]);
+const socials = await socialFind();
 ---
 
 <BaseLayout>
     <slot slot="head" name="head" />
     {showHexBackground && <HexBackground class="h-48 text-foreground/40" />}
-    <Header
-        routes={headerRoutes}
-        socials={socials}
-        settings={settings}
-    />
+    <Header routes={headerRoutes} socials={socials} />
     <main class="flex flex-1 flex-col">
         <slot />
     </main>

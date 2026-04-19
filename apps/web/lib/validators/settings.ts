@@ -12,6 +12,7 @@ export const settingsValidator = z
         avatar: sanityMediaValidator.nullish(),
         cv: sanityMediaValidator.nullish(),
         resume: sanityMediaValidator.nullish(),
+        bookingUrl: z.url().nullish(),
     })
     .extend(sanityDocumentValidator.shape);
 export type Settings = z.infer<typeof settingsValidator>;

@@ -1,9 +1,12 @@
 ---
+import { ArrowRightIcon, CalendarIcon, FileTextIcon } from "lucide-react";
 import { Image } from "@/components/image";
+import { ButtonLink } from "@/components/link";
 import { Markdown } from "@/components/mdx/markdown";
+import { useTranslations } from "@/lib/i18n";
+import { isReference } from "@/lib/sanity/utils";
 import type { Landing } from "@/lib/validators/landing";
 import type { Settings } from "@/lib/validators/settings";
-import { isReference } from "@/lib/sanity/utils";
 
 interface Props {
     landing: Landing;
@@ -11,36 +14,65 @@ interface Props {
 }
 
 const { landing, settings } = Astro.props;
+const { t } = useTranslations();
 const authorName = `${settings.firstName} ${settings.lastName}`;
+const hasAvatar =
+    settings.avatar && !isReference(settings.avatar?.asset);
 ---
 
 <section
     id="intro"
     class="mx-auto flex min-h-[calc(100dvh-4rem)] w-full max-w-5xl items-center p-4"
 >
-    <div class="transition duration-500 ease-spring motion-safe:md:opacity-0 motion-safe:md:translate-y-20 motion-safe:md:intersect:opacity-100 motion-safe:md:intersect:translate-y-0 intersect-once intersect-quarter -mt-16 text-left">
-        {settings.avatar &&
-            !isReference(settings.avatar?.asset) && (
-                <div class="mx-2 sm:mx-4">
+    <div class="transition duration-500 ease-spring motion-safe:md:opacity-0 motion-safe:md:translate-y-20 motion-safe:md:intersect:opacity-100 motion-safe:md:intersect:translate-y-0 intersect-once intersect-quarter -mt-16 w-full text-left">
+        <div class="grid items-center gap-8 md:grid-cols-[1fr_auto] md:gap-14">
+            <div class="order-2 md:order-1 min-w-0">
+                <h1 class="text-balance font-extrabold text-4xl tracking-tight lg:text-5xl">
+                    {landing.logline}
+                </h1>
+                {landing.intro && (
+                    <div class="mt-6">
+                        <Markdown
+                            source={landing.intro}
+                            className="text-muted-foreground"
+                        />
+                    </div>
+                )}
+                <div class="mt-8 flex flex-wrap items-center gap-3">
+                    <ButtonLink
+                        href="/resume"
+                        variant="outline"
+                        size="lg"
+                        className="group border-none rounded-full hover:-translate-y-0.5"
+                    >
+                        <FileTextIcon className="group-hover:scale-110" />
+                        {t("resumeRequest.cta")}
+                    </ButtonLink>
+                    {settings.bookingUrl && (
+                        <ButtonLink
+                            href={settings.bookingUrl}
+                            variant="outline"
+                            size="lg"
+                            className="group border-none rounded-full hover:-translate-y-0.5"
+                        >
+                            <CalendarIcon className="group-hover:-rotate-12" />
+                            {t("common.bookAppointment")}
+                            <ArrowRightIcon className="group-hover:translate-x-0.5" />
+                        </ButtonLink>
+                    )}
+                </div>
+            </div>
+            {hasAvatar && settings.avatar && !isReference(settings.avatar.asset) && (
+                <div class="order-1 flex justify-center md:order-2 md:justify-end">
                     <Image
                         src={settings.avatar.asset}
                         alt={settings.avatar.alt ?? authorName}
-                        width={128}
-                        height={128}
-                        className="h-20 w-20 select-none rounded-full shadow-md ring-2 ring-transparent ring-offset-2 ring-offset-background transition-all duration-500 will-change-transform hover:scale-105 hover:ring-ring/20 sm:h-24 sm:w-24"
+                        width={384}
+                        height={384}
+                        className="h-40 w-40 select-none rounded-full shadow-md ring-2 ring-transparent ring-offset-4 ring-offset-background transition-all duration-500 will-change-transform hover:scale-105 hover:ring-ring/20 sm:h-48 sm:w-48"
                     />
                 </div>
             )}
-        <h1 class="mt-6 flex items-end text-balance font-extrabold text-4xl tracking-tight lg:text-5xl">
-            {landing.logline}
-        </h1>
-        {landing.intro && (
-            <div class="mt-8">
-                <Markdown
-                    source={landing.intro}
-                    className="text-muted-foreground"
-                />
-            </div>
-        )}
+        </div>
     </div>
 </section>

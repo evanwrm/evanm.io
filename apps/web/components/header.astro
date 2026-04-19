@@ -3,16 +3,14 @@ import { HeaderSpotlight } from "@/components/header-spotlight";
 import { Link } from "@/components/link";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
-import type { Settings } from "@/lib/validators/settings";
 import type { SocialLink } from "@/lib/validators/social";
 
 interface Props {
     routes: { href: string; label: string }[];
     socials: SocialLink[];
-    settings: Settings;
 }
 
-const { routes, socials, settings } = Astro.props;
+const { routes, socials } = Astro.props;
 const siteUrl = Astro.site?.origin ?? "https://evanm.io";
 const pathname = Astro.url.pathname;
 ---
@@ -36,7 +34,6 @@ const pathname = Astro.url.pathname;
     <div class="flex items-center gap-2 sm:gap-4">
         <HeaderSpotlight
             socials={socials}
-            settings={settings}
             siteUrl={siteUrl}
             client:idle
         />

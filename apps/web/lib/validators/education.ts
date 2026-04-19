@@ -27,7 +27,7 @@ export const educationValidator = z
         startDate: z.string().nullish(),
         endDate: z.string().nullish(),
         description: z.string().nullish(),
-        siteUrl: z.string().nullish(),
+        siteUrl: z.url().nullish(),
         courses: z.array(courseValidator).nullish(),
         educationLevel: educationLevelValidator,
         thumbnail: sanityMediaValidator.nullish(),

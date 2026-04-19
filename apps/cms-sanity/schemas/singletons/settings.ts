@@ -46,6 +46,12 @@ const settingsSchema = defineType({
             fields: [...mediaFields],
             options: { accept: ".pdf" },
         }),
+        defineField({
+            name: "bookingUrl",
+            title: "Booking URL",
+            description: "Public scheduling link",
+            type: "url",
+        }),
     ],
 });
 

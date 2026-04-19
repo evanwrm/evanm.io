@@ -21,7 +21,6 @@ import { articleFindOne, settingsFind } from "@/lib/sanity/queries";
 import { isReference } from "@/lib/sanity/utils";
 
 export const prerender = false;
-
 const { slug } = Astro.params;
 const { t, formatNumber, formatDate } = useTranslations();
 const [article, settings] = await Promise.all([

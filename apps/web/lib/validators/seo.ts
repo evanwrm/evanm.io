@@ -4,7 +4,7 @@ import { sanityDocumentValidator } from "@/lib/validators/sanity";
 export const authorsValidator = z.array(
     z.object({
         name: z.string(),
-        url: z.string().optional(),
+        url: z.url().optional(),
     }),
 );
 export type Authors = z.infer<typeof authorsValidator>;
@@ -16,8 +16,8 @@ export const openGraphProfileValidator = z.object({
     gender: z.string().nullish(),
 });
 export const openGraphMediaValidator = z.object({
-    url: z.string(),
-    secureUrl: z.string().nullish(),
+    url: z.url(),
+    secureUrl: z.url().nullish(),
     alt: z.string().nullish(),
     type: z.string().nullish(),
     width: z.number().nullish(),
@@ -36,7 +36,7 @@ export const openGraphValidator = z.object({
     images: z.array(openGraphMediaValidator).nullish(),
     audio: z.array(openGraphMediaValidator).nullish(),
     videos: z.array(openGraphMediaValidator).nullish(),
-    url: z.string().nullish(),
+    url: z.url().nullish(),
     countryName: z.string().nullish(),
     ttl: z.number().nullish(),
     type: z.string().nullish(),
@@ -71,7 +71,7 @@ export const seoValidator = z
         description: z.string().nullish(),
         authors: authorsValidator.nullish(),
         keywords: z.array(z.string()).nullish(),
-        canonical: z.string().nullish(),
+        canonical: z.url().nullish(),
         creator: z.string().nullish(),
         publisher: z.string().nullish(),
         openGraph: openGraphValidator.nullish(),
