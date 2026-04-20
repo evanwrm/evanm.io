@@ -33,28 +33,26 @@ const [home, educations, experiences, projects, publications, settings] =
 
 <MainLayout>
     <SeoPage slot="head" title={t("common.home")} />
-    <div class="flex flex-col">
-        {home.includeIntro && (
-            <IntroSection home={home} settings={settings} />
-        )}
-        <div class="mx-auto flex w-full max-w-7xl gap-8 p-4">
-            <main class="min-w-0 flex-1 space-y-16">
-                {home.includeExperience && (
-                    <ExperienceSection experiences={experiences} />
-                )}
-                {home.includeEducation && (
-                    <EducationSection educations={educations} />
-                )}
-                {home.includeProjects && (
-                    <ProjectsSection projects={projects} />
-                )}
-                {home.includePublications && (
-                    <PublicationsSection publications={publications} />
-                )}
-            </main>
-            <aside class="sticky top-24 hidden w-48 shrink-0 self-start xl:block">
-                <SectionToc client:idle />
-            </aside>
+    {home.includeIntro && (
+        <IntroSection home={home} settings={settings} />
+    )}
+    <div class="mx-auto flex w-full max-w-7xl gap-8 p-4">
+        <div class="min-w-0 flex-1 space-y-16">
+            {home.includeExperience && (
+                <ExperienceSection experiences={experiences} />
+            )}
+            {home.includeEducation && (
+                <EducationSection educations={educations} />
+            )}
+            {home.includeProjects && (
+                <ProjectsSection projects={projects} />
+            )}
+            {home.includePublications && (
+                <PublicationsSection publications={publications} />
+            )}
         </div>
+        <aside class="sticky top-24 hidden w-48 shrink-0 self-start xl:block">
+            <SectionToc client:idle />
+        </aside>
     </div>
 </MainLayout>

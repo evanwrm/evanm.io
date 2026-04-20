@@ -32,6 +32,7 @@ const en = {
         breadcrumb: "Breadcrumb",
         close: "Close",
         openNavigation: "Open navigation",
+        viewMore: "View more",
     },
     home: {
         education: "Education",

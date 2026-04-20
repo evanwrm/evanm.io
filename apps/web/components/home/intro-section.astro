@@ -1,5 +1,10 @@
 ---
-import { ArrowRightIcon, CalendarIcon, FileTextIcon } from "lucide-react";
+import {
+    ArrowRightIcon,
+    CalendarIcon,
+    ChevronDownIcon,
+    FileTextIcon,
+} from "lucide-react";
 import { Image } from "@/components/image";
 import { ButtonLink } from "@/components/link";
 import { Markdown } from "@/components/mdx/markdown";
@@ -7,6 +12,7 @@ import { useTranslations } from "@/lib/i18n";
 import { isReference } from "@/lib/sanity/utils";
 import type { Home } from "@/lib/validators/home";
 import type { Settings } from "@/lib/validators/settings";
+import { Button } from "@/components/ui/button";
 
 interface Props {
     home: Home;
@@ -22,11 +28,11 @@ const hasAvatar =
 
 <section
     id="intro"
-    class="mx-auto flex min-h-[calc(100dvh-4rem)] w-full max-w-5xl items-center p-4"
+    class="relative mx-auto flex min-h-[calc(100dvh-4rem)] w-full max-w-5xl items-center p-4"
 >
     <div class="transition duration-500 ease-spring motion-safe:md:opacity-0 motion-safe:md:translate-y-20 motion-safe:md:intersect:opacity-100 motion-safe:md:intersect:translate-y-0 intersect-once intersect-quarter -mt-16 w-full text-left">
-        <div class="grid items-center gap-5 grid-cols-[1fr_auto] sm:gap-8 md:gap-14">
-            <div class="min-w-0">
+        <div class="grid items-center grid-cols-[1fr_auto] gap-x-5 gap-y-6 sm:gap-x-8 md:gap-x-14 md:gap-y-0 [grid-template-areas:'heading_avatar'_'intro_intro'_'actions_actions'] md:[grid-template-areas:'heading_avatar'_'intro_avatar'_'actions_avatar']">
+            <div class="min-w-0 [grid-area:heading]">
                 <h1 class="text-balance font-extrabold text-4xl tracking-tight lg:text-5xl">
                     {home.heading}
                 </h1>
@@ -35,50 +41,97 @@ const hasAvatar =
                         {home.logline}
                     </p>
                 )}
-                {home.intro && (
-                    <div class="mt-6">
-                        <Markdown
-                            source={home.intro}
-                            className="text-muted-foreground"
-                        />
-                    </div>
-                )}
-                <div class="mt-8 flex flex-wrap items-center gap-3">
+            </div>
+            {home.intro && (
+                <div class="[grid-area:intro] md:mt-6">
+                    <Markdown
+                        source={home.intro}
+                        className="text-muted-foreground"
+                    />
+                </div>
+            )}
+            <div class="flex flex-wrap items-center gap-3 [grid-area:actions] md:mt-8">
+                <ButtonLink
+                    href="/resume"
+                    variant="outline"
+                    size="lg"
+                    className="group border-none rounded-full hover:-translate-y-0.5"
+                >
+                    <FileTextIcon className="group-hover:scale-110" />
+                    {t("resumeRequest.cta")}
+                </ButtonLink>
+                {settings.bookingUrl && (
                     <ButtonLink
-                        href="/resume"
+                        href={settings.bookingUrl}
                         variant="outline"
                         size="lg"
                         className="group border-none rounded-full hover:-translate-y-0.5"
                     >
-                        <FileTextIcon className="group-hover:scale-110" />
-                        {t("resumeRequest.cta")}
+                        <CalendarIcon className="group-hover:-rotate-12" />
+                        {t("common.bookAppointment")}
+                        <ArrowRightIcon className="group-hover:translate-x-0.5" />
                     </ButtonLink>
-                    {settings.bookingUrl && (
-                        <ButtonLink
-                            href={settings.bookingUrl}
-                            variant="outline"
-                            size="lg"
-                            className="group border-none rounded-full hover:-translate-y-0.5"
-                        >
-                            <CalendarIcon className="group-hover:-rotate-12" />
-                            {t("common.bookAppointment")}
-                            <ArrowRightIcon className="group-hover:translate-x-0.5" />
-                        </ButtonLink>
-                    )}
-                </div>
+                )}
             </div>
             {hasAvatar && settings.avatar && !isReference(settings.avatar.asset) && (
-                <div class="flex justify-end self-start">
+                <div class="flex justify-end self-end [grid-area:avatar]">
                     <Image
                         src={settings.avatar.asset}
                         alt={settings.avatar.alt ?? authorName}
                         width={384}
                         height={384}
                         fetchPriority="high"
-                        className="h-20 w-20 select-none rounded-full shadow-md ring-2 ring-transparent ring-offset-4 ring-offset-background transition-all duration-500 will-change-transform hover:scale-105 hover:ring-ring/20 sm:h-32 sm:w-32 md:h-44 md:w-44 lg:h-48 lg:w-48"
+                        className="h-20 w-20 select-none rounded-full shadow-md ring-2 ring-transparent ring-offset-4 ring-offset-background transition-all duration-500 will-change-transform hover:scale-105 hover:ring-ring/20 md:h-48 md:w-48"
                     />
                 </div>
             )}
         </div>
     </div>
+    <Button
+        id="intro-view-more"
+        variant="ghost"
+        size="icon-lg"
+        aria-label={t("nav.viewMore")}
+        className="group pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full opacity-0 transition-opacity duration-500 hover:text-foreground motion-safe:animate-bounce"
+    >
+        <ChevronDownIcon className="size-6 transition group-hover:translate-y-0.5" />
+    </Button>
 </section>
+
+<script>
+    const btn = document.getElementById("intro-view-more");
+    if (btn) {
+        const revealDelayMs = 3000;
+
+        const reveal = () => {
+            btn.classList.remove("pointer-events-none", "opacity-0");
+            btn.classList.add("opacity-100");
+        };
+        const hide = () => {
+            btn.classList.add("pointer-events-none", "opacity-0");
+            btn.classList.remove("opacity-100");
+        };
+
+        const timer = setTimeout(reveal, revealDelayMs);
+
+        window.addEventListener(
+            "scroll",
+            () => {
+                if (window.scrollY > 0) {
+                    clearTimeout(timer);
+                    hide();
+                }
+            },
+            { passive: true, once: true },
+        );
+
+        btn.addEventListener("click", () => {
+            const intro = document.getElementById("intro");
+            if (!intro) return;
+            const sections = Array.from(document.querySelectorAll("section"));
+            const next = sections[sections.indexOf(intro) + 1];
+            next?.scrollIntoView({ behavior: "smooth", block: "start" });
+            hide();
+        });
+    }
+</script>

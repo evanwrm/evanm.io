@@ -34,6 +34,7 @@ const de: Translations = {
         breadcrumb: "Navigationspfad",
         close: "Schließen",
         openNavigation: "Navigation öffnen",
+        viewMore: "Mehr ansehen",
     },
     home: {
         education: "Ausbildung",
@@ -89,8 +90,7 @@ const de: Translations = {
         intro: "Erzählen Sie mir ein wenig über sich und ich schicke Ihnen die aktuelle Version meines Lebenslaufs.",
         nameLabel: "Vollständiger Name",
         noteLabel: "Worum geht es?",
-        notePlaceholder:
-            "Kurze Notiz zur Rolle oder dem Anliegen…",
+        notePlaceholder: "Kurze Notiz zur Rolle oder dem Anliegen…",
         pageDescription:
             "Hinterlassen Sie eine kurze Nachricht und ich teile meinen Lebenslauf direkt mit Ihnen.",
         pageTitle: "Lebenslauf anfordern",

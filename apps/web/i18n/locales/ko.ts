@@ -34,6 +34,7 @@ const ko: Translations = {
         breadcrumb: "현재 경로",
         close: "닫기",
         openNavigation: "내비게이션 열기",
+        viewMore: "더 보기",
     },
     home: {
         education: "학력",

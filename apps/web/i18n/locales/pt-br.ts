@@ -34,6 +34,7 @@ const ptBr: Translations = {
         breadcrumb: "Trilha de navegação",
         close: "Fechar",
         openNavigation: "Abrir navegação",
+        viewMore: "Ver mais",
     },
     home: {
         education: "Educação",

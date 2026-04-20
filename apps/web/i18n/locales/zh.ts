@@ -34,6 +34,7 @@ const zh: Translations = {
         breadcrumb: "面包屑导航",
         close: "关闭",
         openNavigation: "打开导航",
+        viewMore: "查看更多",
     },
     home: {
         education: "教育",

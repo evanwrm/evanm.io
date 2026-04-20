@@ -34,6 +34,7 @@ const es: Translations = {
         breadcrumb: "Ruta de navegación",
         close: "Cerrar",
         openNavigation: "Abrir navegación",
+        viewMore: "Ver más",
     },
     home: {
         education: "Educación",

@@ -34,6 +34,7 @@ const fr: Translations = {
         breadcrumb: "Fil d’Ariane",
         close: "Fermer",
         openNavigation: "Ouvrir la navigation",
+        viewMore: "Voir plus",
     },
     home: {
         education: "Éducation",

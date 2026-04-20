@@ -34,6 +34,7 @@ const ja: Translations = {
         breadcrumb: "パンくずリスト",
         close: "閉じる",
         openNavigation: "ナビゲーションを開く",
+        viewMore: "もっと見る",
     },
     home: {
         education: "学歴",
