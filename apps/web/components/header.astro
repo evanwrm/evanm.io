@@ -1,6 +1,7 @@
 ---
 import { HeaderSpotlight } from "@/components/header-spotlight";
 import { Link } from "@/components/link";
+import { LogoWordmark } from "@/components/logo";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
 import type { SocialLink } from "@/lib/validators/social";
@@ -24,10 +25,9 @@ const pathname = Astro.url.pathname;
         <Link
             href="/"
             aria-label="evanm.io"
-            className="font-bold text-foreground/80 transition-all hover:text-foreground"
+            className="text-foreground/80 transition-all hover:text-foreground"
         >
-            <span>evanm</span>
-            <span class="text-red-600">.io</span>
+            <LogoWordmark />
         </Link>
         <MainNav links={routes} pathname={pathname} className="ml-8" />
     </div>

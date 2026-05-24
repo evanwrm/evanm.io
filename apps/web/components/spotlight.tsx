@@ -1,15 +1,14 @@
+import { Command as CommandPrimitive } from "cmdk";
 import { ChevronRightIcon, CornerDownLeftIcon, SearchIcon } from "lucide-react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
+    Command,
     CommandDialog,
     CommandGroup,
     CommandItem,
+    CommandShortcut,
 } from "@/components/ui/command";
-import {
-    InputGroup,
-    InputGroupAddon,
-    InputGroupCommandInput,
-} from "@/components/ui/input-group";
+import { InputGroup, InputGroupAddon } from "@/components/ui/input-group";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { cn } from "@/lib/utils";
 
@@ -140,53 +139,61 @@ export function SpotlightList({
             title={title}
             description={description}
             showCloseButton={false}
-            className={cn("backdrop-blur-sm backdrop-saturate-200", className)}
+            className={cn(
+                "backdrop-blur-sm backdrop-saturate-200 sm:max-w-lg",
+                className,
+            )}
         >
-            <div ref={containerRef}>{children}</div>
+            <Command className="p-0" loop>
+                <div ref={containerRef}>{children}</div>
+            </Command>
         </CommandDialog>
     );
 }
 
-interface SpotlightInputProps {
-    placeholder?: string;
-}
 export function SpotlightInput({
     placeholder = "Type a command or search...",
-}: SpotlightInputProps) {
+    className,
+    ...props
+}: React.ComponentProps<typeof CommandPrimitive.Input>) {
     const { search, setSearch, setOpen, pages, popPage, bounce } =
         useSpotlight();
 
     return (
-        <InputGroup className="border-border/50 has-[[data-slot=input-group-control]:focus-visible]:border-border/50 dark:bg-card h-11 rounded-b-none border-b shadow-none has-[[data-slot=input-group-control]:focus-visible]:ring-0">
-            <InputGroupAddon>
-                <SearchIcon />
-            </InputGroupAddon>
-            <InputGroupCommandInput
-                placeholder={placeholder}
-                value={search}
-                onValueChange={setSearch}
-                onKeyDown={e => {
-                    if (
-                        e.key === "Backspace" &&
-                        search === "" &&
-                        pages.length > 0
-                    ) {
-                        e.preventDefault();
-                        popPage();
-                        bounce();
-                    }
-                }}
-            />
-            <InputGroupAddon align="inline-end">
-                <button
-                    type="button"
-                    onClick={() => setOpen(false)}
-                    className="cursor-pointer"
-                >
-                    <Kbd>Esc</Kbd>
-                </button>
-            </InputGroupAddon>
-        </InputGroup>
+        <div data-slot="command-input-wrapper" className="p-0">
+            <InputGroup className="border-input/30 h-11 rounded-b-none border-b border-t-transparent border-r-transparent border-l-transparent bg-transparent!">
+                <InputGroupAddon>
+                    <SearchIcon />
+                </InputGroupAddon>
+                <CommandPrimitive.Input
+                    data-slot="command-input"
+                    placeholder={placeholder}
+                    value={search}
+                    onValueChange={setSearch}
+                    onKeyDown={e => {
+                        if (
+                            e.key === "Backspace" &&
+                            search === "" &&
+                            pages.length > 0
+                        ) {
+                            e.preventDefault();
+                            popPage();
+                            bounce();
+                        }
+                    }}
+                    className={cn(
+                        "w-full text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
+                        className,
+                    )}
+                    {...props}
+                />
+                <InputGroupAddon align="inline-end">
+                    <button type="button" onClick={() => setOpen(false)}>
+                        <Kbd>Esc</Kbd>
+                    </button>
+                </InputGroupAddon>
+            </InputGroup>
+        </div>
     );
 }
 
@@ -205,7 +212,11 @@ export function SpotlightGroup({
 
     if (!isVisible) return null;
 
-    return <CommandGroup heading={heading}>{children}</CommandGroup>;
+    return (
+        <CommandGroup heading={heading} className="px-2">
+            {children}
+        </CommandGroup>
+    );
 }
 
 interface SpotlightItemProps {
@@ -241,7 +252,7 @@ export function SpotlightItem({
                 onSelect?.();
                 if (closeOnSelect) setOpen(false);
             }}
-            className="group/item relative justify-between"
+            className="group/item relative justify-between py-3 in-data-[slot=dialog-content]:rounded-none!"
         >
             <div className="bg-primary absolute top-0 left-0 h-full w-0.5 origin-center scale-y-0 transition-transform duration-200 group-data-[selected=true]/item:scale-y-100" />
             <div className="flex items-center gap-3">
@@ -263,15 +274,17 @@ export function SpotlightItem({
                     )}
                 </div>
             </div>
-            {shortcut && shortcut.length > 0 ? (
-                <KbdGroup>
-                    {shortcut.map(key => (
-                        <Kbd key={key}>{key}</Kbd>
-                    ))}
-                </KbdGroup>
-            ) : (
-                <CornerDownLeftIcon className="text-muted-foreground size-3.5!" />
-            )}
+            <CommandShortcut>
+                {shortcut && shortcut.length > 0 ? (
+                    <KbdGroup>
+                        {shortcut.map(key => (
+                            <Kbd key={key}>{key}</Kbd>
+                        ))}
+                    </KbdGroup>
+                ) : (
+                    <CornerDownLeftIcon className="text-muted-foreground size-3.5!" />
+                )}
+            </CommandShortcut>
         </CommandItem>
     );
 }

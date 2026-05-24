@@ -124,7 +124,7 @@ export function ResumeRequestForm() {
                     <FieldError errors={[errors.note]} />
                 </Field>
                 <FieldError>{errors.root?.message}</FieldError>
-                <Button type="submit" disabled={isSubmitting}>
+                <Button type="submit" size="lg" disabled={isSubmitting}>
                     {isSubmitting
                         ? t("resumeRequest.submitting")
                         : t("resumeRequest.submit")}

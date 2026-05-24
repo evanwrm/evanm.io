@@ -13,15 +13,15 @@ const themes = [
 ];
 ---
 
-<div class="group/toggle-group flex w-fit items-center rounded-md" id="theme-toggle">
+<div id="theme-toggle" class="group/toggle-group flex w-fit items-center rounded-md" >
     {themes.map(({ id, label, icon: Icon, rounded }) => (
         <Button
             variant="ghost"
-            size="sm"
+            size="icon-sm"
             aria-label={label}
             data-theme={id}
             className={cn(
-                "theme-btn rounded-none px-3 text-muted-foreground hover:text-muted-foreground data-active:bg-muted/80 data-active:text-foreground",
+                "theme-btn border-none rounded-none text-muted-foreground hover:text-muted-foreground data-active:bg-muted/80 data-active:text-foreground",
                 rounded,
             )}
         >
