@@ -35,9 +35,5 @@ interface ButtonLinkProps
     href?: string;
 }
 export function ButtonLink({ href = "", children, ...props }: ButtonLinkProps) {
-    return (
-        <Button asChild {...props}>
-            <Link href={href}>{children}</Link>
-        </Button>
-    );
+    return <Button {...props} render={<Link href={href}>{children}</Link>} />;
 }
