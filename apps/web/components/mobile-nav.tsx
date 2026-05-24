@@ -70,43 +70,42 @@ export function MobileNav({ links, pathname }: Props) {
                 </DrawerHeader>
                 <Separator />
                 <nav className="flex flex-col p-3">
-                    {links.map((link, i) => {
-                        const isActive = pathname === localizedPath(link.href);
-                        return (
-                            <DrawerClose
-                                key={link.href}
-                                render={
-                                    <Link
-                                        href={link.href}
-                                        aria-current={
-                                            isActive ? "page" : undefined
-                                        }
+                    {links.map((link, i) => (
+                        <DrawerClose
+                            key={link.href}
+                            render={
+                                <Link
+                                    href={link.href}
+                                    aria-current={
+                                        pathname === link.href
+                                            ? "page"
+                                            : undefined
+                                    }
+                                    className={cn(
+                                        "fade-in slide-in-from-bottom-12 animate-in ease-spring group relative flex items-center px-3 py-2 text-sm transition duration-500",
+                                        pathname === link.href
+                                            ? "text-foreground bg-muted/60"
+                                            : "text-foreground/60 hover:text-foreground hover:bg-muted/40",
+                                    )}
+                                    style={{
+                                        animationDelay: `${100 + i * 50}ms`,
+                                        animationFillMode: "both",
+                                    }}
+                                >
+                                    <span
+                                        aria-hidden
                                         className={cn(
-                                            "fade-in slide-in-from-bottom-12 animate-in ease-spring group relative flex items-center px-3 py-2 text-sm transition duration-500",
-                                            isActive
-                                                ? "text-foreground bg-muted/60"
-                                                : "text-foreground/60 hover:text-foreground hover:bg-muted/40",
+                                            "absolute left-0 h-full w-0.5 rounded-full transition-all",
+                                            pathname === link.href
+                                                ? "bg-red-600 opacity-100"
+                                                : "bg-foreground/40 opacity-0 group-hover:opacity-60",
                                         )}
-                                        style={{
-                                            animationDelay: `${100 + i * 50}ms`,
-                                            animationFillMode: "both",
-                                        }}
-                                    >
-                                        <span
-                                            aria-hidden
-                                            className={cn(
-                                                "absolute left-0 h-full w-0.5 rounded-full transition-all",
-                                                isActive
-                                                    ? "bg-red-600 opacity-100"
-                                                    : "bg-foreground/40 opacity-0 group-hover:opacity-60",
-                                            )}
-                                        />
-                                        {link.label}
-                                    </Link>
-                                }
-                            />
-                        );
-                    })}
+                                    />
+                                    {link.label}
+                                </Link>
+                            }
+                        />
+                    ))}
                 </nav>
             </DrawerPopup>
         </Drawer>
